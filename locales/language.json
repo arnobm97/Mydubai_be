@@ -1,0 +1,676 @@
+{
+    "en": {
+        "navber": {
+            "dashboard": "Dashboard",
+            "markings": "Markings",
+            "institute": "Institute",
+            "course": "Course",
+            "cohort": "Batch",
+            "userManagement": "User Management",
+            "trainingAreas": "Training Module",
+            "changePassword": "Change Password",
+            "logOut": "Log Out"
+        },
+        "common": {
+            "button": {
+                "edit": "EDIT",
+                "delete": "DELETE",
+                "update": "UPDATE",
+                "return": "RETURN",
+                "cancel": "CANCEL",
+                "deleteAnyway": "Delete Anyway"
+            },
+            "table": {
+                "action": "Action"
+            },
+            "link": {
+                "details": "Details",
+                "edit": "Edit"
+            }
+        },
+        "loginPage": {
+            "title": "Log In",
+            "subTitle": "Please input email & password for login",
+            "email": "Email Address",
+            "password": "Password",
+            "forgotPassword": "Forgot Password?",
+            "remember": "Remember me next time",
+            "signupNow": "Create New Institute"
+        },
+        "signupPage": {
+            "title": "Create Institute Account",
+            "subTitle": "After creating an institute account, you can add a course, training module, group, trainee & trainer from your dashboard",
+            "name": "Name",
+            "email": "Email Address",
+            "address": "Address",
+            "phone": "Phone Number",
+            "instituteName": "Institute's Name",
+            "chooseInstituteType": "Choose Institute's Type",
+            "btnSignupNow": "Create Institute",
+            "btnLoginNow": "Login Now?"
+        },
+        "dashboard": {
+            "title": "Admin Dashboard",
+            "subTitle": "Quick access to recent active and upcoming cohorts.",
+            "activeCohorts": "Active Cohorts",
+            "upcomingCohorts": "Upcoming Cohorts"
+        },
+        "markings": {
+            "index": {
+                "title": "Markings",
+                "subTitle": "Training module designated to you for marking from currently active cohorts.",
+                "emptyTable": "Nothing to Mark Right Now",
+                "course": "Course",
+                "trainingName": "Training Name",
+                "cohortName": "Cohort Name",
+                "fellows": "Fellows",
+                "startDate": "Start Date",
+                "endDate": "End Date",
+                "action": "Action"
+            },
+            "details": {
+                "title": "Training Details",
+                "subTitle": "List of fellows with their marking summary for ",
+                "name": "Name",
+                "email": "Email",
+                "task": "Task",
+                "lastMarked": "Last Marked",
+                "points": "Points",
+                "action": "Action",
+                "checkpoints": "Checkpoints",
+                "lastChecked": "Last Checked",
+                "observations": "Observations",
+                "lastObserved": "Last Observed"
+            }
+        },
+        "institute": {
+            "index": {
+                "title": "Institute information",
+                "subTitle": "You can edit institute information from here.",
+                "name": "Name",
+                "type": "Type",
+                "phone": "Phone",
+                "address": "Address",
+                "instituteNotFound": "Institute not found."
+            },
+            "update": {
+                "title": "Update Institute",
+                "subTitle": "Please input Institute name and address here for update",
+                "name": "Institute's Name",
+                "phone": "Institute's Phone",
+                "address": "Institute's Address"
+            }
+        },
+        "course": {
+            "index": {
+                "title": "Manage Courses",
+                "subTitle": "Create new course or update and remove course.",
+                "name": "Name",
+                "courseCode": "Course Code",
+                "courseListEmpty": "Course list empty",
+                "addNewCourse": "Add New Course"
+            },
+            "add": {
+                "title": "Add New Course",
+                "subTitle": "Let's add a new course. Please input course name and course code bellow.",
+                "name": "Course Name",
+                "courseCode": "Course Code",
+                "addCourse": "Add Course"
+            },
+            "details": {
+                "title": "Course Details",
+                "subTitle": "You can edit and delete course information & manage batch here.",
+                "name": "Course Name",
+                "courseCode": "Course Code",
+                "cohortsInCourse": "Batch in Course",
+                "tooltip": {
+                    "edit": "Edit Course Details",
+                    "delete": "Delete Course",
+                    "return": "Return To Course"
+                }
+            },
+            "delete": {
+                "title": "Delete Course",
+                "subTitle": "Cleaning up! it also deletes all batches & trainee's account access.",
+                "deleteMgs1": "Are you sure you want to delete",
+                "deleteMgs2": "course permanently? It will also delete all the batches & trainee's accounts as well."
+            },
+            "update": {
+                "title": "Update course information",
+                "subTitle": "Please input updated course name and course code here.",
+                "name": "Course Name",
+                "courseCode": "Course Code",
+                "courseNotExists": "Sorry! Course doesn't exists."
+            }
+        },
+        "cohort": {
+            "index": {
+                "title": "Manage Batches",
+                "subTitle": "You can edit batch information from here.",
+                "name": "Name",
+                "fellows": "Trainees",
+                "startDate": "Start Date",
+                "endDate": "End Date",
+                "status": "Status",
+                "cohortListEmpty": "Batch list empty",
+                "addNewCohort": "Add new batch"
+            },
+            "add": {
+                "title": "Add New Cohort",
+                "subTitle": "Please select the start and end date to create a cohort.",
+                "name": "Batch's Name",
+                "startDate": "Start Date",
+                "endDate": "End Date",
+                "chooseCourse": "Choose Course",
+                "addNewCohort": "Add batch",
+                "btnAddList": "Task List",
+                "btnAddObservational": "Observational",
+                "btnAddMonthly": "Checkpoint"
+            },
+            "details": {
+                "title": "Batch's Details",
+                "subTitle": "You can edit and delete batch information & add/manage trainee here.",
+                "name": "Name",
+                "schedule": "Schedule",
+                "notFOund": "Batch not found, it might be deleted already.",
+                "tooltip": {
+                    "edit": "Edit Batch Details",
+                    "delete": "Delete Batch",
+                    "return": "Return To Batch"
+                },
+                "addFellow": {
+                    "title": "Add Trainee",
+                    "name": "Trainee's Name",
+                    "email": "Trainee's Email",
+                    "addFellow": "Add Trainee"
+                },
+                "fellows": {
+                    "title": "Trainees in Batch",
+                    "name": "Name",
+                    "email": "Email",
+                    "total": "Total",
+                    "noFellow": "No Trainee in Batch"
+                },
+                "training": {
+                    "title": "Training Module in Batch",
+                    "name": "Name",
+                    "type": "Type",
+                    "coach": "Trainer",
+                    "point": "point",
+                    "noTraining": "No Training module added in Batch"
+                }
+            },
+            "update": {
+                "title": "Update Batch",
+                "subTitle": "Let's update the batch. You can also add or remove training module from here.",
+                "name": "Batch's name",
+                "addTrainingArea": "Add Training Module",
+                "startDate": "Start Date",
+                "endDate": "End Date"
+            },
+            "delete": {
+                "title": "Delete Batch",
+                "subTitle": "Cleaning up! it also deletes all trainee's account access.",
+                "deleteMgs1": "Are you sure you want to delete",
+                "deleteMgs2": "batch permanently? It will also delete all the trainee accounts as well."
+            }
+        },
+        "user": {
+            "index": {
+                "title": "Manage Users",
+                "subTitle": "Access control is important, you can add new user or update someone's roles here.",
+                "name": "Name",
+                "email": "Email",
+                "role": "Role",
+                "addNewUser": "Add New User"
+            },
+            "add": {
+                "title": "Add New User",
+                "subTitle": "Let's setup a new user. They will receive an email with their password.",
+                "name": "Name",
+                "email": "Email",
+                "chooseUserRole": "Choose User Role",
+                "addUser": "Add User"
+            },
+            "details": {
+                "title": "User Details",
+                "subTitle": "You can edit and delete user information here.",
+                "name": "Name",
+                "email": "Email",
+                "role": "Role",
+                "createdAt": "Created at",
+                "status": "Status",
+                "active": "Active",
+                "deactivate": "Deactivate",
+                "userNotFound": "User not found, it might be deleted already."
+            },
+            "delete": {
+                "title": "Delete User",
+                "subTitle": "Cleaning up! it also removes account data from the system.",
+                "deleteMgs1": "Are you sure you want to delete",
+                "deleteMgs2": "permanently? Adding them back won't restore their data."
+            },
+            "update": {
+                "title": "Update User Information",
+                "subTitle": "You can change user's name or their role but can't edit email address.",
+                "name": "Name",
+                "email": "Email",
+                "chooseUserRole": "Choose User Role"
+            }
+        },
+        "password": {
+            "change": {
+                "title": "Change Password",
+                "subTitle": "It's a good idea to change your password often.",
+                "newPassword": "New Password",
+                "confirmPassword": "Confirm Password",
+                "change": "Change"
+            }
+        },
+        "training": {
+            "index": {
+                "title": "Manage Training Module",
+                "subTitle": "Pre configure Module of training with default trainer, tasks and points. New batch are created based on training area configuration.",
+                "name": "Name",
+                "type": "Type",
+                "totalPoints": "Total Points",
+                "addTrainingArea": "Add Training Area",
+                "noTrainingAdded": "No Trainings Added"
+            },
+            "add": {
+                "title": "Add Training",
+                "subTitleTask": "Let's setup a new task based training area. Markings are done by tasks.",
+                "subTitleObservational": "Let's setup a new observational training area. Markings are done by trainers observations.",
+                "subTitleMonthly": "Let's setup a checkpoint based training area. Markings are done by monthly checkpoints.",
+                "maxAtainablePoint": "Maximum Points",
+                "maxDailyPoint": "Maximum Daily Points",
+                "maxWeeklyPoint": "Maximum Weekly Points",
+                "maxMonthlyPoint": "Maximum Monthly Points",
+                "numberOfCheckpoints": "Number of Checkpoints",
+                "includeWeekends": "Include Weekends?",
+                "name": "Name",
+                "addCoach": "Add coach",
+                "taskList": "Task List",
+                "addTask": "Add Task",
+                "nameOfTask": "Name Of Task",
+                "point": "Point",
+                "addTraining": "Add Training"
+                
+            },
+            "details": {
+                "title": "Training Details",
+                "subTitle": "You can update or remove the training area.",
+                "maxAtainablePoint": "Maximum Points",
+                "maxDailyPoint": "Maximum Daily Points",
+                "maxWeeklyPoint": "Maximum Weekly Points",
+                "maxMonthlyPoint": "Maximum Monthly Points",
+                "numberOfCheckpoints": "Number of Checkpoints",
+                "includeWeekends": "Include Weekends?",
+                "name": "Name",
+                "type": "Type",
+                "createdAt": "Created at",
+                "coaches": "Trainers",
+                "taskList": "Task List",
+                "addTask": "Add Task",
+                "nameOfTask": "Name Of Task",
+                "point": "Point",
+                "addTraining": "Add Training"
+            },
+            "delete": {
+                "title": "Delete Training",
+                "subTitle": "Cleaning up! It won't delete training area from existing batches.",
+                "deleteMgs1": "Are you sure you want to delete",
+                "deleteMgs2": "permanently?"
+            },
+            "update": {
+                "title": "Update Training",
+                "subTitleTask": "Let's update the task based training area. Markings are done by tasks.",
+                "subTitleObservational": "Let's update the observational training area. Markings are done by coaches observations.",
+                "subTitleMonthly": "Let's update the checkpoint based training area. Markings are done by monthly checkpoints.",
+                "updateTraining": "Update Training"
+            }
+        }
+    },
+
+
+
+
+
+
+
+
+
+
+
+    "bn": {
+        "navber": {
+            "dashboard": "ড্যাশবোর্ড",
+            "markings": "মার্কিংস",
+            "institute": "ইনস্টিটিউট",
+            "course": "কোর্স",
+            "cohort": "ব্যাচ",
+            "userManagement": "ইউসার ম্যানেজমেন্ট",
+            "trainingAreas": "ট্রেনিং মডিউল",
+            "changePassword": "চেঞ্জ পাসওয়ার্ড",
+            "logOut": "লগ আউট"
+        },
+        "common": {
+            "button": {
+                "edit": "সম্পাদনা করুন",
+                "delete": "মুছে ফেলুন",
+                "update": "হালনাগাদ করুন",
+                "return": "ফিরে আসুন",
+                "cancel": "বাতিল করুন",
+                "deleteAnyway": "যাইহোক মুছুন"
+            },
+            "table": {
+                "action": "অ্যাকশন"
+            },
+            "link": {
+                "details": "বিস্তারিত",
+                "edit": "সম্পাদনা করুন"
+            }
+        },
+        "loginPage": {
+            "title": "লগইন করুন",
+            "subTitle": "আপনি যে পৃষ্ঠাটিতে অ্যাক্সেসের চেষ্টা করছেন সেটি আপনার লগ ইন করতে হবে।",
+            "email": "ইমেল ঠিকানা",
+            "password": "পাসওয়ার্ড",
+            "forgotPassword": "পাসওয়ার্ড ভুলে গেছেন?",
+            "remember": "পরের বার আমাকে মনে রাখুন",
+            "signupNow": "এখন সাইন আপ করুন?"
+        },
+        "signupPage": {
+            "title": "ইনস্টিটিউট অ্যাকাউন্ট তৈরি করুন",
+            "subTitle": "ইনস্টিটিউট অ্যাকাউন্ট তৈরি করার পরে, আপনি আপনার ড্যাশবোর্ড থেকে একটি কোর্স, প্রশিক্ষণ মডিউল, গ্রুপ, প্রশিক্ষণার্থী এবং প্রশিক্ষক যুক্ত করতে পারেন।",
+            "name": "নাম",
+            "email": "ইমেল ঠিকানা",
+            "address": "ঠিকানা",
+            "phone": "ফোন নম্বর",
+            "instituteName": "প্রতিষ্ঠানের নাম",
+            "chooseInstituteType": "ইনস্টিটিউটের ধরণটি চয়ন করুন",
+            "btnSignupNow": "ইনস্টিটিউট তৈরি করুন",
+            "btnLoginNow": "এখনই লগইন করবেন?"
+        },
+        "dashboard": {
+            "title": "অ্যাডমিন ড্যাশবোর্ড",
+            "subTitle": "সাম্প্রতিক সক্রিয় এবং আসন্ন সংঘের দ্রুত অ্যাক্সেস।",
+            "activeCohorts": "অ্যাক্টিভ কোহোর্টস",
+            "upcomingCohorts": "আসন্ন কোহোর্টস"
+        },
+        "markings": {
+            "index": {
+                "title": "মার্কিংস",
+                "subTitle": "বর্তমানে সক্রিয় সংস্থাগুলি থেকে মার্কিং করার জন্য আপনাকে মনোনীত প্রশিক্ষণ অঞ্চল।",
+                "emptyTable": "এখনই মার্কিং করার মতো কিছুই নেই।",
+                "course": "কোর্স",
+                "trainingName": "প্রশিক্ষণের নাম",
+                "cohortName": "কোহোর্ট নাম",
+                "fellows": "ফেলো",
+                "startDate": "শুরুর তারিখ",
+                "endDate": "শেষ তারিখ",
+                "action": "অ্যাকশন"
+            },
+            "details": {
+                "title": "প্রশিক্ষণের বিশদ",
+                "subTitle": "জন্য চিহ্নিতকরণের সংক্ষিপ্তসার সহ ফেলোদের তালিকা।",
+                "name": "নাম",
+                "email": "ইমেল",
+                "task": "টাস্ক",
+                "lastMarked": "সর্বশেষ চিহ্নিত",
+                "points": "পয়েন্টস",
+                "action": "অ্যাকশন",
+                "checkpoints": "চেকপয়েন্টস",
+                "lastChecked": "সর্বশেষ চেক করা হয়েছে",
+                "observations": "পর্যবেক্ষণ",
+                "lastObserved": "সর্বশেষ পর্যবেক্ষণ"
+            }
+        },
+        "institute": {
+            "index": {
+                "title": "ইনস্টিটিউটের তথ্য",
+                "subTitle": "আপনি এখান থেকে ইনস্টিটিউট তথ্য সম্পাদনা করতে পারেন।",
+                "name": "নাম",
+                "type": "ধরণ",
+                "phone": "ফোন",
+                "address": "ঠিকানা",
+                "instituteNotFound": "ইনস্টিটিউট পাওয়া যায় নি।"
+            },
+            "update": {
+                "title": "ইনস্টিটিউট সম্পাদনা করুন",
+                "subTitle": "আপডেটের জন্য দয়া করে এখানে ইনস্টিটিউট নাম এবং ঠিকানা ইনপুট করুন।",
+                "name": "ইনস্টিটিউটের নাম",
+                "phone": "ইনস্টিটিউটের ফোন",
+                "address": "ইনস্টিটিউটের ঠিকানা"
+            }
+        },
+        "course": {
+            "index": {
+                "title": "কোর্স পরিচালনা করুন",
+                "subTitle": "নতুন কোর্স তৈরি করুন বা আপডেট করুন এবং কোর্স সরান।",
+                "name": "নাম",
+                "courseCode": "কোর্স কোড",
+                "courseListEmpty": "কোর্সের তালিকা খালি",
+                "addNewCourse": "নতুন কোর্স যুক্ত করুন"
+            },
+            "add": {
+                "title": "নতুন কোর্স যুক্ত করুন",
+                "subTitle": "একটি নতুন কোর্স যুক্ত করা যাক। দয়া করে কোর্সের নাম এবং কোর্স কোড ইনপুট করুন।",
+                "name": "কোর্সের নাম",
+                "courseCode": "কোর্স কোড",
+                "addCourse": "কোর্স যুক্ত করুন"
+            },
+            "details": {
+                "title": "কোর্সের বিবরণ",
+                "subTitle": "আপনি এখানে কোর্সের তথ্য এবং ব্যাচ পরিচালনা করতে এবং মুছতে পারেন।",
+                "name": "কোর্সের নাম",
+                "courseCode": "কোর্স কোড",
+                "cohortsInCourse": "কোর্সের  ব্যাচ সমূহ",
+                "tooltip": {
+                    "edit": "কোর্সের বিবরণ সম্পাদনা করুন",
+                    "delete": "কোর্সটি মুছে ফেলুন",
+                    "return": "কোর্সে ফিরে যান"
+                }
+            },
+            "delete": {
+                "title": "কোর্সটি স্থায়ীভাবে মুছুন",
+                "subTitle": "ক্লিনিং আপ! এটি সমস্ত ব্যাচ এবং প্রশিক্ষণার্থীর অ্যাকাউন্টগুলি মুছে ফেলবে।",
+                "deleteMgs1": "আপনি কি",
+                "deleteMgs2": "কোর্সটি স্থায়ীভাবে মুছতে চান? এটি সমস্ত ব্যাচ এবং প্রশিক্ষণার্থীর অ্যাকাউন্টগুলিও মুছে ফেলবে।"
+            },
+            "update": {
+                "title": "কোর্সের তথ্য সম্পাদনা করুন",
+                "subTitle": "দয়া করে এখানে আপডেট কোর্সের নাম এবং কোর্স কোডটি ইনপুট করুন।",
+                "name": "কোর্সের নাম",
+                "courseCode": "কোর্স কোড",
+                "courseNotExists": "দুঃখিত! কোর্স বিদ্যমান নেই।"
+            }
+            
+        },
+        "cohort": {
+            "index": {
+                "title": "ব্যাচ পরিচালনা করুন",
+                "subTitle": "আপনি এখান থেকে ব্যাচের তথ্য সম্পাদনা করতে পারেন।",
+                "name": "নাম",
+                "fellows": "প্রশিক্ষণার্থী",
+                "startDate": "শুরুর তারিখ",
+                "endDate": "শেষ তারিখ",
+                "status": "অবস্থা",
+                "cohortListEmpty": "ব্যাচের তালিকা খালি",
+                "addNewCohort": "নতুন ব্যাচ যুক্ত করুন"
+            },
+            "add": {
+                "title": "নতুন ব্যাচ যুক্ত করুন",
+                "subTitle": "দয়া করে কোর্সটি বেছে নিন, একটি ব্যাচ তৈরি করতে শুরু এবং শেষের তারিখটি নির্বাচন করুন।",
+                "name": "ব্যাচের নাম",
+                "startDate": "শুরুর তারিখ",
+                "endDate": "শেষ তারিখ",
+                "chooseCourse": "কোর্স বেছে নিন",
+                "addNewCohort": "ব্যাচ যুক্ত করুন"
+            },
+            "details": {
+                "title": "ব্যাচের বিবরণ",
+                "subTitle": "আপনি ব্যাচের তথ্য সম্পাদনা করতে এবং মুছতে এবং প্রশিক্ষণার্থীকে এখানে যুক্ত / পরিচালনা করতে পারেন।",
+                "name": "নাম",
+                "schedule": "সময়সূচী",
+                "notFOund": "ব্যাচ পাওয়া যায় নি, এটি ইতিমধ্যে মুছে ফেলা হতে পারে।",
+                "tooltip": {
+                    "edit": "ব্যাচের বিবরণ সম্পাদনা করুন",
+                    "delete": "ব্যাচটি মুছে ফেলুন",
+                    "return": "ব্যাচে ফিরে যান"
+                },
+                "addFellow": {
+                    "title": "প্রশিক্ষণার্থী যুক্ত করুন",
+                    "name": "প্রশিক্ষণার্থীর নাম",
+                    "email": "প্রশিক্ষণার্থীর ইমেইল",
+                    "addFellow": "প্রশিক্ষণার্থী যুক্ত করুন"
+                },
+                "fellows": {
+                    "title": "ব্যাচে প্রশিক্ষণার্থী",
+                    "name": "নাম",
+                    "email": "ইমেল",
+                    "total": "মোট",
+                    "noFellow": "ব্যাচে প্রশিক্ষণার্থী নেই।"
+                },
+                "training": {
+                    "title": "ব্যাচে ট্রেনিং মডিউল",
+                    "name": "নাম",
+                    "type": "প্রকার",
+                    "coach": "প্রশিক্ষক",
+                    "point": "পয়েন্ট",
+                    "noTraining": "ব্যাচে কোনও ট্রেনিং মডিউল যুক্ত হয়নি।"
+                }
+            },
+            "update": {
+                "title": "ব্যাচের তথ্য সম্পাদনা করুন",
+                "subTitle": "ব্যাচ আপডেট করা যাক। আপনি এখান থেকে প্রশিক্ষণ মডিউল যুক্ত বা সরাতে পারেন।",
+                "name": "ব্যাচের নাম",
+                "addTrainingArea": "ট্রেনিং মডিউল যোগ করুন",
+                "startDate": "শুরুর তারিখ",
+                "endDate": "শেষ তারিখ"
+            },
+            "delete": {
+                "title": "ব্যাচটি স্থায়ীভাবে মুছুন",
+                "subTitle": "ক্লিনিং আপ! এটি সমস্ত প্রশিক্ষণার্থীর অ্যাকাউন্টগুলি মুছে ফেলবে।",
+                "deleteMgs1": "আপনি কি",
+                "deleteMgs2": "ব্যাচটি স্থায়ীভাবে মুছতে চান? এটি সমস্ত প্রশিক্ষণার্থীর অ্যাকাউন্টগুলিও মুছে ফেলবে।"
+            }
+        },
+        "user": {
+            "index": {
+                "title": "ব্যবহারকারীদের ম্যানেজ করুন",
+                "subTitle": "অ্যাক্সেস নিয়ন্ত্রণ গুরুত্বপূর্ণ, আপনি এখানে নতুন ব্যবহারকারী যুক্ত করতে বা কারও ভূমিকা আপডেট করতে পারেন।",
+                "name": "নাম",
+                "email": "ইমেইল",
+                "role": "ভূমিকা",
+                "addNewUser": "নতুন ব্যবহারকারী যুক্ত করুন"
+            },
+            "add": {
+                "title": "নতুন ব্যবহারকারী যুক্ত করুন",
+                "subTitle": "একটি নতুন ব্যবহারকারী সেটআপ করা যাক। তারা তাদের পাসওয়ার্ড সহ একটি ইমেল পাবেন।",
+                "name": "নাম",
+                "email": "ইমেইল",
+                "chooseUserRole": "ব্যবহারকারীর ভূমিকা পছন্দ করুন",
+                "addUser": "ব্যবহারকারী যুক্ত করুন"
+            },
+            "details": {
+                "title": "ব্যবহারকারীর বৃত্যান্ত",
+                "subTitle": "আপনি এখানে ব্যবহারকারী তথ্য সম্পাদনা করতে এবং মুছতে পারেন।",
+                "name": "নাম",
+                "email": "ইমেইল",
+                "role": "ভূমিকা",
+                "createdAt": "নির্মিত",
+                "status": "অবস্থা",
+                "active": "সক্রিয়",
+                "deactivate": "নিষ্ক্রিয়",
+                "userNotFound": "ব্যবহারকারী পাওয়া যায় নি, এটি ইতিমধ্যে মুছে ফেলা হতে পারে।"
+            },
+            "delete": {
+                "title": "ব্যবহারকারী মুছুন",
+                "subTitle": "ক্লিনিং আপ! এটি সিস্টেম থেকে অ্যাকাউন্ট ডেটা অপসারণ করে।",
+                "deleteMgs1": "আপনি কি স্থায়িভাবে",
+                "deleteMgs2": "মুছে ফেলতে চান? তাদের আবার যুক্ত করা তাদের ডেটা পুনরুদ্ধার করবে না।"
+            },
+            "update": {
+                "title": "ব্যবহারকারীর তথ্য আপডেট করুন",
+                "subTitle": "আপনি ব্যবহারকারীর নাম বা তাদের ভূমিকা পরিবর্তন করতে পারেন তবে ইমেল ঠিকানা সম্পাদনা করতে পারবেন না।",
+                "name": "নাম",
+                "email": "ইমেইল",
+                "chooseUserRole": "ব্যবহারকারীর ভূমিকা পছন্দ করুন"
+            }
+        },
+        "password": {
+            "change": {
+                "title": "পাসওয়ার্ড পরিবর্তন করুন",
+                "subTitle": "আপনার পাসওয়ার্ড প্রায়শই পরিবর্তন করা ভাল ধারণা।",
+                "newPassword": "নতুন পাসওয়ার্ড",
+                "confirmPassword": "পাসওয়ার্ড নিশ্চিত করুন",
+                "change": "পরিবর্তন করুন"
+            }
+        },
+        "training": {
+            "index": {
+                "title": "ট্রেনিং মডিউল পরিচালনা করুন",
+                "subTitle": "ডিফল্ট প্রশিক্ষক, টাস্ক এবং পয়েন্ট সহ ট্রেনিংয়ের ক্ষেত্রগুলি প্রাক কনফিগার করুন। ট্রেনিং মডিউল কনফিগারেশনের উপর ভিত্তি করে নতুন ব্যাচ তৈরি করা হয়।",
+                "name": "নাম",
+                "type": "প্রকার",
+                "totalPoints": "মোট পয়েন্ট",
+                "addTrainingArea": "ট্রেনিং মডিউল যোগ করুন",
+                "noTrainingAdded": "কোন ট্রেনিং মডিউল যুক্ত হয়নি",
+                "btnAddList": "টাস্ক লিস্ট",
+                "btnAddObservational": "পর্যবেক্ষণমূলক",
+                "btnAddMonthly": "চেকপয়েন্ট"
+            },
+            "add": {
+                "title": "ট্রেনিং মডিউল যোগ করুন",
+                "subTitleTask": "আসুন একটি নতুন টাস্ক ভিত্তিক ট্রেনিংয়ের ক্ষেত্র সেটআপ করি। চিহ্নিতকরণ কাজ দ্বারা সম্পন্ন হয়।",
+                "subTitleObservational": "আসুন একটি নতুন পর্যবেক্ষণ ট্রেনিংয়ের ক্ষেত্র সেটআপ করা যাক। চিহ্নিতকরণগুলি প্রশিক্ষকদের পর্যবেক্ষণ দ্বারা করা হয়।",
+                "subTitleMonthly": "আসুন একটি চেকপয়েন্ট ভিত্তিক পট্রেনিংয়ের ক্ষেত্র সেটআপ করি। চিহ্নিতকরণগুলি মাসিক চেকপয়েন্টগুলি দ্বারা সম্পন্ন হয়।",
+                "maxAtainablePoint": "সর্বোচ্চ পয়েন্ট",
+                "maxDailyPoint": "সর্বোচ্চ দৈনিক পয়েন্ট",
+                "maxWeeklyPoint": "সর্বোচ্চ সাপ্তাহিক পয়েন্ট",
+                "maxMonthlyPoint": "সর্বোচ্চ মাসিক পয়েন্ট",
+                "numberOfCheckpoints": "চেকপয়েন্টগুলির সংখ্যা",
+                "includeWeekends": "সপ্তাহান্তে অন্তর্ভুক্ত করবেন?",
+                "name": "নাম",
+                "addCoach": "কোচ যোগ করুন",
+                "taskList": "কাজের তালিকা",
+                "addTask": "টাস্ক যোগ করুন",
+                "nameOfTask": "টাস্কের নাম",
+                "point": "পয়েন্ট",
+                "addTraining": "ট্রেনিং যোগ করুন"
+                
+            },
+            "details": {
+                "title": "ট্রেনিংয়ের বিবরণ",
+                "subTitle": "আপনি ট্রেনিং মডিউল আপডেট বা মুছে ফেলতে পারেন।",
+                "maxAtainablePoint": "সর্বোচ্চ পয়েন্ট",
+                "maxDailyPoint": "সর্বোচ্চ দৈনিক পয়েন্ট",
+                "maxWeeklyPoint": "সর্বোচ্চ সাপ্তাহিক পয়েন্ট",
+                "maxMonthlyPoint": "সর্বোচ্চ মাসিক পয়েন্ট",
+                "numberOfCheckpoints": "চেকপয়েন্টগুলির সংখ্যা",
+                "includeWeekends": "সপ্তাহান্তে অন্তর্ভুক্ত করবেন?",
+                "name": "নাম",
+                "type": "প্রকার",
+                "createdAt": "নির্মিত",
+                "coaches": "প্রশিক্ষক",
+                "taskList": "কাজের তালিকা",
+                "nameOfTask": "টাস্কের নাম",
+                "point": "পয়েন্ট"
+            },
+            "delete": {
+                "title": "ট্রেনিং মুছুন",
+                "subTitle": "ক্লিনিং আপ! এটি বিদ্যমান ব্যাচগুলি থেকে ট্রেনিংয়ের ক্ষেত্রটি মুছবে না।",
+                "deleteMgs1": "আপনি কি স্থায়িভাবে",
+                "deleteMgs2": "মুছে ফেলতে চান?"
+            },
+            "update": {
+                "title": "আপডেট ট্রেনিং",
+                "subTitleTask": "আসুন টাস্ক ভিত্তিক প্রশিক্ষণের ক্ষেত্রটি আপডেট করুন। চিহ্নিতকরণ কাজ দ্বারা সম্পন্ন হয়।",
+                "subTitleObservational": "আসুন পর্যবেক্ষণ প্রশিক্ষণের ক্ষেত্রটি আপডেট করুন। কোচ পর্যবেক্ষণ দ্বারা চিহ্নিত করা হয়।",
+                "subTitleMonthly": "আসুন চেকপয়েন্ট ভিত্তিক প্রশিক্ষণ অঞ্চল আপডেট করুন। চিহ্নিতকরণগুলি মাসিক চেকপয়েন্টগুলি দ্বারা সম্পন্ন হয়।",
+                "updateTraining": "আপডেট ট্রেনিং"
+            }
+        }
+    }
+}
