@@ -12,7 +12,7 @@ There are 3 different user types
 Short desc about user roles here...
 
 
-## Initial Tasks (Deadline Saturday 13th Nov, 2022) ##
+## Initial Tasks (Deadline Saturday 15th Feb, 2023) ##
 - [x] Initial project structure
 - [x] Authorization URL
 - [x] Menu auto filter based on authorization
