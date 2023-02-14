@@ -1,24 +1,26 @@
 # ABOUT #
 
-API service for banani club member panel.
+Web & API services for Off Ready Ready Plan.
 
 
-## Users ##
+## Back Panel Users ##
 There are 3 different user types
-- Superadmin
 - Admin
-- Member
+- Moderator
+- User
 
 Short desc about user roles here...
+
 
 ## Initial Tasks (Deadline Saturday 13th Nov, 2022) ##
 - [x] Initial project structure
 - [x] Authorization URL
 - [x] Menu auto filter based on authorization
-- [x] Authentication
-- [x] Dashboard Structure
-- [x] Login API
-- [x] User management (Adding and removing Admin, Tutor)
+- [x] First Time Setup
+- [x] Authentication & User Login
+- [x] Dashboard
+
+- [x] User management
     - [x] List Users
     - [x] Add User
     - [x] Edit User

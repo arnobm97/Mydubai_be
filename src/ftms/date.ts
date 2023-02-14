@@ -1,3 +1,4 @@
+import { any } from "bluebird";
 
 class DateFormatter {
 
@@ -25,6 +26,82 @@ class DateFormatter {
         return y+'-'+m+'-'+d;
     }
 
+    public time(dateStr:string | Date): string {
+        const date = new Date(dateStr);
+        let hours: any = date.getHours();
+        let minutes: any = date.getMinutes();
+        if(minutes<10){
+            minutes = '0'+minutes;
+        }
+        if(hours<10){
+            hours = '0'+hours;
+        }
+        return hours+':'+minutes;
+    }
+
+
+    public dateTime(dateStr:string | Date): string {
+        const date = new Date(dateStr);
+        const months = date.getMonth()+1;
+        const d = ('0' + date.getDate()).slice(-2);
+        const m = ('0' + months).slice(-2);
+        const y = date.getFullYear();
+        let hours = date.getHours();
+        let minutes: any = date.getMinutes();
+        const ampm = hours >= 12 ? 'PM' : 'AM';
+        hours = hours % 12;
+        hours = hours ? hours : 12;
+        minutes = minutes < 10 ? '0'+minutes : minutes;
+        return d+'-'+m+'-'+y+' '+hours+':'+minutes+' '+ampm
+    }
+
+
+    public Time12(dateStr:string | Date): string {
+        const date = new Date(dateStr);
+        const months = date.getMonth()+1;
+        let hours = date.getHours();
+        let minutes: any = date.getMinutes();
+        const ampm = hours >= 12 ? 'PM' : 'AM';
+        hours = hours % 12;
+        hours = hours ? hours : 12;
+        minutes = minutes < 10 ? '0'+minutes : minutes;
+        return hours+':'+minutes+' '+ampm
+    }
+
+
+
+    public timeDifference(toDate:number, fromDate:number): any {
+        if(fromDate>toDate){
+            return "Invalid";
+        }
+        let s = toDate-fromDate;
+        const ms = s % 1000;
+        s = (s - ms) / 1000;
+        const secs = s % 60;
+        s = (s - secs) / 60;
+        const mins = s % 60;
+        const hrs = (s - mins) / 60;
+        // return hrs + 'H' + mins + ':' + secs + '.' + ms;
+        return hrs + ':' + mins + ' hour(s)';
+    }
+
+
+    public msToHour(time:number): any {
+        let s = time;
+        const ms = s % 1000;
+        s = (s - ms) / 1000;
+        const secs = s % 60;
+        s = (s - secs) / 60;
+        const mins = s % 60;
+        const hrs = (s - mins) / 60;
+        return hrs + ':' + mins + ' hour(s)';
+    }
+
+
+
+
+
+
     public my(dateStr:string | Date, short: boolean = false):string {
         const date = new Date(dateStr);
         let m;
@@ -38,15 +115,15 @@ class DateFormatter {
 
     public nextMonth(date: Date): Date {
         let current;
-
         if (date.getMonth() === 11) {
             current = new Date(date.getFullYear() + 1, 0, date.getDate());
         } else {
             current = new Date(date.getFullYear(), date.getMonth() + 1, date.getDate());
         }
-
         return current;
     }
+
+
 
     public now(): Date {
         return new Date();

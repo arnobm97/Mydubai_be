@@ -1,0 +1,47 @@
+extends ../layout
+block content
+    //- stats ------------------------------------------------------------------------
+    div.row.g-4.mb-4
+        div.col-6.col-lg-3
+            div.app-card.app-card-stat.shadow-sm.h-100
+                div.app-card-body.p-3.p-lg-4
+                    h4.stats-type.mb-1 Total Sessions
+                    div.stats-figure=stats.total_sessions
+                a.app-card-link-mask(href="#")
+        div.col-6.col-lg-3
+            div.app-card.app-card-stat.shadow-sm.h-100
+                div.app-card-body.p-3.p-lg-4
+                    h4.stats-type.mb-1 Today Sessions
+                    div.stats-figure=stats.today_sessions
+                a.app-card-link-mask(href="#")
+        div.col-6.col-lg-3
+            div.app-card.app-card-stat.shadow-sm.h-100
+                div.app-card-body.p-3.p-lg-4
+                    h4.stats-type.mb-1 Active Stations
+                    div.stats-figure 1
+                a.app-card-link-mask(href="#")
+        div.col-6.col-lg-3
+            div.app-card.app-card-stat.shadow-sm.h-100
+                div.app-card-body.p-3.p-lg-4
+                    h4.stats-type.mb-1 Total Users
+                    div.stats-figure=stats.total_users
+                a.app-card-link-mask(href="#")
+                
+    //- chart ------------------------------------------------------------------------
+    .row.g-4.mb-4
+        .col-12.col-lg-12
+            .app-card.app-card-chart.h-100.shadow-sm
+                .app-card-header.p-3
+                    .row.justify-content-between.align-items-center
+                        .col-auto
+                            h4.app-card-title Sessions Graph
+                        .col-auto
+                            .card-header-action
+                                a(href="#") Last 7 days data till today
+                .app-card-body.p-3.p-lg-4
+                    .mb-3.d-flex
+                        select.form-select.form-select-sm.ms-auto.d-inline-flex.w-auto
+                            option(value="1", selected) This week
+                            option(value="2") Last week
+                    .chart-container
+                        canvas#canvas-barchart

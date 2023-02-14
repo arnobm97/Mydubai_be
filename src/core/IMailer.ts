@@ -4,7 +4,8 @@ export interface IMail {
     from?:string,
     subject:string,
     text?:string,
-    html:string
+    html?:string,
+    attachments?: any
 }
 
 export interface IMailer {

@@ -12,6 +12,8 @@ export interface SMTPConf {
 }
 
 export class Config {
+    public appTitle: string;
+    public host: string;
     public port: number;
     public mongoUrl: string;
     public cookieSecret: string;

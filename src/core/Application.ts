@@ -23,6 +23,7 @@ export class Application {
     private Controllers: Controller[];
     private menus: Dictionary<Menu>;
     private formatters: Dictionary<any>;
+    private lang: any;
 
     // Injected dependencies
     public UserProvider: IUserProvider;
@@ -49,6 +50,10 @@ export class Application {
         this.set("Session", new Session());
         this.set("Authenticator", new Authenticator(this));
         this.set("config", config);
+
+        // Read language file
+        const langFIle: any = fs.readFileSync("./locales/language.json");
+        this.lang = JSON.parse(langFIle);
 
         // Register session middleware
         this.use(new Extention());
@@ -84,23 +89,16 @@ export class Application {
     public registerController(ControllerClass: typeof Controller): void {
         const controller:Controller = new ControllerClass();
         controller.Register(this);
+
         this.Controllers.push(controller);
     }
 
-
     private execute(context: Controller, callback: ActionCallback, roles: Role[]) {
+
         return (req: HttpRequest, resp : HttpResponse, next: NextFunc) => {
-            const respData = { status: 200, error: false, message: "", action: "", data: {} };
+
             if(roles.length > 0 && (!req.user || roles.indexOf(req.user.role) === -1)) {
-                respData.message = "Access Denied, You don’t have permission to access on this Server.";
-                if(!req.user){
-                    respData.message = "Invalid or expired access token.";
-                }
-                respData.status = 498;
-                respData.error = true;
-                respData.data = null;
-                resp.status(200);
-                return resp.send(respData);
+                resp.redirect(`/login?ref=${encodeURIComponent(req.path)}`);
             } else {
                 this.populateBag(req, resp);
                 callback.call(context, req, resp, next);
@@ -108,15 +106,27 @@ export class Application {
         }
     }
 
-
-
-
-
     private populateBag(req: HttpRequest, resp : HttpResponse) {
         if(!resp.bag.menu) resp.bag.menu = { main: { items: [] }};
         for(const key of this.menus.Keys()) {
             const menu = { items: this.menus.Item(key).items.filter( mi => mi.for.length === 0 || (req.user && mi.for.indexOf(req.user.role) >= 0)) };
             resp.bag.menu[key] = menu;
+        }
+        resp.bag.fmt = {};
+        for(const key of this.formatters.Keys()) {
+            resp.bag.fmt[key] = this.formatters.Item(key);
+        }
+        resp.bag.loggedUser = req.user;
+        if(req.cookies.AppLanguage === 'bn'){
+            resp.bag.lang = this.lang.bn;
+            resp.bag.switchLangBtn = {text: "English", url: "/en" };
+        }
+        else if(req.cookies.AppLanguage === 'en'){
+            resp.bag.lang = this.lang.en;
+            resp.bag.switchLangBtn = {text: "বাংলা", url: "/bn" };
+        }else{
+            resp.bag.lang = this.lang.en;
+            resp.bag.switchLangBtn = {text: "বাংলা", url: "/bn" };
         }
     }
 

@@ -1,9 +1,11 @@
 import { ISession } from "../core/IUserProvider";
 import mongoose, { Schema } from "mongoose";
 
-const UserSchema: Schema = new Schema({
-    mobile:{ type: String, required: true, unique: true },
+const SessionSchema: Schema = new Schema({
+    username:{ type: String, required: true },
     refreshToken: { type: String, required: true },
 }, { timestamps: true });
 
-export default mongoose.model<ISession>("sessions", UserSchema);
+SessionSchema.index({ username: "text" }, { unique: true } );
+
+export default mongoose.model<ISession>("sessions", SessionSchema);

@@ -5,7 +5,6 @@ import { IUserToken } from "./IUserProvider";
 
 export interface HttpRequest extends Request {
     user: IUserToken;
-    userId: string;
 }
 
 export interface HttpResponse extends Response {

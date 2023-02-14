@@ -1,0 +1,24 @@
+div#app-sidepanel.app-sidepanel
+  div#sidepanel-drop.sidepanel-drop
+  div.sidepanel-inner.d-flex.flex-column
+    a#sidepanel-close.sidepanel-close.d-xl-none(href='#') &times;
+    div.app-branding
+      a.app-logo(href='/')
+        img.logo-icon.me-2(src='/images/app-logo.svg', alt='logo')
+        span.logo-text ADMIN PANEL
+    nav#app-nav-main.app-nav.app-nav-main.flex-grow-1
+      ul#menu-accordion.app-menu.list-unstyled.accordion
+        each mi in menu.main.items
+          li.nav-item
+            a.nav-link(href=mi.path)
+              span.nav-icon !{mi.icon}
+              span.nav-link-text !{mi.name}
+
+    div.app-sidepanel-footer
+      nav.app-nav.app-nav-footer
+        ul.app-menu.footer-menu.list-unstyled
+          li.nav-item
+            a.nav-link(href='#')
+              span.nav-icon
+                i.fa-sharp.fa-solid.fa-gear.fa-lg
+              span.nav-link-text Settings

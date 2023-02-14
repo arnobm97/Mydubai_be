@@ -1,0 +1,9 @@
+extends ../layout
+
+block content
+    .row.section
+        .col.s12
+            h4.center Not Found (404)
+        if !!errorMessage
+            div.input-field.col.s12
+                span.error.center #{errorMessage}

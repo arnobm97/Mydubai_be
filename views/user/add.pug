@@ -1,0 +1,60 @@
+extends ../layout
+
+block content
+
+  //- Breadcrumbs
+  .col.s12(style="margin-top: 0px; background: #577889; line-height: 1; padding-left: 10px;")
+    a.breadcrumb(href='/users') User Management
+    a.breadcrumb(href='/users') Users
+    a.breadcrumb(href='#') Add New User
+
+  div.valign-wrapper
+    div.row
+      div.div.col.s12.m12.l10.xl8.offset-l1.offset-xl2
+        form.col.s12(action="", method="POST")
+          div.row
+            div.input-field.col.s12
+              h5.header Add New User
+              span Let's setup a new user. They will receive an email with their password.
+            if !!errorMessage
+              div.input-field.col.s12
+                span.error #{errorMessage}
+            if !!successMessage
+              div.input-field.col.s12
+                span.success #{successMessage}
+            
+            div.input-field.col.s6
+              input#name.validate(type="text", name="name" required = "true") 
+              label(for="name") Name
+            div.input-field.col.s6
+              input#email.validate(type="email", name="email" required = "true") 
+              label(for="email") Email
+
+            div.input-field.col.s6
+              input#designation.validate(type="text", name="designation" required = "true") 
+              label(for="designation") Designation
+            div.input-field.col.s6
+              input#department.validate(type="text", name="department" required = "true") 
+              label(for="department") Department
+            div.input-field.col.s12
+              input#unit.validate(type="text", name="unit" required = "true") 
+              label(for="unit") Business Unit
+
+            div.input-field.col.s12
+              select(name="role" required)
+                option(value="", disabled="") Choose User Role
+                option(value="Admin") Admin
+                option(value="Moderator") Moderator
+                option(value="User") User
+
+            div.row
+              div.input-field.col.s12
+                  button.btn.waves-effect.waves-light(style="margin-left:10px" type="submit") Add User
+                      i.material-icons.right add
+                  a.btn.waves-effect.waves-light.urbaned.black(style="margin-left:5px" href="/users") Return
+                    i.material-icons.right keyboard_return
+
+                  
+
+
+

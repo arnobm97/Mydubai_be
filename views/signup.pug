@@ -1,0 +1,48 @@
+extends layout
+
+block content
+    div.valign-wrapper
+        div.row
+            div.col.s12.m8.l8.xl6.offset-m2.offset-l2.offset-xl3
+                form.col.s12(action="", method="POST")
+                    div.row
+                        div.input-field.col.s12
+                            h4 #{lang.signupPage.title}
+                            span #{lang.signupPage.subTitle}
+                        if !!errorMessage
+                            div.input-field.col.s12
+                                span.error #{errorMessage}
+                        div.input-field.col.s12
+                            i.material-icons.prefix person
+                            input.validate#name(type="text", name="name", required="true")
+                            label(for="name") #{lang.signupPage.name}
+                        div.input-field.col.s12
+                            i.material-icons.prefix email
+                            input.validate#email(type="email", name="email", required="true")
+                            label(for="email") #{lang.signupPage.email}
+                        div.input-field.col.s12
+                            i.material-icons.prefix home
+                            input.validate#address(type="text", name="address", required="true")
+                            label(for="address") #{lang.signupPage.address}
+                        div.input-field.col.s12
+                            i.material-icons.prefix call
+                            input.validate#phone(type="tel", name="phone", required="true")
+                            label(for="phone") #{lang.signupPage.phone}
+                        div.input-field.col.s12
+                            i.material-icons.prefix account_balance
+                            input.validate#institute_name(type="text", name="institute_name", required="true")
+                            label(for="institute_name") #{lang.signupPage.instituteName}
+                        div.input-field.col.s12
+                            i.material-icons.prefix list
+                            select(name="type" value="" required)
+                                option(value="", disabled="", selected="") #{lang.signupPage.chooseInstituteType}
+                                each type in types
+                                    option(value=type) #{type}
+               
+                    div.row
+                        div.input-field.col.s12
+                            button.btn.waves-effect.waves-light(type="submit") #{lang.signupPage.btnSignupNow}
+                                i.material-icons.right lock_open
+                            a.waves-effect.waves-light.urbaned-text.text-red(style="margin-left: 18px;" href="/login") #{lang.signupPage.btnLoginNow}
+                           
+

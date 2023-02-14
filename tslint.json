@@ -8,8 +8,7 @@
         "trailing-comma": [ false ],
         "no-console": false,
         "forin": false,
-        "only-arrow-functions": false,
-        "prefer-for-of": false
+        "only-arrow-functions": false
     },
     "rulesDirectory": []
 }

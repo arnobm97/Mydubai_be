@@ -1,0 +1,32 @@
+doctype html
+html(lang="en")
+    head
+        title=pageTitle
+        meta(charset="utf-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        meta(name="description", content="Weight Link || Login")
+        meta(name="author", content="btsl")
+        link(rel="shortcut icon", href="favicon.ico")
+        script(defer, src="/plugins/fontawesome/js/all.min.js")
+        link#theme-style(rel="stylesheet", href="/css/portal.css")
+    
+    body.app.app-login.p-0
+        //- content
+        div.row.g-0.app-auth-wrapper
+            div.col-12.col-md-12.col-lg-12.auth-main-col.text-center.p-5
+                div.d-flex.flex-column.align-content-end
+                    div.app-auth-body.mx-auto
+                        div.app-auth-branding.mb-4
+                            a.app-logo(href="/")
+                                img.logo-icon.me-2(src="images/app-logo.svg", alt="logo")
+                        h5.text-center.mb-4 Setup is Done!
+                        span.success.center 
+
+                        div.alert.alert-success Setup is done and the application is live. #[a(href="/login") Please login]
+                        
+        //- footer
+        footer.app-auth-footer
+            div.container.text-center.py-3
+                small.copyright Developed by 
+                    a.app-link(href="#", target="_blank") Off Plan

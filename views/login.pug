@@ -1,0 +1,52 @@
+doctype html
+html(lang="en")
+    head
+        title=pageTitle
+        meta(charset="utf-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        meta(name="description", content="Weight Link || Login")
+        meta(name="author", content="btsl")
+        link(rel="shortcut icon", href="favicon.ico")
+        script(defer, src="/plugins/fontawesome/js/all.min.js")
+        link#theme-style(rel="stylesheet", href="/css/portal.css")
+    
+    body.app.app-login.p-0
+        //- content
+        div.row.g-0.app-auth-wrapper
+            div.col-12.col-md-12.col-lg-12.auth-main-col.text-center.p-5
+                div.d-flex.flex-column.align-content-end
+                    div.app-auth-body.mx-auto
+                        div.app-auth-branding.mb-4
+                            a.app-logo(href="/")
+                                img.logo-icon.me-2(src="images/app-logo.svg", alt="logo")
+                        h2.auth-heading.text-center.mb-5 Log into Admin Panel
+                        -if(errorMessage)
+                            div.alert.alert-danger(role='alert')=errorMessage
+                        div.auth-form-container.text-start
+                            form.auth-form.login-form(action="/login" method="POST")
+                                div.email.mb-3
+                                    label.sr-only(for="email") Email
+                                    input#email.form-control.email(name="email", type="email", placeholder="Email", required="required")
+                                div.password.mb-3
+                                    label.sr-only(for="password") Password
+                                    input#password.form-control.password(name="password", type="password", placeholder="Password", required="required")
+                                    div.extra.mt-3.row.justify-content-between
+                                        div.col-6
+                                            .form-check
+                                                input#RememberPassword.form-check-input(type="checkbox", name="remember" value="")
+                                                label.form-check-label(for="RememberPassword")
+                                                    | Remember me
+                                        div.col-6
+                                            .forgot-password.text-end
+                                                a(href="reset-password.html") Forgot password?
+                                div.text-center
+                                    button.btn.app-btn-primary.w-100.theme-btn.mx-auto(type="submit") Log In
+                            div.auth-option.text-center.pt-5 No Account? Please contact with admin.
+
+        //- footer
+        footer.app-auth-footer
+            div.container.text-center.py-3
+                small.copyright Developed by 
+                    a.app-link(href="#", target="_blank") Off Ready Plan
+

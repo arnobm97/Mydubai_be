@@ -1,0 +1,60 @@
+extends ../layout
+
+block content
+    //- Breadcrumbs
+    .col.s12(style="margin-top: 0px; background: #577889; line-height: 1; padding-left: 10px;")
+        a.breadcrumb(href='/users') User Management
+        a.breadcrumb(href='/users') Users
+        a.breadcrumb(href='#') User Details
+
+    div.row
+      div.div.col.s12.m12.l10.xl8.offset-l1.offset-xl2
+              -if(user)
+                form.col.s12(action="", method="POST")
+                    div.row
+                        div.input-field.col.s12
+                            h5.header User Details
+                            span You can edit and delete user information here.
+                        div.col.s12.m12.l12.xl12
+                            table.table.table-striped
+                              tr
+                                th 
+                                th 
+                                tr
+                                  th Name
+                                  td= user.name
+                                  th Email
+                                  td= user.email
+                                tr
+                                  th Designation
+                                  td= user.designation
+                                  th Department
+                                  td= user.department
+                                tr
+                                  th Unit
+                                  td= user.unit
+                                  th Role
+                                  td= user.role
+                                tr
+                                  th Created at
+                                  td= fmt.date.pretty(user.createdAt)
+                                  th Status
+                                  -if(user.isActive == true )
+                                    td Active
+                                  -else
+                                    td Deactivate
+                            
+                    div.row
+                        div.col.s12
+                            a.btn.waves-effect.waves-light(style="margin-right:5px" href='/users/update/'+user._id) Edit
+                               i.material-icons.right edit
+                            a.btn.waves-effect.waves-light(style="margin-right:5px" href='/users/delete/'+user._id) Delete
+                               i.material-icons.right delete
+                            a.btn.waves-effect.waves-light.urbaned.black(href="/users") Return
+                              i.material-icons.right keyboard_return
+                              
+              -else
+                h4 User not found, it might be deleted already.
+                a.btn.waves-effect.waves-light.urbaned.black(onclick="history.back()") Return
+                              i.material-icons.right keyboard_return
+                              
