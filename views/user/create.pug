@@ -4,7 +4,7 @@ block content
 
   .row.mb-2.align-items-center.justify-content-between.bg-white.p-2.m-0
     .col-auto
-      h1.app-page-title.mb-0 Users / Update User
+      h1.app-page-title.mb-0 Users / Create User
     .col-auto
       .page-utilities
         .row.g-2.justify-content-start.justify-content-md-end.align-items-center
@@ -26,35 +26,26 @@ block content
           form(action="" method="POST")
             div.mb-3
               label.form-label(for='setting-input-1') Full Name
-              input#fullName.form-control(type='text' name="fullName" value=userToUpdate.fullName required )
+              input#fullName.form-control(type='text' name="fullName" required )
             div.mb-3
               label.form-label(for='setting-input-2') Email
-              input#username.form-control(type='text' value=userToUpdate.email readonly required )
+              input#email.form-control(type='email' name="email" required )
             div.mb-3
               label.form-label(for='setting-input-2') Password
-              input#password.form-control(type="password" name="password" )
+              input#password.form-control(type="password" name="password" required )
             div.mb-3
               label.form-label(for='setting-input-2') Confirm Password
-              input#confirmPassword.form-control(type="password" name="confirmPassword" )
+              input#confirmPassword.form-control(type="password" name="confirmPassword" required )
             div.mb-3
               label.form-label(for='setting-input-2') Select User Role
-              - var roles = ["Admin", "Moderator", "User"]
-              select.form-control(name="role" value=userToUpdate.role required)
+              select.form-control(name="role")
                 option(value="", disabled="", selected="") Choose User Role
-                each role in roles
-                  if userToUpdate.role == role
-                    option(value=role selected="") #{role}
-                  else
-                    option(value=role) #{role}
+                option(value="Admin") Admin
+                option(value="Moderator") Moderator
+                option(value="User") User
             div.mb-3
               label.form-label(for='setting-input-2') Avatar Link
-              input#avatar.form-control(type='text', name="avatar" value=userToUpdate.avatar )
-
-            div.form-check.form-switch.mb-3
-              abel.form-label(for='isActive') Active Status
-              -if(userToUpdate.isActive === true)
-                input#isActive.form-check-input(type='checkbox' name="isActive" checked )
-              -else
-                input#isActive.form-check-input(type='checkbox' name="isActive" )
-              
-            button.btn.app-btn-primary(type='submit') Update User
+              input#avatar.form-control(type='text', name="avatar" )
+            
+            button.btn.app-btn-primary(type='submit') Create User
+  

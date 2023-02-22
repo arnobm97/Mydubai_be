@@ -1,0 +1,34 @@
+doctype html
+html(lang="en")
+    head
+        title Permission Denied
+        meta(charset="utf-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        meta(name="description", content="Weight Link || Login")
+        meta(name="author", content="btsl")
+        link(rel="shortcut icon", href="favicon.ico")
+        script(defer, src="/plugins/fontawesome/js/all.min.js")
+        link#theme-style(rel="stylesheet", href="/css/portal.css")
+    
+    body.app.app-login.p-0
+        //- content
+        div.row.g-0.app-auth-wrapper
+            div.col-12.col-md-12.col-lg-12.auth-main-col.text-center.p-5
+                div.d-flex.flex-column.align-content-end
+                    div.mx-auto.mt-5
+                        div.app-auth-branding.mb-3
+                            a.app-logo(href="/")
+                                img.logo-icon.me-2(src="/images/denied.png", alt="logo")
+                        h2.auth-heading.text-center.mb-5 Permission Denied
+                            div.alert.alert-danger.mt-3(role='alert') You don't have permission to access on this service.
+                        
+                        div.text-center
+                            button.btn.app-btn-primary.theme-btn.mx-auto(type="button" onclick="history.back()" ) Return To Privious Page
+
+        //- footer
+        footer.app-auth-footer
+            div.container.text-center.py-3
+                small.copyright Developed by 
+                    a.app-link(href="https://www.btracsolutions.com", target="_blank") B-Trac Solutions Ltd.
+

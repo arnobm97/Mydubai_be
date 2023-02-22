@@ -1,8 +1,7 @@
 extends ../layout
 block content
 
-
-  .row.g-3.mb-4.align-items-center.justify-content-between
+  .row.mb-2.align-items-center.justify-content-between.bg-white.p-2.m-0
     .col-auto
       h1.app-page-title.mb-0 Users
     .col-auto
@@ -25,82 +24,78 @@ block content
               option(value='option-4') 50
               option(value='option-4') 100
           .col-auto
-            a.btn.app-btn-secondary(href='#')
-              svg.bi.bi-download.me-1(width='1em', height='1em', viewBox='0 0 16 16', fill='currentColor', xmlns='http://www.w3.org/2000/svg')
-                path(fill-rule='evenodd', d='M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z')
-                path(fill-rule='evenodd', d='M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z')
-              |  Download CSV
-          .col-auto
-            a.btn.app-btn-secondary(href='/users/create-new')
+            a.btn.app-btn-primary(href='/users/create')
               i.fa.fa-plus
               | &nbsp;Create User
       
+  div.row(style="margin: 0px 1px")
+    -if(flashMessage.length>0)
+      div.alert.alert-success(role='alert')
+        each mgs in flashMessage
+          li=mgs
 
-  #orders-table-tab-content.tab-content
-    #orders-all.tab-pane.fade.show.active(role='tabpanel', aria-labelledby='orders-all-tab')
-      .app-card.app-card-orders-table.shadow-sm.mb-5
-        .app-card-body
-          .table-responsive
-            table.table.app-table-hover.mb-0.text-left
-              thead
-                tr
-                  th.cell SL#
-                  th.cell Name
-                  th.cell Email
-                  th.cell.text-center Status
-                  th.cell.text-center Role
-                  th.cell.text-center Created At
-                  th.cell.text-center Action
-              tbody
-                -var sl=1
-                each user in userPage.data
-                  tr
-                    td.cell=sl++
-                    td.cell=user.fullName
-                    td.cell=user.email
-                    td.cell.text-center
-                      -if(user.isActive == true)
-                        span.badge.bg-success Active
-                      -else
-                        span.badge.bg-danger Deactivated
-                    td.cell.text-center
-                      span.badge.bg-info=user.role
-                    td.cell.text-center
-                      span=fmt.date.pretty(user.createdAt)+' '+fmt.date.Time12(user.createdAt)
-                      //- span.note=fmt.date.Time12(user.createdAt)
-                    td.cell.text-center
-                      a.btn.app-btn-info.btn-sm(href='/users/edit/'+user._id) Edit
-                      a.btn.app-btn-danger.btn-sm.ms-2(href='/users/edit/'+user._id) Reset Password
-                      a.btn.app-btn-primary.btn-sm.ms-2(href='/users/edit/'+user._id) View
-                      
-      //- pagination
-      nav.app-pagination
-        ul.pagination.justify-content-center
-          - var n = 1;
-          - var pages = Math.ceil(userPage.count/userPage.size)
-          if userPage.page > 1
-            li.page-item
-              a.page-link(href="/users?page=" + (userPage.page-1), tabindex='-1', aria-disabled='false') Previous
-          else
-            li.page-item.disabled
-              a.page-link(href="/users?page=" + pages, tabindex='-1', aria-disabled='true') Previous
+  div.app-card.app-card-orders-table.shadow-sm.mb-5
+    div.app-card-body
+      div.table-responsive
+        table.table.app-table-hover.mb-0.text-left
+          thead
+            tr
+              th.cell SL#
+              th.cell Name
+              th.cell Email
+              th.cell.text-center Status
+              th.cell.text-center Role
+              th.cell.text-center Created At
+              th.cell.text-center Action
+          tbody
+            -var sl=1
+            each user in userPage.data
+              tr
+                td.cell=sl++
+                td.cell=user.fullName
+                td.cell=user.email
+                td.cell.text-center
+                  -if(user.isActive == true)
+                    span.badge.bg-success Active
+                  -else
+                    span.badge.bg-danger Deactivated
+                td.cell.text-center
+                  span.badge.bg-info=user.role
+                td.cell.text-center
+                  span=fmt.date.pretty(user.createdAt)+' '+fmt.date.Time12(user.createdAt)
+                  //- span.note=fmt.date.Time12(user.createdAt)
+                td.cell.text-center
+                  a.btn.app-btn-info.btn-sm(href='/users/update/'+user._id) Update
+                  a.btn.app-btn-primary.btn-sm.ms-2(href='/users/details/'+user._id) View
+                  
+  //- pagination
+  nav.app-pagination
+    ul.pagination.justify-content-center
+      - var n = 1;
+      - var pages = Math.ceil(userPage.count/userPage.size)
+      if userPage.page > 1
+        li.page-item
+          a.page-link(href="/users?page=" + (userPage.page-1), tabindex='-1', aria-disabled='false') Previous
+      else
+        li.page-item.disabled
+          a.page-link(href="/users?page=" + pages, tabindex='-1', aria-disabled='true') Previous
 
-          -var flag = 0;
-          while n <= pages
-            if n == userPage.page
-              li.page-item.active #[a.page-link(href="/users?page=" + n) #{n}]
-            else if n < 5 || n == userPage.page - 1 || n == userPage.page + 1 || n > pages - 1
-              li.page-item #[a.page-link(href="/users?page=" + n) #{n}]
-            //- else
-            //-   if flag == 0
-            //-     li.page-item.disabled #[a.page-link(href="") - ]
-            //-   -flag=1;
-            else
-              li.page-item #[a.page-link(href="/users?page=" + n) #{n}]
-            - n++
-          if userPage.page < pages
-            li.page-item
-              a.page-link(href=href="/users?page=" + (userPage.page+1)) Next
-          else
-            li.page-item.disabled
-              a.page-link(href="/users?page=1") Next
+      -var flag = 0;
+      while n <= pages
+        if n == userPage.page
+          li.page-item.active #[a.page-link(href="/users?page=" + n) #{n}]
+        else if n < 5 || n == userPage.page - 1 || n == userPage.page + 1 || n > pages - 1
+          li.page-item #[a.page-link(href="/users?page=" + n) #{n}]
+        //- else
+        //-   if flag == 0
+        //-     li.page-item.disabled #[a.page-link(href="") - ]
+        //-   -flag=1;
+        else
+          li.page-item #[a.page-link(href="/users?page=" + n) #{n}]
+        - n++
+      if userPage.page < pages
+        li.page-item
+          a.page-link(href=href="/users?page=" + (userPage.page+1)) Next
+      else
+        li.page-item.disabled
+          a.page-link(href="/users?page=1") Next

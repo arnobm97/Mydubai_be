@@ -15,6 +15,8 @@ import { Extention } from "./Extention";
 import { Menu } from "./Menu";
 import { IMailer } from "./IMailer";
 import fs from "fs";
+import session  from "express-session";
+import flash from "connect-flash";
 
 
 export class Application {
@@ -45,6 +47,14 @@ export class Application {
         this.Express.use(bodyParser.json());
         this.Express.use(bodyParser.urlencoded({ extended: true }));
         this.Express.use(CookieParser(config.cookieSecret));
+
+        // flash message & session
+        this.Express.use(session({
+            secret: 'secret key',
+            resave: false,
+            saveUninitialized: false
+        }));
+        this.Express.use(flash());
 
         // Make session available to all controllers
         this.set("Session", new Session());
@@ -94,11 +104,12 @@ export class Application {
     }
 
     private execute(context: Controller, callback: ActionCallback, roles: Role[]) {
-
         return (req: HttpRequest, resp : HttpResponse, next: NextFunc) => {
-
             if(roles.length > 0 && (!req.user || roles.indexOf(req.user.role) === -1)) {
-                resp.redirect(`/login?ref=${encodeURIComponent(req.path)}`);
+                if(!req.user){
+                    return resp.redirect(`/login?ref=${encodeURIComponent(req.path)}`);
+                }
+                return resp.view("error/access-denide");
             } else {
                 this.populateBag(req, resp);
                 callback.call(context, req, resp, next);
