@@ -14,7 +14,7 @@ import cron from "node-cron";
 // Providers
 import { SMTPMailer } from "./providers/SMTPMailer";
 import { UserProvider } from "./providers/UserProvider";
-import { WeightDataProvider } from "./providers/WeightDataProvider";
+import { PropertyProvider } from "./providers/PropertyProvider";
 
 // Formatters
 import { dateFormatter } from "./ftms/date";
@@ -24,9 +24,9 @@ import { SetupController } from "./controllers/SetupController";
 import { LoginController } from "./controllers/LoginController";
 import { DashboardController } from "./controllers/DashboardController";
 import { UserController } from "./controllers/UserController";
+import { PropertyController } from "./controllers/PropertyController";
 
-// Crons
-import { SendReportMail } from "./crons/SendReportMail";
+
 
 // config
 const CONFIG_FILE = "config.json";
@@ -48,7 +48,7 @@ app.viewEngine("pug");
 app.setStatic(path.join(__dirname, "public"), { maxAge: 0 }); // 31557600000 turned off caching for now
 
 app.set("UserProvider", new UserProvider());
-app.set("WeightDataProvider", new WeightDataProvider());
+app.set("PropertyProvider", new PropertyProvider());
 
 
 // Initialize and set the mailer to use
@@ -61,6 +61,7 @@ app.setMenu("main", {
     items: [
         { name: "Dashboard", icon: "<i class='fa-solid fa-house fa-lg'></i>", path: "/", for: [Role.Admin, Role.Moderator, Role.User] },
         { name: "Users", icon: "<i class='fa-solid fa-user fa-lg'></i>", path: "/users", for: [Role.Admin, Role.Moderator, Role.User] },
+        { name: "Properties", icon: "<i class='fa-solid fa-building fa-lg'></i>", path: "/properties", for: [Role.Admin, Role.Moderator, Role.User] },
     ]
 })
 
@@ -72,13 +73,14 @@ app.registerController(SetupController);
 app.registerController(LoginController);
 app.registerController(DashboardController);
 app.registerController(UserController);
+app.registerController(PropertyController);
 
 
 
 // Finally setup the cron jobs
-cron.schedule("1 0 * * *", async () => {
-    // await SendReportMail();
-});
+// cron.schedule("1 0 * * *", async () => {
+
+// });
 
 
 // start the express server

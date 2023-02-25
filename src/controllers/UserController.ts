@@ -37,12 +37,12 @@ export class UserController extends Controller {
 
 
     public async details(req: HttpRequest, res: HttpResponse, next: NextFunc) {
-        res.bag.pageTitle = this.config.appTitle+" | Users Details"    
+        res.bag.pageTitle = this.config.appTitle+" | Users Details"
         const user: IUser  = await this.UserProvider.getById(req.params.id);
         res.bag.user = user;
         res.view('user/details');
     }
-    
+
 
     public async createUser(req: HttpRequest, res: HttpResponse, next: NextFunc) {
         res.bag.pageTitle = this.config.appTitle+" | Create User";
@@ -76,7 +76,7 @@ export class UserController extends Controller {
                     res.bag.errorMessage = "This Username is already registered";
                     return res.view('user/create');
                 } else {
-                    
+
                     const userPassword = this.Authenticator.digestPassword(password);
                     await this.UserProvider.create(fullName, email, userPassword, role);
                     req.flash('flashMessage', 'User created successfully.');
@@ -98,15 +98,15 @@ export class UserController extends Controller {
         if(req.method === "GET"){
             res.view('user/update');
         }else if(req.method === "POST"){
-            //return res.send(req.body);
+            // return res.send(req.body);
             const fullName = req.body.fullName;
             const role = req.body.role;
             const isActive = req.body.isActive;
             const avatar = req.body.avatar;
             const password = req.body.password;
             const confirmPassword = req.body.confirmPassword;
-            
-            //if password exists
+
+            // if password exists
             if(password && confirmPassword){
                 if (!password || !confirmPassword) {
                     res.bag.errorMessage = "Password & Ponfirm Password is required";
@@ -119,7 +119,7 @@ export class UserController extends Controller {
                     res.bag.errorMessage = "Password & Confirm Password do not matched";
                     return res.view('user/update')
                 }else{
-                    //nothing & continue ...
+                    // nothing & continue ...
                 }
             }
             if (!fullName) {
