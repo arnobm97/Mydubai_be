@@ -29,7 +29,9 @@ export class PropertyController extends Controller {
         const properties: IProperty[] = await this.PropertyProvider.getAll();
         res.bag.properties = properties;
         res.bag.flashMessage = req.flash('flashMessage');
-        res.view('property/index');
+        
+        return res.send(properties);
+        //res.view('property/index');
     }
 
 
