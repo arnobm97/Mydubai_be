@@ -12,7 +12,7 @@
             "pass": "NOrePly#%2022"
         }
     },
-    "mongoUrl": "mongodb://localhost:27017/off_plan_db",
+    "mongoUrl": "mongodb://localhost:27017/off_ready_plan_db",
     "cookieSecret": "P>twUC2.9mNurJN%fW(!esGwua:!e(Pu8bHfTXW grck3g9/J@*W3MuEB,FE#/=m",
     "sessionSecret": "P>twUC2.9mVurJN%fW(!esGwua:!e(Pu8bHfTXW grck3g9/J@*W3MuEB,FE#/=m",
     "authSecret": "TFqA$uc4hD5VV(NS*vF=f3$jaCsw6/3U/w%9yu)Py,#&w)kG2(pAgAP9@)3,uVqt",
