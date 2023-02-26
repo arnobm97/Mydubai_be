@@ -1,0 +1,78 @@
+extends ../layout
+block content
+
+
+  .row.mb-2.align-items-center.justify-content-between.bg-white.p-2.m-0
+    .col-auto
+      h1.app-page-title.mb-0 Properties / Create
+    .col-auto
+      .page-utilities
+        .row.g-2.justify-content-start.justify-content-md-end.align-items-center
+          .col-auto
+            a.btn.app-btn-info(href='')
+              i.fa.fa-refresh
+              | &nbsp;Reset Page
+          .col-auto
+            a.btn.app-btn-danger(href='/users')
+              i.fa.fa-chevron-left
+              | &nbsp;Return
+  
+  div.row
+    div.col-12.col-md-12
+      div.app-card.app-card-settings.shadow-sm.p-4
+        -if(errorMessage)
+          div.alert.alert-danger(role='alert')=errorMessage
+        div.app-card-body
+          form(action="" method="POST")
+            
+            div.row
+              div.col-4.col-md-4.mb-2
+                label.form-label(for='lang') Language
+                select.form-control(name="lang")
+                  option(value="", disabled="", selected="") Choose Language
+                  each lang in language
+                    option(value=lang.value) #{lang.title}
+              div.col-4.col-md-4.mb-2
+                label.form-label(for='propertyName') Property Name
+                input#propertyName.form-control(type='text' name="propertyName" required )
+              div.col-4.col-md-4.mb-2
+                label.form-label(for='propertyType') Property Type
+                select.form-control(name="propertyType")
+                  option(value="", disabled="", selected="") Choose Property Type
+                  each pType in propertyType
+                    option(value=pType.value) #{pType.title}
+            div.row
+              div.col-4.col-md-4.mb-2
+                label.form-label(for='propertyDescription') Property Description
+                textarea#propertyDescription.form-control(name="propertyDescription" rows='2' required )
+              div.col-4.col-md-4.mb-2
+                label.form-label(for='propertyArea') Property Area
+                select.form-control(name="propertyArea")
+                  option(value="", disabled="", selected="") Choose Property Area
+                  each pArea in propertyArea
+                    option(value=pArea._id) #{pArea.areaName}
+              div.col-4.col-md-4.mb-2
+                label.form-label(for='developmentType') Development Type
+                select.form-control(name="developmentType")
+                  option(value="", disabled="", selected="") Choose Development Type
+                  each development in developmentType
+                    option(value=development._id) #{development.name}
+            div.row
+              div.col-4.col-md-4.mb-2
+                label.form-label(for='developerType') Developer Type
+                select.form-control(name="developerType")
+                  option(value="", disabled="", selected="") Choose Developer Type
+                  each developer in developerType
+                    option(value=developer._id) #{developer.name}
+              div.col-4.col-md-4.mb-2
+                label.form-label(for='areaSize') Area Size
+                input#areaSize.form-control(type='text' name="areaSize" required )
+              
+
+
+
+                
+        
+              
+            button.btn.app-btn-primary(type='submit') Create User
+  

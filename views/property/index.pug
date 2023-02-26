@@ -1,0 +1,101 @@
+extends ../layout
+block content
+
+  .row.mb-2.align-items-center.justify-content-between.bg-white.p-2.m-0
+    .col-auto
+      h1.app-page-title.mb-0 Users
+    .col-auto
+      .page-utilities
+        .row.g-2.justify-content-start.justify-content-md-end.align-items-center
+          .col-auto
+            form.table-search-form.row.gx-1.align-items-center
+              .col-auto
+                input#search-orders.form-control.search-orders(type='text', name='searchorders', placeholder='Search')
+              .col-auto
+                button.btn.app-btn-secondary(type='submit') Search
+          
+          .col-auto
+            select.form-select.w-auto
+              option(selected='', value='option-1') Page Size
+              option(value='option-2') 10
+              option(value='option-3') 20
+              option(value='option-4') 30
+              option(value='option-4') 40
+              option(value='option-4') 50
+              option(value='option-4') 100
+          .col-auto
+            a.btn.app-btn-primary(href='/users/create')
+              i.fa.fa-plus
+              | &nbsp;Create User
+      
+  div.row(style="margin: 0px 1px")
+    -if(flashMessage.length>0)
+      div.alert.alert-success(role='alert')
+        each mgs in flashMessage
+          li=mgs
+
+  div.app-card.app-card-orders-table.shadow-sm.mb-5
+    div.app-card-body
+      div.table-responsive
+        table.table.app-table-hover.mb-0.text-left
+          thead
+            tr
+              th.cell SL#
+              th.cell Name
+              th.cell Email
+              th.cell.text-center Status
+              th.cell.text-center Role
+              th.cell.text-center Created At
+              th.cell.text-center Action
+          tbody
+            -var sl=1
+            each user in userPage.data
+              tr
+                td.cell=sl++
+                td.cell=user.fullName
+                td.cell=user.email
+                td.cell.text-center
+                  -if(user.isActive == true)
+                    span.badge.bg-success Active
+                  -else
+                    span.badge.bg-danger Deactivated
+                td.cell.text-center
+                  span.badge.bg-info=user.role
+                td.cell.text-center
+                  span=fmt.date.pretty(user.createdAt)+' '+fmt.date.Time12(user.createdAt)
+                  //- span.note=fmt.date.Time12(user.createdAt)
+                td.cell.text-center
+                  a.btn.app-btn-info.btn-sm(href='/users/update/'+user._id) Update
+                  a.btn.app-btn-primary.btn-sm.ms-2(href='/users/details/'+user._id) View
+                  
+  //- pagination
+  nav.app-pagination
+    ul.pagination.justify-content-center
+      - var n = 1;
+      - var pages = Math.ceil(userPage.count/userPage.size)
+      if userPage.page > 1
+        li.page-item
+          a.page-link(href="/users?page=" + (userPage.page-1), tabindex='-1', aria-disabled='false') Previous
+      else
+        li.page-item.disabled
+          a.page-link(href="/users?page=" + pages, tabindex='-1', aria-disabled='true') Previous
+
+      -var flag = 0;
+      while n <= pages
+        if n == userPage.page
+          li.page-item.active #[a.page-link(href="/users?page=" + n) #{n}]
+        else if n < 5 || n == userPage.page - 1 || n == userPage.page + 1 || n > pages - 1
+          li.page-item #[a.page-link(href="/users?page=" + n) #{n}]
+        //- else
+        //-   if flag == 0
+        //-     li.page-item.disabled #[a.page-link(href="") - ]
+        //-   -flag=1;
+        else
+          li.page-item #[a.page-link(href="/users?page=" + n) #{n}]
+        - n++
+      if userPage.page < pages
+        li.page-item
+          a.page-link(href=href="/users?page=" + (userPage.page+1)) Next
+      else
+        li.page-item.disabled
+          a.page-link(href="/users?page=1") Next
