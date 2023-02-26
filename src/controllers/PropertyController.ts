@@ -30,13 +30,18 @@ export class PropertyController extends Controller {
 
     public async createProperty(req: HttpRequest, res: HttpResponse, next: NextFunc) {
 
-        res.bag.language = [{title: "English", value : "EN"},{title: "Arabic", value : "AR"}];
-        res.bag.propertyType = [{title: "OFF PLAN", value : "OFF PLAN"},{title: "READY", value : "READY"}];
-        res.bag.propertyArea = [{_id: "112345", areaName : "Dubai"},{_id: "112421", areaName : "Sharjah"},{_id: "112499", areaName : "Abu Dhabi"}];
-        res.bag.developmentType = [{_id: "112345", name : "D Type 1"},{_id: "112421", name : "D Type 2"},{_id: "112499", name : "D Type 3"}];
-        res.bag.developerType = [{_id: "112345", name : "DP Type 1"},{_id: "112421", name : "DP Type 2"},{_id: "112499", name : "DP Type 3"}];
+        if(req.method === "GET"){
+            res.bag.language = [{title: "English", value : "EN"},{title: "Arabic", value : "AR"}];
+            res.bag.propertyType = [{title: "OFF PLAN", value : "OFF PLAN"},{title: "READY", value : "READY"}];
+            res.bag.propertyArea = [{_id: "112345", areaName : "Dubai"},{_id: "112421", areaName : "Sharjah"},{_id: "112499", areaName : "Abu Dhabi"}];
+            res.bag.developmentType = [{_id: "112345", name : "D Type 1"},{_id: "112421", name : "D Type 2"},{_id: "112499", name : "D Type 3"}];
+            res.bag.developerType = [{_id: "112345", name : "DP Type 1"},{_id: "112421", name : "DP Type 2"},{_id: "112499", name : "DP Type 3"}];
+            return res.view('property/create');
+        }
+
+        return res.send(req.body);
+
         
-        return res.view('property/create');
 
 
         const testproperty: any = {
