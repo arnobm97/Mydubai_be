@@ -68,11 +68,41 @@ block content
                 label.form-label(for='areaSize') Area Size
                 input#areaSize.form-control(type='text' name="areaSize" required )
               
+              div.col-4.col-md-4.mb-2
+                label.form-label(for='completion') Completion
+                input#completion.form-control(type='text' name="completion" required )
 
-
+            div.row
+              div.col-12.col-md-12.mb-2
+                label.form-label(for='highlights') Highlights
+                input#highlights.form-control(type='text' name="highlights" placeholder="Use # after each separate entities." required )
+            div.row
+              div.col-4.col-md-4.mb-2
+                label.form-label(for='amenitiesDescription') Amenities Description
+                textarea#amenitiesDescription.form-control(name="amenitiesDescription" rows='2' required )
+              div.col-8.col-md-8.mb-2
+                label.form-label(for='amenitiesFeatures') Amenities Features
+                input#amenitiesFeatures.form-control(type='text' name="amenitiesFeatures" placeholder="Use # after each separate entities." required )
+            
+            div.row
+              div.col-4.col-md-4.mb-2
+                label.form-label(for='startingPrice') Starting Price
+                input#startingPrice.form-control(type='number' name="startingPrice" required )
+              
+              div.col-4.col-md-4.mb-2
+                label.form-label(for='locDescription') location Description
+                input#locDescription.form-control(type='text' name="locDescription" required )
+              
+              div.col-4.col-md-4.mb-2
+                label.form-label(for='position') location Position
+                input#position.form-control(type='text' name="position" placeholder="Example: 23.8103,90.4125" required )
 
                 
-        
-              
+            //- submit button
             button.btn.app-btn-primary(type='submit') Create User
-  
+
+block script
+  script.
+
+    
+
