@@ -96,13 +96,94 @@ block content
               div.col-12.col-md-4.mb-2
                 label.form-label(for='position') location Position
                 input#position.form-control(type='text' name="position" placeholder="Example: 25.2048,55.2708" required )
+            
+            //- NearBy
+            div.row(style="border-bottom: 2px solid #51b37f;")
+              div.col-6.col-md-6.mb-2
+                label.form-label(for='Nearby') Nearby
+              div.col-6.col-md-6.mb-2.text-end
+                button.app-btn-primary.btn-sm(type="button" onclick="addMoreNearBy()")
+                  i.fa.fa-plus
+                  | &nbsp; More
 
+            div.row.nearby-row
+              div.row.nearby-list
+                div.col-12.col-md-4.mb-2
+                  label.form-label(for='nearByTitle') Title
+                  input#nearByTitle.form-control(type='text' name="nearby['title']" required )
+                div.col-12.col-md-4.mb-2
+                  label.form-label(for='locDescription') Icon
+                  input#locDescription.form-control(type='text' name="nearby['icon']" required )
+                div.col-12.col-md-3.mb-2
+                  label.form-label(for='position') Position
+                  input#position.form-control(type='text' name="nearby['position']" placeholder="Example: 25.2048,55.2708" required )
+                div.col-12.col-md-1.mb-2.text-center
+                  label.form-label(for='action') Action
+                  br
+                  button.app-btn-danger(type="button" onclick="return false" disabled )
+                    i.fa.fa-trash
+            
+            
+            //- paymentPlan
+            div.row.mt-4(style="border-bottom: 2px solid #51b37f;")
+              div.col-6.col-md-6.mb-2
+                label.form-label(for='paymentPlan') Payment Plan
+              div.col-6.col-md-6.mb-2.text-end
+                button.app-btn-primary.btn-sm(type="button" onclick="addMorePaymentPlan()")
+                  i.fa.fa-plus
+                  | &nbsp; More
+
+            div.row.paymentPlan-row
+              div.row.paymentPlan-list
+                div.col-12.col-md-3.mb-2
+                  label.form-label(for='paymentPlanMilestone') Milestone
+                  input#paymentPlanMilestone.form-control(type='text' name="paymentPlan['milestone']" required )
+                div.col-12.col-md-2.mb-2
+                  label.form-label(for='paymentPlanInstallment') Installment
+                  input#paymentPlanInstallment.form-control(type='number' name="paymentPlan['installment']" )
+                div.col-12.col-md-2.mb-2
+                  label.form-label(for='paymentPlanPercentage') Percentage
+                  input#paymentPlanPercentage.form-control(type='text' name="paymentPlan['percentage']" )
+                div.col-12.col-md-2.mb-2
+                  label.form-label(for='paymentPlanDate') Date
+                  input#paymentPlanDate.form-control(type='date' name="paymentPlan['date']" )
+                div.col-12.col-md-2.mb-2
+                  label.form-label(for='paymentPlanNotes') Notes
+                  input#paymentPlanNotes.form-control(type='text' name="paymentPlan['notes']"  )
+                div.col-12.col-md-1.mb-2.text-center
+                  label.form-label(for='action') Action
+                  br
+                  button.app-btn-danger(type="button" onclick="return false" disabled )
+                    i.fa.fa-trash
                 
             //- submit button
-            button.btn.app-btn-primary(type='submit') Create User
+            hr
+            button.btn.app-btn-primary(type='submit') Create Property
 
 block script
   script.
+    
+    let addMoreNearBy;
+    let addMorePaymentPlan;
+
+    $(document).ready(function(){
+      
+      //nearby
+      var delete_nearBy_row = "'div.nearby-list'";
+      const nearBy_content = '<div class="row nearby-list"><div class="col-12 col-md-4 mb-2"><input class="form-control" id="nearByTitle" type="text" name="nearby["title"]" required=""></div><div class="col-12 col-md-4 mb-2"><input class="form-control" id="locDescription" type="text" name="nearby["icon"]" required=""></div><div class="col-12 col-md-3 mb-2"><input class="form-control" id="position" type="text" name="nearby["position"]" placeholder="Example: 25.2048,55.2708" required=""></div><div class="col-12 col-md-1 mb-2 text-center"><button class="app-btn-danger" type="button" onclick="$(this).closest('+delete_nearBy_row+').remove()"><i class="fa fa-trash"></i></button></div></div>';
+      addMoreNearBy = function(){
+        $('div.nearby-row').append(nearBy_content);
+      }
+
+      //PaymentPlan
+      var delete_PaymentPlan_row = "'div.paymentPlan-list'";
+      const PaymentPlan_content = '<div class="row paymentPlan-list"> <div class="col-12 col-md-3 mb-2"><input class="form-control" id="paymentPlanMilestone" type="text" name="paymentPlan["milestone"]" required="" /> </div> <div class="col-12 col-md-2 mb-2"><input class="form-control" id="paymentPlanInstallment" type="number" name="paymentPlan["installment"]" /> </div> <div class="col-12 col-md-2 mb-2"><input class="form-control" id="paymentPlanPercentage" type="text" name="paymentPlan["percentage"]" /> </div> <div class="col-12 col-md-2 mb-2"><input class="form-control" id="paymentPlanDate" type="date" name="paymentPlan["date"]" /> </div> <div class="col-12 col-md-2 mb-2"><input class="form-control" id="paymentPlanNotes" type="text" name="paymentPlan["notes"]" /> </div> <div class="col-12 col-md-1 mb-2 text-center"><button class="app-btn-danger" type="button" onclick="$(this).closest('+delete_PaymentPlan_row+').remove()"> <i class="fa fa-trash"></i> </button> </div> </div>';
+      addMorePaymentPlan = function(){
+        $('div.paymentPlan-row').append(PaymentPlan_content);
+      }
+
+
+    });
 
     
 
