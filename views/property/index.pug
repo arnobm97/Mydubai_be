@@ -3,7 +3,7 @@ block content
 
   .row.mb-2.align-items-center.justify-content-between.bg-white.p-2.m-0
     .col-auto
-      h1.app-page-title.mb-0 Users
+      h1.app-page-title.mb-0 Properties
     .col-auto
       .page-utilities
         .row.g-2.justify-content-start.justify-content-md-end.align-items-center
@@ -24,9 +24,9 @@ block content
               option(value='option-4') 50
               option(value='option-4') 100
           .col-auto
-            a.btn.app-btn-primary(href='/users/create')
+            a.btn.app-btn-primary(href='/properties/create')
               i.fa.fa-plus
-              | &nbsp;Create User
+              | &nbsp;Create Property
       
   div.row(style="margin: 0px 1px")
     -if(flashMessage.length>0)
@@ -41,61 +41,25 @@ block content
           thead
             tr
               th.cell SL#
-              th.cell Name
-              th.cell Email
-              th.cell.text-center Status
-              th.cell.text-center Role
-              th.cell.text-center Created At
+              th.cell Property Name
+              th.cell Type
+              th.cell Area
+              th.cell Developer
+              th.cell Language
+              th.cell Created At
               th.cell.text-center Action
           tbody
             -var sl=1
-            each user in userPage.data
+            each property in properties
               tr
                 td.cell=sl++
-                td.cell=user.fullName
-                td.cell=user.email
+                td.cell=property.propertyName
+                td.cell=property.propertyType
+                td.cell=property.propertyArea.areaName
+                td.cell=property.developerType.name
+                td.cell=property.lang
+                td.cell
+                  span=fmt.date.pretty(property.createdAt)+' '+fmt.date.Time12(property.createdAt)
                 td.cell.text-center
-                  -if(user.isActive == true)
-                    span.badge.bg-success Active
-                  -else
-                    span.badge.bg-danger Deactivated
-                td.cell.text-center
-                  span.badge.bg-info=user.role
-                td.cell.text-center
-                  span=fmt.date.pretty(user.createdAt)+' '+fmt.date.Time12(user.createdAt)
-                  //- span.note=fmt.date.Time12(user.createdAt)
-                td.cell.text-center
-                  a.btn.app-btn-info.btn-sm(href='/users/update/'+user._id) Update
-                  a.btn.app-btn-primary.btn-sm.ms-2(href='/users/details/'+user._id) View
-                  
-  //- pagination
-  nav.app-pagination
-    ul.pagination.justify-content-center
-      - var n = 1;
-      - var pages = Math.ceil(userPage.count/userPage.size)
-      if userPage.page > 1
-        li.page-item
-          a.page-link(href="/users?page=" + (userPage.page-1), tabindex='-1', aria-disabled='false') Previous
-      else
-        li.page-item.disabled
-          a.page-link(href="/users?page=" + pages, tabindex='-1', aria-disabled='true') Previous
-
-      -var flag = 0;
-      while n <= pages
-        if n == userPage.page
-          li.page-item.active #[a.page-link(href="/users?page=" + n) #{n}]
-        else if n < 5 || n == userPage.page - 1 || n == userPage.page + 1 || n > pages - 1
-          li.page-item #[a.page-link(href="/users?page=" + n) #{n}]
-        //- else
-        //-   if flag == 0
-        //-     li.page-item.disabled #[a.page-link(href="") - ]
-        //-   -flag=1;
-        else
-          li.page-item #[a.page-link(href="/users?page=" + n) #{n}]
-        - n++
-      if userPage.page < pages
-        li.page-item
-          a.page-link(href=href="/users?page=" + (userPage.page+1)) Next
-      else
-        li.page-item.disabled
-          a.page-link(href="/users?page=1") Next
+                  a.btn.app-btn-info.btn-sm(href='/properties/update/'+property._id) Update
+                  a.btn.app-btn-primary.btn-sm.ms-2(href='/properties/details/'+property._id) View
