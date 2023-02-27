@@ -47,25 +47,16 @@ export class PropertyController extends Controller {
         const propertyType = req.body.propertyType;
         const propertyDescription = req.body.propertyDescription;
 
-        const propertyArea = {
-            id: req.body.propertyArea,
-            areaName: "Dubai"
-        };
-        const developmentType = {
-            id: req.body.developmentType,
-            name: "TDP1"
-        };
-        const developerType = {
-            id: req.body.developerType,
-            name: "TD1"
-        };
+        const propertyArea = { id: req.body.propertyArea,areaName: "Dubai" };
+        const developmentType = { id: req.body.developmentType,name: "TDP1" };
+        const developerType = { id: req.body.developerType,name: "TD1" };
 
         const areaSize = req.body.areaSize;
         const completion = req.body.completion;
         const highlights = req.body.highlights;  //highlights #
         const amenities = req.body.amenities; //features #
         const startingPrice = req.body.startingPrice;
-        let location = req.body.location;
+        const location = req.body.location;
         const paymentPlan = req.body.paymentPlan;
         const unitType = req.body.unitType;
         const brochure = req.body.brochure;
@@ -73,55 +64,15 @@ export class PropertyController extends Controller {
         const videos = req.body.videos;
         const createBy = { id: req.user.id, fullName: req.user.name };
 
-
-        //location parsing
-        const tempLocation = [];
-        for(let i = 0; i<location.position.split(',').length; i++) {
-            tempLocation[i] = parseFloat(location.position.split(',')[i])
-        }
-        location.position = tempLocation;
-        
-        //nearBy position parsing
-        const tempNearby = location.nearby;
-        for(let i = 0; i<tempNearby.length; i++) {
-            let tempPoint = [];
-            for(let j = 0; j<tempNearby[i].position.split(',').length; j++) {
-                tempPoint[j] =  parseFloat(tempNearby[i].position.split(',')[j]);
-            }
-            location.nearby[i].position = tempPoint;
-        }
-
-        const testproperty: any = {
-            propertyNo: propertyNo,
-            lang: lang,
-            propertyName: propertyName,
-            propertyType: propertyType,
-            propertyDescription: propertyDescription,
-            propertyArea: propertyArea,
-            developmentType: developmentType,
-            developerType: developerType,
-            areaSize: areaSize,
-            highlights: highlights,
-            amenities: amenities,
-            completion: completion,
-            startingPrice: startingPrice,
-            location: location,
-            paymentPlan:paymentPlan,
-            unitType : unitType,
-            brochure: brochure,
-            images: images,
-            videos: videos,
-            createBy: createBy
-        };
-
+        const newProperty: any = {propertyNo,lang,propertyName,propertyType,propertyDescription,propertyArea,developmentType,developerType,areaSize,highlights,amenities,completion,startingPrice,location,paymentPlan,unitType,brochure,images,videos,createBy};
         //return res.send(testproperty);
-        await this.PropertyProvider.create(testproperty).then(async property => {
+        await this.PropertyProvider.create(newProperty).then(async property => {
             res.bag.successMessage = "Done";
             req.flash('flashMessage', 'Property created successfully.');
-            res.redirect('/properties');
+            return res.redirect('/properties');
         }).catch(async error => {
             req.flash('flashMessage', 'Opps! Something went wrong. Please try later.');
-            res.redirect('/properties');
+            return res.redirect('/properties');
         });
 
 
