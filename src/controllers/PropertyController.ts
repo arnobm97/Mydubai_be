@@ -2,6 +2,7 @@ import { Controller } from "../core/Controller";
 import { NextFunc, HttpRequest, HttpResponse } from "../core/Types";
 import { Role } from "../core/IUserProvider";
 import { IPropertyProvider, IProperty, IPropertyLang, IPropertyType } from "../core/IPropertyProvider";
+import { any } from "bluebird";
 
 
 
@@ -40,114 +41,88 @@ export class PropertyController extends Controller {
             return res.view('property/create');
         }
 
-        return res.send(req.body);
+        const propertyNo = 1;
+        const lang = req.body.lang;
+        const propertyName = req.body.propertyName;
+        const propertyType = req.body.propertyType;
+        const propertyDescription = req.body.propertyDescription;
 
-
-
-
-        const testproperty: any = {
-            lang: IPropertyLang.EN,
-            propertyNo: 1,
-            propertyName: 'Palm Hills',
-            propertyType: IPropertyType.READY,
-            propertyDescription: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-            propertyArea: {
-                id: '12345678',
-                areaName: 'Dubai',
-            },
-            developmentType: {
-                id: "12345678",
-                name: "URBAN",
-            },
-            developerType: {
-                id: "12345678",
-                name: "CONCORD",
-            },
-            areaSize: "200 M",
-            highlights: ['Text 1', 'Text 2', 'Text 3', 'Text 4','Text 5', 'Text 6', 'Text 7', 'Text 8'],
-            amenities: {
-                description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-                features: ['Text 1', 'Text 2', 'Text 3', 'Text 4']
-            },
-            completion: "2023, June",
-            startingPrice: 125700,
-            location: {
-                locDescription:"Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-                position: [23.32,90.223],
-                nearby: [
-                    {
-                        title: "Mosque",
-                        icon: "Mosque",
-                        position: [23.32,90.223],
-                    },{
-                        title: "School",
-                        icon: "School",
-                        position: [23.32,90.223],
-                    }
-                ]
-            },
-            paymentPlan: [
-                {
-                    milestone: "Text 1",
-                    installment: 6,
-                    percentage: "10%",
-                    date: new Date(),
-                    notes: "Test Notes 1"
-                },
-                {
-                    milestone: "Text 2",
-                    installment: 3,
-                    percentage: "12%",
-                    date: new Date(),
-                    notes: "Test Notes 2"
-                }
-            ],
-            unitType : {
-                title: "Bedroom",
-                count: '3',
-                size: "430 SFT"
-            },
-            brcure: "https://cdn.offplan/media/562374ghvsdhfvh.pdf",
-            images: [
-                {
-                    type: "Slider",
-                    metaDescription: "search for lorem ipsum",
-                    path: "https://cdn.offplan/media/562374ghvsdhfvh.png"
-                },
-                {
-                    type: "top-left",
-                    metaDescription: "search for lorem ipsum",
-                    path: "https://cdn.offplan/media/562374ghvsdhfvh.png"
-                }
-            ],
-            videos: [
-                {
-                    type: "Take a tour",
-                    path: "https://cdn.offplan/media/562374ghvsdhfvh.png"
-                },
-                {
-                    type: "Ads",
-                    path: "https://cdn.offplan/media/562374ghvsdhfvh.png"
-                }
-            ],
-            createBy: {
-                id: "3453456gyd777",
-                fullName: "Test user name"
-            }
-
-
-
+        const propertyArea = {
+            id: req.body.propertyArea,
+            areaName: "Dubai"
+        };
+        const developmentType = {
+            id: req.body.developmentType,
+            name: "TDP1"
+        };
+        const developerType = {
+            id: req.body.developerType,
+            name: "TD1"
         };
 
+        const areaSize = req.body.areaSize;
+        const completion = req.body.completion;
+        const highlights = req.body.highlights;  //highlights #
+        const amenities = req.body.amenities; //features #
+        const startingPrice = req.body.startingPrice;
+        let location = req.body.location;
+        const paymentPlan = req.body.paymentPlan;
+        const unitType = req.body.unitType;
+        const brochure = req.body.brochure;
+        const images = req.body.images;
+        const videos = req.body.videos;
+        const createBy = { id: req.user.id, fullName: req.user.name };
 
+
+        //location parsing
+        const tempLocation = [];
+        for(let i = 0; i<location.position.split(',').length; i++) {
+            tempLocation[i] = parseFloat(location.position.split(',')[i])
+        }
+        location.position = tempLocation;
+        
+        //nearBy position parsing
+        const tempNearby = location.nearby;
+        for(let i = 0; i<tempNearby.length; i++) {
+            let tempPoint = [];
+            for(let j = 0; j<tempNearby[i].position.split(',').length; j++) {
+                tempPoint[j] =  parseFloat(tempNearby[i].position.split(',')[j]);
+            }
+            location.nearby[i].position = tempPoint;
+        }
+
+        const testproperty: any = {
+            propertyNo: propertyNo,
+            lang: lang,
+            propertyName: propertyName,
+            propertyType: propertyType,
+            propertyDescription: propertyDescription,
+            propertyArea: propertyArea,
+            developmentType: developmentType,
+            developerType: developerType,
+            areaSize: areaSize,
+            highlights: highlights,
+            amenities: amenities,
+            completion: completion,
+            startingPrice: startingPrice,
+            location: location,
+            paymentPlan:paymentPlan,
+            unitType : unitType,
+            brochure: brochure,
+            images: images,
+            videos: videos,
+            createBy: createBy
+        };
+
+        //return res.send(testproperty);
         await this.PropertyProvider.create(testproperty).then(async property => {
             res.bag.successMessage = "Done";
+            req.flash('flashMessage', 'Property created successfully.');
+            res.redirect('/properties');
         }).catch(async error => {
-            res.bag.errorMessage = "Error";
+            req.flash('flashMessage', 'Opps! Something went wrong. Please try later.');
+            res.redirect('/properties');
         });
-
-
-        return res.send(res.bag);
 
 
     }

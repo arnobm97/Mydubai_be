@@ -2,8 +2,8 @@ import mongoose, { Schema } from "mongoose";
 import { IProperty } from "../core/IPropertyProvider";
 
 const PropertySchema: Schema = new Schema({
-    lang:{ type: String, required: true },
     propertyNo:{ type: Number, required: true },
+    lang:{ type: String, required: true },
     propertyName:{ type: String, required: true },
     propertyType:{ type: String, required: true },
     propertyDescription:{ type: String, required: true },

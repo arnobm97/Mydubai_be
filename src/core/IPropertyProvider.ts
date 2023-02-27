@@ -59,8 +59,8 @@ export interface IUnitType {
 }
 
 export interface IProperty extends Document{
-    lang: IPropertyLang;
     propertyNo: number;
+    lang: IPropertyLang;
     propertyName: string;
     propertyType: IPropertyType;
     propertyDescription: string;
@@ -80,7 +80,6 @@ export interface IProperty extends Document{
     videos: IPropertyVideo[];
     createBy: EmbededUser;
 }
-
 
 export interface IPropertyPage {
     size: number,
