@@ -97,12 +97,12 @@ block content
                 label.form-label(for='position') location : Position
                 input#position.form-control(type='text' name="location[position]" placeholder="Example: 25.2048,55.2708" required )
             
-            //- NearBy
+            //- NearBy : title, icon, position
             div.row(style="border-bottom: 2px solid #51b37f;")
               div.col-6.col-md-6.mb-2
                 label.form-label(for='Nearby') Nearby
               div.col-6.col-md-6.mb-2.text-end
-                button.app-btn-primary.btn-sm(type="button" onclick="addMoreNearBy()")
+                button.btn.app-btn-primary.btn-sm(type="button" onclick="addMoreNearBy()")
                   i.fa.fa-plus
                   | &nbsp; More
 
@@ -120,16 +120,16 @@ block content
                 div.col-12.col-md-1.mb-2.text-center
                   label.form-label(for='action') Action
                   br
-                  button.app-btn-danger(type="button" onclick="return false" disabled )
+                  button.btn.text-danger(type="button" onclick="return false" disabled )
                     i.fa.fa-trash
             
             
-            //- paymentPlan
+            //- paymentPlan : milestone, Installment, Percentage, Date, Notes
             div.row.mt-4(style="border-bottom: 2px solid #51b37f;")
               div.col-6.col-md-6.mb-2
                 label.form-label(for='paymentPlan') Payment Plan
               div.col-6.col-md-6.mb-2.text-end
-                button.app-btn-primary.btn-sm(type="button" onclick="addMorePaymentPlan()")
+                button.btn.app-btn-primary.btn-sm(type="button" onclick="addMorePaymentPlan()")
                   i.fa.fa-plus
                   | &nbsp; More
 
@@ -153,7 +153,7 @@ block content
                 div.col-12.col-md-1.mb-2.text-center
                   label.form-label(for='action') Action
                   br
-                  button.app-btn-danger(type="button" onclick="return false" disabled )
+                  button.btn.text-danger(type="button" onclick="return false" disabled )
                     i.fa.fa-trash
 
             div.row
@@ -179,7 +179,7 @@ block content
               div.col-6.col-md-6.mb-2
                 label.form-label(for='images') Images
               div.col-6.col-md-6.mb-2.text-end
-                button.app-btn-primary.btn-sm(type="button" onclick="addMoreImage()")
+                button.btn.app-btn-primary.btn-sm(type="button" onclick="addMoreImage()")
                   i.fa.fa-plus
                   | &nbsp; More
             div.row.images-row
@@ -196,7 +196,7 @@ block content
                 div.col-12.col-md-1.mb-2.text-center
                   label.form-label(for='action') Action
                   br
-                  button.app-btn-danger(type="button" onclick="return false" disabled )
+                  button.btn.text-danger(type="button" onclick="return false" disabled )
                     i.fa.fa-trash
             
             
@@ -205,7 +205,7 @@ block content
               div.col-6.col-md-6.mb-2
                 label.form-label(for='Videos') Videos
               div.col-6.col-md-6.mb-2.text-end
-                button.app-btn-primary.btn-sm(type="button" onclick="addMoreVideo()")
+                button.btn.app-btn-primary.btn-sm(type="button" onclick="addMoreVideo()")
                   i.fa.fa-plus
                   | &nbsp; More
             div.row.video-row
@@ -219,7 +219,7 @@ block content
                 div.col-12.col-md-1.mb-2.text-center
                   label.form-label(for='action') Action
                   br
-                  button.app-btn-danger(type="button" onclick="return false" disabled )
+                  button.btn.text-danger(type="button" onclick="return false" disabled )
                     i.fa.fa-trash
 
 
@@ -239,35 +239,35 @@ block script
     $(document).ready(function(){
       
 
-      //nearby
+      //moreNearby
       let nearByIndex = 1;
       addMoreNearBy = function(){
-        const nearBy_content = '<div class="row nearby-list"><div class="col-12 col-md-4 mb-2"><input class="form-control" type="text" name="location[nearby]['+nearByIndex+'][title]" required=""></div><div class="col-12 col-md-4 mb-2"><input class="form-control" type="text" name="location[nearby]['+nearByIndex+'][icon]" required=""></div><div class="col-12 col-md-3 mb-2"><input class="form-control" type="text" name="location[nearby]['+nearByIndex+'][position]" placeholder="Example: 25.2048,55.2708" required=""></div><div class="col-12 col-md-1 mb-2 text-center"><button class="app-btn-danger" type="button" onclick='+"$(this).closest('div.nearby-list').remove()"+'><i class="fa fa-trash"></i></button></div></div>';
+        const nearBy_content = '<div class="row nearby-list"><div class="col-12 col-md-4 mb-2"><input class="form-control" type="text" name="location[nearby]['+nearByIndex+'][title]" required=""></div><div class="col-12 col-md-4 mb-2"><input class="form-control" type="text" name="location[nearby]['+nearByIndex+'][icon]" required=""></div><div class="col-12 col-md-3 mb-2"><input class="form-control" type="text" name="location[nearby]['+nearByIndex+'][position]" placeholder="Example: 25.2048,55.2708" required=""></div><div class="col-12 col-md-1 mb-2 text-center"><button class="btn text-danger" type="button" onclick='+"$(this).closest('div.nearby-list').remove()"+'><i class="fa fa-trash"></i></button></div></div>';
         $('div.nearby-row').append(nearBy_content);
         nearByIndex++;
       }
 
-      //PaymentPlan
+      //morePaymentPlan
       let paymentPlanIndex = 1;
       addMorePaymentPlan = function(){
-        const paymentPlan_content = '<div class="row paymentPlan-list"> <div class="col-12 col-md-3 mb-2"><input class="form-control" type="text" name="paymentPlan['+paymentPlanIndex+'][milestone]" /> </div> <div class="col-12 col-md-2 mb-2"><input class="form-control" type="number" name="paymentPlan['+paymentPlanIndex+'][installment]" /> </div> <div class="col-12 col-md-2 mb-2"><input class="form-control" type="text" name="paymentPlan['+paymentPlanIndex+'][percentage]" /> </div> <div class="col-12 col-md-2 mb-2"><input class="form-control" type="date" name="paymentPlan['+paymentPlanIndex+'][date]" /> </div> <div class="col-12 col-md-2 mb-2"><input class="form-control" type="text" name="paymentPlan['+paymentPlanIndex+'][notes]" /> </div> <div class="col-12 col-md-1 mb-2 text-center"><button class="app-btn-danger" type="button" onclick='+"$(this).closest('div.paymentPlan-list').remove()"+'> <i class="fa fa-trash"></i> </button> </div> </div>';
+        const paymentPlan_content = '<div class="row paymentPlan-list"> <div class="col-12 col-md-3 mb-2"><input class="form-control" type="text" name="paymentPlan['+paymentPlanIndex+'][milestone]" /> </div> <div class="col-12 col-md-2 mb-2"><input class="form-control" type="number" name="paymentPlan['+paymentPlanIndex+'][installment]" /> </div> <div class="col-12 col-md-2 mb-2"><input class="form-control" type="text" name="paymentPlan['+paymentPlanIndex+'][percentage]" /> </div> <div class="col-12 col-md-2 mb-2"><input class="form-control" type="date" name="paymentPlan['+paymentPlanIndex+'][date]" /> </div> <div class="col-12 col-md-2 mb-2"><input class="form-control" type="text" name="paymentPlan['+paymentPlanIndex+'][notes]" /> </div> <div class="col-12 col-md-1 mb-2 text-center"><button class="btn text-danger" type="button" onclick='+"$(this).closest('div.paymentPlan-list').remove()"+'> <i class="fa fa-trash"></i> </button> </div> </div>';
         $('div.paymentPlan-row').append(paymentPlan_content);
         paymentPlanIndex++;
       }
 
 
-      //Images
+      //moreImages
       let imageIndex = 1;
       addMoreImage = function(){
-        $('div.images-row').append('<div class="row images-list"><div class="col-12 col-md-4 mb-2"><input class="form-control" type="text" name="images['+imageIndex+'][type]" required=""></div><div class="col-12 col-md-4 mb-2"><input class="form-control" type="text"  name="images['+imageIndex+'][metaDescription]" required=""></div><div class="col-12 col-md-3 mb-2"><input class="form-control" type="text" name="images['+imageIndex+'][path]" placeholder="JPG/JPEG/PNG image path only." required="" ></div><div class="col-12 col-md-1 mb-2 text-center"><button class="app-btn-danger" type="button" onclick='+"$(this).closest('div.images-list').remove()"+'><i class="fa fa-trash"></i></button></div></div>');
+        $('div.images-row').append('<div class="row images-list"><div class="col-12 col-md-4 mb-2"><input class="form-control" type="text" name="images['+imageIndex+'][type]" required=""></div><div class="col-12 col-md-4 mb-2"><input class="form-control" type="text"  name="images['+imageIndex+'][metaDescription]" required=""></div><div class="col-12 col-md-3 mb-2"><input class="form-control" type="text" name="images['+imageIndex+'][path]" placeholder="JPG/JPEG/PNG image path only." required="" ></div><div class="col-12 col-md-1 mb-2 text-center"><button class="btn text-danger" type="button" onclick='+"$(this).closest('div.images-list').remove()"+'><i class="fa fa-trash"></i></button></div></div>');
         imageIndex++;
       }
 
 
-      //Videos
+      //moreVideos
       let videoIndex = 1;
       addMoreVideo = function(){
-        $('div.video-row').append('<div class="row video-list"><div class="col-12 col-md-6 mb-2"><input class="form-control" type="text" name="videos['+videoIndex+'][type]" required=""></div> <div class="col-12 col-md-5 mb-2"><input class="form-control" type="text" name="videos['+videoIndex+'][path]" placeholder="Video path only." required="" ></div><div class="col-12 col-md-1 mb-2 text-center"><button class="app-btn-danger" type="button" onclick='+"$(this).closest('div.video-list').remove()"+'><i class="fa fa-trash"></i></button></div></div>');
+        $('div.video-row').append('<div class="row video-list"><div class="col-12 col-md-6 mb-2"><input class="form-control" type="text" name="videos['+videoIndex+'][type]" required=""></div> <div class="col-12 col-md-5 mb-2"><input class="form-control" type="text" name="videos['+videoIndex+'][path]" placeholder="Video path only." required="" ></div><div class="col-12 col-md-1 mb-2 text-center"><button class="btn text-danger" type="button" onclick='+"$(this).closest('div.video-list').remove()"+'><i class="fa fa-trash"></i></button></div></div>');
         videoIndex++;
       }
 
