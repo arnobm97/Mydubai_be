@@ -16,19 +16,20 @@ export class PropertyController extends Controller {
         this.onPost("/properties/create", this.createProperty, [Role.Admin, Role.Moderator]);
     }
 
-    
+
     public async index(req: HttpRequest, res: HttpResponse, next: NextFunc) {
         res.bag.pageTitle = this.config.appTitle+" | Properties";
         const properties: IProperty[] = await this.PropertyProvider.getAll();
         res.bag.properties = properties;
         res.bag.flashMessage = req.flash('flashMessage');
         return res.send(properties);
-        //res.view('property/index');
+        // res.view('property/index');
     }
 
 
 
     public async createProperty(req: HttpRequest, res: HttpResponse, next: NextFunc) {
+        res.bag.pageTitle = this.config.appTitle+" | Property Create";
 
         if(req.method === "GET"){
             res.bag.language = [{title: "English", value : "EN"},{title: "Arabic", value : "AR"}];
@@ -41,7 +42,7 @@ export class PropertyController extends Controller {
 
         return res.send(req.body);
 
-        
+
 
 
         const testproperty: any = {
@@ -133,7 +134,7 @@ export class PropertyController extends Controller {
                 id: "3453456gyd777",
                 fullName: "Test user name"
             }
-            
+
 
 
         };
@@ -148,7 +149,7 @@ export class PropertyController extends Controller {
 
         return res.send(res.bag);
 
-        
+
     }
 
 

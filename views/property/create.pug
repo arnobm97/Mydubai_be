@@ -78,11 +78,11 @@ block content
                 input#highlights.form-control(type='text' name="highlights" placeholder="Use # after each separate entities." required )
             div.row
               div.col-12.col-md-4.mb-2
-                label.form-label(for='amenitiesDescription') Amenities Description
-                textarea#amenitiesDescription.form-control(name="amenitiesDescription" rows='2' required )
+                label.form-label(for='amenitiesDescription') Amenities : Description
+                textarea#amenitiesDescription.form-control(name="amenities[description]" rows='2' required )
               div.col-12.col-md-8.mb-2
-                label.form-label(for='amenitiesFeatures') Amenities Features
-                input#amenitiesFeatures.form-control(type='text' name="amenitiesFeatures" placeholder="Use # after each separate entities." required )
+                label.form-label(for='amenitiesFeatures') Amenities : Features
+                input#amenitiesFeatures.form-control(type='text' name="amenities[features]" placeholder="Use # after each separate entities." required )
             
             div.row
               div.col-12.col-md-4.mb-2
@@ -90,12 +90,12 @@ block content
                 input#startingPrice.form-control(type='number' name="startingPrice" required )
               
               div.col-12.col-md-4.mb-2
-                label.form-label(for='locDescription') location Description
-                input#locDescription.form-control(type='text' name="locDescription" required )
+                label.form-label(for='locDescription') location : Description
+                input#locDescription.form-control(type='text' name="location[locDescription]" required )
               
               div.col-12.col-md-4.mb-2
-                label.form-label(for='position') location Position
-                input#position.form-control(type='text' name="position" placeholder="Example: 25.2048,55.2708" required )
+                label.form-label(for='position') location : Position
+                input#position.form-control(type='text' name="location[position]" placeholder="Example: 25.2048,55.2708" required )
             
             //- NearBy
             div.row(style="border-bottom: 2px solid #51b37f;")
@@ -110,13 +110,13 @@ block content
               div.row.nearby-list
                 div.col-12.col-md-4.mb-2
                   label.form-label(for='nearByTitle') Title
-                  input#nearByTitle.form-control(type='text' name="nearby['title']" required )
+                  input#nearByTitle.form-control(type='text' name="location[nearby][0][title]" required )
                 div.col-12.col-md-4.mb-2
                   label.form-label(for='locDescription') Icon
-                  input#locDescription.form-control(type='text' name="nearby['icon']" required )
+                  input#locDescription.form-control(type='text' name="location[nearby][0][icon]" required )
                 div.col-12.col-md-3.mb-2
                   label.form-label(for='position') Position
-                  input#position.form-control(type='text' name="nearby['position']" placeholder="Example: 25.2048,55.2708" required )
+                  input#position.form-control(type='text' name="location[nearby][0][position]" placeholder="Example: 25.2048,55.2708" required )
                 div.col-12.col-md-1.mb-2.text-center
                   label.form-label(for='action') Action
                   br
@@ -137,24 +137,92 @@ block content
               div.row.paymentPlan-list
                 div.col-12.col-md-3.mb-2
                   label.form-label(for='paymentPlanMilestone') Milestone
-                  input#paymentPlanMilestone.form-control(type='text' name="paymentPlan['milestone']" required )
+                  input.form-control(type='text' name="paymentPlan[0][milestone]")
                 div.col-12.col-md-2.mb-2
                   label.form-label(for='paymentPlanInstallment') Installment
-                  input#paymentPlanInstallment.form-control(type='number' name="paymentPlan['installment']" )
+                  input.form-control(type='number' name="paymentPlan[0][installment]")
                 div.col-12.col-md-2.mb-2
                   label.form-label(for='paymentPlanPercentage') Percentage
-                  input#paymentPlanPercentage.form-control(type='text' name="paymentPlan['percentage']" )
+                  input.form-control(type='text' name="paymentPlan[0][percentage]")
                 div.col-12.col-md-2.mb-2
                   label.form-label(for='paymentPlanDate') Date
-                  input#paymentPlanDate.form-control(type='date' name="paymentPlan['date']" )
+                  input.form-control(type='date' name="paymentPlan[0][date]")
                 div.col-12.col-md-2.mb-2
                   label.form-label(for='paymentPlanNotes') Notes
-                  input#paymentPlanNotes.form-control(type='text' name="paymentPlan['notes']"  )
+                  input.form-control(type='text' name="paymentPlan[0][notes]" )
                 div.col-12.col-md-1.mb-2.text-center
                   label.form-label(for='action') Action
                   br
                   button.app-btn-danger(type="button" onclick="return false" disabled )
                     i.fa.fa-trash
+
+            div.row
+              div.col-12.col-md-4.mb-2
+                label.form-label(for='unitTypeTitle') Unit Type : Title
+                input#unitTypeTitle.form-control(type='text' name="unitType[title]")
+              div.col-12.col-md-4.mb-2
+                label.form-label(for='unitTypeCount') Unit Type : Count
+                input#unitTypeCount.form-control(type='text' name="unitType[count]")
+              div.col-12.col-md-4.mb-2
+                label.form-label(for='unitTypeSize') Unit Type : size
+                input#unitTypeSize.form-control(type='text' name="unitType[size]")
+
+            
+            div.row
+              div.col-12.col-md-12.mb-2
+                label.form-label(for='brochure') Brochure
+                input#brochure.form-control(type='text' name="brochure" placeholder="PDF brochure path only.")
+
+
+            //- images : type, metaDescription, path
+            div.row(style="border-bottom: 2px solid #51b37f;")
+              div.col-6.col-md-6.mb-2
+                label.form-label(for='images') Images
+              div.col-6.col-md-6.mb-2.text-end
+                button.app-btn-primary.btn-sm(type="button" onclick="addMoreImage()")
+                  i.fa.fa-plus
+                  | &nbsp; More
+            div.row.images-row
+              div.row.images-list
+                div.col-12.col-md-4.mb-2
+                  label.form-label(for='imageType') Type
+                  input.form-control(type='text' name="images[0][type]" required )
+                div.col-12.col-md-4.mb-2
+                  label.form-label(for='imageMetaDescription') MetaDescription
+                  input.form-control(type='text' name="images[0][metaDescription]" required )
+                div.col-12.col-md-3.mb-2
+                  label.form-label(for='imagePath') Path
+                  input.form-control(type='text' name="images[0][path]" placeholder="JPG/JPEG/PNG image path only." required )
+                div.col-12.col-md-1.mb-2.text-center
+                  label.form-label(for='action') Action
+                  br
+                  button.app-btn-danger(type="button" onclick="return false" disabled )
+                    i.fa.fa-trash
+            
+            
+            //- video : type, path
+            div.row(style="border-bottom: 2px solid #51b37f;")
+              div.col-6.col-md-6.mb-2
+                label.form-label(for='Videos') Videos
+              div.col-6.col-md-6.mb-2.text-end
+                button.app-btn-primary.btn-sm(type="button" onclick="addMoreVideo()")
+                  i.fa.fa-plus
+                  | &nbsp; More
+            div.row.video-row
+              div.row.video-list
+                div.col-12.col-md-6.mb-2
+                  label.form-label(for='videoType') Type
+                  input.form-control(type='text' name="videos[0][type]" required )
+                div.col-12.col-md-5.mb-2
+                  label.form-label(for='videoPath') Path
+                  input.form-control(type='text' name="videos[0][path]" placeholder="Video path only." required )
+                div.col-12.col-md-1.mb-2.text-center
+                  label.form-label(for='action') Action
+                  br
+                  button.app-btn-danger(type="button" onclick="return false" disabled )
+                    i.fa.fa-trash
+
+
                 
             //- submit button
             hr
@@ -165,21 +233,42 @@ block script
     
     let addMoreNearBy;
     let addMorePaymentPlan;
+    let addMoreImage;
+    let addMoreVideo;
 
     $(document).ready(function(){
       
+
       //nearby
-      var delete_nearBy_row = "'div.nearby-list'";
-      const nearBy_content = '<div class="row nearby-list"><div class="col-12 col-md-4 mb-2"><input class="form-control" id="nearByTitle" type="text" name="nearby["title"]" required=""></div><div class="col-12 col-md-4 mb-2"><input class="form-control" id="locDescription" type="text" name="nearby["icon"]" required=""></div><div class="col-12 col-md-3 mb-2"><input class="form-control" id="position" type="text" name="nearby["position"]" placeholder="Example: 25.2048,55.2708" required=""></div><div class="col-12 col-md-1 mb-2 text-center"><button class="app-btn-danger" type="button" onclick="$(this).closest('+delete_nearBy_row+').remove()"><i class="fa fa-trash"></i></button></div></div>';
+      let nearByIndex = 1;
       addMoreNearBy = function(){
+        const nearBy_content = '<div class="row nearby-list"><div class="col-12 col-md-4 mb-2"><input class="form-control" type="text" name="location[nearby]['+nearByIndex+'][title]" required=""></div><div class="col-12 col-md-4 mb-2"><input class="form-control" type="text" name="location[nearby]['+nearByIndex+'][icon]" required=""></div><div class="col-12 col-md-3 mb-2"><input class="form-control" type="text" name="location[nearby]['+nearByIndex+'][position]" placeholder="Example: 25.2048,55.2708" required=""></div><div class="col-12 col-md-1 mb-2 text-center"><button class="app-btn-danger" type="button" onclick='+"$(this).closest('div.nearby-list').remove()"+'><i class="fa fa-trash"></i></button></div></div>';
         $('div.nearby-row').append(nearBy_content);
+        nearByIndex++;
       }
 
       //PaymentPlan
-      var delete_PaymentPlan_row = "'div.paymentPlan-list'";
-      const PaymentPlan_content = '<div class="row paymentPlan-list"> <div class="col-12 col-md-3 mb-2"><input class="form-control" id="paymentPlanMilestone" type="text" name="paymentPlan["milestone"]" required="" /> </div> <div class="col-12 col-md-2 mb-2"><input class="form-control" id="paymentPlanInstallment" type="number" name="paymentPlan["installment"]" /> </div> <div class="col-12 col-md-2 mb-2"><input class="form-control" id="paymentPlanPercentage" type="text" name="paymentPlan["percentage"]" /> </div> <div class="col-12 col-md-2 mb-2"><input class="form-control" id="paymentPlanDate" type="date" name="paymentPlan["date"]" /> </div> <div class="col-12 col-md-2 mb-2"><input class="form-control" id="paymentPlanNotes" type="text" name="paymentPlan["notes"]" /> </div> <div class="col-12 col-md-1 mb-2 text-center"><button class="app-btn-danger" type="button" onclick="$(this).closest('+delete_PaymentPlan_row+').remove()"> <i class="fa fa-trash"></i> </button> </div> </div>';
+      let paymentPlanIndex = 1;
       addMorePaymentPlan = function(){
-        $('div.paymentPlan-row').append(PaymentPlan_content);
+        const paymentPlan_content = '<div class="row paymentPlan-list"> <div class="col-12 col-md-3 mb-2"><input class="form-control" type="text" name="paymentPlan['+paymentPlanIndex+'][milestone]" /> </div> <div class="col-12 col-md-2 mb-2"><input class="form-control" type="number" name="paymentPlan['+paymentPlanIndex+'][installment]" /> </div> <div class="col-12 col-md-2 mb-2"><input class="form-control" type="text" name="paymentPlan['+paymentPlanIndex+'][percentage]" /> </div> <div class="col-12 col-md-2 mb-2"><input class="form-control" type="date" name="paymentPlan['+paymentPlanIndex+'][date]" /> </div> <div class="col-12 col-md-2 mb-2"><input class="form-control" type="text" name="paymentPlan['+paymentPlanIndex+'][notes]" /> </div> <div class="col-12 col-md-1 mb-2 text-center"><button class="app-btn-danger" type="button" onclick='+"$(this).closest('div.paymentPlan-list').remove()"+'> <i class="fa fa-trash"></i> </button> </div> </div>';
+        $('div.paymentPlan-row').append(paymentPlan_content);
+        paymentPlanIndex++;
+      }
+
+
+      //Images
+      let imageIndex = 1;
+      addMoreImage = function(){
+        $('div.images-row').append('<div class="row images-list"><div class="col-12 col-md-4 mb-2"><input class="form-control" type="text" name="images['+imageIndex+'][type]" required=""></div><div class="col-12 col-md-4 mb-2"><input class="form-control" type="text"  name="images['+imageIndex+'][metaDescription]" required=""></div><div class="col-12 col-md-3 mb-2"><input class="form-control" type="text" name="images['+imageIndex+'][path]" placeholder="JPG/JPEG/PNG image path only." required="" ></div><div class="col-12 col-md-1 mb-2 text-center"><button class="app-btn-danger" type="button" onclick='+"$(this).closest('div.images-list').remove()"+'><i class="fa fa-trash"></i></button></div></div>');
+        imageIndex++;
+      }
+
+
+      //Videos
+      let videoIndex = 1;
+      addMoreVideo = function(){
+        $('div.video-row').append('<div class="row video-list"><div class="col-12 col-md-6 mb-2"><input class="form-control" type="text" name="videos['+videoIndex+'][type]" required=""></div> <div class="col-12 col-md-5 mb-2"><input class="form-control" type="text" name="videos['+videoIndex+'][path]" placeholder="Video path only." required="" ></div><div class="col-12 col-md-1 mb-2 text-center"><button class="app-btn-danger" type="button" onclick='+"$(this).closest('div.video-list').remove()"+'><i class="fa fa-trash"></i></button></div></div>');
+        videoIndex++;
       }
 
 

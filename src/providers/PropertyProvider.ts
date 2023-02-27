@@ -11,7 +11,7 @@ export class PropertyProvider implements IPropertyProvider {
         return await PropertyModel.find({ "lang": IPropertyLang.EN }).catch(err => null);
     }
 
-    
+
 
 
 

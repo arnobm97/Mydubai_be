@@ -54,7 +54,7 @@ const PropertySchema: Schema = new Schema({
       size: { type: String, required: true }
     },
 
-    brcure: { type: String, required: true },
+    brochure: { type: String, required: true },
     images: [{
       _id: false,
       type: { type: String, required: true },
@@ -76,6 +76,6 @@ const PropertySchema: Schema = new Schema({
 
 }, { timestamps: true });
 
-PropertySchema.set('toJSON', { virtuals: true});
+//PropertySchema.set('toJSON', { virtuals: true});
 
 export default mongoose.model<IProperty>("properties", PropertySchema);

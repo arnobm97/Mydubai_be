@@ -75,7 +75,7 @@ export interface IProperty extends Document{
     location: IPropertyLocation;
     paymentPlan: IPaymentPlan[];
     unitType: IUnitType;
-    brcure: string;
+    brochure: string;
     images: IPropertyImage[];
     videos: IPropertyVideo[];
     createBy: EmbededUser;
