@@ -13,76 +13,76 @@ block content
               i.fa.fa-chevron-left
               | &nbsp;Return
   
-
-  div.row
-    div.col-12.col-lg-6
-      div.app-card.app-card-account.shadow-sm.d-flex.flex-column.align-items-start
-        div.app-card-header.p-3.border-bottom-0
-          div.row.align-items-center.gx-3
-            div.col-auto
-              div.app-icon-holder
-                svg.bi.bi-person(width='1em', height='1em', viewBox='0 0 16 16', fill='currentColor', xmlns='http://www.w3.org/2000/svg')
-                  path(fill-rule='evenodd', d='M10 5a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm6 5c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z')
-            div.col-auto
-              h4.app-card-title User Details
-        div.app-card-body.px-4.w-100
-          div.item.border-bottom.py-2
+  -if(user)
+    div.row
+      div.col-12.col-lg-6
+        div.app-card.app-card-account.shadow-sm.d-flex.flex-column.align-items-start
+          div.app-card-header.p-3.border-bottom-0
+            div.row.align-items-center.gx-3
               div.col-auto
-                div.item-label.mb-2
-                  strong Photo
-                div.item-data
-                  img.profile-image(src=user.avatar)
-          div.item.border-bottom.py-2
+                div.app-icon-holder
+                  svg.bi.bi-person(width='1em', height='1em', viewBox='0 0 16 16', fill='currentColor', xmlns='http://www.w3.org/2000/svg')
+                    path(fill-rule='evenodd', d='M10 5a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm6 5c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z')
               div.col-auto
-                div.item-label
-                  strong Name
-                div.item-data=user.fullName
-          div.item.border-bottom.py-2
-              div.col-auto
-                div.item-label
-                  strong Email
-                div.item-data=user.email
-          div.item.border-bottom.py-2
-              div.col-auto
-                div.item-label
-                  strong Role
-                div.item-data=user.role
-          div.item.border-bottom.py-2
-              div.col-auto
-                div.item-label
-                  strong Active Status
-                div.item-data=user.isActive===true? "Active" : "Inactive"
-          div.item.border-bottom.py-2
-              div.col-auto
-                div.item-label
-                  strong Created At
-                div.item-data=fmt.date.pretty(user.createdAt)+' '+fmt.date.Time12(user.createdAt)
-        div.app-card-footer.p-4.mt-auto
-          a.btn.app-btn-secondary(href='/users/update/'+user._id) Update
-    
-    
-    .col-12.col-lg-6
-      .app-card.app-card-account.shadow-sm.d-flex.flex-column.align-items-start
-        .app-card-header.p-3.border-bottom-0
-          .row.align-items-center.gx-3
-            .col-auto
-              .app-icon-holder
-                svg.bi.bi-sliders(width='1em', height='1em', viewBox='0 0 16 16', fill='currentColor', xmlns='http://www.w3.org/2000/svg')
-                  path(fill-rule='evenodd', d='M11.5 2a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM9.05 3a2.5 2.5 0 0 1 4.9 0H16v1h-2.05a2.5 2.5 0 0 1-4.9 0H0V3h9.05zM4.5 7a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM2.05 8a2.5 2.5 0 0 1 4.9 0H16v1H6.95a2.5 2.5 0 0 1-4.9 0H0V8h2.05zm9.45 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm-2.45 1a2.5 2.5 0 0 1 4.9 0H16v1h-2.05a2.5 2.5 0 0 1-4.9 0H0v-1h9.05z')
-            .col-auto
-              h4.app-card-title User's Log
-        .app-card-body.px-4.w-100
-          -var sl=1;
-          -if(user.logs)
-            each logs in user.logs
+                h4.app-card-title User Details
+          div.app-card-body.px-4.w-100
+            div.item.border-bottom.py-2
+                div.col-auto
+                  div.item-label.mb-2
+                    strong Photo
+                  div.item-data
+                    img.profile-image(src=user.avatar)
+            div.item.border-bottom.py-2
+                div.col-auto
+                  div.item-label
+                    strong Name
+                  div.item-data=user.fullName
+            div.item.border-bottom.py-2
+                div.col-auto
+                  div.item-label
+                    strong Email
+                  div.item-data=user.email
+            div.item.border-bottom.py-2
+                div.col-auto
+                  div.item-label
+                    strong Role
+                  div.item-data=user.role
+            div.item.border-bottom.py-2
+                div.col-auto
+                  div.item-label
+                    strong Active Status
+                  div.item-data=user.isActive===true? "Active" : "Inactive"
+            div.item.border-bottom.py-2
+                div.col-auto
+                  div.item-label
+                    strong Created At
+                  div.item-data=fmt.date.pretty(user.createdAt)+' '+fmt.date.Time12(user.createdAt)
+          div.app-card-footer.p-4.mt-auto
+            a.btn.app-btn-secondary(href='/users/update/'+user._id) Update
+      
+      
+      .col-12.col-lg-6
+        .app-card.app-card-account.shadow-sm.d-flex.flex-column.align-items-start
+          .app-card-header.p-3.border-bottom-0
+            .row.align-items-center.gx-3
+              .col-auto
+                .app-icon-holder
+                  svg.bi.bi-sliders(width='1em', height='1em', viewBox='0 0 16 16', fill='currentColor', xmlns='http://www.w3.org/2000/svg')
+                    path(fill-rule='evenodd', d='M11.5 2a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM9.05 3a2.5 2.5 0 0 1 4.9 0H16v1h-2.05a2.5 2.5 0 0 1-4.9 0H0V3h9.05zM4.5 7a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM2.05 8a2.5 2.5 0 0 1 4.9 0H16v1H6.95a2.5 2.5 0 0 1-4.9 0H0V8h2.05zm9.45 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm-2.45 1a2.5 2.5 0 0 1 4.9 0H16v1h-2.05a2.5 2.5 0 0 1-4.9 0H0v-1h9.05z')
+              .col-auto
+                h4.app-card-title User's Log
+          .app-card-body.px-4.w-100
+            -var sl=1;
+            -if(user.logs)
+              each logs in user.logs
+                .item.border-bottom.py-3
+                  .col-auto
+                    .item-label
+                      strong=(sl++)+'. '+logs.title 
+            -else
               .item.border-bottom.py-3
                 .col-auto
-                  .item-label
-                    strong=(sl++)+'. '+logs.title 
-          -else
-            .item.border-bottom.py-3
-              .col-auto
-                .item-label No Activity Found.
+                  .item-label No Activity Found.
 
-        .app-card-footer.p-4.mt-auto
-          a.btn.app-btn-secondary(href='#') Clear Log
+          .app-card-footer.p-4.mt-auto
+            a.btn.app-btn-secondary(href='#') Clear Log

@@ -22,39 +22,41 @@ block content
       div.app-card.app-card-settings.shadow-sm.p-4
         -if(errorMessage)
           div.alert.alert-danger(role='alert')=errorMessage
-        div.app-card-body
-          form(action="" method="POST")
-            div.mb-3
-              label.form-label(for='setting-input-1') Full Name
-              input#fullName.form-control(type='text' name="fullName" value=userToUpdate.fullName required )
-            div.mb-3
-              label.form-label(for='setting-input-2') Email
-              input#username.form-control(type='text' value=userToUpdate.email readonly required )
-            div.mb-3
-              label.form-label(for='setting-input-2') Password
-              input#password.form-control(type="password" name="password" )
-            div.mb-3
-              label.form-label(for='setting-input-2') Confirm Password
-              input#confirmPassword.form-control(type="password" name="confirmPassword" )
-            div.mb-3
-              label.form-label(for='setting-input-2') Select User Role
-              - var roles = ["Admin", "Moderator", "User"]
-              select.form-control(name="role" value=userToUpdate.role required)
-                option(value="", disabled="", selected="") Choose User Role
-                each role in roles
-                  if userToUpdate.role == role
-                    option(value=role selected="") #{role}
-                  else
-                    option(value=role) #{role}
-            div.mb-3
-              label.form-label(for='setting-input-2') Avatar Link
-              input#avatar.form-control(type='text', name="avatar" value=userToUpdate.avatar )
+        
+        -if(userToUpdate)
+          div.app-card-body
+            form(action="" method="POST")
+              div.mb-3
+                label.form-label(for='setting-input-1') Full Name
+                input#fullName.form-control(type='text' name="fullName" value=userToUpdate.fullName required )
+              div.mb-3
+                label.form-label(for='setting-input-2') Email
+                input#username.form-control(type='text' value=userToUpdate.email readonly required )
+              div.mb-3
+                label.form-label(for='setting-input-2') Password
+                input#password.form-control(type="password" name="password" )
+              div.mb-3
+                label.form-label(for='setting-input-2') Confirm Password
+                input#confirmPassword.form-control(type="password" name="confirmPassword" )
+              div.mb-3
+                label.form-label(for='setting-input-2') Select User Role
+                - var roles = ["Admin", "Moderator", "User"]
+                select.form-control(name="role" value=userToUpdate.role required)
+                  option(value="", disabled="", selected="") Choose User Role
+                  each role in roles
+                    if userToUpdate.role == role
+                      option(value=role selected="") #{role}
+                    else
+                      option(value=role) #{role}
+              div.mb-3
+                label.form-label(for='setting-input-2') Avatar Link
+                input#avatar.form-control(type='text', name="avatar" value=userToUpdate.avatar )
 
-            div.form-check.form-switch.mb-3
-              abel.form-label(for='isActive') Active Status
-              -if(userToUpdate.isActive === true)
-                input#isActive.form-check-input(type='checkbox' name="isActive" checked )
-              -else
-                input#isActive.form-check-input(type='checkbox' name="isActive" )
-              
-            button.btn.app-btn-primary(type='submit') Update User
+              div.form-check.form-switch.mb-3
+                abel.form-label(for='isActive') Active Status
+                -if(userToUpdate.isActive === true)
+                  input#isActive.form-check-input(type='checkbox' name="isActive" checked )
+                -else
+                  input#isActive.form-check-input(type='checkbox' name="isActive" )
+                
+              button.btn.app-btn-primary(type='submit') Update User

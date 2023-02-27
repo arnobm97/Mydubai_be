@@ -62,6 +62,7 @@ app.setMenu("main", {
         { name: "Dashboard", icon: "<i class='fa-solid fa-house fa-lg'></i>", path: "/", for: [Role.Admin, Role.Moderator, Role.User] },
         { name: "Users", icon: "<i class='fa-solid fa-user fa-lg'></i>", path: "/users", for: [Role.Admin, Role.Moderator, Role.User] },
         { name: "Properties", icon: "<i class='fa-solid fa-building fa-lg'></i>", path: "/properties", for: [Role.Admin, Role.Moderator, Role.User] },
+        { name: "File Drive", icon: "<i class='fa-solid fa-hdd fa-lg'></i>", path: "/properties", for: [Role.Admin, Role.Moderator, Role.User] }
     ]
 })
 
