@@ -2,9 +2,9 @@ import { Controller } from "../core/Controller";
 import { NextFunc, HttpRequest, HttpResponse } from "../core/Types";
 import { Role } from "../core/IUserProvider";
 import { IPropertyProvider, IProperty, IPropertyLang, IPropertyType } from "../core/IPropertyProvider";
-import {IPropertyAreaProvider } from "../core/IPropertyAreaProvider";
-import {IDevelopmentTypeProvider } from "../core/IDevelopmentTypeProvider";
-import {IDeveloperTypeProvider } from "../core/IDeveloperTypeProvider";
+import {IPropertyAreaProvider, EmbededPropertyArea, IPropertyArea } from "../core/IPropertyAreaProvider";
+import {IDevelopmentTypeProvider, EmbededDevelopmentType, IDevelopmentType } from "../core/IDevelopmentTypeProvider";
+import {IDeveloperTypeProvider, EmbededDeveloperType, IDeveloperType } from "../core/IDeveloperTypeProvider";
 
 
 
@@ -49,11 +49,6 @@ export class PropertyController extends Controller {
         const propertyName = req.body.propertyName;
         const propertyType = req.body.propertyType;
         const propertyDescription = req.body.propertyDescription;
-
-        const propertyArea = { id: req.body.propertyArea,areaName: "Dubai" };
-        const developmentType = { id: req.body.developmentType,name: "TDP1" };
-        const developerType = { id: req.body.developerType,name: "TD1" };
-
         const areaSize = req.body.areaSize;
         const completion = req.body.completion;
         const highlights = req.body.highlights;  // highlights #
@@ -67,8 +62,38 @@ export class PropertyController extends Controller {
         const videos = req.body.videos;
         const createBy = { id: req.user.id, fullName: req.user.name };
 
+        //find in db then generate object
+        let tempPropertyArea: IPropertyArea = await this.PropertyAreaProvider.get(req.body.propertyArea);
+        let propertyArea: EmbededPropertyArea = {id: null, areaName: null};
+        if(tempPropertyArea){
+            propertyArea.id = tempPropertyArea._id;
+            propertyArea.areaName = tempPropertyArea.areaName;
+        }else{
+            req.flash('flashMessage', 'Invalid property area. Please try again.');
+            return res.redirect('/properties');
+        }
+        let tempDevelopmentType: IDevelopmentType = await this.DevelopmentTypeProvider.get(req.body.developmentType);
+        let developmentType: EmbededDevelopmentType = {id: null, name: null};
+        if(tempDevelopmentType){
+            developmentType.id = tempDevelopmentType._id;
+            developmentType.name = tempDevelopmentType.name;
+        }else{
+            req.flash('flashMessage', 'Invalid development type. Please try again.');
+            return res.redirect('/properties');
+        }
+        let tempDeveloperType: IDeveloperType = await this.DeveloperTypeProvider.get(req.body.developerType);
+        let developerType: EmbededDeveloperType = {id: null, name: null};
+        if(tempDeveloperType){
+            developerType.id = tempDeveloperType._id;
+            developerType.name = tempDeveloperType.name;
+        }else{
+            req.flash('flashMessage', 'Invalid developer type. Please try again.');
+            return res.redirect('/properties');
+        }
         const newProperty: any = {propertyNo,lang,propertyName,propertyType,propertyDescription,propertyArea,developmentType,developerType,areaSize,highlights,amenities,completion,startingPrice,location,paymentPlan,unitType,brochure,images,videos,createBy};
-        // return res.send(testproperty);
+        
+        //return res.send(newProperty);
+
         await this.PropertyProvider.create(newProperty).then(async property => {
             res.bag.successMessage = "Done";
             req.flash('flashMessage', 'Property created successfully.');
