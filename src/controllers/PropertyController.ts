@@ -35,12 +35,17 @@ export class PropertyController extends Controller {
 
     public async createProperty(req: HttpRequest, res: HttpResponse, next: NextFunc) {
         res.bag.pageTitle = this.config.appTitle+" | Property Create";
+        const language: any = req.query.language;
+
+
         if(req.method === "GET"){
             res.bag.language = [{title: "English", value : "en"},{title: "Arabic", value : "ar"}];
-            res.bag.propertyType = [{title: "OFF PLAN", value : "OFF PLAN"},{title: "READY", value : "READY"}];
-            res.bag.propertyArea = await this.PropertyAreaProvider.getAll();
-            res.bag.developmentType = await this.DevelopmentTypeProvider.getAll();
-            res.bag.developerType = await this.DeveloperTypeProvider.getAll();
+            res.bag.propertyType = [{title: "Villa", value : "Villa"},{title: "Apartment", value : "Apartment"}, {title: "FLAT", value : "FLAT"} ];
+
+            res.bag.propertyArea = await this.PropertyAreaProvider.getAll(language);
+            res.bag.developmentType = await this.DevelopmentTypeProvider.getAll(language);
+            res.bag.developerType = await this.DeveloperTypeProvider.getAll(language);
+
             return res.view('property/create');
         }
 
