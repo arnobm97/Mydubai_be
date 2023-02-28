@@ -7,7 +7,7 @@ export class UserProvider implements IUserProvider {
 
 
     public async count(): Promise<number> {
-        return await UserModel.find().find().countDocuments();
+        return await UserModel.find().countDocuments();
     }
 
     public async get(email: string): Promise<IUser> {

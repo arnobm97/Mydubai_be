@@ -15,6 +15,7 @@ import cron from "node-cron";
 import { SMTPMailer } from "./providers/SMTPMailer";
 import { UserProvider } from "./providers/UserProvider";
 import { PropertyProvider } from "./providers/PropertyProvider";
+import { PropertyAreaProvider } from "./providers/PropertyAreaProvider";
 
 // Formatters
 import { dateFormatter } from "./ftms/date";
@@ -23,6 +24,7 @@ import { dateFormatter } from "./ftms/date";
 import { SetupController } from "./controllers/SetupController";
 import { LoginController } from "./controllers/LoginController";
 import { DashboardController } from "./controllers/DashboardController";
+import { BasicSetupController } from "./controllers/BasicSetupController";
 import { UserController } from "./controllers/UserController";
 import { PropertyController } from "./controllers/PropertyController";
 
@@ -47,8 +49,16 @@ app.viewDir("views");
 app.viewEngine("pug");
 app.setStatic(path.join(__dirname, "public"), { maxAge: 0 }); // 31557600000 turned off caching for now
 
+
+
+
+// provider
 app.set("UserProvider", new UserProvider());
 app.set("PropertyProvider", new PropertyProvider());
+app.set("PropertyAreaProvider", new PropertyAreaProvider());
+
+
+
 
 
 // Initialize and set the mailer to use
@@ -59,10 +69,11 @@ app.set("Mailer", Mailer);
 // Setup menu
 app.setMenu("main", {
     items: [
-        { name: "Dashboard", icon: "<i class='fa-solid fa-house fa-lg'></i>", path: "/", for: [Role.Admin, Role.Moderator, Role.User] },
-        { name: "Users", icon: "<i class='fa-solid fa-user fa-lg'></i>", path: "/users", for: [Role.Admin, Role.Moderator, Role.User] },
-        { name: "Properties", icon: "<i class='fa-solid fa-building fa-lg'></i>", path: "/properties", for: [Role.Admin, Role.Moderator, Role.User] },
-        { name: "File Drive", icon: "<i class='fa-solid fa-hdd fa-lg'></i>", path: "/properties", for: [Role.Admin, Role.Moderator, Role.User] }
+        { name: "Dashboard", icon: "<i class='fa-solid fa-house fa-lg'></i>", path: "/", for: [Role.Admin, Role.Moderator] },
+        { name: "Users", icon: "<i class='fa-solid fa-user fa-lg'></i>", path: "/users", for: [Role.Admin, Role.Moderator] },
+        { name: "Properties", icon: "<i class='fa-solid fa-building fa-lg'></i>", path: "/properties", for: [Role.Admin, Role.Moderator] },
+        { name: "Basic Setup", icon: "<i class='fa-solid fa-cogs fa-lg'></i>", path: "/basic-setup/index", for: [Role.Admin, Role.Moderator] },
+        { name: "File Drive", icon: "<i class='fa-solid fa-hdd fa-lg'></i>", path: "/properties", for: [Role.Admin, Role.Moderator] }
     ]
 })
 
@@ -73,6 +84,7 @@ app.setFormatter("date", dateFormatter);
 app.registerController(SetupController);
 app.registerController(LoginController);
 app.registerController(DashboardController);
+app.registerController(BasicSetupController);
 app.registerController(UserController);
 app.registerController(PropertyController);
 

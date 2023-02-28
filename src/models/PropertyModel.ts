@@ -76,6 +76,6 @@ const PropertySchema: Schema = new Schema({
 
 }, { timestamps: true });
 
-//PropertySchema.set('toJSON', { virtuals: true});
+// PropertySchema.set('toJSON', { virtuals: true});
 
 export default mongoose.model<IProperty>("properties", PropertySchema);

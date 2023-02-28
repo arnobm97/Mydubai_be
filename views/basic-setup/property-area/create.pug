@@ -1,0 +1,32 @@
+extends ../../layout
+block content
+
+
+  .row.app-card.mb-2.align-items-center.justify-content-between.bg-white.p-2.m-0
+    .col-auto
+      h1.app-page-title.mb-0 Basic Setup / Property Area / Create
+    .col-auto
+      .page-utilities
+        .row.g-2.justify-content-start.justify-content-md-end.align-items-center
+          .col-auto
+            a.btn.app-btn-info(href='')
+              i.fa.fa-refresh
+              | &nbsp;Reset Page
+          .col-auto
+            a.btn.app-btn-danger(href='/users')
+              i.fa.fa-chevron-left
+              | &nbsp;Return
+  
+  div.row
+    div.col-12.col-md-12
+      div.app-card.app-card-settings.shadow-sm.p-4
+        -if(errorMessage)
+          div.alert.alert-danger(role='alert')=errorMessage
+        div.app-card-body
+          form(action="" method="POST")
+            div.mb-3
+              label.form-label(for='areaName') Area Name
+              input#areaName.form-control(type='text' name="areaName" required )
+           
+            button.btn.app-btn-primary(type='submit') Create Property Area
+  

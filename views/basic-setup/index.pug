@@ -1,0 +1,63 @@
+extends ../layout
+block content
+
+  .row.app-card.mb-2.align-items-center.justify-content-between.bg-white.p-2.m-0
+    .col-auto
+      h1.app-page-title.mb-0 Basic Setup
+    .col-auto
+      .page-utilities
+        .row.g-2.justify-content-start.justify-content-md-end.align-items-center
+          .col-auto
+            form.table-search-form.row.gx-1.align-items-center
+              .col-auto
+                input#search-orders.form-control.search-orders(type='text', name='searchorders', placeholder='Search')
+              .col-auto
+                button.btn.app-btn-secondary(type='submit') Search
+      
+
+  div.row.g-4.mb-4
+    
+    div.col-12.col-lg-4
+      div.app-card.app-card-basic.d-flex.flex-column.align-items-start.shadow-sm
+        div.app-card-header.p-3.border-bottom-0
+          div.row.align-items-center.gx-3
+            div.col-auto
+              div.app-icon-holder
+                i.fa.fa-map
+            div.col-auto
+              h4.app-card-title Property Area
+        div.app-card-body.px-4
+          div.intro
+            | Let's setup some property area. You can add edit & delete property area by clicking bellow link.
+        div.app-card-footer.p-4.mt-auto
+          a.btn.app-btn-secondary(href='/basic-setup/property-area') Go
+
+    div.col-12.col-lg-4
+      div.app-card.app-card-basic.d-flex.flex-column.align-items-start.shadow-sm
+        div.app-card-header.p-3.border-bottom-0
+          div.row.align-items-center.gx-3
+            div.col-auto
+              div.app-icon-holder
+                i.fa.fa-building
+            div.col-auto
+              h4.app-card-title Development Type
+        div.app-card-body.px-4
+          div.intro
+            | Let's setup some development type. You can add edit & delete development type by clicking bellow link.
+        div.app-card-footer.p-4.mt-auto
+          a.btn.app-btn-secondary(href='/basic-setup/development-type') Go
+
+    div.col-12.col-lg-4
+      div.app-card.app-card-basic.d-flex.flex-column.align-items-start.shadow-sm
+        div.app-card-header.p-3.border-bottom-0
+          div.row.align-items-center.gx-3
+            div.col-auto
+              div.app-icon-holder
+                i.fa.fa-briefcase
+            div.col-auto
+              h4.app-card-title Developer Type
+        div.app-card-body.px-4
+          div.intro
+            | Let's setup some developer type. You can add edit & delete developer type by clicking bellow link.
+        div.app-card-footer.p-4.mt-auto
+          a.btn.app-btn-secondary(href='/basic-setup/developer-type') Go

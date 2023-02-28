@@ -2,7 +2,7 @@ extends ../layout
 block content
 
 
-  .row.mb-2.align-items-center.justify-content-between.bg-white.p-2.m-0
+  .row.app-card.mb-2.align-items-center.justify-content-between.bg-white.p-2.m-0
     .col-auto
       h1.app-page-title.mb-0 Properties / Create
     .col-auto
@@ -101,7 +101,7 @@ block content
                 input#position.form-control(type='number' name="location[position][1]" step="any" placeholder="Example: 55.2708" required )
             
             //- NearBy : title, icon, position
-            div.row.nearby-row(style="background: #e9ecef")
+            div.row.nearby-row(style="border: 1px solid #cfcfcf")
               div.row.m-0(style="background:#cfcfcf")
                 div.col-6.col-md-6.text-end
                   label.form-label(for='nearBy') Nearby
@@ -130,7 +130,7 @@ block content
             
             
             //- paymentPlan : milestone, Installment, Percentage, Date, Notes
-            div.row.paymentPlan-row(style="background: #e9ecef")
+            div.row.paymentPlan-row(style="border: 1px solid #cfcfcf")
               div.row.m-0(style="background:#cfcfcf")
                 div.col-6.col-md-6.text-end
                   label.form-label(for='paymentPlan') Payment Plan
@@ -179,7 +179,7 @@ block content
 
 
             //- images : type, metaDescription, path
-            div.row.images-row(style="background: #e9ecef")
+            div.row.images-row(style="border: 1px solid #cfcfcf")
               div.row.m-0(style="background:#cfcfcf")
                 div.col-6.col-md-6.text-end
                   label.form-label(for='images') Images
@@ -205,7 +205,7 @@ block content
             
             
             //- video : type, path
-            div.row.video-row(style="background: #e9ecef")
+            div.row.video-row(style="border: 1px solid #cfcfcf")
               div.row.m-0(style="background:#cfcfcf")
                 div.col-6.col-md-6.text-end
                   label.form-label(for='videos') Videos

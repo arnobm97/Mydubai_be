@@ -2,6 +2,8 @@ import { Controller } from "../core/Controller";
 import { NextFunc, HttpRequest, HttpResponse } from "../core/Types";
 import { Role } from "../core/IUserProvider";
 import { IPropertyProvider, IProperty, IPropertyLang, IPropertyType } from "../core/IPropertyProvider";
+import {IPropertyAreaProvider } from "../core/IPropertyAreaProvider";
+
 import { any } from "bluebird";
 
 
@@ -10,6 +12,7 @@ export class PropertyController extends Controller {
 
     private config = require("../../config.json");
     private PropertyProvider: IPropertyProvider;
+    private PropertyAreaProvider: IPropertyAreaProvider;
 
     public onRegister(): void {
         this.onGet("/properties", this.index, [Role.Admin, Role.Moderator]);
@@ -23,7 +26,7 @@ export class PropertyController extends Controller {
         const properties: IProperty[] = await this.PropertyProvider.getAll();
         res.bag.properties = properties;
         res.bag.flashMessage = req.flash('flashMessage');
-        //return res.send(properties);
+        // return res.send(properties);
         res.view('property/index');
     }
 
@@ -35,9 +38,11 @@ export class PropertyController extends Controller {
         if(req.method === "GET"){
             res.bag.language = [{title: "English", value : "EN"},{title: "Arabic", value : "AR"}];
             res.bag.propertyType = [{title: "OFF PLAN", value : "OFF PLAN"},{title: "READY", value : "READY"}];
-            res.bag.propertyArea = [{_id: "112345", areaName : "Dubai"},{_id: "112421", areaName : "Sharjah"},{_id: "112499", areaName : "Abu Dhabi"}];
+            res.bag.propertyArea = await this.PropertyAreaProvider.getAll();
+            
             res.bag.developmentType = [{_id: "112345", name : "D Type 1"},{_id: "112421", name : "D Type 2"},{_id: "112499", name : "D Type 3"}];
             res.bag.developerType = [{_id: "112345", name : "DP Type 1"},{_id: "112421", name : "DP Type 2"},{_id: "112499", name : "DP Type 3"}];
+           
             return res.view('property/create');
         }
 
@@ -53,8 +58,8 @@ export class PropertyController extends Controller {
 
         const areaSize = req.body.areaSize;
         const completion = req.body.completion;
-        const highlights = req.body.highlights;  //highlights #
-        const amenities = req.body.amenities; //features #
+        const highlights = req.body.highlights;  // highlights #
+        const amenities = req.body.amenities; // features #
         const startingPrice = req.body.startingPrice;
         const location = req.body.location;
         const paymentPlan = req.body.paymentPlan;
@@ -65,7 +70,7 @@ export class PropertyController extends Controller {
         const createBy = { id: req.user.id, fullName: req.user.name };
 
         const newProperty: any = {propertyNo,lang,propertyName,propertyType,propertyDescription,propertyArea,developmentType,developerType,areaSize,highlights,amenities,completion,startingPrice,location,paymentPlan,unitType,brochure,images,videos,createBy};
-        //return res.send(testproperty);
+        // return res.send(testproperty);
         await this.PropertyProvider.create(newProperty).then(async property => {
             res.bag.successMessage = "Done";
             req.flash('flashMessage', 'Property created successfully.');
