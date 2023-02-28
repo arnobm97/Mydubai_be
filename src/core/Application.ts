@@ -69,6 +69,13 @@ export class Application {
         this.use(new Extention());
         this.use(this.Session);
         this.use(this.Authenticator);
+
+        this.Express.use(function (req, res, next) {
+            res.setHeader('Access-Control-Allow-Origin', '*');
+            res.setHeader('Access-Control-Allow-Methods', '*');
+            res.setHeader('Access-Control-Allow-Headers', '*');
+            next();
+        });
     }
 
     public registerAction(context: Controller, method: HttpMethods, route: PathParam, callback: ActionCallback, roles: Role[]): void {
