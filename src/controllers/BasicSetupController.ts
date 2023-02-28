@@ -2,13 +2,15 @@ import { Controller } from "../core/Controller";
 import { NextFunc, HttpRequest, HttpResponse } from "../core/Types";
 import {IPropertyAreaProvider, IPropertyAreaPage } from "../core/IPropertyAreaProvider";
 import {IDevelopmentTypeProvider, IDevelopmentTypePage } from "../core/IDevelopmentTypeProvider";
-import { Role, IUserPage, EmbededUser } from "../core/IUserProvider";
+import {IDeveloperTypeProvider, IDeveloperTypePage } from "../core/IDeveloperTypeProvider";
+import { Role, EmbededUser } from "../core/IUserProvider";
 
 
 export class BasicSetupController extends Controller {
 
     private PropertyAreaProvider: IPropertyAreaProvider;
     private DevelopmentTypeProvider: IDevelopmentTypeProvider;
+    private DeveloperTypeProvider: IDeveloperTypeProvider;
     private config = require("../../config.json");
 
 
@@ -18,11 +20,12 @@ export class BasicSetupController extends Controller {
         this.onGet("/basic-setup/property-area", this.propertyArea, [Role.Admin, Role.Moderator]);
         this.onGet("/basic-setup/property-area/create", this.createPropertyArea, [Role.Admin, Role.Moderator]);
         this.onPost("/basic-setup/property-area/create", this.createPropertyArea, [Role.Admin, Role.Moderator]);
-
-
         this.onGet("/basic-setup/development-type", this.developmentType, [Role.Admin, Role.Moderator]);
         this.onGet("/basic-setup/development-type/create", this.createDevelopmentType, [Role.Admin, Role.Moderator]);
         this.onPost("/basic-setup/development-type/create", this.createDevelopmentType, [Role.Admin, Role.Moderator]);
+        this.onGet("/basic-setup/developer-type", this.developerType, [Role.Admin, Role.Moderator]);
+        this.onGet("/basic-setup/developer-type/create", this.createDeveloperType, [Role.Admin, Role.Moderator]);
+        this.onPost("/basic-setup/developer-type/create", this.createDeveloperType, [Role.Admin, Role.Moderator]);
     }
 
 
@@ -104,6 +107,45 @@ export class BasicSetupController extends Controller {
         }else{
             res.bag.errorMessage = "Invalid Request";
             res.view('/basic-setup/development-type');
+        }
+
+    }
+
+
+
+    public async developerType(req: HttpRequest, res: HttpResponse, next: NextFunc) {
+        res.bag.pageTitle = this.config.appTitle+" | Developer Type"
+        const p: any = req.query.page;
+        const s: any = req.query.size;
+        let page: number = parseInt(p, 10);
+        if (!page || page < 0) page = 1;
+        let size: number = parseInt(s, 10);
+        if (!size || size < 1) size = 10;
+        const developerTypePage: IDeveloperTypePage  = await this.DeveloperTypeProvider.list( page, size );
+        res.bag.developerTypePage = developerTypePage;
+        res.bag.flashMessage = req.flash('flashMessage');
+        res.view('basic-setup/developer-type/index');
+    }
+
+
+    public async createDeveloperType(req: HttpRequest, res: HttpResponse, next: NextFunc) {
+        res.bag.pageTitle = this.config.appTitle+" | Create Developer Type";
+        if(req.method === "GET"){
+            res.view('basic-setup/developer-type/create');
+        }else if(req.method === "POST"){
+            const name = req.body.name;
+            if (!name) {
+                res.bag.errorMessage = "Developer type name is required";
+                return res.view('basic-setup/developer-type/create')
+            }else{
+                const user : EmbededUser = {id: req.user.id, fullName: req.user.name };
+                await this.DeveloperTypeProvider.create(name, user);
+                req.flash('flashMessage', 'Developer type created successfully.');
+                res.redirect('/basic-setup/developer-type');
+            }
+        }else{
+            res.bag.errorMessage = "Invalid Request";
+            res.view('/basic-setup/developer-type');
         }
 
     }

@@ -4,8 +4,7 @@ import { Role } from "../core/IUserProvider";
 import { IPropertyProvider, IProperty, IPropertyLang, IPropertyType } from "../core/IPropertyProvider";
 import {IPropertyAreaProvider } from "../core/IPropertyAreaProvider";
 import {IDevelopmentTypeProvider } from "../core/IDevelopmentTypeProvider";
-
-import { any } from "bluebird";
+import {IDeveloperTypeProvider } from "../core/IDeveloperTypeProvider";
 
 
 
@@ -15,6 +14,7 @@ export class PropertyController extends Controller {
     private PropertyProvider: IPropertyProvider;
     private PropertyAreaProvider: IPropertyAreaProvider;
     private DevelopmentTypeProvider: IDevelopmentTypeProvider;
+    private DeveloperTypeProvider: IDeveloperTypeProvider;
 
     public onRegister(): void {
         this.onGet("/properties", this.index, [Role.Admin, Role.Moderator]);
@@ -28,7 +28,6 @@ export class PropertyController extends Controller {
         const properties: IProperty[] = await this.PropertyProvider.getAll();
         res.bag.properties = properties;
         res.bag.flashMessage = req.flash('flashMessage');
-        // return res.send(properties);
         res.view('property/index');
     }
 
@@ -36,19 +35,12 @@ export class PropertyController extends Controller {
 
     public async createProperty(req: HttpRequest, res: HttpResponse, next: NextFunc) {
         res.bag.pageTitle = this.config.appTitle+" | Property Create";
-
         if(req.method === "GET"){
             res.bag.language = [{title: "English", value : "EN"},{title: "Arabic", value : "AR"}];
             res.bag.propertyType = [{title: "OFF PLAN", value : "OFF PLAN"},{title: "READY", value : "READY"}];
             res.bag.propertyArea = await this.PropertyAreaProvider.getAll();
             res.bag.developmentType = await this.DevelopmentTypeProvider.getAll();
-            
-           
-
-
-
-            res.bag.developerType = [{_id: "112345", name : "DP Type 1"},{_id: "112421", name : "DP Type 2"},{_id: "112499", name : "DP Type 3"}];
-           
+            res.bag.developerType = await this.DeveloperTypeProvider.getAll();
             return res.view('property/create');
         }
 

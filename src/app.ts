@@ -17,6 +17,7 @@ import { UserProvider } from "./providers/UserProvider";
 import { PropertyProvider } from "./providers/PropertyProvider";
 import { PropertyAreaProvider } from "./providers/PropertyAreaProvider";
 import { DevelopmentTypeProvider } from "./providers/DevelopmentTypeProvider";
+import { DeveloperTypeProvider } from "./providers/DeveloperTypeProvider";
 
 // Formatters
 import { dateFormatter } from "./ftms/date";
@@ -58,6 +59,7 @@ app.set("UserProvider", new UserProvider());
 app.set("PropertyProvider", new PropertyProvider());
 app.set("PropertyAreaProvider", new PropertyAreaProvider());
 app.set("DevelopmentTypeProvider", new DevelopmentTypeProvider());
+app.set("DeveloperTypeProvider", new DeveloperTypeProvider());
 
 
 
