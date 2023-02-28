@@ -31,7 +31,7 @@ export class PropertyApiController extends Controller {
         }
         const bag = { properties };
         this.response.data = bag;
-        return res.send(this.response);
+        return res.status(this.response.status).send(this.response)
     }
 
 
@@ -46,7 +46,7 @@ export class PropertyApiController extends Controller {
         }
         const bag = { property };
         this.response.data = bag;
-        return res.send(this.response);
+        return res.status(this.response.status).send(this.response)
     }
 
 
