@@ -3,7 +3,7 @@ block content
 
   .row.app-card.mb-2.align-items-center.justify-content-between.bg-white.p-2.m-0
     .col-auto
-      h1.app-page-title.mb-0 Basic Setup / Property Area
+      h1.app-page-title.mb-0 Basic Setup / Development Type
     .col-auto
       .page-utilities
         .row.g-2.justify-content-start.justify-content-md-end.align-items-center
@@ -24,9 +24,9 @@ block content
               option(value='option-4') 50
               option(value='option-4') 100
           .col-auto
-            a.btn.app-btn-primary(href='/basic-setup/property-area/create')
+            a.btn.app-btn-primary(href='/basic-setup/development-type/create')
               i.fa.fa-plus
-              | &nbsp;Create Property Area
+              | &nbsp;Create  Development Type
       
   div.row(style="margin: 0px 1px")
     -if(flashMessage.length>0)
@@ -41,51 +41,50 @@ block content
           thead
             tr
               th.cell SL#
-              th.cell Area Name
+              th.cell  Development Type Name
               th.cell.text-center Created At
               th.cell.text-center Created By
               th.cell.text-center Action
           tbody
             -var sl=1
-            each list in propertyAreaPage.data
+            each list in developmentTypePage.data
               tr
                 td.cell=sl++
-                td.cell=list.areaName
+                td.cell=list.name
                 td.cell.text-center
                   span=fmt.date.pretty(list.createdAt)+' '+fmt.date.Time12(list.createdAt)
                 td.cell.text-center=list.createdBy.fullName
                 td.cell.text-center
-                  a.btn.app-btn-info.btn-sm(href='/basic-setup/property-area/update/'+list._id) Update
-                  a.btn.app-btn-primary.btn-sm.ms-2(href='/basic-setup/property-area/details/'+list._id) View
-                  
+                  a.btn.app-btn-info.btn-sm(href='/basic-setup/development-type/update/'+list._id) Update
+                  a.btn.app-btn-primary.btn-sm.ms-2(href='/basic-setup/development-type/details/'+list._id) View             
   //- pagination
   nav.app-pagination
     ul.pagination.justify-content-center
       - var n = 1;
-      - var pages = Math.ceil(propertyAreaPage.count/propertyAreaPage.size)
-      if propertyAreaPage.page > 1
+      - var pages = Math.ceil(developmentTypePage.count/developmentTypePage.size)
+      if developmentTypePage.page > 1
         li.page-item
-          a.page-link(href="/basic-setup/property-area?page=" + (propertyAreaPage.page-1), tabindex='-1', aria-disabled='false') Previous
+          a.page-link(href="/basic-setup/development-type?page=" + (developmentTypePage.page-1), tabindex='-1', aria-disabled='false') Previous
       else
         li.page-item.disabled
-          a.page-link(href="/basic-setup/property-area?page=" + pages, tabindex='-1', aria-disabled='true') Previous
+          a.page-link(href="/basic-setup/development-type?page=" + pages, tabindex='-1', aria-disabled='true') Previous
 
       -var flag = 0;
       while n <= pages
-        if n == propertyAreaPage.page
-          li.page-item.active #[a.page-link(href="/basic-setup/property-area?page=" + n) #{n}]
-        else if n < 5 || n == propertyAreaPage.page - 1 || n == propertyAreaPage.page + 1 || n > pages - 1
-          li.page-item #[a.page-link(href="/basic-setup/property-area?page=" + n) #{n}]
+        if n == developmentTypePage.page
+          li.page-item.active #[a.page-link(href="/basic-setup/development-type?page=" + n) #{n}]
+        else if n < 5 || n == developmentTypePage.page - 1 || n == developmentTypePage.page + 1 || n > pages - 1
+          li.page-item #[a.page-link(href="/basic-setup/development-type?page=" + n) #{n}]
         //- else
         //-   if flag == 0
         //-     li.page-item.disabled #[a.page-link(href="") - ]
         //-   -flag=1;
         else
-          li.page-item #[a.page-link(href="/basic-setup/property-area?page=" + n) #{n}]
+          li.page-item #[a.page-link(href="/basic-setup/development-type?page=" + n) #{n}]
         - n++
-      if propertyAreaPage.page < pages
+      if developmentTypePage.page < pages
         li.page-item
-          a.page-link(href=href="/basic-setup/property-area?page=" + (propertyAreaPage.page+1)) Next
+          a.page-link(href=href="/basic-setup/development-type?page=" + (developmentTypePage.page+1)) Next
       else
         li.page-item.disabled
-          a.page-link(href="/basic-setup/property-area?page=1") Next
+          a.page-link(href="/basic-setup/development-type?page=1") Next

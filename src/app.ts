@@ -16,6 +16,7 @@ import { SMTPMailer } from "./providers/SMTPMailer";
 import { UserProvider } from "./providers/UserProvider";
 import { PropertyProvider } from "./providers/PropertyProvider";
 import { PropertyAreaProvider } from "./providers/PropertyAreaProvider";
+import { DevelopmentTypeProvider } from "./providers/DevelopmentTypeProvider";
 
 // Formatters
 import { dateFormatter } from "./ftms/date";
@@ -56,8 +57,7 @@ app.setStatic(path.join(__dirname, "public"), { maxAge: 0 }); // 31557600000 tur
 app.set("UserProvider", new UserProvider());
 app.set("PropertyProvider", new PropertyProvider());
 app.set("PropertyAreaProvider", new PropertyAreaProvider());
-
-
+app.set("DevelopmentTypeProvider", new DevelopmentTypeProvider());
 
 
 

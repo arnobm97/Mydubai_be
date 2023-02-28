@@ -4,7 +4,7 @@ block content
 
   .row.app-card.mb-2.align-items-center.justify-content-between.bg-white.p-2.m-0
     .col-auto
-      h1.app-page-title.mb-0 Basic Setup / Property Area / Create
+      h1.app-page-title.mb-0 Basic Setup / Development Type / Create
     .col-auto
       .page-utilities
         .row.g-2.justify-content-start.justify-content-md-end.align-items-center
@@ -13,7 +13,7 @@ block content
               i.fa.fa-refresh
               | &nbsp;Reset Page
           .col-auto
-            a.btn.app-btn-danger(href='/basic-setup/property-area')
+            a.btn.app-btn-danger(href='/basic-setup/development-type')
               i.fa.fa-chevron-left
               | &nbsp;Return
   
@@ -25,8 +25,8 @@ block content
         div.app-card-body
           form(action="" method="POST")
             div.mb-3
-              label.form-label(for='areaName') Area Name
-              input#areaName.form-control(type='text' name="areaName" required )
+              label.form-label(for='name') Development Type Name
+              input#name.form-control(type='text' name="name" required )
            
             button.btn.app-btn-primary(type='submit') Create Property Area
   
