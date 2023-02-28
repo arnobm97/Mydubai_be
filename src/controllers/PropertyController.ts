@@ -25,7 +25,7 @@ export class PropertyController extends Controller {
 
     public async index(req: HttpRequest, res: HttpResponse, next: NextFunc) {
         res.bag.pageTitle = this.config.appTitle+" | Properties";
-        const properties: IProperty[] = await this.PropertyProvider.getAll();
+        const properties: IProperty[] = await this.PropertyProvider.getAll(IPropertyLang.EN);
         res.bag.properties = properties;
         res.bag.flashMessage = req.flash('flashMessage');
         res.view('property/index');
@@ -36,7 +36,7 @@ export class PropertyController extends Controller {
     public async createProperty(req: HttpRequest, res: HttpResponse, next: NextFunc) {
         res.bag.pageTitle = this.config.appTitle+" | Property Create";
         if(req.method === "GET"){
-            res.bag.language = [{title: "English", value : "EN"},{title: "Arabic", value : "AR"}];
+            res.bag.language = [{title: "English", value : "en"},{title: "Arabic", value : "ar"}];
             res.bag.propertyType = [{title: "OFF PLAN", value : "OFF PLAN"},{title: "READY", value : "READY"}];
             res.bag.propertyArea = await this.PropertyAreaProvider.getAll();
             res.bag.developmentType = await this.DevelopmentTypeProvider.getAll();

@@ -30,6 +30,9 @@ import { BasicSetupController } from "./controllers/BasicSetupController";
 import { UserController } from "./controllers/UserController";
 import { PropertyController } from "./controllers/PropertyController";
 
+//api
+import { PropertyApiController } from "./controllers/api/PropertyApiController";
+
 
 
 // config
@@ -89,6 +92,10 @@ app.registerController(DashboardController);
 app.registerController(BasicSetupController);
 app.registerController(UserController);
 app.registerController(PropertyController);
+
+//api
+app.registerController(PropertyApiController);
+
 
 
 

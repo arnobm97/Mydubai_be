@@ -7,8 +7,8 @@ export enum IPropertyType {
     READY = "READY"
 }
 export enum IPropertyLang {
-    EN = "EN",
-    AR = "AR"
+    EN = "en",
+    AR = "ar"
 }
 export interface IPropertyArea {
     id: string;
@@ -93,7 +93,8 @@ export interface IPropertyPage {
 
 export interface IPropertyProvider {
 
-    getAll(): Promise<IProperty[]>;
+    get(propertyNo: number, lang: IPropertyLang): Promise<IProperty>;
+    getAll(lang: IPropertyLang): Promise<IProperty[]>;
     create(property: IProperty): Promise<IProperty>;
 
 }
