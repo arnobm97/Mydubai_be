@@ -16,7 +16,9 @@ block content
             a.btn.app-btn-danger(href='/basic-setup/development-type')
               i.fa.fa-chevron-left
               | &nbsp;Return
-  
+
+
+
   div.row
     div.col-12.col-md-12
       div.app-card.app-card-settings.shadow-sm.p-4
@@ -24,9 +26,17 @@ block content
           div.alert.alert-danger(role='alert')=errorMessage
         div.app-card-body
           form(action="" method="POST")
-            div.mb-3
-              label.form-label(for='name') Development Type Name
-              input#name.form-control(type='text' name="name" required )
-           
+            div.row
+              div.col-12.col-md-6.mb-2
+                label.form-label(for='lang') Language
+                select.form-control(name="lang" required )
+                  option(value="", disabled="", selected="") Choose Language
+                  each lang in language
+                    option(value=lang.value) #{lang.title}
+              div.col-12.col-md-6.mb-2
+                label.form-label(for='name') Development Type Name
+                input#name.form-control(type='text' name="name" required )
+            //- submit button
+            hr
             button.btn.app-btn-primary(type='submit') Create Development Type
   

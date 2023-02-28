@@ -4,6 +4,7 @@ import { IPropertyArea } from "../core/IPropertyAreaProvider";
 
 const PropertyAreaSchema: Schema = new Schema({
     areaName:{ type: String, required: true },
+    lang:{ type: String, required: true },
     createdBy: {
       id: { type: String, required: true },
       fullName: { type: String, required: true },

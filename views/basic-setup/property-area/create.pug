@@ -24,9 +24,17 @@ block content
           div.alert.alert-danger(role='alert')=errorMessage
         div.app-card-body
           form(action="" method="POST")
-            div.mb-3
-              label.form-label(for='areaName') Area Name
-              input#areaName.form-control(type='text' name="areaName" required )
-           
+            div.row
+              div.col-12.col-md-6.mb-2
+                label.form-label(for='lang') Language
+                select.form-control(name="lang" required )
+                  option(value="", disabled="", selected="") Choose Language
+                  each lang in language
+                    option(value=lang.value) #{lang.title}
+              div.col-12.col-md-6.mb-2
+                label.form-label(for='areaName') Area Name
+                input#areaName.form-control(type='text' name="areaName" required )
+            //- submit button
+            hr
             button.btn.app-btn-primary(type='submit') Create Property Area
   

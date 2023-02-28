@@ -15,14 +15,14 @@ block content
                 button.btn.app-btn-secondary(type='submit') Search
           
           .col-auto
-            select.form-select.w-auto
-              option(selected='', value='option-1') Page Size
-              option(value='option-2') 10
-              option(value='option-3') 20
-              option(value='option-4') 30
-              option(value='option-4') 40
-              option(value='option-4') 50
-              option(value='option-4') 100
+            form.lang-filter
+              select.form-select.w-auto(name="lang" onchange="$('form.lang-filter').submit()")
+                option(value="") Language
+                each lang in language
+                  -if(currentLang === lang.value)
+                    option(value=lang.value selected="") #{lang.title}
+                  -else
+                    option(value=lang.value ) #{lang.title}
           .col-auto
             a.btn.app-btn-primary(href='/basic-setup/developer-type/create')
               i.fa.fa-plus
@@ -42,6 +42,7 @@ block content
             tr
               th.cell SL#
               th.cell  Developer Type Name
+              th.cell Language
               th.cell.text-center Created At
               th.cell.text-center Created By
               th.cell.text-center Action
@@ -51,6 +52,7 @@ block content
               tr
                 td.cell=sl++
                 td.cell=list.name
+                td.cell=list.lang
                 td.cell.text-center
                   span=fmt.date.pretty(list.createdAt)+' '+fmt.date.Time12(list.createdAt)
                 td.cell.text-center=list.createdBy.fullName

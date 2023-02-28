@@ -4,6 +4,7 @@ import { IDevelopmentType } from "../core/IDevelopmentTypeProvider";
 
 const DevelopmentTypeSchema: Schema = new Schema({
     name:{ type: String, required: true },
+    lang:{ type: String, required: true },
     createdBy: {
       id: { type: String, required: true },
       fullName: { type: String, required: true },
