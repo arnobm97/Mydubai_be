@@ -135,17 +135,21 @@ export class Application {
             resp.bag.fmt[key] = this.formatters.Item(key);
         }
         resp.bag.loggedUser = req.user;
-        if(req.cookies.AppLanguage === 'bn'){
-            resp.bag.lang = this.lang.bn;
-            resp.bag.switchLangBtn = {text: "English", url: "/en" };
+        const languageList = this.lang.languageList;
+        if(req.params.lang){
+            let flag = 0;
+            for(const item of languageList){
+                if(item.value === req.params.lang){
+                    resp.bag.lang = this.lang[req.params.lang];
+                    flag = 1;
+                    break;
+                }
+            }
+            if(flag === 0){
+                resp.bag.lang = this.lang.en;
+            }
         }
-        else if(req.cookies.AppLanguage === 'en'){
-            resp.bag.lang = this.lang.en;
-            resp.bag.switchLangBtn = {text: "বাংলা", url: "/bn" };
-        }else{
-            resp.bag.lang = this.lang.en;
-            resp.bag.switchLangBtn = {text: "বাংলা", url: "/bn" };
-        }
+        resp.bag.langList = this.lang.languageList;
     }
 
     /**

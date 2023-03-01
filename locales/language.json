@@ -1,59 +1,30 @@
 {
+    "languageList": [
+        {"title": "English", "value" : "en"},
+        {"title": "Arabic", "value" : "ar"}
+    ],
+
     "en": {
         "navber": {
-            "dashboard": "Dashboard",
-            "tripManagement": "Trip Management",
-            "vehicleManagement": "Vehicle",
-            "driverManagement": "Driver",
-            "report": "Report",
-            "userManagement": "Users",
-            "account": "Account"
+            "menu": "Menu"
         },
         "common": {
             "button": {
-                "edit": "EDIT",
-                "delete": "DELETE",
-                "update": "UPDATE",
-                "return": "RETURN",
-                "cancel": "CANCEL",
-                "deleteAnyway": "Delete Anyway"
-            },
-            "table": {
-                "action": "Action"
-            },
-            "link": {
-                "details": "Details",
-                "edit": "Edit"
+                "ok": "Ok",
+                "submit": "Submit"
             }
         }
+
     },
 
-
-    "bn": {
+    "ar": {
         "navber": {
-            "dashboard": "ড্যাশবোর্ড",
-            "tripManagement": "ট্রিপ ম্যানেজমেন্ট",
-            "vehicleManagement": "ভেহিকল",
-            "driverManagement": "ড্রাইভার",
-            "report": "রিপোর্ট",
-            "userManagement": "ইউসার",
-            "account": "অ্যাকাউন্ট"
+            "menu": "قائمة طعام"
         },
         "common": {
             "button": {
-                "edit": "সম্পাদনা করুন",
-                "delete": "মুছে ফেলুন",
-                "update": "হালনাগাদ করুন",
-                "return": "ফিরে আসুন",
-                "cancel": "বাতিল করুন",
-                "deleteAnyway": "যাইহোক মুছুন"
-            },
-            "table": {
-                "action": "অ্যাকশন"
-            },
-            "link": {
-                "details": "বিস্তারিত",
-                "edit": "সম্পাদনা করুন"
+                "ok": "نعم",
+                "submit": "يُقدِّم"
             }
         }
         

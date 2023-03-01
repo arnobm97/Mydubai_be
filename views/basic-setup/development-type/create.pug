@@ -31,7 +31,7 @@ block content
                 label.form-label(for='lang') Language
                 select.form-control(name="lang" required )
                   option(value="", disabled="", selected="") Choose Language
-                  each lang in language
+                  each lang in langList
                     option(value=lang.value) #{lang.title}
               div.col-12.col-md-6.mb-2
                 label.form-label(for='name') Development Type Name

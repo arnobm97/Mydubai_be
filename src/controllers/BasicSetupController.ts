@@ -20,7 +20,7 @@ export class BasicSetupController extends Controller {
         this.onGet("/basic-setup/index", this.index, [Role.Admin, Role.Moderator]);
         this.onGet("/basic-setup/property-type", this.propertyType, [Role.Admin, Role.Moderator]);
         this.onGet("/basic-setup/property-type/create", this.createPropertyType, [Role.Admin, Role.Moderator]);
-        
+
         this.onPost("/basic-setup/property-type/create", this.createPropertyType, [Role.Admin, Role.Moderator]);
         this.onGet("/basic-setup/property-area", this.propertyArea, [Role.Admin, Role.Moderator]);
         this.onGet("/basic-setup/property-area/create", this.createPropertyArea, [Role.Admin, Role.Moderator]);
@@ -42,17 +42,16 @@ export class BasicSetupController extends Controller {
 
     public async propertyType(req: HttpRequest, res: HttpResponse, next: NextFunc) {
         res.bag.pageTitle = this.config.appTitle+" | Property Type"
-        res.bag.language = [{title: "English", value : "en"},{title: "Arabic", value : "ar"}];
-        const lang: any = req.query.lang;
+        const queryLanguage: any = req.query.lang;
         const p: any = req.query.page;
         const s: any = req.query.size;
         let page: number = parseInt(p, 10);
         if (!page || page < 0) page = 1;
         let size: number = parseInt(s, 10);
         if (!size || size < 1) size = 15;
-        const propertyTypePage: IPropertyTypePage  = await this.PropertyTypeProvider.list(page, size, lang);
+        const propertyTypePage: IPropertyTypePage  = await this.PropertyTypeProvider.list(page, size, queryLanguage);
         res.bag.propertyTypePage = propertyTypePage;
-        res.bag.currentLang = lang;
+        res.bag.currentLang = queryLanguage;
         res.bag.flashMessage = req.flash('flashMessage');
         res.view('basic-setup/property-type/index');
     }
@@ -60,7 +59,6 @@ export class BasicSetupController extends Controller {
 
     public async createPropertyType(req: HttpRequest, res: HttpResponse, next: NextFunc) {
         res.bag.pageTitle = this.config.appTitle+" | Create Property Type";
-        res.bag.language = [{title: "English", value : "en"},{title: "Arabic", value : "ar"}];
         if(req.method === "GET"){
             res.view('basic-setup/property-type/create');
         }else if(req.method === "POST"){
@@ -87,17 +85,16 @@ export class BasicSetupController extends Controller {
 
     public async propertyArea(req: HttpRequest, res: HttpResponse, next: NextFunc) {
         res.bag.pageTitle = this.config.appTitle+" | Property Area";
-        res.bag.language = [{title: "English", value : "en"},{title: "Arabic", value : "ar"}];
-        const lang: any = req.query.lang;
+        const queryLanguage: any = req.query.lang;
         const p: any = req.query.page;
         const s: any = req.query.size;
         let page: number = parseInt(p, 10);
         if (!page || page < 0) page = 1;
         let size: number = parseInt(s, 10);
         if (!size || size < 1) size = 15;
-        const propertyAreaPage: IPropertyAreaPage  = await this.PropertyAreaProvider.list(page, size, lang);
+        const propertyAreaPage: IPropertyAreaPage  = await this.PropertyAreaProvider.list(page, size, queryLanguage);
         res.bag.propertyAreaPage = propertyAreaPage;
-        res.bag.currentLang = lang;
+        res.bag.currentLang = queryLanguage;
         res.bag.flashMessage = req.flash('flashMessage');
         res.view('basic-setup/property-area/index');
     }
@@ -105,7 +102,6 @@ export class BasicSetupController extends Controller {
 
     public async createPropertyArea(req: HttpRequest, res: HttpResponse, next: NextFunc) {
         res.bag.pageTitle = this.config.appTitle+" | Create Property Area";
-        res.bag.language = [{title: "English", value : "en"},{title: "Arabic", value : "ar"}];
         if(req.method === "GET"){
             res.view('basic-setup/property-area/create');
         }else if(req.method === "POST"){
@@ -135,17 +131,16 @@ export class BasicSetupController extends Controller {
 
     public async developmentType(req: HttpRequest, res: HttpResponse, next: NextFunc) {
         res.bag.pageTitle = this.config.appTitle+" | Development Type"
-        res.bag.language = [{title: "English", value : "en"},{title: "Arabic", value : "ar"}];
-        const lang: any = req.query.lang;
+        const queryLanguage: any = req.query.lang;
         const p: any = req.query.page;
         const s: any = req.query.size;
         let page: number = parseInt(p, 10);
         if (!page || page < 0) page = 1;
         let size: number = parseInt(s, 10);
         if (!size || size < 1) size = 15;
-        const developmentTypePage: IDevelopmentTypePage  = await this.DevelopmentTypeProvider.list(page, size, lang);
+        const developmentTypePage: IDevelopmentTypePage  = await this.DevelopmentTypeProvider.list(page, size, queryLanguage);
         res.bag.developmentTypePage = developmentTypePage;
-        res.bag.currentLang = lang;
+        res.bag.currentLang = queryLanguage;
         res.bag.flashMessage = req.flash('flashMessage');
         res.view('basic-setup/development-type/index');
     }
@@ -153,7 +148,6 @@ export class BasicSetupController extends Controller {
 
     public async createDevelopmentType(req: HttpRequest, res: HttpResponse, next: NextFunc) {
         res.bag.pageTitle = this.config.appTitle+" | Create Development Type";
-        res.bag.language = [{title: "English", value : "en"},{title: "Arabic", value : "ar"}];
         if(req.method === "GET"){
             res.view('basic-setup/development-type/create');
         }else if(req.method === "POST"){
@@ -181,17 +175,16 @@ export class BasicSetupController extends Controller {
 
     public async developerType(req: HttpRequest, res: HttpResponse, next: NextFunc) {
         res.bag.pageTitle = this.config.appTitle+" | Developer Type";
-        res.bag.language = [{title: "English", value : "en"},{title: "Arabic", value : "ar"}];
-        const lang: any = req.query.lang;
+        const queryLanguage: any = req.query.lang;
         const p: any = req.query.page;
         const s: any = req.query.size;
         let page: number = parseInt(p, 10);
         if (!page || page < 0) page = 1;
         let size: number = parseInt(s, 10);
         if (!size || size < 1) size = 10;
-        const developerTypePage: IDeveloperTypePage  = await this.DeveloperTypeProvider.list(page, size, lang);
+        const developerTypePage: IDeveloperTypePage  = await this.DeveloperTypeProvider.list(page, size, queryLanguage);
         res.bag.developerTypePage = developerTypePage;
-        res.bag.currentLang = lang;
+        res.bag.currentLang = queryLanguage;
         res.bag.flashMessage = req.flash('flashMessage');
         res.view('basic-setup/developer-type/index');
     }
@@ -201,7 +194,6 @@ export class BasicSetupController extends Controller {
 
     public async createDeveloperType(req: HttpRequest, res: HttpResponse, next: NextFunc) {
         res.bag.pageTitle = this.config.appTitle+" | Create Developer Type";
-        res.bag.language = [{title: "English", value : "en"},{title: "Arabic", value : "ar"}];
 
         if(req.method === "GET"){
             res.view('basic-setup/developer-type/create');

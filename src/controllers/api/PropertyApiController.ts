@@ -44,9 +44,9 @@ export class PropertyApiController extends Controller {
         }else{
             this.response.message = "Property found.";
         }
-        const bag = { property };
+        const bag = { property: property, lang: res.bag.lang, langList: res.bag.langList };
         this.response.data = bag;
-        return res.status(this.response.status).send(this.response)
+        return res.status(this.response.status).send(this.response);
     }
 
 

@@ -30,7 +30,7 @@ block content
                 label.form-label(for='lang') Language
                 select.form-control(name="lang" required )
                   option(value="", disabled="", selected="") Choose Language
-                  each lang in language
+                  each lang in langList
                     option(value=lang.value) #{lang.title}
               div.col-12.col-md-4.mb-2
                 label.form-label(for='propertyName') Property Name
@@ -40,7 +40,7 @@ block content
                 select.form-control(name="propertyType" required )
                   option(value="", disabled="", selected="") Choose Property Type
                   each pType in propertyType
-                    option(value=pType.value) #{pType.title}
+                    option(value=pType.id) #{pType.name}
             div.row
               div.col-12.col-md-4.mb-2
                 label.form-label(for='propertyDescription') Property Description

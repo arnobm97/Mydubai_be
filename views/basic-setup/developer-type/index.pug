@@ -11,7 +11,7 @@ block content
             form.lang-filter
               select.form-select.w-auto(name="lang" onchange="$('form.lang-filter').submit()")
                 option(value="") Language
-                each lang in language
+                each lang in langList
                   -if(currentLang === lang.value)
                     option(value=lang.value selected="") #{lang.title}
                   -else

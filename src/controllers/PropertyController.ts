@@ -1,7 +1,8 @@
 import { Controller } from "../core/Controller";
 import { NextFunc, HttpRequest, HttpResponse } from "../core/Types";
 import { Role } from "../core/IUserProvider";
-import { IPropertyProvider, IProperty, IPropertyLang, IPropertyType } from "../core/IPropertyProvider";
+import { IPropertyProvider, IProperty, IPropertyLang } from "../core/IPropertyProvider";
+import {IPropertyTypeProvider, IPropertyType, EmbededPropertyType } from "../core/IPropertyTypeProvider";
 import {IPropertyAreaProvider, EmbededPropertyArea, IPropertyArea } from "../core/IPropertyAreaProvider";
 import {IDevelopmentTypeProvider, EmbededDevelopmentType, IDevelopmentType } from "../core/IDevelopmentTypeProvider";
 import {IDeveloperTypeProvider, EmbededDeveloperType, IDeveloperType } from "../core/IDeveloperTypeProvider";
@@ -12,6 +13,7 @@ export class PropertyController extends Controller {
 
     private config = require("../../config.json");
     private PropertyProvider: IPropertyProvider;
+    private PropertyTypeProvider: IPropertyTypeProvider;
     private PropertyAreaProvider: IPropertyAreaProvider;
     private DevelopmentTypeProvider: IDevelopmentTypeProvider;
     private DeveloperTypeProvider: IDeveloperTypeProvider;
@@ -35,17 +37,13 @@ export class PropertyController extends Controller {
 
     public async createProperty(req: HttpRequest, res: HttpResponse, next: NextFunc) {
         res.bag.pageTitle = this.config.appTitle+" | Property Create";
-        const language: any = req.query.language;
-
+        const queryLanguage: any = req.query.language;
 
         if(req.method === "GET"){
-            res.bag.language = [{title: "English", value : "en"},{title: "Arabic", value : "ar"}];
-            res.bag.propertyType = [{title: "Villa", value : "Villa"},{title: "Apartment", value : "Apartment"}, {title: "FLAT", value : "FLAT"} ];
-
-            res.bag.propertyArea = await this.PropertyAreaProvider.getAll(language);
-            res.bag.developmentType = await this.DevelopmentTypeProvider.getAll(language);
-            res.bag.developerType = await this.DeveloperTypeProvider.getAll(language);
-
+            res.bag.propertyType = await this.PropertyTypeProvider.getAll(queryLanguage);
+            res.bag.propertyArea = await this.PropertyAreaProvider.getAll(queryLanguage);
+            res.bag.developmentType = await this.DevelopmentTypeProvider.getAll(queryLanguage);
+            res.bag.developerType = await this.DeveloperTypeProvider.getAll(queryLanguage);
             return res.view('property/create');
         }
 
