@@ -5,11 +5,13 @@ import PropertyModel from "../models/PropertyModel";
 
 export class PropertyProvider implements IPropertyProvider {
 
-
+    public async count(): Promise<number> {
+        return await PropertyModel.find({ "lang": 'en' }).countDocuments();
+    }
 
     public async lastPropertyNo(): Promise<number> {
         const lastEntry =  await PropertyModel.find().sort({propertyNo:-1}).limit(1).catch(err => null);
-        if(lastEntry.length == 1){
+        if(lastEntry.length === 1){
             return lastEntry[0].propertyNo;
         }else{
             return 0;

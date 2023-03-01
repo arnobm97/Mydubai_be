@@ -22,6 +22,7 @@ export interface IPropertyAreaPage {
 
 
 export interface IPropertyAreaProvider {
+    count(): Promise<number>;
     get(id: string): Promise<IPropertyArea>;
     getAll(lang?: string): Promise<IPropertyArea[]>;
     list(page:number, size:number, lang?: string): Promise<IPropertyAreaPage>;

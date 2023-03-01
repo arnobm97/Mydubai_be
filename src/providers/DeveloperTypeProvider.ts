@@ -7,6 +7,10 @@ import DeveloperTypeModel from "../models/DeveloperTypeModel";
 
 export class DeveloperTypeProvider implements IDeveloperTypeProvider {
 
+    public async count(): Promise<number> {
+        return await DeveloperTypeModel.find({ "lang": 'en' }).countDocuments();
+    }
+
     public async get(id: string): Promise<IDeveloperType> {
         return await DeveloperTypeModel.findOne({ "_id": id }).catch(err => null);
     }

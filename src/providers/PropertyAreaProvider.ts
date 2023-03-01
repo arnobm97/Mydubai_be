@@ -7,6 +7,10 @@ import PropertyAreaModel from "../models/PropertyAreaModel";
 
 export class PropertyAreaProvider implements IPropertyAreaProvider {
 
+    public async count(): Promise<number> {
+        return await PropertyAreaModel.find({ "lang": 'en' }).countDocuments();
+    }
+
     public async get(id: string): Promise<IPropertyArea> {
         return await PropertyAreaModel.findOne({ "_id": id }).catch(err => null);
     }

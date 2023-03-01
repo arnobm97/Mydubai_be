@@ -139,7 +139,7 @@ var barChartConfig = {
 	data: {
 		labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
 		datasets: [{
-			label: 'Orders',
+			label: 'Site Engagement',
 			backgroundColor: window.chartColors.green,
 			borderColor: window.chartColors.green,
 			borderWidth: 1,
@@ -165,7 +165,7 @@ var barChartConfig = {
 		},
 		title: {
 			display: true,
-			text: 'Chart.js Bar Chart Example'
+			text: 'User Engagement Statistics'
 		},
 		tooltips: {
 			mode: 'index',

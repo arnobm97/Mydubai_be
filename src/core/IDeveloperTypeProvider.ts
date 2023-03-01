@@ -21,6 +21,7 @@ export interface IDeveloperTypePage {
 }
 
 export interface IDeveloperTypeProvider {
+    count(): Promise<number>;
     get(id: string): Promise<IDeveloperType>;
     getAll(lang?: string): Promise<IDeveloperType[]>;
     list(page:number, size:number, lang?: string): Promise<IDeveloperTypePage>;
