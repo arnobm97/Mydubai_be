@@ -1,5 +1,4 @@
 import { EmbededUser } from "./IUserProvider"
-import { IPropertyLang } from "./IPropertyProvider"
 import { Document } from "mongoose";
 
 
@@ -10,7 +9,7 @@ export interface EmbededPropertyArea {
 
 export interface IPropertyArea extends Document{
     areaName: string;
-    lang: IPropertyLang;
+    lang: string;
     createdBy: EmbededUser;
 }
 
@@ -24,7 +23,7 @@ export interface IPropertyAreaPage {
 
 export interface IPropertyAreaProvider {
     get(id: string): Promise<IPropertyArea>;
-    getAll(lang?: IPropertyLang): Promise<IPropertyArea[]>;
-    list(page:number, size:number, lang?: IPropertyLang): Promise<IPropertyAreaPage>;
-    create(areaName: string, lang: IPropertyLang, createdBy: EmbededUser): Promise<IPropertyArea>;
+    getAll(lang?: string): Promise<IPropertyArea[]>;
+    list(page:number, size:number, lang?: string): Promise<IPropertyAreaPage>;
+    create(areaName: string, lang: string, createdBy: EmbededUser): Promise<IPropertyArea>;
 }

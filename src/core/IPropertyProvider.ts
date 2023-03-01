@@ -1,27 +1,12 @@
-import { EmbededUser } from "./IUserProvider"
+import { EmbededUser } from "./IUserProvider";
+import {EmbededPropertyType } from "../core/IPropertyTypeProvider";
+import {EmbededPropertyArea } from "../core/IPropertyAreaProvider";
+import {EmbededDevelopmentType } from "../core/IDevelopmentTypeProvider";
+import {EmbededDeveloperType } from "../core/IDeveloperTypeProvider";
 import { Document } from "mongoose";
 
 
-export enum IPropertyType {
-    OFFPLAN = "OFF PLAN",
-    READY = "READY"
-}
-export enum IPropertyLang {
-    EN = "en",
-    AR = "ar"
-}
-export interface IPropertyArea {
-    id: string;
-    areaName: string;
-}
-export interface IDevelopmentType {
-    id: string;
-    name: string;
-}
-export interface IDeveloperType {
-    id: string;
-    name: string;
-}
+
 export interface IPropertyAmenities {
     description: string;
     features: string[];
@@ -60,13 +45,13 @@ export interface IUnitType {
 
 export interface IProperty extends Document{
     propertyNo: number;
-    lang: IPropertyLang;
+    lang: string;
     propertyName: string;
-    propertyType: IPropertyType;
     propertyDescription: string;
-    propertyArea: IPropertyArea;
-    developmentType: IDevelopmentType;
-    developerType: IDeveloperType;
+    propertyType: EmbededPropertyType;
+    propertyArea: EmbededPropertyArea;
+    developmentType: EmbededDevelopmentType;
+    developerType: EmbededDeveloperType;
     areaSize: string;
     highlights: string[];
     amenities: IPropertyAmenities;  // html string
@@ -89,12 +74,10 @@ export interface IPropertyPage {
 }
 
 
-
-
 export interface IPropertyProvider {
 
-    get(propertyNo: number, lang: IPropertyLang): Promise<IProperty>;
-    getAll(lang: IPropertyLang): Promise<IProperty[]>;
+    get(propertyNo: number, lang: string): Promise<IProperty>;
+    getAll(lang: string): Promise<IProperty[]>;
     create(property: IProperty): Promise<IProperty>;
 
 }

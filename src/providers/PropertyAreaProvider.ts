@@ -1,7 +1,6 @@
 
 import { IPropertyAreaProvider, IPropertyArea, IPropertyAreaPage } from "../core/IPropertyAreaProvider";
 import { EmbededUser } from "../core/IUserProvider";
-import { IPropertyLang } from "../core/IPropertyProvider";
 import PropertyAreaModel from "../models/PropertyAreaModel";
 
 
@@ -12,7 +11,7 @@ export class PropertyAreaProvider implements IPropertyAreaProvider {
         return await PropertyAreaModel.findOne({ "_id": id }).catch(err => null);
     }
 
-    public async getAll(lang?: IPropertyLang): Promise<IPropertyArea[]> {
+    public async getAll(lang?: string): Promise<IPropertyArea[]> {
         if(lang){
             return await PropertyAreaModel.find({ "lang": lang }).catch(err => null);
         }else{
@@ -22,7 +21,7 @@ export class PropertyAreaProvider implements IPropertyAreaProvider {
 
 
 
-    public async list(page:number = 1, size:number = 10, lang?: IPropertyLang): Promise<IPropertyAreaPage> {
+    public async list(page:number = 1, size:number = 10, lang?: string): Promise<IPropertyAreaPage> {
         let filter: any = {}
         if(lang) {
             filter = {...filter, lang};
@@ -42,7 +41,7 @@ export class PropertyAreaProvider implements IPropertyAreaProvider {
 
 
 
-    public async create(areaName: string, lang: IPropertyLang, createdBy: EmbededUser): Promise<IPropertyArea> {
+    public async create(areaName: string, lang: string, createdBy: EmbededUser): Promise<IPropertyArea> {
         return await PropertyAreaModel.create({
             areaName,
             lang,

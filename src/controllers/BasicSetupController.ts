@@ -20,7 +20,6 @@ export class BasicSetupController extends Controller {
         this.onGet("/basic-setup/index", this.index, [Role.Admin, Role.Moderator]);
         this.onGet("/basic-setup/property-type", this.propertyType, [Role.Admin, Role.Moderator]);
         this.onGet("/basic-setup/property-type/create", this.createPropertyType, [Role.Admin, Role.Moderator]);
-
         this.onPost("/basic-setup/property-type/create", this.createPropertyType, [Role.Admin, Role.Moderator]);
         this.onGet("/basic-setup/property-area", this.propertyArea, [Role.Admin, Role.Moderator]);
         this.onGet("/basic-setup/property-area/create", this.createPropertyArea, [Role.Admin, Role.Moderator]);

@@ -2,7 +2,6 @@
 import { IPropertyTypeProvider, IPropertyType, IPropertyTypePage } from "../core/IPropertyTypeProvider";
 import { EmbededUser } from "../core/IUserProvider";
 import PropertyTypeModel from "../models/PropertyTypeModel";
-import { IPropertyLang } from "../core/IPropertyProvider";
 
 
 
@@ -12,7 +11,7 @@ export class PropertyTypeProvider implements IPropertyTypeProvider {
         return await PropertyTypeModel.findOne({ "_id": id }).catch(err => null);
     }
 
-    public async getAll(lang?: IPropertyLang): Promise<IPropertyType[]> {
+    public async getAll(lang?: string): Promise<IPropertyType[]> {
         if(lang){
             return await PropertyTypeModel.find({ "lang": lang }).catch(err => null);
         }else{
@@ -20,7 +19,7 @@ export class PropertyTypeProvider implements IPropertyTypeProvider {
         }
     }
 
-    public async list(page:number = 1, size:number = 10, lang?: IPropertyLang): Promise<IPropertyTypePage> {
+    public async list(page:number = 1, size:number = 10, lang?: string): Promise<IPropertyTypePage> {
         let filter: any = {}
         if(lang) {
             filter = {...filter, lang};
@@ -39,7 +38,7 @@ export class PropertyTypeProvider implements IPropertyTypeProvider {
     }
 
 
-    public async create(name: string, lang: IPropertyLang, createdBy: EmbededUser): Promise<IPropertyType> {
+    public async create(name: string, lang: string, createdBy: EmbededUser): Promise<IPropertyType> {
         return await PropertyTypeModel.create({
             name,
             lang,

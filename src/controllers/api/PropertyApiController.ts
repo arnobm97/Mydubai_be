@@ -1,6 +1,6 @@
 import { Controller } from "../../core/Controller";
 import { NextFunc, HttpRequest, HttpResponse } from "../../core/Types";
-import { IPropertyProvider, IProperty, IPropertyLang, IPropertyType } from "../../core/IPropertyProvider";
+import { IPropertyProvider, IProperty } from "../../core/IPropertyProvider";
 import {IPropertyAreaProvider, EmbededPropertyArea, IPropertyArea } from "../../core/IPropertyAreaProvider";
 import {IDevelopmentTypeProvider, EmbededDevelopmentType, IDevelopmentType } from "../../core/IDevelopmentTypeProvider";
 import {IDeveloperTypeProvider, EmbededDeveloperType, IDeveloperType } from "../../core/IDeveloperTypeProvider";
@@ -44,7 +44,7 @@ export class PropertyApiController extends Controller {
         }else{
             this.response.message = "Property found.";
         }
-        const bag = { property: property, lang: res.bag.lang, langList: res.bag.langList };
+        const bag = { property, lang: res.bag.lang, langList: res.bag.langList };
         this.response.data = bag;
         return res.status(this.response.status).send(this.response);
     }

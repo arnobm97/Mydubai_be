@@ -2,7 +2,6 @@
 import { IDeveloperTypeProvider, IDeveloperType, IDeveloperTypePage } from "../core/IDeveloperTypeProvider";
 import { EmbededUser } from "../core/IUserProvider";
 import DeveloperTypeModel from "../models/DeveloperTypeModel";
-import { IPropertyLang } from "../core/IPropertyProvider";
 
 
 
@@ -12,7 +11,7 @@ export class DeveloperTypeProvider implements IDeveloperTypeProvider {
         return await DeveloperTypeModel.findOne({ "_id": id }).catch(err => null);
     }
 
-    public async getAll(lang?: IPropertyLang): Promise<IDeveloperType[]> {
+    public async getAll(lang?: string): Promise<IDeveloperType[]> {
         if(lang){
             return await DeveloperTypeModel.find({ "lang": lang }).catch(err => null);
         }else{
@@ -20,7 +19,7 @@ export class DeveloperTypeProvider implements IDeveloperTypeProvider {
         }
     }
 
-    public async list(page:number = 1, size:number = 10, lang?: IPropertyLang): Promise<IDeveloperTypePage> {
+    public async list(page:number = 1, size:number = 10, lang?: string): Promise<IDeveloperTypePage> {
         let filter: any = {}
         if(lang) {
             filter = {...filter, lang};
@@ -39,7 +38,7 @@ export class DeveloperTypeProvider implements IDeveloperTypeProvider {
     }
 
 
-    public async create(name: string, lang: IPropertyLang, createdBy: EmbededUser): Promise<IDeveloperType> {
+    public async create(name: string, lang: string, createdBy: EmbededUser): Promise<IDeveloperType> {
         return await DeveloperTypeModel.create({
             name,
             lang,

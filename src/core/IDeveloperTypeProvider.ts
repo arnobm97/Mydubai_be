@@ -1,6 +1,5 @@
 import { EmbededUser } from "./IUserProvider"
 import { Document } from "mongoose";
-import { IPropertyLang } from "./IPropertyProvider"
 
 
 export interface EmbededDeveloperType {
@@ -10,7 +9,7 @@ export interface EmbededDeveloperType {
 
 export interface IDeveloperType extends Document{
     name: string;
-    lang: IPropertyLang;
+    lang: string;
     createdBy: EmbededUser;
 }
 
@@ -23,7 +22,7 @@ export interface IDeveloperTypePage {
 
 export interface IDeveloperTypeProvider {
     get(id: string): Promise<IDeveloperType>;
-    getAll(lang?: IPropertyLang): Promise<IDeveloperType[]>;
-    list(page:number, size:number, lang?: IPropertyLang): Promise<IDeveloperTypePage>;
-    create(name: string, lang: IPropertyLang, createdBy: EmbededUser): Promise<IDeveloperType>;
+    getAll(lang?: string): Promise<IDeveloperType[]>;
+    list(page:number, size:number, lang?: string): Promise<IDeveloperTypePage>;
+    create(name: string, lang: string, createdBy: EmbededUser): Promise<IDeveloperType>;
 }

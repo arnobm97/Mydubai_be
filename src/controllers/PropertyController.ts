@@ -1,7 +1,7 @@
 import { Controller } from "../core/Controller";
 import { NextFunc, HttpRequest, HttpResponse } from "../core/Types";
 import { Role } from "../core/IUserProvider";
-import { IPropertyProvider, IProperty, IPropertyLang } from "../core/IPropertyProvider";
+import { IPropertyProvider, IProperty } from "../core/IPropertyProvider";
 import {IPropertyTypeProvider, IPropertyType, EmbededPropertyType } from "../core/IPropertyTypeProvider";
 import {IPropertyAreaProvider, EmbededPropertyArea, IPropertyArea } from "../core/IPropertyAreaProvider";
 import {IDevelopmentTypeProvider, EmbededDevelopmentType, IDevelopmentType } from "../core/IDevelopmentTypeProvider";
@@ -27,7 +27,7 @@ export class PropertyController extends Controller {
 
     public async index(req: HttpRequest, res: HttpResponse, next: NextFunc) {
         res.bag.pageTitle = this.config.appTitle+" | Properties";
-        const properties: IProperty[] = await this.PropertyProvider.getAll(IPropertyLang.EN);
+        const properties: IProperty[] = await this.PropertyProvider.getAll('en');
         res.bag.properties = properties;
         res.bag.flashMessage = req.flash('flashMessage');
         res.view('property/index');
@@ -50,7 +50,6 @@ export class PropertyController extends Controller {
         const propertyNo = 1;
         const lang = req.body.lang;
         const propertyName = req.body.propertyName;
-        const propertyType = req.body.propertyType;
         const propertyDescription = req.body.propertyDescription;
         const areaSize = req.body.areaSize;
         const completion = req.body.completion;
@@ -66,6 +65,15 @@ export class PropertyController extends Controller {
         const createBy = { id: req.user.id, fullName: req.user.name };
 
         // find in db then generate object
+        const tempPropertyType: IPropertyType =  await this.PropertyTypeProvider.get(req.body.propertyType);
+        const propertyType: EmbededPropertyType = {id: null, name: null};
+        if(tempPropertyType){
+            propertyType.id = tempPropertyType._id;
+            propertyType.name = tempPropertyType.name;
+        }else{
+            req.flash('flashMessage', 'Invalid property type. Please try again.');
+            return res.redirect('/properties');
+        }
         const tempPropertyArea: IPropertyArea = await this.PropertyAreaProvider.get(req.body.propertyArea);
         const propertyArea: EmbededPropertyArea = {id: null, areaName: null};
         if(tempPropertyArea){
@@ -93,7 +101,7 @@ export class PropertyController extends Controller {
             req.flash('flashMessage', 'Invalid developer type. Please try again.');
             return res.redirect('/properties');
         }
-        const newProperty: any = {propertyNo,lang,propertyName,propertyType,propertyDescription,propertyArea,developmentType,developerType,areaSize,highlights,amenities,completion,startingPrice,location,paymentPlan,unitType,brochure,images,videos,createBy};
+        const newProperty: any = {propertyNo,lang,propertyName,propertyDescription,propertyType,propertyArea,developmentType,developerType,areaSize,highlights,amenities,completion,startingPrice,location,paymentPlan,unitType,brochure,images,videos,createBy};
 
         // return res.send(newProperty);
 

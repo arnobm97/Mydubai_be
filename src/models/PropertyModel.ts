@@ -5,9 +5,11 @@ const PropertySchema: Schema = new Schema({
     propertyNo:{ type: Number, required: true },
     lang:{ type: String, required: true },
     propertyName:{ type: String, required: true },
-    propertyType:{ type: String, required: true },
     propertyDescription:{ type: String, required: true },
-
+    propertyType: {
+      id: { type: String, required: true },
+      name: { type: String, required: true },
+    },
     propertyArea: {
       id: { type: String, required: true },
       areaName: { type: String, required: true },
