@@ -13,16 +13,15 @@ block content
                 input#search-orders.form-control.search-orders(type='text', name='searchorders', placeholder='Search')
               .col-auto
                 button.btn.app-btn-secondary(type='submit') Search
-          
           .col-auto
-            select.form-select.w-auto
-              option(selected='', value='option-1') Page Size
-              option(value='option-2') 10
-              option(value='option-3') 20
-              option(value='option-4') 30
-              option(value='option-4') 40
-              option(value='option-4') 50
-              option(value='option-4') 100
+            form.lang-filter
+              select.form-select.w-auto(name="lang" onchange="$('form.lang-filter').submit()")
+                option(value="") Language
+                each lang in langList
+                  -if(currentLang === lang.value)
+                    option(value=lang.value selected="") #{lang.title}
+                  -else
+                    option(value=lang.value ) #{lang.title}
           .col-auto
             a.btn.app-btn-primary(href='/properties/create')
               i.fa.fa-plus
@@ -44,6 +43,7 @@ block content
               th.cell Property Name
               th.cell Type
               th.cell Area
+              th.cell Dev Type
               th.cell Developer
               th.cell Language
               th.cell Created At
@@ -54,12 +54,14 @@ block content
               tr
                 td.cell=sl++
                 td.cell=property.propertyName
-                td.cell=property.propertyType
+                td.cell=property.propertyType.name
                 td.cell=property.propertyArea.areaName
+                td.cell=property.developmentType.name
                 td.cell=property.developerType.name
                 td.cell=property.lang
                 td.cell
                   span=fmt.date.pretty(property.createdAt)+' '+fmt.date.Time12(property.createdAt)
                 td.cell.text-center
-                  a.btn.app-btn-info.btn-sm(href='/properties/update/'+property._id) Update
-                  a.btn.app-btn-primary.btn-sm.ms-2(href='/properties/details/'+property._id) View
+                  a.btn.app-btn-info.btn-sm(href="#") Update
+                  a.btn.app-btn-primary.btn-sm.ms-2(href="#") View
+                  a.btn.app-btn-primary.btn-sm.ms-2(href='/properties/create/'+property.propertyNo) Add Language

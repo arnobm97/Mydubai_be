@@ -77,7 +77,8 @@ export interface IPropertyPage {
 export interface IPropertyProvider {
 
     get(propertyNo: number, lang: string): Promise<IProperty>;
-    getAll(lang: string): Promise<IProperty[]>;
+    getAll(lang?: string): Promise<IProperty[]>;
+    lastPropertyNo(): Promise<number>;
     create(property: IProperty): Promise<IProperty>;
 
 }

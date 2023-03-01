@@ -20,15 +20,17 @@ export class PropertyController extends Controller {
 
     public onRegister(): void {
         this.onGet("/properties", this.index, [Role.Admin, Role.Moderator]);
-        this.onGet("/properties/create", this.createProperty, [Role.Admin, Role.Moderator]);
-        this.onPost("/properties/create", this.createProperty, [Role.Admin, Role.Moderator]);
+        this.onGet("/properties/create/:propertyNo?", this.createProperty, [Role.Admin, Role.Moderator]);
+        this.onPost("/properties/create/:propertyNo?", this.createProperty, [Role.Admin, Role.Moderator]);
     }
 
 
     public async index(req: HttpRequest, res: HttpResponse, next: NextFunc) {
         res.bag.pageTitle = this.config.appTitle+" | Properties";
-        const properties: IProperty[] = await this.PropertyProvider.getAll('en');
+        const queryLanguage: any = req.query.lang;
+        const properties: IProperty[] = await this.PropertyProvider.getAll(queryLanguage);
         res.bag.properties = properties;
+        res.bag.currentLang = queryLanguage;
         res.bag.flashMessage = req.flash('flashMessage');
         res.view('property/index');
     }
@@ -46,8 +48,14 @@ export class PropertyController extends Controller {
             res.bag.developerType = await this.DeveloperTypeProvider.getAll(queryLanguage);
             return res.view('property/create');
         }
+        let propertyNo: number;
+        if(req.params.propertyNo){
+            propertyNo = parseInt(req.params.propertyNo,10);
+        }else{
+            const lastPropertyNo = await this.PropertyProvider.lastPropertyNo();
+            propertyNo = lastPropertyNo+1;
+        }
 
-        const propertyNo = 1;
         const lang = req.body.lang;
         const propertyName = req.body.propertyName;
         const propertyDescription = req.body.propertyDescription;
