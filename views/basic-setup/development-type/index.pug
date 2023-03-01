@@ -8,13 +8,6 @@ block content
       .page-utilities
         .row.g-2.justify-content-start.justify-content-md-end.align-items-center
           .col-auto
-            form.table-search-form.row.gx-1.align-items-center
-              .col-auto
-                input#search-orders.form-control.search-orders(type='text', name='searchorders', placeholder='Search')
-              .col-auto
-                button.btn.app-btn-secondary(type='submit') Search
-          
-          .col-auto
             form.lang-filter
               select.form-select.w-auto(name="lang" onchange="$('form.lang-filter').submit()")
                 option(value="") Language
@@ -27,6 +20,10 @@ block content
             a.btn.app-btn-primary(href='/basic-setup/development-type/create')
               i.fa.fa-plus
               | &nbsp;Create  Development Type
+          .col-auto
+            a.btn.app-btn-danger(href='/basic-setup/index')
+              i.fa.fa-chevron-left
+              | &nbsp;Return
       
   div.row(style="margin: 0px 1px")
     -if(flashMessage.length>0)

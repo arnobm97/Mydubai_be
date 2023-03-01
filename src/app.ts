@@ -15,6 +15,7 @@ import cron from "node-cron";
 import { SMTPMailer } from "./providers/SMTPMailer";
 import { UserProvider } from "./providers/UserProvider";
 import { PropertyProvider } from "./providers/PropertyProvider";
+import { PropertyTypeProvider } from "./providers/PropertyTypeProvider";
 import { PropertyAreaProvider } from "./providers/PropertyAreaProvider";
 import { DevelopmentTypeProvider } from "./providers/DevelopmentTypeProvider";
 import { DeveloperTypeProvider } from "./providers/DeveloperTypeProvider";
@@ -30,7 +31,7 @@ import { BasicSetupController } from "./controllers/BasicSetupController";
 import { UserController } from "./controllers/UserController";
 import { PropertyController } from "./controllers/PropertyController";
 
-//api
+// api
 import { PropertyApiController } from "./controllers/api/PropertyApiController";
 
 
@@ -59,6 +60,7 @@ app.setStatic(path.join(__dirname, "public"), { maxAge: 0 }); // 31557600000 tur
 
 // provider
 app.set("UserProvider", new UserProvider());
+app.set("PropertyTypeProvider", new PropertyTypeProvider());
 app.set("PropertyProvider", new PropertyProvider());
 app.set("PropertyAreaProvider", new PropertyAreaProvider());
 app.set("DevelopmentTypeProvider", new DevelopmentTypeProvider());
@@ -93,7 +95,7 @@ app.registerController(BasicSetupController);
 app.registerController(UserController);
 app.registerController(PropertyController);
 
-//api
+// api
 app.registerController(PropertyApiController);
 
 

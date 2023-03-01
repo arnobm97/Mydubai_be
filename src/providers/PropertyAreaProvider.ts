@@ -20,7 +20,7 @@ export class PropertyAreaProvider implements IPropertyAreaProvider {
         }
     }
 
-    
+
 
     public async list(page:number = 1, size:number = 10, lang?: IPropertyLang): Promise<IPropertyAreaPage> {
         let filter: any = {}

@@ -3,7 +3,7 @@ block content
 
   .row.app-card.mb-2.align-items-center.justify-content-between.bg-white.p-2.m-0
     .col-auto
-      h1.app-page-title.mb-0 Basic Setup / Developer Type
+      h1.app-page-title.mb-0 Basic Setup / Property Type
     .col-auto
       .page-utilities
         .row.g-2.justify-content-start.justify-content-md-end.align-items-center
@@ -17,9 +17,9 @@ block content
                   -else
                     option(value=lang.value ) #{lang.title}
           .col-auto
-            a.btn.app-btn-primary(href='/basic-setup/developer-type/create')
+            a.btn.app-btn-primary(href='/basic-setup/property-type/create')
               i.fa.fa-plus
-              | &nbsp;Create  Developer Type
+              | &nbsp;Create  Property Type
           .col-auto
             a.btn.app-btn-danger(href='/basic-setup/index')
               i.fa.fa-chevron-left
@@ -38,14 +38,14 @@ block content
           thead
             tr
               th.cell SL#
-              th.cell  Developer Type Name
+              th.cell  Property Type Name
               th.cell Language
               th.cell.text-center Created At
               th.cell.text-center Created By
               th.cell.text-center Action
           tbody
             -var sl=1
-            each list in developerTypePage.data
+            each list in propertyTypePage.data
               tr
                 td.cell=sl++
                 td.cell=list.name
@@ -54,36 +54,36 @@ block content
                   span=fmt.date.pretty(list.createdAt)+' '+fmt.date.Time12(list.createdAt)
                 td.cell.text-center=list.createdBy.fullName
                 td.cell.text-center
-                  a.btn.app-btn-info.btn-sm(href='/basic-setup/developer-type/update/'+list._id) Update
-                  a.btn.app-btn-primary.btn-sm.ms-2(href='/basic-setup/developer-type/details/'+list._id) View             
+                  a.btn.app-btn-info.btn-sm(href='/basic-setup/property-type/update/'+list._id) Update
+                  a.btn.app-btn-primary.btn-sm.ms-2(href='/basic-setup/property-type/details/'+list._id) View             
   //- pagination
   nav.app-pagination
     ul.pagination.justify-content-center
       - var n = 1;
-      - var pages = Math.ceil(developerTypePage.count/developerTypePage.size)
-      if developerTypePage.page > 1
+      - var pages = Math.ceil(propertyTypePage.count/propertyTypePage.size)
+      if propertyTypePage.page > 1
         li.page-item
-          a.page-link(href="/basic-setup/developer-type?page=" + (developerTypePage.page-1), tabindex='-1', aria-disabled='false') Previous
+          a.page-link(href="/basic-setup/property-type?page=" + (propertyTypePage.page-1), tabindex='-1', aria-disabled='false') Previous
       else
         li.page-item.disabled
-          a.page-link(href="/basic-setup/developer-type?page=" + pages, tabindex='-1', aria-disabled='true') Previous
+          a.page-link(href="/basic-setup/property-type?page=" + pages, tabindex='-1', aria-disabled='true') Previous
 
       -var flag = 0;
       while n <= pages
-        if n == developerTypePage.page
-          li.page-item.active #[a.page-link(href="/basic-setup/developer-type?page=" + n) #{n}]
-        else if n < 5 || n == developerTypePage.page - 1 || n == developerTypePage.page + 1 || n > pages - 1
-          li.page-item #[a.page-link(href="/basic-setup/developer-type?page=" + n) #{n}]
+        if n == propertyTypePage.page
+          li.page-item.active #[a.page-link(href="/basic-setup/property-type?page=" + n) #{n}]
+        else if n < 5 || n == propertyTypePage.page - 1 || n == propertyTypePage.page + 1 || n > pages - 1
+          li.page-item #[a.page-link(href="/basic-setup/property-type?page=" + n) #{n}]
         //- else
         //-   if flag == 0
         //-     li.page-item.disabled #[a.page-link(href="") - ]
         //-   -flag=1;
         else
-          li.page-item #[a.page-link(href="/basic-setup/developer-type?page=" + n) #{n}]
+          li.page-item #[a.page-link(href="/basic-setup/property-type?page=" + n) #{n}]
         - n++
-      if developerTypePage.page < pages
+      if propertyTypePage.page < pages
         li.page-item
-          a.page-link(href=href="/basic-setup/developer-type?page=" + (developerTypePage.page+1)) Next
+          a.page-link(href=href="/basic-setup/property-type?page=" + (propertyTypePage.page+1)) Next
       else
         li.page-item.disabled
-          a.page-link(href="/basic-setup/developer-type?page=1") Next
+          a.page-link(href="/basic-setup/property-type?page=1") Next

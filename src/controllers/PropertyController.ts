@@ -67,9 +67,9 @@ export class PropertyController extends Controller {
         const videos = req.body.videos;
         const createBy = { id: req.user.id, fullName: req.user.name };
 
-        //find in db then generate object
-        let tempPropertyArea: IPropertyArea = await this.PropertyAreaProvider.get(req.body.propertyArea);
-        let propertyArea: EmbededPropertyArea = {id: null, areaName: null};
+        // find in db then generate object
+        const tempPropertyArea: IPropertyArea = await this.PropertyAreaProvider.get(req.body.propertyArea);
+        const propertyArea: EmbededPropertyArea = {id: null, areaName: null};
         if(tempPropertyArea){
             propertyArea.id = tempPropertyArea._id;
             propertyArea.areaName = tempPropertyArea.areaName;
@@ -77,8 +77,8 @@ export class PropertyController extends Controller {
             req.flash('flashMessage', 'Invalid property area. Please try again.');
             return res.redirect('/properties');
         }
-        let tempDevelopmentType: IDevelopmentType = await this.DevelopmentTypeProvider.get(req.body.developmentType);
-        let developmentType: EmbededDevelopmentType = {id: null, name: null};
+        const tempDevelopmentType: IDevelopmentType = await this.DevelopmentTypeProvider.get(req.body.developmentType);
+        const developmentType: EmbededDevelopmentType = {id: null, name: null};
         if(tempDevelopmentType){
             developmentType.id = tempDevelopmentType._id;
             developmentType.name = tempDevelopmentType.name;
@@ -86,8 +86,8 @@ export class PropertyController extends Controller {
             req.flash('flashMessage', 'Invalid development type. Please try again.');
             return res.redirect('/properties');
         }
-        let tempDeveloperType: IDeveloperType = await this.DeveloperTypeProvider.get(req.body.developerType);
-        let developerType: EmbededDeveloperType = {id: null, name: null};
+        const tempDeveloperType: IDeveloperType = await this.DeveloperTypeProvider.get(req.body.developerType);
+        const developerType: EmbededDeveloperType = {id: null, name: null};
         if(tempDeveloperType){
             developerType.id = tempDeveloperType._id;
             developerType.name = tempDeveloperType.name;
@@ -96,8 +96,8 @@ export class PropertyController extends Controller {
             return res.redirect('/properties');
         }
         const newProperty: any = {propertyNo,lang,propertyName,propertyType,propertyDescription,propertyArea,developmentType,developerType,areaSize,highlights,amenities,completion,startingPrice,location,paymentPlan,unitType,brochure,images,videos,createBy};
-        
-        //return res.send(newProperty);
+
+        // return res.send(newProperty);
 
         await this.PropertyProvider.create(newProperty).then(async property => {
             res.bag.successMessage = "Done";

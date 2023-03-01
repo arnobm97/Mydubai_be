@@ -1,5 +1,6 @@
 import { Controller } from "../core/Controller";
 import { NextFunc, HttpRequest, HttpResponse } from "../core/Types";
+import {IPropertyTypeProvider, IPropertyTypePage } from "../core/IPropertyTypeProvider";
 import {IPropertyAreaProvider, IPropertyAreaPage } from "../core/IPropertyAreaProvider";
 import {IDevelopmentTypeProvider, IDevelopmentTypePage } from "../core/IDevelopmentTypeProvider";
 import {IDeveloperTypeProvider, IDeveloperTypePage } from "../core/IDeveloperTypeProvider";
@@ -8,6 +9,7 @@ import { Role, EmbededUser } from "../core/IUserProvider";
 
 export class BasicSetupController extends Controller {
 
+    private PropertyTypeProvider: IPropertyTypeProvider;
     private PropertyAreaProvider: IPropertyAreaProvider;
     private DevelopmentTypeProvider: IDevelopmentTypeProvider;
     private DeveloperTypeProvider: IDeveloperTypeProvider;
@@ -16,7 +18,10 @@ export class BasicSetupController extends Controller {
 
     public onRegister(): void {
         this.onGet("/basic-setup/index", this.index, [Role.Admin, Role.Moderator]);
+        this.onGet("/basic-setup/property-type", this.propertyType, [Role.Admin, Role.Moderator]);
+        this.onGet("/basic-setup/property-type/create", this.createPropertyType, [Role.Admin, Role.Moderator]);
         
+        this.onPost("/basic-setup/property-type/create", this.createPropertyType, [Role.Admin, Role.Moderator]);
         this.onGet("/basic-setup/property-area", this.propertyArea, [Role.Admin, Role.Moderator]);
         this.onGet("/basic-setup/property-area/create", this.createPropertyArea, [Role.Admin, Role.Moderator]);
         this.onPost("/basic-setup/property-area/create", this.createPropertyArea, [Role.Admin, Role.Moderator]);
@@ -32,6 +37,51 @@ export class BasicSetupController extends Controller {
     public async index(req: HttpRequest, res: HttpResponse, next: NextFunc) {
         res.bag.pageTitle = this.config.appTitle+" | Basic Setup"
         res.view('basic-setup/index');
+    }
+
+
+    public async propertyType(req: HttpRequest, res: HttpResponse, next: NextFunc) {
+        res.bag.pageTitle = this.config.appTitle+" | Property Type"
+        res.bag.language = [{title: "English", value : "en"},{title: "Arabic", value : "ar"}];
+        const lang: any = req.query.lang;
+        const p: any = req.query.page;
+        const s: any = req.query.size;
+        let page: number = parseInt(p, 10);
+        if (!page || page < 0) page = 1;
+        let size: number = parseInt(s, 10);
+        if (!size || size < 1) size = 15;
+        const propertyTypePage: IPropertyTypePage  = await this.PropertyTypeProvider.list(page, size, lang);
+        res.bag.propertyTypePage = propertyTypePage;
+        res.bag.currentLang = lang;
+        res.bag.flashMessage = req.flash('flashMessage');
+        res.view('basic-setup/property-type/index');
+    }
+
+
+    public async createPropertyType(req: HttpRequest, res: HttpResponse, next: NextFunc) {
+        res.bag.pageTitle = this.config.appTitle+" | Create Property Type";
+        res.bag.language = [{title: "English", value : "en"},{title: "Arabic", value : "ar"}];
+        if(req.method === "GET"){
+            res.view('basic-setup/property-type/create');
+        }else if(req.method === "POST"){
+            const name = req.body.name;
+            const lang = req.body.lang;
+            if (!name) {
+                res.bag.errorMessage = "Property type name is required";
+                return res.view('basic-setup/property-type/create')
+            }else if (!lang) {
+                res.bag.errorMessage = "Property type language is required";
+                return res.view('basic-setup/property-type/create')
+            }else{
+                const user : EmbededUser = {id: req.user.id, fullName: req.user.name };
+                await this.PropertyTypeProvider.create(name, lang, user);
+                req.flash('flashMessage', 'Property type created successfully.');
+                res.redirect('/basic-setup/property-type');
+            }
+        }else{
+            res.bag.errorMessage = "Invalid Request";
+            res.view('/basic-setup/property-type');
+        }
     }
 
 

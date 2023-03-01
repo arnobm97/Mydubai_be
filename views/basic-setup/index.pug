@@ -14,8 +14,24 @@ block content
               .col-auto
                 button.btn.app-btn-secondary(type='submit') Search
       
-
+  //- row
   div.row.g-4.mb-4
+    
+    div.col-12.col-lg-4
+      div.app-card.app-card-basic.d-flex.flex-column.align-items-start.shadow-sm
+        div.app-card-header.p-3.border-bottom-0
+          div.row.align-items-center.gx-3
+            div.col-auto
+              div.app-icon-holder
+                i.fa.fa-home
+            div.col-auto
+              h4.app-card-title Property Type
+        div.app-card-body.px-4
+          div.intro
+            | Let's setup some property type. You can add edit & delete property type by clicking bellow link.
+        div.app-card-footer.p-4.mt-auto
+          a.btn.app-btn-secondary(href='/basic-setup/property-type') Go
+    
     
     div.col-12.col-lg-4
       div.app-card.app-card-basic.d-flex.flex-column.align-items-start.shadow-sm
@@ -47,6 +63,9 @@ block content
         div.app-card-footer.p-4.mt-auto
           a.btn.app-btn-secondary(href='/basic-setup/development-type') Go
 
+
+  //- row
+  div.row.g-4.mb-4
     div.col-12.col-lg-4
       div.app-card.app-card-basic.d-flex.flex-column.align-items-start.shadow-sm
         div.app-card-header.p-3.border-bottom-0
