@@ -6,27 +6,256 @@
 
     "en": {
         "navber": {
-            "menu": "Menu"
+            "home": "Home",
+            "english": "English",
+            "arabic": "Arabic",
+            "chinese": "Chinese",
+            "french": "French",
+            "russian": "Russian"
+        },
+        "menu": {
+            "WHY US": "WHY US",
+            "ABOUT US": "ABOUT US",
+            "CONTACT US": "CONTACT US",
+            "DEVELOPERS": "DEVELOPERS",
+            "PROJECTS": "PROJECTS",
+            "OFFERS": "OFFERS",
+            "3D TOUR": "3D TOUR",
         },
         "common": {
             "button": {
                 "ok": "Ok",
-                "submit": "Submit"
-            }
+                "submit": "Submit",
+                "arrange A Meeting": "Arrange A Meeting",
+                "all Projects": "All Projects",
+                "off Plan": "Off Plan",
+                "ready": "Ready",
+                "ready projects": "Ready Projects",
+                "view All": "View All",
+                "details": "Details",
+                "enquiry": "Enquiry",
+                "subscribe": "Subscribe",
+                "yES, I ACCEPT COOKIES": "YES, I ACCEPT COOKIES",
+                "nO, I WANT MORE INFO": "NO, I WANT MORE INFO",
+                "cONTACT US": "CONTACT US",
+                "dOWNLOAD BROCHURE": "DOWNLOAD BROCHURE",
+                "dOWNLOAD FLOOR PLANS": "DOWNLOAD FLOOR PLANS",
+                "vIEW GALLERY": "VIEW GALLERY",
+                "lOCATION": "LOCATION",
+                "sUBMIT YOUR INTEREST": "SUBMIT YOUR INTEREST",
+                "rEGISTER YOUR INTEREST": "REGISTER YOUR INTEREST",
+                "register Now": "Register Now",
+                "iNTRODUCTION PHONE CALL": "INTRODUCTION PHONE CALL",
+                "vIDEO MEETING": "VIDEO MEETING",
+                "nEXT STEP": "NEXT STEP",
+                "add Guests": "Add Guests",
+                "back": "Back",
+                "Project List": "Project List",
+                "Show More": "Show More"
+            },
+            "dropdown": {
+                "All Dubai Area": "All Dubai Area",
+                "All Dubai Developer": "All Dubai Developer",
+                "All Property Type": "All Property Type",
+                "All Completion": "All Completion",
+                "All Development Type": "All Development Type",
+                "Development Type": "Development Type",
+                "Developer Type": "Developer Type",
+                "Project Area": "Project Area",
+                "Sort By": "Sort By",
+                "Beds": "Beds",
+                "Completion": "Completion",
+                "Prefered Language": "Prefered Language"
+            },
+            "search": "SEARCH",
+            "cookie": "This website uses cookies. We use cookies to make sure you get the best experience on our website. Please read our privacy and cookie policy.",
+            "Off Plan Properties": "Off Plan Properties",
+            "Ready Properties": "Ready Properties",
+            "Developers": "Developers"
+        },
+        "copy property": {
+            "starting price": "Starting price",
+            "location": "Location",
+            "type": "Type",
+            "bedrooms": "Bedrooms",
+            "highlights": "Highlights",
+            "Payment Plan": "Payment Plan",
+            "Photo Gallery": "Photo Gallery",
+            "video": "Video",
+            "amenities": "Amenities",
+            "nearby": "Nearby",
+            "Downloads": "Downloads",
+            "Enquire About": "Enquire About",
+            "Similar Properties": "Similar Properties"
+        },
+        "copy meeting": {
+            "Arrange a meeting": "Arrange a meeting",
+            "bellow meeting": "Follow the steps to set up a meeting with sales team to get the best solution",
+            "Select an Option": "Select an Option",
+            "min": "Min",
+            "Select a Date & Time": "Select a Date & Time",
+            "Time Zone": "Time Zone",
+            "Enter Details": "Enter Details",
+            "Meeting check": "Notify up to 10 additional guests of the scheduled meeting",
+            "Successfully Submitted": "Successfully Submitted",
+        },
+        "copy homepage": {
+            "bellow filter": "Find your next investment opportunity with the latest Off-plan & Ready projects in Dubai",
+            "off-plan property list": "Latest Off Plan Properties",
+            "ready property list": "Latest Ready Properties",
+            "payment question": "Which property investment is right for you?",
+            "payment copy": "Discover the best off-plan & ready projects in Dubai and secure your dream home today",
+            "payment off-plan": "OFF-PLAN",
+            "payment ready": "READY",
+            "payment luxury": "LUXURY",
+            "transfer copy": "Our Payment Methods",
+            "transfer cash": "CASH",
+            "transfer crypto": "CRYPTO",
+            "transfer mortgage": "MORTGAGE",
+            "newsletter": "Sign up for our exclusive updates and information about the newest projects in Dubai",
+            
+        },
+        "copy about-us": {
+            
+        },
+        "copy contact-us": {
+            
+        },
+        "copy privacy policy": {
+            
+        },
+        "copy terms conditions": {
+            
+        },
+        "copy cookie policy": {
+            
         }
-
     },
 
     "ar": {
         "navber": {
-            "menu": "قائمة طعام"
+            "home": "قائمة طعام",
+            "English": "الإنجليزية",
+            "Arabic": "العربية",
+            "Chinese": "الصينية",
+            "French": "الفرنسية",
+            "Russian": "الروسية"
+        },
+        "menu": {
+            "WHY US": "لماذا نحن",
+            "ABOUT US": "معلومات عنا",
+            "CONTACT US": "اتصل بنا",
+            "DEVELOPERS": "المطورون",
+            "PROJECTS": "المشاريع",
+            "OFFERS": "عروض",
+            "3D TOUR": "جولة ثلاثية الأبعاد",
         },
         "common": {
             "button": {
                 "ok": "نعم",
-                "submit": "يُقدِّم"
-            }
+                "submit": "يُقدِّم",
+                "arrange A Meeting": "ترتيب لقاء",
+                "all Projects": "كل المشاريع",
+                "off Plan": "خارج الخطة",
+                "ready": "مستعد",
+                "ready projects": "مشاريع جاهزة",
+                "view All": "مشاهدة الكل",
+                "details": "تفاصيل",
+                "enquiry": "سؤال",
+                "subscribe": "يشترك",
+                "yes, I Accept Cookies": "نعم ، أنا أقبل ملفات تعريف الارتباط",
+                "nO, I WANT MORE INFO": "لا ، اريد المزيد من المعلومات",
+                "cONTACT US": "اتصل بنا",
+                "dOWNLOAD BROCHURE": "تحميل الكتيب",
+                "dOWNLOAD FLOOR PLANS": "قم بتنزيل مخططات الأرضية",
+                "vIEW GALLERY": "عرض المعرض",
+                "lOCATION": "موقع",
+                "rEGISTER YOUR INTEREST": "سجل اهتمامك",
+                "register Now": "سجل الان",
+                "iNTRODUCTION PHONE CALL": "مكالمة هاتفية مقدمة",
+                "vIDEO MEETING": "لقاء بالفيديو",
+                "nEXT STEP": "الخطوة التالية",
+                "add Guests": "أضف الضيوف",
+                "back": "خلف",
+                "Project List": "قائمة المشروع",
+                "Show More": "أظهر المزيد"
+            },
+            "dropdown": {
+                "All Dubai Area": "كل منطقة دبي",
+                "All Dubai Developer": "كل مطور دبي",
+                "All Property Type": "كل أنواع العقارات",
+                "All Completion": "كل الإنجاز",
+                "All Development Type": "كل أنواع التطوير",
+                "Development Type": "نوع التطوير",
+                "Developer Type": "نوع المطور",
+                "Project Area": "منطقة المشروع",
+                "Sort By": "ترتيب حسب",
+                "Beds": "سرير",
+                "Completion": "انتهاء",
+                "Prefered Language": "اللغة المفضلة"
+            },
+            "search": "يبحث",
+            "cookie": "هذا الموقع يستخدم الكوكيز. نحن نستخدم ملفات تعريف الارتباط للتأكد من حصولك على أفضل تجربة على موقعنا. يرجى قراءة سياسة الخصوصية وملفات تعريف الارتباط الخاصة بنا.",
+            "Off Plan Properties": "خصائص خارج الخطة",
+            "Ready Properties": "عقارات جاهزة",
+            "Developers": "المطورين"
+        },
+        "copy property": {
+            "starting price": "السعر المبدئي",
+            "location": "موقع",
+            "type": "يكتب",
+            "bedrooms": "غرف نوم",
+            "highlights": "يسلط الضوء",
+            "Payment Plan": "خطة الدفع",
+            "Photo Gallery": "معرض الصور",
+            "video": "فيديو",
+            "amenities": "وسائل الراحة",
+            "nearby": "مجاور",
+            "downloads": "التحميلات",
+            "Enquire About": "استفسار عن",
+            "Similar Properties": "خصائص مماثلة"
+        },
+        "copy meeting": {
+            "Arrange a meeting": "ترتيب لقاء",
+            "bellow meeting": "اتبع الخطوات لإعداد اجتماع مع فريق المبيعات للحصول على أفضل حل",
+            "Select an Option": "حدد اختيارا",
+            "min": "دقيقة",
+            "Select a Date & Time": "حدد التاريخ والوقت",
+            "Time Zone": "وحدة زمنية",
+            "Enter Details": "أدخل التفاصيل",
+            "Meeting check": "قم بإخطار ما يصل إلى 10 ضيوف إضافيين بالاجتماع المقرر",
+            "Successfully Submitted": "قدمت بنجاح",
+        },
+        "copy homepage": {
+            "copy bellow filter": "ابحث عن فرصتك الاستثمارية التالية مع أحدث المشاريع الجاهزة على الخارطة في دبي",
+            "off-plan list": "أحدث العقارات على الخارطة",
+            "ready property list": "أحدث العقارات الجاهزة",
+            "payment question": "ما هو الاستثمار العقاري المناسب لك؟",
+            "payment copy": "اكتشف أفضل المشاريع الجاهزة والجاهزة في دبي واحصل على منزل أحلامك اليوم",
+            "payment off-plan": "خارج الخطة",
+            "payment ready": "مستعد",
+            "payment luxury": "رفاهية",
+            "transfer copy": "طرق الدفع لدينا",
+            "transfer cash": "نقدي",
+            "transfer crypto": "تشفير",
+            "transfer mortgage": "القرض العقاري",
+            "newsletter": "اشترك للحصول على تحديثاتنا الحصرية ومعلومات حول أحدث المشاريع في دبي",
+            
+        },
+        "copy about-us": {
+            
+        },
+        "copy contact-us": {
+            
+        },
+        "copy privacy policy": {
+            
+        },
+        "copy terms conditions": {
+            
+        },
+        "copy cookie policy": {
+            
         }
-        
     }
 }
