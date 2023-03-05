@@ -1,0 +1,87 @@
+extends ../../layout
+block content
+
+  .row.app-card.mb-2.align-items-center.justify-content-between.bg-white.p-2.m-0
+      .col-auto
+        h1.app-page-title.mb-0 Customer Query
+      .col-auto
+        .page-utilities
+          .row.g-2.justify-content-start.justify-content-md-end.align-items-center
+            .col-auto
+              form.table-search-form.row.gx-1.align-items-center
+                .col-auto
+                  input#search-orders.form-control.search-orders(type='text', name='searchorders', placeholder='Search')
+                .col-auto
+                  button.btn.app-btn-secondary(type='submit') Search
+
+            .col-auto
+              a.btn.app-btn-danger(href='#')
+                i.fa.fa-trash
+                | &nbsp;Clear All
+      
+  div.row(style="margin: 0px 1px")
+    -if(flashMessage.length>0)
+      div.alert.alert-success(role='alert')
+        each mgs in flashMessage
+          li=mgs
+
+  div.app-card.app-card-orders-table.shadow-sm.mb-5
+    div.app-card-body
+      div.table-responsive
+        table.table.app-table-hover.mb-0.text-left
+          thead
+            tr
+              th.cell SL#
+              th.cell  Customer Name
+              th.cell Email
+              th.cell.text-center Phone
+              th.cell.text-center Lang
+              th.cell.text-center Desc
+              th.cell.text-center Date
+              th.cell.text-center Action
+          tbody
+            -var sl=1
+            each list in customerInterestPage.data
+              tr
+                td.cell=sl++
+                td.cell=list.name
+                td.cell=list.email
+                td.cell=list.phone
+                td.cell=list.preferedLang
+                td.cell=list.description
+                td.cell.text-center
+                  span=fmt.date.pretty(list.createdAt)+' '+fmt.date.Time12(list.createdAt)
+                td.cell.text-center
+                  a.btn.app-btn-danger.btn-sm.ms-2(href='/customer-interest/delete/'+list._id) Delete             
+                  a.btn.app-btn-primary.btn-sm.ms-2(href='#') View             
+  //- pagination
+  nav.app-pagination
+    ul.pagination.justify-content-center
+      - var n = 1;
+      - var pages = Math.ceil(customerInterestPage.count/customerInterestPage.size)
+      if customerInterestPage.page > 1
+        li.page-item
+          a.page-link(href="/customer-interest/index" + (customerInterestPage.page-1), tabindex='-1', aria-disabled='false') Previous
+      else
+        li.page-item.disabled
+          a.page-link(href="/customer-interest/index" + pages, tabindex='-1', aria-disabled='true') Previous
+
+      -var flag = 0;
+      while n <= pages
+        if n == customerInterestPage.page
+          li.page-item.active #[a.page-link(href="/customer-interest/index" + n) #{n}]
+        else if n < 5 || n == customerInterestPage.page - 1 || n == customerInterestPage.page + 1 || n > pages - 1
+          li.page-item #[a.page-link(href="/customer-interest/index" + n) #{n}]
+        //- else
+        //-   if flag == 0
+        //-     li.page-item.disabled #[a.page-link(href="") - ]
+        //-   -flag=1;
+        else
+          li.page-item #[a.page-link(href="/customer-interest/index" + n) #{n}]
+        - n++
+      if customerInterestPage.page < pages
+        li.page-item
+          a.page-link(href=href="/customer-interest/index" + (customerInterestPage.page+1)) Next
+      else
+        li.page-item.disabled
+          a.page-link(href="/customer-interest/index1") Next

@@ -5,7 +5,10 @@ import {EmbededDevelopmentType } from "../core/IDevelopmentTypeProvider";
 import {EmbededDeveloperType } from "../core/IDeveloperTypeProvider";
 import { Document } from "mongoose";
 
-
+export interface EmbededProperty {
+    propertyNo: number;
+    name: string;
+}
 
 export interface IPropertyAmenities {
     description: string;
