@@ -31,6 +31,39 @@ export class PropertyProvider implements IPropertyProvider {
         }
     }
 
+
+
+    public async propertyListByDeveloper(page:number = 1, size:number = 10, developerId: string, propertyAreaId: string, propertyTypeId: string, completion: string, beds: string): Promise<IPropertyPage> {
+        let filter: any = {"developerType.id": developerId };
+        if(propertyAreaId) {
+            filter = {...filter, "propertyArea.id": propertyAreaId};
+        }
+        if(propertyTypeId) {
+            filter = {...filter, "propertyType.id": propertyTypeId};
+        }
+        if(completion) {
+            filter = {...filter, "completion": completion};
+        }
+        if(beds) {
+            filter = {...filter,  "unitType.count": beds };
+        }
+
+        let pageSize : number;
+        const count: number = await PropertyModel.find(filter).countDocuments();
+        let query;
+
+        if(page === 0){
+            pageSize = count;
+            query = await PropertyModel.find(filter).catch(err => null);
+        }else{
+            pageSize = size;
+            query = await PropertyModel.find(filter).skip(size * (page - 1)).limit(size).catch(err => null);
+        }
+        return { size: pageSize, page, count, data: query };
+    }
+
+
+
     public async create(property: IProperty): Promise<IProperty> {
         return await PropertyModel.create(property);
     }

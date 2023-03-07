@@ -82,6 +82,10 @@ export interface IPropertyProvider {
     get(propertyNo: number, lang: string): Promise<IProperty>;
     getAll(lang?: string): Promise<IProperty[]>;
     lastPropertyNo(): Promise<number>;
+
+    propertyListByDeveloper(page:number, size:number, developerId: string, propertyAreaId: string, propertyTypeId: string, completion: string, beds: string): Promise<IPropertyPage>;
+
+
     create(property: IProperty): Promise<IProperty>;
 
 }

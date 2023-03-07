@@ -1,6 +1,6 @@
 import { Controller } from "../../core/Controller";
 import { NextFunc, HttpRequest, HttpResponse } from "../../core/Types";
-import { IPropertyProvider, IProperty } from "../../core/IPropertyProvider";
+import { IPropertyProvider, IProperty, IPropertyPage } from "../../core/IPropertyProvider";
 import {IPropertyAreaProvider, IPropertyArea } from "../../core/IPropertyAreaProvider";
 import {IDevelopmentTypeProvider, IDevelopmentType } from "../../core/IDevelopmentTypeProvider";
 import {IPropertyTypeProvider, IPropertyType } from "../../core/IPropertyTypeProvider";
@@ -20,10 +20,11 @@ export class PropertyApiController extends Controller {
 
 
     public onRegister(): void {
-        this.onGet("/api/v1/:lang/properties", this.index);
-        this.onGet("/api/v1/:lang/property/:propertyNo", this.propertyDetails);
         this.onGet("/api/v1/:lang/data/filter-list", this.filterList);
         this.onGet("/api/v1/:lang/developers", this.developerList);
+        this.onGet("/api/v1/:lang/developer/:developerId", this.developerDetails);
+        this.onGet("/api/v1/:lang/properties", this.propertyList);
+        this.onGet("/api/v1/:lang/property/:propertyNo", this.propertyDetails);
     }
     /**
      * method: filter list
@@ -34,8 +35,8 @@ export class PropertyApiController extends Controller {
             const propertyAreas: IPropertyArea[] = await this.PropertyAreaProvider.getAll(lang);
             const developers: IDeveloperType[] = await this.DeveloperTypeProvider.getAll(lang);
             const propertyTypes: IPropertyType[] = await this.PropertyTypeProvider.getAll(lang);
-            const completions = [2016,2017,2018,2019,2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030];
             const developmentTypes: IDevelopmentType[] = await this.DevelopmentTypeProvider.getAll(lang);
+            const completions = [2016,2017,2018,2019,2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030];
             const payload = {propertyAreas, developers, propertyTypes, completions, developmentTypes, lang: res.bag.lang, langList: res.bag.langList };
             this.response.message = 'success';
             this.response.data = payload;
@@ -71,9 +72,41 @@ export class PropertyApiController extends Controller {
             return res.status(200).send(this.response);
         }
     }
+    /**
+     * method: developer details
+     */
+    public async developerDetails(req: HttpRequest, res: HttpResponse, next: NextFunc) {
+        try{
+            const lang: string =  req.params.lang;
+            const developerId: string =  req.params.developerId;
+            //filter - act as optional
+            const propertyAreaId: any =  req.query.propertyAreaId;
+            const propertyTypeId: any =  req.query.propertyTypeId;
+            const completion: any =  req.query.completion;
+            const beds: any =  req.query.beds;
+
+            const p: any = req.query.page;
+            const s: any = req.query.size;
+            let page: number = parseInt(p, 10);
+            if (!page || page < 0) page = 1;
+            let size: number = parseInt(s, 10);
+            if (!size || size < 1) size = 6;
+            const developer: IDeveloperType = await this.DeveloperTypeProvider.get(developerId)
+            const developerProperty: IPropertyPage = await this.PropertyProvider.propertyListByDeveloper(page, size, developerId, propertyAreaId, propertyTypeId, completion, beds); 
+            const payload = {developer, developerProperty, lang: res.bag.lang, langList: res.bag.langList };
+            this.response.message = 'success';
+            this.response.data = payload;
+            return res.status(200).send(this.response);
+        }catch(err){
+            this.response.message = err;
+            this.response.status = 500;
+            this.response.data = null;
+            return res.status(200).send(this.response);
+        }
+    }
 
 
-    public async index(req: HttpRequest, res: HttpResponse, next: NextFunc) {
+    public async propertyList(req: HttpRequest, res: HttpResponse, next: NextFunc) {
         const lang: any =  req.params.lang;
         const properties: IProperty[] = await this.PropertyProvider.getAll(lang);
         if(!properties){
