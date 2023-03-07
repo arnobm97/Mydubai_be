@@ -42,9 +42,15 @@ export class PropertyApiController extends Controller {
             this.response.data = payload;
             return res.status(200).send(this.response);
         }catch(err){
+            const propertyAreas: any = null;
+            const developers: any = null;
+            const propertyTypes: any = null;
+            const developmentTypes: any = null;
+            const completions: any = null;
+            const payload = {propertyAreas, developers, propertyTypes, completions, developmentTypes, lang: res.bag.lang, langList: res.bag.langList };
             this.response.message = err;
             this.response.status = 500;
-            this.response.data = null;
+            this.response.data = payload;
             return res.status(200).send(this.response);
         }
     }
@@ -66,9 +72,11 @@ export class PropertyApiController extends Controller {
             this.response.data = payload;
             return res.status(200).send(this.response);
         }catch(err){
+            const developers: any = null;
+            const payload = {developers, lang: res.bag.lang, langList: res.bag.langList };
             this.response.message = err;
             this.response.status = 500;
-            this.response.data = null;
+            this.response.data = payload;
             return res.status(200).send(this.response);
         }
     }
@@ -98,41 +106,68 @@ export class PropertyApiController extends Controller {
             this.response.data = payload;
             return res.status(200).send(this.response);
         }catch(err){
+            const developer: any = null;
+            const developerProperty: any = null;
+            const payload = {developer, developerProperty, lang: res.bag.lang, langList: res.bag.langList };
             this.response.message = err;
             this.response.status = 500;
-            this.response.data = null;
+            this.response.data = payload;
             return res.status(200).send(this.response);
         }
     }
-
-
+    /**
+     * method: property list
+     */
     public async propertyList(req: HttpRequest, res: HttpResponse, next: NextFunc) {
-        const lang: any =  req.params.lang;
-        const properties: IProperty[] = await this.PropertyProvider.getAll(lang);
-        if(!properties){
-            this.response.message = "Properties not found.";
-        }else{
-            this.response.message = "Properties found.";
+        try{
+            const lang: string =  req.params.lang;
+            //filter - act as optional
+            const developmentTypeId: any =  req.query.developmentTypeId;
+            const propertyTypeId: any =  req.query.propertyTypeId;
+            const developerId: any =  req.query.developerId;
+            const propertyAreaId: any =  req.query.propertyAreaId;
+            const completion: any =  req.query.completion;
+
+            const p: any = req.query.page;
+            const s: any = req.query.size;
+            let page: number = parseInt(p, 10);
+            if (!page || page < 0) page = 1;
+            let size: number = parseInt(s, 10);
+            if (!size || size < 1) size = 6;
+            
+            const properties: IPropertyPage = await this.PropertyProvider.propertySearch(page, size, lang, developmentTypeId, propertyTypeId, developerId, propertyAreaId, completion); 
+            const payload = {properties, lang: res.bag.lang, langList: res.bag.langList };
+            this.response.message = 'success';
+            this.response.data = payload;
+            return res.status(200).send(this.response);
+        }catch(err){
+            const properties: any = null;
+            const payload = {properties, lang: res.bag.lang, langList: res.bag.langList };
+            this.response.message = err;
+            this.response.status = 500;
+            this.response.data = payload;
+            return res.status(200).send(this.response);
         }
-        const bag = { properties };
-        this.response.data = bag;
-        return res.status(this.response.status).send(this.response)
     }
-
-
-
+    /**
+     * method: property details
+     */
     public async propertyDetails(req: HttpRequest, res: HttpResponse, next: NextFunc) {
-        const lang: any =  req.params.lang;
-        const propertyNo: any =  req.params.propertyNo;
-        const property: IProperty = await this.PropertyProvider.get(propertyNo,lang);
-        if(!property){
-            this.response.message = "Property not found.";
-        }else{
-            this.response.message = "Property found.";
+        try{
+            const lang: any =  req.params.lang;
+            const propertyNo: any =  req.params.propertyNo;
+            const property: IProperty = await this.PropertyProvider.get(propertyNo,lang);
+            const payload = { property, lang: res.bag.lang, langList: res.bag.langList };
+            this.response.data = payload;
+            return res.status(this.response.status).send(this.response);
+        }catch(err){
+            const property: any = null;
+            const payload = { property, lang: res.bag.lang, langList: res.bag.langList };
+            this.response.message = err;
+            this.response.status = 500;
+            this.response.data = payload;
+            return res.status(this.response.status).send(this.response);
         }
-        const bag = { property, lang: res.bag.lang, langList: res.bag.langList };
-        this.response.data = bag;
-        return res.status(this.response.status).send(this.response);
     }
 
 
