@@ -4,7 +4,7 @@ import { IPropertyProvider, IProperty } from "../../core/IPropertyProvider";
 import {IPropertyAreaProvider, IPropertyArea } from "../../core/IPropertyAreaProvider";
 import {IDevelopmentTypeProvider, IDevelopmentType } from "../../core/IDevelopmentTypeProvider";
 import {IPropertyTypeProvider, IPropertyType } from "../../core/IPropertyTypeProvider";
-import {IDeveloperTypeProvider, IDeveloperType } from "../../core/IDeveloperTypeProvider";
+import {IDeveloperTypeProvider, IDeveloperType, IDeveloperTypePage } from "../../core/IDeveloperTypeProvider";
 
 
 export class PropertyApiController extends Controller {
@@ -22,17 +22,15 @@ export class PropertyApiController extends Controller {
     public onRegister(): void {
         this.onGet("/api/v1/:lang/properties", this.index);
         this.onGet("/api/v1/:lang/property/:propertyNo", this.propertyDetails);
-        // filterList
         this.onGet("/api/v1/:lang/data/filter-list", this.filterList);
+        this.onGet("/api/v1/:lang/developers", this.developerList);
     }
-
-
     /**
      * method: filter list
      */
     public async filterList(req: HttpRequest, res: HttpResponse, next: NextFunc) {
         try{
-            const lang: any =  req.params.lang;
+            const lang: string =  req.params.lang;
             const propertyAreas: IPropertyArea[] = await this.PropertyAreaProvider.getAll(lang);
             const developers: IDeveloperType[] = await this.DeveloperTypeProvider.getAll(lang);
             const propertyTypes: IPropertyType[] = await this.PropertyTypeProvider.getAll(lang);
@@ -49,10 +47,30 @@ export class PropertyApiController extends Controller {
             return res.status(200).send(this.response);
         }
     }
-
-
-
-
+    /**
+     * method: developer list
+     */
+    public async developerList(req: HttpRequest, res: HttpResponse, next: NextFunc) {
+        try{
+            const lang: string =  req.params.lang;
+            const p: any = req.query.page;
+            const s: any = req.query.size;
+            let page: number = parseInt(p, 10);
+            if (!page || page < 0) page = 1;
+            let size: number = parseInt(s, 10);
+            if (!size || size < 1) size = 9;
+            const developers: IDeveloperTypePage = await this.DeveloperTypeProvider.list(page, size, lang);
+            const payload = {developers, lang: res.bag.lang, langList: res.bag.langList };
+            this.response.message = 'success';
+            this.response.data = payload;
+            return res.status(200).send(this.response);
+        }catch(err){
+            this.response.message = err;
+            this.response.status = 500;
+            this.response.data = null;
+            return res.status(200).send(this.response);
+        }
+    }
 
 
     public async index(req: HttpRequest, res: HttpResponse, next: NextFunc) {
