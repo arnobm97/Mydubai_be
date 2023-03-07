@@ -17,7 +17,7 @@ export class DeveloperTypeProvider implements IDeveloperTypeProvider {
 
     public async getAll(lang?: string): Promise<IDeveloperType[]> {
         if(lang){
-            return await DeveloperTypeModel.find({ "lang": lang }).catch(err => null);
+            return await DeveloperTypeModel.find({ "lang": lang },{_id:1, name:1}).catch(err => null);
         }else{
             return await DeveloperTypeModel.find().catch(err => null);
         }

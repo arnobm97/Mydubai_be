@@ -17,7 +17,7 @@ export class PropertyAreaProvider implements IPropertyAreaProvider {
 
     public async getAll(lang?: string): Promise<IPropertyArea[]> {
         if(lang){
-            return await PropertyAreaModel.find({ "lang": lang }).catch(err => null);
+            return await PropertyAreaModel.find({ "lang": lang },{_id:1, areaName:1}).catch(err => null);
         }else{
             return await PropertyAreaModel.find().catch(err => null);
         }

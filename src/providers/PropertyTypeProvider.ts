@@ -13,7 +13,7 @@ export class PropertyTypeProvider implements IPropertyTypeProvider {
 
     public async getAll(lang?: string): Promise<IPropertyType[]> {
         if(lang){
-            return await PropertyTypeModel.find({ "lang": lang }).catch(err => null);
+            return await PropertyTypeModel.find({ "lang": lang },{_id: 1, name: 1}).catch(err => null);
         }else{
             return await PropertyTypeModel.find().catch(err => null);
         }

@@ -13,7 +13,7 @@ export class DevelopmentTypeProvider implements IDevelopmentTypeProvider {
 
     public async getAll(lang?: string): Promise<IDevelopmentType[]> {
         if(lang){
-            return await DevelopmentTypeModel.find({ "lang": lang }).catch(err => null);
+            return await DevelopmentTypeModel.find({ "lang": lang },{_id:1, name:1}).catch(err => null);
         }else{
             return await DevelopmentTypeModel.find().catch(err => null);
         }

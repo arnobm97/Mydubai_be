@@ -26,7 +26,7 @@ export class CustomerInterestController extends Controller {
         const customerInterestPage: ICustomerInterestPage  = await this.CustomerInterestProvider.list(page, size);
         res.bag.customerInterestPage = customerInterestPage;
         res.bag.flashMessage = req.flash('flashMessage');
-        //return res.send(res.bag);
+        // return res.send(res.bag);
         res.view('customer/query-form/index');
     }
 
