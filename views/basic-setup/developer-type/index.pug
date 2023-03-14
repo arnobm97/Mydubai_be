@@ -39,6 +39,7 @@ block content
             tr
               th.cell SL#
               th.cell  Developer Type Name
+              th.cell Logo
               th.cell Language
               th.cell.text-center Created At
               th.cell.text-center Created By
@@ -49,6 +50,11 @@ block content
               tr
                 td.cell=sl++
                 td.cell=list.name
+                td.cell
+                  -if(list.logo)
+                    a(href=list.logo target="_blank") Show
+                  -else
+                    | Show
                 td.cell=list.lang
                 td.cell.text-center
                   span=fmt.date.pretty(list.createdAt)+' '+fmt.date.Time12(list.createdAt)

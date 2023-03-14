@@ -185,9 +185,6 @@ export class BasicSetupController extends Controller {
         res.bag.developerTypePage = developerTypePage;
         res.bag.currentLang = queryLanguage;
         res.bag.flashMessage = req.flash('flashMessage');
-
-        return res.send(developerTypePage);
-
         res.view('basic-setup/developer-type/index');
     }
 
