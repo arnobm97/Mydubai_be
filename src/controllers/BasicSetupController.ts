@@ -185,6 +185,9 @@ export class BasicSetupController extends Controller {
         res.bag.developerTypePage = developerTypePage;
         res.bag.currentLang = queryLanguage;
         res.bag.flashMessage = req.flash('flashMessage');
+
+        return res.send(developerTypePage);
+
         res.view('basic-setup/developer-type/index');
     }
 
@@ -198,16 +201,24 @@ export class BasicSetupController extends Controller {
             res.view('basic-setup/developer-type/create');
         }else if(req.method === "POST"){
             const name = req.body.name;
+            const description = req.body.description;
+            const logo = req.body.logo;
             const lang = req.body.lang;
             if (!name) {
                 res.bag.errorMessage = "Developer type name is required";
+                return res.view('basic-setup/developer-type/create')
+            }else if (!description) {
+                res.bag.errorMessage = "Developer type description is required";
+                return res.view('basic-setup/developer-type/create')
+            }else if (!logo) {
+                res.bag.errorMessage = "Developer type logo is required";
                 return res.view('basic-setup/developer-type/create')
             }else if (!lang) {
                 res.bag.errorMessage = "Developer type language is required";
                 return res.view('basic-setup/developer-type/create')
             }else{
                 const user : EmbededUser = {id: req.user.id, fullName: req.user.name };
-                await this.DeveloperTypeProvider.create(name, lang, user);
+                await this.DeveloperTypeProvider.create(name, description, logo, lang, user);
                 req.flash('flashMessage', 'Developer type created successfully.');
                 res.redirect('/basic-setup/developer-type');
             }

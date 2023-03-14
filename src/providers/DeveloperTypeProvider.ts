@@ -42,9 +42,11 @@ export class DeveloperTypeProvider implements IDeveloperTypeProvider {
     }
 
 
-    public async create(name: string, lang: string, createdBy: EmbededUser): Promise<IDeveloperType> {
+    public async create(name: string, description: string, logo: string, lang: string, createdBy: EmbededUser): Promise<IDeveloperType> {
         return await DeveloperTypeModel.create({
             name,
+            description,
+            logo,
             lang,
             createdBy
         });

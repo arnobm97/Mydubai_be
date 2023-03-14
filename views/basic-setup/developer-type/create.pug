@@ -33,8 +33,14 @@ block content
                   each lang in langList
                     option(value=lang.value) #{lang.title}
               div.col-12.col-md-6.mb-2
-                label.form-label(for='name') Developer Type Name
+                label.form-label(for='name') Developer Name
                 input#name.form-control(type='text' name="name" required )
+              div.col-12.col-md-6.mb-2
+                label.form-label(for='description') Developer description
+                textarea#description.form-control(name="description" rows='3' required )
+              div.col-12.col-md-6.mb-2
+                label.form-label(for='name') Developer logo path
+                input#logo.form-control(type='text' name="logo" required )
             //- submit button
             hr
             button.btn.app-btn-primary(type='submit') Create Developer Type
