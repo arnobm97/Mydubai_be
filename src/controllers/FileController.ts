@@ -15,7 +15,8 @@ export class FileController extends Controller {
 
     public onRegister(): void {
         this.onGet("/file-drive", this.index, [Role.Admin, Role.Moderator]);
-        this.onPost("/file-drive/upload", this.upload, [Role.Admin, Role.Moderator]);
+        this.onPost("/file-drive/upload", this.uploadFile, [Role.Admin, Role.Moderator]);
+        this.onGet("/file-drive/delete/:file", this.deleteFile, [Role.Admin, Role.Moderator]);
 
         AWS.config.update({
             accessKeyId: this.config.awsS3.accessKeyId,
@@ -51,7 +52,7 @@ export class FileController extends Controller {
     }
 
 
-    public async upload(req: HttpRequest, res: HttpResponse, next: NextFunc) {
+    public async uploadFile(req: HttpRequest, res: HttpResponse, next: NextFunc) {
         const bucket = this.config.awsS3.bucket;
         const form = new multiparty.Form();
         form.parse(req, function (err, fields, files) {
@@ -72,6 +73,27 @@ export class FileController extends Controller {
                 req.flash('flashMessage',"File uploaded into cloud successfully.");
                 res.redirect('/file-drive');
             });
+        });
+    }
+
+
+
+    public async deleteFile(req: HttpRequest, res: HttpResponse, next: NextFunc) {
+        const filePath = req.params.file;
+        const bucket = this.config.awsS3.bucket;
+        const params = {
+            Bucket: bucket,
+            Key: filePath,
+        };
+        const s3 = new AWS.S3();
+        s3.deleteObject(params, (err: any, data: any) => {
+            if (err) {
+                req.flash('flashMessage',"`Error deleting file: ${err}`");
+                res.redirect('/file-drive');
+            } else {
+                req.flash('flashMessage',"File deleted successfully");
+                res.redirect('/file-drive');
+            }
         });
     }
 
