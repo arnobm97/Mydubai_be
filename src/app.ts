@@ -31,6 +31,7 @@ import { DashboardController } from "./controllers/DashboardController";
 import { BasicSetupController } from "./controllers/BasicSetupController";
 import { UserController } from "./controllers/UserController";
 import { PropertyController } from "./controllers/PropertyController";
+import { FileController } from "./controllers/FileController";
 import { CustomerInterestController } from "./controllers/CustomerInterestController";
 
 // api
@@ -84,7 +85,7 @@ app.setMenu("main", {
         { name: "Users", icon: "<i class='fa-solid fa-user fa-lg'></i>", path: "/users", for: [Role.Admin, Role.Moderator] },
         { name: "Properties", icon: "<i class='fa-solid fa-building fa-lg'></i>", path: "/properties", for: [Role.Admin, Role.Moderator] },
         { name: "Basic Setup", icon: "<i class='fa-solid fa-cogs fa-lg'></i>", path: "/basic-setup/index", for: [Role.Admin, Role.Moderator] },
-        { name: "File Drive", icon: "<i class='fa-solid fa-hdd fa-lg'></i>", path: "#", for: [Role.Admin, Role.Moderator] },
+        { name: "File Drive", icon: "<i class='fa-solid fa-hdd fa-lg'></i>", path: "/file-drive", for: [Role.Admin, Role.Moderator] },
         { name: "Customer Query", icon: "<i class='fa-solid fa-envelope fa-lg'></i>", path: "/customer-interest/index", for: [Role.Admin, Role.Moderator] }
     ]
 })
@@ -99,6 +100,7 @@ app.registerController(DashboardController);
 app.registerController(BasicSetupController);
 app.registerController(UserController);
 app.registerController(PropertyController);
+app.registerController(FileController);
 app.registerController(CustomerInterestController);
 
 // api

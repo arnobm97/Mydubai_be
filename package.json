@@ -33,6 +33,9 @@
   "dependencies": {
     "@types/connect-flash": "0.0.37",
     "@types/express-session": "^1.17.6",
+    "@types/multiparty": "0.0.33",
+    "@types/uuidv4": "^5.0.0",
+    "aws-sdk": "^2.1334.0",
     "axios": "^0.27.2",
     "bluebird": "^3.7.2",
     "body-parser": "^1.20.1",
@@ -45,6 +48,7 @@
     "html-pdf": "^3.0.1",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.10.0",
+    "multiparty": "^4.2.3",
     "node-cron": "^2.0.3",
     "nodemailer": "^6.9.1",
     "process": "^0.11.10",
