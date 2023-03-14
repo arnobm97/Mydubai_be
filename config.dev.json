@@ -12,6 +12,12 @@
             "pass": "NOrePly#%2022"
         }
     },
+    "awsS3": {
+        "bucket": "propertyseeker",
+        "accessKeyId": "AKIAQYX2GW46WQR65QYX",
+        "secretAccessKey": "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",
+        "region": "me-central-1"
+    },
     "mongoUrl": "mongodb://localhost:27017/off_ready_plan_db",
     "cookieSecret": "P>twUC2.9mNurJN%fW(!esGwua:!e(Pu8bHfTXW grck3g9/J@*W3MuEB,FE#/=m",
     "sessionSecret": "P>twUC2.9mVurJN%fW(!esGwua:!e(Pu8bHfTXW grck3g9/J@*W3MuEB,FE#/=m",
