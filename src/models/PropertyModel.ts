@@ -69,7 +69,7 @@ const PropertySchema: Schema = new Schema({
       type: { type: String, required: true },
       path: { type: String, required: true },
     }],
-
+    isFeatured: { type: Boolean, default: false },
     createBy: {
       id: { type: String, required: true },
       fullName: { type: String, required: true },

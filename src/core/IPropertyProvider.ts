@@ -66,6 +66,7 @@ export interface IProperty extends Document{
     brochure: string;
     images: IPropertyImage[];
     videos: IPropertyVideo[];
+    isFeatured: boolean;
     createBy: EmbededUser;
 }
 

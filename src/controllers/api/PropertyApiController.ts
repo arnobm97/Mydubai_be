@@ -22,9 +22,9 @@ export class PropertyApiController extends Controller {
     public onRegister(): void {
         this.onGet("/api/v1/:lang/data/filter-list", this.filterList);
         this.onGet("/api/v1/:lang/developers", this.developerList);
-        this.onGet("/api/v1/:lang/developer/:developerId", this.developerDetails);
+        this.onGet("/api/v1/:lang/developers/:developerId", this.developerDetails);
         this.onGet("/api/v1/:lang/properties", this.propertyList);
-        this.onGet("/api/v1/:lang/property/:propertyNo", this.propertyDetails);
+        this.onGet("/api/v1/:lang/properties/:propertyNo", this.propertyDetails);
     }
     /**
      * method: filter list
@@ -87,7 +87,7 @@ export class PropertyApiController extends Controller {
         try{
             const lang: string =  req.params.lang;
             const developerId: string =  req.params.developerId;
-            //filter - act as optional
+            // filter - act as optional
             const propertyAreaId: any =  req.query.propertyAreaId;
             const propertyTypeId: any =  req.query.propertyTypeId;
             const completion: any =  req.query.completion;
@@ -100,7 +100,7 @@ export class PropertyApiController extends Controller {
             let size: number = parseInt(s, 10);
             if (!size || size < 1) size = 6;
             const developer: IDeveloperType = await this.DeveloperTypeProvider.get(developerId)
-            const developerProperty: IPropertyPage = await this.PropertyProvider.propertyListByDeveloper(page, size, developerId, propertyAreaId, propertyTypeId, completion, beds); 
+            const developerProperty: IPropertyPage = await this.PropertyProvider.propertyListByDeveloper(page, size, developerId, propertyAreaId, propertyTypeId, completion, beds);
             const payload = {developer, developerProperty, lang: res.bag.lang, langList: res.bag.langList };
             this.response.message = 'success';
             this.response.data = payload;
@@ -121,7 +121,7 @@ export class PropertyApiController extends Controller {
     public async propertyList(req: HttpRequest, res: HttpResponse, next: NextFunc) {
         try{
             const lang: string =  req.params.lang;
-            //filter - act as optional
+            // filter - act as optional
             const developmentTypeId: any =  req.query.developmentTypeId;
             const propertyTypeId: any =  req.query.propertyTypeId;
             const developerId: any =  req.query.developerId;
@@ -134,8 +134,8 @@ export class PropertyApiController extends Controller {
             if (!page || page < 0) page = 1;
             let size: number = parseInt(s, 10);
             if (!size || size < 1) size = 6;
-            
-            const properties: IPropertyPage = await this.PropertyProvider.propertySearch(page, size, lang, developmentTypeId, propertyTypeId, developerId, propertyAreaId, completion); 
+
+            const properties: IPropertyPage = await this.PropertyProvider.propertySearch(page, size, lang, developmentTypeId, propertyTypeId, developerId, propertyAreaId, completion);
             const payload = {properties, lang: res.bag.lang, langList: res.bag.langList };
             this.response.message = 'success';
             this.response.data = payload;

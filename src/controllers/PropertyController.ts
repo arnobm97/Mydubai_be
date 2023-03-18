@@ -70,6 +70,7 @@ export class PropertyController extends Controller {
         const brochure = req.body.brochure;
         const images = req.body.images;
         const videos = req.body.videos;
+        const isFeatured = true;
         const createBy = { id: req.user.id, fullName: req.user.name };
 
         // find in db then generate object
@@ -109,7 +110,7 @@ export class PropertyController extends Controller {
             req.flash('flashMessage', 'Invalid developer type. Please try again.');
             return res.redirect('/properties');
         }
-        const newProperty: any = {propertyNo,lang,propertyName,propertyDescription,propertyType,propertyArea,developmentType,developerType,areaSize,highlights,amenities,completion,startingPrice,location,paymentPlan,unitType,brochure,images,videos,createBy};
+        const newProperty: any = {propertyNo,lang,propertyName,propertyDescription,propertyType,propertyArea,developmentType,developerType,areaSize,highlights,amenities,completion,startingPrice,location,paymentPlan,unitType,brochure,images,videos,isFeatured,createBy};
 
         // return res.send(newProperty);
 
