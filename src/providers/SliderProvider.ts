@@ -17,7 +17,7 @@ export class SliderProvider implements ISliderProvider {
 
     public async getAll(lang?: string): Promise<ISlider[]> {
         if(lang){
-            return await SliderModel.find({ "lang": lang },{_id:1, name:1}).catch(err => null);
+            return await SliderModel.find({ "lang": lang },{createdBy:0, __v:0}).catch(err => null);
         }else{
             return await SliderModel.find().catch(err => null);
         }
