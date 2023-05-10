@@ -42,7 +42,7 @@ export class HomeApiController extends Controller {
             const sliders: any = null;
             const letestOffplan: any = null;
             const letestReady: any = null;
-            const payload = {liders, letestOffplan, letestReady, lang: res.bag.lang, langList: res.bag.langList };
+            const payload = {sliders, letestOffplan, letestReady, lang: res.bag.lang, langList: res.bag.langList };
             this.response.message = err;
             this.response.status = 500;
             this.response.data = payload;
