@@ -32,6 +32,11 @@ export class PropertyProvider implements IPropertyProvider {
     }
 
 
+    public async letestByDevelopmentType(developmentTypeId: string, limit: number): Promise<IProperty[]> {
+        return await PropertyModel.find({"developmentType.id": developmentTypeId}).limit(limit).catch(err => null);
+    }
+
+
 
     public async propertyListByDeveloper(page:number = 1, size:number = 10, developerId: string, propertyAreaId: string, propertyTypeId: string, completion: string, beds: string): Promise<IPropertyPage> {
         let filter: any = {"developerType.id": developerId };

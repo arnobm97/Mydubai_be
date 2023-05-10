@@ -1,17 +1,17 @@
 import { Controller } from "../../core/Controller";
 import { NextFunc, HttpRequest, HttpResponse } from "../../core/Types";
-import {IPropertyAreaProvider, IPropertyArea } from "../../core/IPropertyAreaProvider";
-import {ISliderProvider, ISlider, ISliderPage } from "../../core/ISliderProvider";
-import {IDeveloperTypeProvider, IDeveloperType, IDeveloperTypePage } from "../../core/IDeveloperTypeProvider";
+import {ISliderProvider, ISlider,  } from "../../core/ISliderProvider";
+import {IDevelopmentTypeProvider, IDevelopmentType } from "../../core/IDevelopmentTypeProvider";
+import {IPropertyProvider, IProperty } from "../../core/IPropertyProvider";
 
 
 export class HomeApiController extends Controller {
 
     private config = require("../../../config.json");
     private response = { status: 200, error: false, message: "", data: {} };
-    private PropertyAreaProvider: IPropertyAreaProvider;
-    private DeveloperTypeProvider: IDeveloperTypeProvider;
     private SliderProvider: ISliderProvider;
+    private DevelopmentTypeProvider: IDevelopmentTypeProvider;
+    private PropertyProvider: IPropertyProvider;
 
     public onRegister(): void {
         this.onGet("/api/v1/:lang/get-home", this.home);
@@ -22,17 +22,27 @@ export class HomeApiController extends Controller {
         try{
             const lang: string =  req.params.lang;
             const sliders: ISlider[] = await this.SliderProvider.getAll(lang);
-            const payload = {sliders, lang: res.bag.lang, langList: res.bag.langList };
+            const devType: IDevelopmentType[] = await  this.DevelopmentTypeProvider.getAll(lang);
+            let letestOffplan: IProperty[];
+            let letestReady: IProperty[];
+            for(let item of devType){
+                if((item.name).toLowerCase() === 'off plan' || (item.name).toLowerCase() === 'off-plan'){
+                    letestOffplan = await this.PropertyProvider.letestByDevelopmentType(item._id, 5);
+                }else if((item.name).toLowerCase() === 'ready'){
+                    letestReady = await this.PropertyProvider.letestByDevelopmentType(item._id, 5);
+                }else{
+                    //do noting
+                }
+            }
+            const payload = {sliders, letestOffplan, letestReady, lang: res.bag.lang, langList: res.bag.langList };
             this.response.message = 'success';
             this.response.data = payload;
             return res.status(200).send(this.response);
         }catch(err){
-            const propertyAreas: any = null;
-            const developers: any = null;
-            const propertyTypes: any = null;
-            const developmentTypes: any = null;
-            const completions: any = null;
-            const payload = {propertyAreas, developers, propertyTypes, completions, developmentTypes, lang: res.bag.lang, langList: res.bag.langList };
+            const sliders: any = null;
+            const letestOffplan: any = null;
+            const letestReady: any = null;
+            const payload = {liders, letestOffplan, letestReady, lang: res.bag.lang, langList: res.bag.langList };
             this.response.message = err;
             this.response.status = 500;
             this.response.data = payload;
@@ -41,7 +51,7 @@ export class HomeApiController extends Controller {
     }
   
 
-    
+
 
 
 }
