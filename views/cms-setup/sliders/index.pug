@@ -1,0 +1,100 @@
+extends ../../layout
+block content
+
+  .row.app-card.mb-2.align-items-center.justify-content-between.bg-white.p-2.m-0
+    .col-auto
+      h1.app-page-title.mb-0 CMS Setup / Sliders
+    .col-auto
+      .page-utilities
+        .row.g-2.justify-content-start.justify-content-md-end.align-items-center
+          .col-auto
+            form.lang-filter
+              select.form-select.w-auto(name="lang" onchange="$('form.lang-filter').submit()")
+                option(value="") Language
+                each lang in langList
+                  -if(currentLang === lang.value)
+                    option(value=lang.value selected="") #{lang.title}
+                  -else
+                    option(value=lang.value ) #{lang.title}
+          .col-auto
+            a.btn.app-btn-primary(href='/cms-setup/sliders/create')
+              i.fa.fa-plus
+              | &nbsp;Create  Slider
+          .col-auto
+            a.btn.app-btn-danger(href='/basic-setup/index')
+              i.fa.fa-chevron-left
+              | &nbsp;Return
+      
+  div.row(style="margin: 0px 1px")
+    -if(flashMessage.length>0)
+      div.alert.alert-success(role='alert')
+        each mgs in flashMessage
+          li=mgs
+
+  div.app-card.app-card-orders-table.shadow-sm.mb-5
+    div.app-card-body
+      div.table-responsive
+        table.table.app-table-hover.mb-0.text-left
+          thead
+            tr
+              th.cell SL#
+              th.cell Title
+              th.cell Image
+              th.cell Description
+              th.cell.text-center URL
+              th.cell.text-center lang
+              th.cell.text-center Created At
+              th.cell.text-center Created By
+              th.cell.text-center Action
+          tbody
+            -var sl=1
+            each list in sliderPage.data
+              tr
+                td.cell=sl++
+                td.cell=list.title
+                td.cell
+                  -if(list.image)
+                    a(href=list.image target="_blank") Show
+                  -else
+                    | Show
+                td.cell=list.description1
+                td.cell.text-center=list.targetLink
+                td.cell.text-center=list.lang
+                td.cell.text-center
+                  span=fmt.date.pretty(list.createdAt)+' '+fmt.date.Time12(list.createdAt)
+                td.cell.text-center=list.createdBy.fullName
+                td.cell.text-center
+                  a.btn.app-btn-info.btn-sm(href='/cms-setup/sliders/update/'+list._id) Update
+                  a.btn.app-btn-danger.btn-sm.ms-2(href='/cms-setup/sliders/delete/'+list._id onclick="return confirm('Are you sure you want to delete this item?');") Delete
+                  a.btn.app-btn-primary.btn-sm.ms-2(href='/cms-setup/sliders/details/'+list._id) View             
+  //- pagination
+  nav.app-pagination
+    ul.pagination.justify-content-center
+      - var n = 1;
+      - var pages = Math.ceil(sliderPage.count/sliderPage.size)
+      if sliderPage.page > 1
+        li.page-item
+          a.page-link(href="/cms-setup/sliders?page=" + (sliderPage.page-1), tabindex='-1', aria-disabled='false') Previous
+      else
+        li.page-item.disabled
+          a.page-link(href="/cms-setup/sliders?page=" + pages, tabindex='-1', aria-disabled='true') Previous
+
+      -var flag = 0;
+      while n <= pages
+        if n == sliderPage.page
+          li.page-item.active #[a.page-link(href="/cms-setup/sliders?page=" + n) #{n}]
+        else if n < 5 || n == sliderPage.page - 1 || n == sliderPage.page + 1 || n > pages - 1
+          li.page-item #[a.page-link(href="/cms-setup/sliders?page=" + n) #{n}]
+        //- else
+        //-   if flag == 0
+        //-     li.page-item.disabled #[a.page-link(href="") - ]
+        //-   -flag=1;
+        else
+          li.page-item #[a.page-link(href="/cms-setup/sliders?page=" + n) #{n}]
+        - n++
+      if sliderPage.page < pages
+        li.page-item
+          a.page-link(href=href="/cms-setup/sliders?page=" + (sliderPage.page+1)) Next
+      else
+        li.page-item.disabled
+          a.page-link(href="/cms-setup/sliders?page=1") Next

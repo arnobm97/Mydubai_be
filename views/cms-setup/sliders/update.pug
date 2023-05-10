@@ -1,0 +1,65 @@
+extends ../../layout
+block content
+
+
+  .row.app-card.mb-2.align-items-center.justify-content-between.bg-white.p-2.m-0
+    .col-auto
+      h1.app-page-title.mb-0 CMS Setup / Sliders / Create
+    .col-auto
+      .page-utilities
+        .row.g-2.justify-content-start.justify-content-md-end.align-items-center
+          .col-auto
+            a.btn.app-btn-info(href='')
+              i.fa.fa-refresh
+              | &nbsp;Reset Page
+          .col-auto
+            a.btn.app-btn-danger(href='/cms-setup/sliders')
+              i.fa.fa-chevron-left
+              | &nbsp;Return
+  
+
+  div.row
+    div.col-12.col-md-12
+      div.app-card.app-card-settings.shadow-sm.p-4
+        -if(errorMessage)
+          div.alert.alert-danger(role='alert')=errorMessage
+        div.app-card-body
+
+          -if(sliderItem)
+
+            form(action="" method="POST")
+              div.row
+                div.col-12.col-md-6.mb-2
+                  label.form-label(for='lang') Language
+                  select.form-control(name="lang" required )
+                    option(value="", disabled="", selected="") Choose Language
+                    each lang in langList
+                      option(value=lang.value  selected=(lang.value === sliderItem.lang ? true : false) ) #{lang.title}
+                div.col-12.col-md-6.mb-2
+                  label.form-label(for='title') Slider's title
+                  input#title.form-control(type='text' name="title"  value=sliderItem.title  required )
+
+                div.col-12.col-md-6.mb-2
+                  label.form-label(for='description1') Slider's description 1
+                  input#description1.form-control(type='text' value=sliderItem.description1 name="description1"  )
+                
+                div.col-12.col-md-6.mb-2
+                  label.form-label(for='description2') Slider's description 2
+                  input#description2.form-control(type='text' value=sliderItem.description2 name="description2"  )
+                
+                div.col-12.col-md-6.mb-2
+                  label.form-label(for='description3') Slider's description 3
+                  input#description3.form-control(type='text' value=sliderItem.description3 name="description3"  )
+
+                div.col-12.col-md-6.mb-2
+                  label.form-label(for='targetLink') Target Link
+                  input#targetLink.form-control(type='text' value=sliderItem.targetLink name="targetLink"  )
+
+                div.col-12.col-md-12.mb-2
+                  label.form-label(for='image') Slider's image Path
+                  input#image.form-control(type='text' value=sliderItem.image name="image" required )
+
+              //- submit button
+              hr
+              button.btn.app-btn-primary(type='submit') Update Slider
+    
