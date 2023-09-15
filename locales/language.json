@@ -11,88 +11,591 @@
             "arabic": "Arabic",
             "chinese": "Chinese",
             "french": "French",
-            "russian": "Russian"
+            "russian": "Russian",
+            "arrangeMeeting": "Arrange a meeting",
+            "offPlan": "OFF PLAN",
+            "ready": "READY",
+            "allProjects": "ALL PROJECTS"
         },
         "menu": {
-            "WHY US": "WHY US",
-            "ABOUT US": "ABOUT US",
-            "CONTACT US": "CONTACT US",
-            "DEVELOPERS": "DEVELOPERS",
-            "PROJECTS": "PROJECTS",
-            "OFFERS": "OFFERS",
-            "3D TOUR": "3D TOUR"
+            "whyUs": "WHY US",
+            "aboutUs": "ABOUT US",
+            "contactUs": "CONTACT US",
+            "developers": "DEVELOPERS",
+            "emaar": "Emaar Properties",
+            "damac":"Damac Properties",
+            "dubai": "Dubai Properties",
+            "all": "ALL DEVELOPERS",
+            "projects": "PROJECTS",
+            "offPlan": "OFF PLAN",
+            "ready": "READY",
+            "allProject": "ALL PROJECTS",
+            "offers": "OFFERS",
+            "tour": "3D TOUR"
         },
-        "common": {
-            "button": {
-                "ok": "Ok",
-                "submit": "Submit",
-                "arrange A Meeting": "Arrange A Meeting",
-                "all Projects": "All Projects",
-                "off Plan": "Off Plan",
-                "ready": "Ready",
-                "ready projects": "Ready Projects",
-                "view All": "View All",
-                "details": "Details",
-                "enquiry": "Enquiry",
-                "subscribe": "Subscribe",
-                "yES, I ACCEPT COOKIES": "YES, I ACCEPT COOKIES",
-                "nO, I WANT MORE INFO": "NO, I WANT MORE INFO",
-                "cONTACT US": "CONTACT US",
-                "dOWNLOAD BROCHURE": "DOWNLOAD BROCHURE",
-                "dOWNLOAD FLOOR PLANS": "DOWNLOAD FLOOR PLANS",
-                "vIEW GALLERY": "VIEW GALLERY",
-                "lOCATION": "LOCATION",
-                "sUBMIT YOUR INTEREST": "SUBMIT YOUR INTEREST",
-                "rEGISTER YOUR INTEREST": "REGISTER YOUR INTEREST",
-                "register Now": "Register Now",
-                "iNTRODUCTION PHONE CALL": "INTRODUCTION PHONE CALL",
-                "vIDEO MEETING": "VIDEO MEETING",
-                "nEXT STEP": "NEXT STEP",
-                "add Guests": "Add Guests",
-                "back": "Back",
-                "Project List": "Project List",
-                "Show More": "Show More"
+        "hero": {
+            "title": "Get an Overview of The Most Iconic Architectural Landmarks in Dubai",
+            "ready": "READY"
+        },
+        "filterHomepage": {
+            "textBoxPropertyArea": "All Property Area",
+            "textBoxDubaiDeveloper": "All Dubai Developer",
+            "textBoxPropertyType": "All Property Type",
+            "textBoxCompletion": "All Completion",
+            "textBoxDevelopmentType": "All Development Type",
+            "buttonSearch": "SEARCH"
+
+        },
+        "slider": {
+            "textCopy": "Find your next investment opportunity with the latest Off-plan & Ready projects in Dubai",
+            "titleReady": "Latest Ready Properties",
+            "titleOffPlan": "Latest Off Plan Properties",
+            "buttonExplore": "explore MOre"
+        },
+        "propertySelection": {
+            "title": "Which property investment is right for you?",
+            "subTitle": "Discover the best off-plan & ready projects in Dubai and secure your dream home today",
+            "insideTitle": "THE PREMIER LUXURY PROPERTY DEVELOPER IN DUBAI",
+            "insideSubTitle": "DAMAC Properties has been shaping the Middle East’s luxury real estate market since 2002, delivering iconic residential, commercial and leisure properties for sale in Dubai, across the region and beyond.",
+            "insideButton": "GET IN TOUCH WITH OUR PROPERTY EXPERTS",
+            "ready": "READY",
+            "offPlan": "OFF-PLAN"
+        },
+        "paymentMethod": {
+            "text": "Figma ipsum component variant main layer. Duplicate ellipse draft scrolling move select ipsum link. Font image boolean library invite hand create. Ipsum image text bold strikethrough.",
+            "cash": "Cash",
+            "crypto": "Crypto",
+            "mortgage": "Mortgage"
+        },
+        "newsletter": {
+            "title": "Sign up for our exclusive updates and information about the newest projects in Dubai",
+            "email": "Provide email",
+            "button": "Subscribe",
+            "submitTextTitle": "Thanks For Subscribing Us",
+            "submitTextSubTitle": "We’d like to show you notifications for the latest news and updates"
+        },
+        "footer": {
+            "whyUs": "WHY US",
+            "aboutUs": "ABOUT US",
+            "contactUs": "CONTACT US",
+            "developers": "Developers",
+            "emaar": "Emaar Properties",
+            "damac": "Dubai Properties",
+            "nakheel": "Nakheel",
+            "meraas": "Meraas",
+            "propertiesForSale": "Properties for Sale",
+            "villa": "Villas for Sale",
+            "appartment": "Appartments for Sale",
+            "hotel": "Hotels for Sale",
+            "readyVilla": "Ready Villas for Sale",
+            "featuredProjects": "Featured Projects",
+            "featuredProject1": "W Residences Downtown Dubai",
+            "featuredProject2": "The Royal Atlantis Residences",
+            "featuredProject3": "Six Senses The Palm",
+            "featuredProject4": "Dorchester Collection Dubai",
+            "featuredProject5": "District One Villas Dubai"
+        },
+        "bottomBar": {
+            "enquire": "ENQUIRE",
+            "contactUs": "CONTACT US"
+        },
+        "meetings": {
+            "title": "ARRANGE A MEETING",
+            "subTitle": "Follow the steps to set up a meeting with sales team to get the best solution",
+            "next": "NEXT STEP",
+            "phone": {
+                "text": "INTRODUCTION PHONE CALL",
+                "timeCount": "30",
+                "timeFormat": "MIN"
             },
-            "dropdown": {
-                "All Dubai Area": "All Dubai Area",
-                "All Dubai Developer": "All Dubai Developer",
-                "All Property Type": "All Property Type",
-                "All Completion": "All Completion",
-                "All Development Type": "All Development Type",
-                "Development Type": "Development Type",
-                "Developer Type": "Developer Type",
-                "Project Area": "Project Area",
-                "Sort By": "Sort By",
-                "Beds": "Beds",
-                "Completion": "Completion",
-                "Prefered Language": "Prefered Language"
+            "video": {
+                "text": "VIDEO MEETING",
+                "timeCount": "60",
+                "timeFormat": "MIN"
             },
+            "selectDate": "Select Date",
+            "SelectTime": "Select Time",
+            "enterDetails": "Enter Details",
+            "placeholderName": "Your Name",
+            "placeholderEmail": "Your Email",
+            "placeholderPhoneNumber": "Your Phone Number",
+            "placeholderGuestEmails": "Guest's Email (Separate with Commas)",
+            "buttonAddGuests": "Add Guests",
+            "button": "Submit",
+            "submitText": "Successfully Submitted"
+        },
+        "enquiryForm": {
+            "register": "Register Your Interest",
+            "placeholderName": "Enter Your Name",
+            "placeholderEmail": "Enter Your Email",
+            "placeholderPhone": "Phone Number",
+            "placeholderLanguage": "Prefered Language",
+            "placeholderDescription": "Description",
+            "buttonSubmit": "Submit Your Interest"
+        },
+        "propertyDetails": {
+            "titleInvestment": "Key Investment",
+            "titleIHighlights": "Highlights",
+            "titlePaymentPlan": "Payment Plan",
+            "titleGallery": "Photo Gallery",
+            "title": "Video",
+            "titleAmenities": "Amenities",
+            "titleNearbyAttractions": "Nearby Attractions",
+            "titleDownloads": "Downloads",
+            "enquiryForm": {
+                "register": "Register Your Interest",
+                "placeholderName": "Enter Your Name",
+                "placeholderEmail": "Enter Your Email",
+                "placeholderPhone": "Phone Number",
+                "placeholderLanguage": "Prefered Language",
+                "placeholderDescription": "Description",
+                "buttonSubmit": "Submit Your Interest"
+            },
+            "bradecumSimiliarProperties": "Similar Properties"
+        },
+        "allProjects": {
+            "titleAllProperties": "All Properties",
+            "titleReady": "Ready Properties",
+            "titleOffPlan": "Off-Plan Properties",
+            "breadcrumb": "Home",
+            "dropdownDevelopmentType": "Development Type",
+            "dropdownDeveloperType": "Developer Type",
+            "dropdownPropertyArea": "Property Area",
+            "dropdownSortBy": "Sort By"
+        },
+        "developers": {
+            "title": "Developers",
+            "search": "SEARCH"
+        },
+        "developerDetails": {
             "search": "SEARCH",
-            "cookie": "This website uses cookies. We use cookies to make sure you get the best experience on our website. Please read our privacy and cookie policy.",
-            "Off Plan Properties": "Off Plan Properties",
-            "Ready Properties": "Ready Properties",
-            "Developers": "Developers"
+            "breadcrumb": "Home",
+            "dropdownDubaiArea": "Dubai Area",
+            "dropdownPropertyType": "Property Type",
+            "dropdownBeds": "Beds",
+            "dropdownCompletion": "Completion",
+            "columnImage": "IMAGE",
+            "columnTitle": "TITLE",
+            "columnArea": "AREA",
+            "columnBeds": "BEDS",
+            "columnPropertyType": "PROPERTY TYPE",
+            "columnCompletion": "COMPLETION",
+            "buttonSeeMore": "SEE MORE"
+        },
+        "aboutUs": {
+            "breadcrumb": "Home",
+            "title1": "Our Story",
+            "p1": "Property Seekers Properties Dubai is the one-stop portal for your investment opportunity. We are the professional brokers exclusively working on the investment Projects with the skilled community information for Endusers and perfect market statistics on ROI for the investors.",
+            "p2": "We are officially partnered with top developers around Dubai, Some of the biggest and trustworthy off-plan developers are EMAAR and MERAAS. As investors, 100% rely on the deliverable of their unit from the trusted developers and after 2012 the sales of the OFF PLAN Project increased to 70% in Dubai for the investments. This suggests you choose the perfect Agent or Broker to find the right investment option for you in multiple products on the market each time.",
+            "p3": "We do the client work for 100% free. As our fees are from the developers as we provide you fair advice on your needs and preferences.",
+            "title2": "Why Us?",
+            "b1": "Official partner of all developers in Dubai.",
+            "b2": "Access to full projects in Dubai.",
+            "b3": "Early access and Pre-product launch from all developers.",
+            "b4": "ROI of community and each project.",
+            "b5": "SOLD projects reports and deliverable reports.",
+            "b6": "NO COMISSION – NO AGENT FEES – NO PREMIUM.",
+            "newsletter": {
+                "textTop": "For more information on the benefits of buying off-plan property or if you are a developer and would like to feature your latest off-plan projects on this site, give us a call now: +971 (4) 000-0000",
+                "textBottom": "Sign up for our exclusive updates and information about the newest projects in Dubai",
+                "email": "Provide email",
+                "button": "Subscribe"
+            }
+        },
+        "contactUs": {
+            "breadcrumb": "Home",
+            "title": "Address",
+            "enquire": {
+                "register": "Register Your Interest",
+                "required": "* All fields are required",
+                "placeholderFirstName": "* First Name",
+                "placeholderLastName": "* Last Name",
+                "placeholderEmail": "* Email",
+                "placeholderPhoneNumber": "* Phone Number",
+                "placeholderMessage": "Message",
+                "checkbox1": "I’d like to hear about news and offers",
+                "checkbox2": "I’ve read and agree to the Privacy Policy",
+                "button": "Contact Us Now"
+            },
+            "newsletter": {
+                "textTop": "For more information on the benefits of buying off-plan property or if you are a developer and would like to feature your latest off-plan projects on this site, give us a call now: +971 (4) 000-0000",
+                "textBottom": "Sign up for our exclusive updates and information about the newest projects in Dubai",
+                "email": "Provide email",
+                "button": "Subscribe"
+            }
+        },
+        "termsAndConditions": {
+            "breadcrumb": "Home",
+            "title1": "Website Terms",
+            "p1": "By clicking on offplan-dubai.com or any of its extensions, by visiting the website hosted on offplan-dubai.com, by taking any actions based on the information on the website you accept to all the policies, disclaimers, terms and conditions associated with this website, affiliate sites, and fully indemnify the owners of this website, the company, affiliates, vendors, partners and all employees from all liabilities in any way whatsoever.",
+            "p2": "The website offplan-dubai.com consolidates and represents information related to existing and upcoming real estate projects in the vicinity of Dubai or other specific regions from time to time. It does not represent any of the companies, projects, developments, properties (or ‘companies’) mentioned anywhere in the website, or any of its affiliates in any way whatsoever.",
+            "p3": "Any information showcased on this website offplan-dubai.com is indicative and solely for informative and reference purposes. The same will be changed any time without prior intimation whatsoever and it is the due responsibility of the user to check the required sections of the website and its affiliate websites for changes. The same is subject to change as per the discretion of the actual brand, company, builder, developer of the property as per their needs. The owners of the website are not responsible for any decisions made based on the information posted on the website in any way.",
+            "p4": "The logos, images (artistic and photos) have been used solely for the purpose of reference to the original brand, company, builder, developer only to provide a perspective to the website user and does not associate the website or its owners, affiliates, vendors and employees to any of the brands mentioned in the website in any way whatsoever. Should you have any objections to the content posted on this website you are requested to write to sales@mydubai-property.com with the subject: ‘content request clarification’ along with your name, address and telephone / mobile no and we will answer as soon as possible.",
+            "title2": "ONLINE PURCHASES AND OTHER TERMS AND CONDITIONS",
+            "p5": "All purchases through our site or other transactions for the sale of services formed through the Website or as a result of visits made by you are governed by these Terms of Use and the Property Agreement.",
+            "p6": "Additional terms and conditions may also apply to specific portions, services or features of the Website. All such additional terms and conditions are hereby incorporated by this reference into these Terms of Use.",
+            "p7": "Any and all payments made through this Website are subject to these Terms of Use and the Property Agreement. Consequently, the Company is under no obligation to accept any payments not made in accordance with the these Terms of Use or the Property Agreement or made following termination of any of them and you hereby acknowledge and accept that any receipt of payment through this Website or otherwise shall not be deemed or construed as an acceptance of such payment or waiver of right to reject payment at a later date.",
+            "p8": "Description of Goods and Services: The Website can be used for payment of service fees, utilities and any other charges payable by you for management of the community, compliance with community rules or required by law and in compliance with the Property Agreement.",
+            "p9": "Currency for all transactions is AED unless stated otherwise.",
+            "p10": "It is your responsibility to ensure that payment is correctly and timely received by the Company. Accordingly, we accept no liability whatsoever in this respect, and we are under no obligation to notify you of any incorrect, rejected and / or declined payments. You shall also ensure that sufficient credit is available and in the event of a “declined” credit card payment, it is your responsibility to pay any additional fees and / or charges levied by either a nominated financial institution or the Company and you shall remain responsible to pay any due amounts. Without prejudice to the foregoing, you shall notify us immediately in the event of any failed transaction or if you face or encounter any technical problems associated with the Website or its use. If any transaction is found to be incorrect, unauthorized or fraudulent, payment may be reversed and payments shall remain due. Payment transactions will be processed on the day the transaction is submitted for payment, unless the transaction is submitted on a weekend or non-working weekday where payment will be processed the next working weekday. Upon receiving the funds into our bank account, we shall accordingly issue a proper receipt acknowledging the same. All transactions will be processed without delay, however the Company expressly disclaims any and all liability for processing delays, which may occur in any circumstance. Payment is not accepted (not deemed made) until the funds have been cleared.",
+            "p11": "Refunds of any payments (if any) made through the Website are subject to the terms and conditions of the Property Agreement. Any duplicate or excess payments received will be adjusted against future/subsequent invoices. It is your responsibility to maintain document evidencing payment though the Website. Any service or maintenance requests made through this Website shall be subject to the Property Agreement.",
+            "newsletter": {
+                "textTop": "For more information on the benefits of buying off-plan property or if you are a developer and would like to feature your latest off-plan projects on this site, give us a call now: +971 (4) 000-0000",
+                "textBottom": "Sign up for our exclusive updates and information about the newest projects in Dubai",
+                "email": "Provide email",
+                "button": "Subscribe"
+            }
+        },
+        "privacypoicy": {
+            "breadcrumb": "Home",
+            "title1": "Introduction",
+            "p1": "This privacy policy has been compiled to better serve those who are concerned with how their ‘Personally Identifiable Information’ (PII) is being used online. PII, as described in UAE privacy law and information security, is information that can be used on its own or with other information to identify, contact, or locate a single person, or to identify an individual in context. Please read our privacy policy carefully to get a clear understanding of how we collect, use, protect or otherwise handle your Personally Identifiable Information in accordance with our website.",
+            "q1": "What personal information do we collect from the people that visit our blog, website or app?",
+            "a1": "When registering on our site, you may be asked to enter your name, email address, phone number or other details to help you with your experience.",
+            "q2": "When do we collect information?",
+            "a2": "We collect information from you when you register on our site, subscribe to a newsletter, fill out a form, Use Live Chat or enter information on our site.",
+            "q3": "How do we protect your information?",
+            "a3p1": "Our website is scanned on a regular basis for security holes and known vulnerabilities in order to make your visit to our site as safe as possible.",
+            "a3p2": "We use regular Malware Scanning.",
+            "a3p3": "We never ask for personal or private information like credit card numbers.",
+            "title2": "Do we use ‘cookies’?",
+            "p2": "We do not use cookies for tracking purposes. You can choose to have your computer warn you each time a cookie is being sent, or you can choose to turn off all cookies. You do this through your browser settings. Since browser is a little different, look at your browser’s Help Menu to learn the correct way to modify your cookies. If you turn cookies off, some features will be disabled. that make your site experience more efficient and may not function properly. However, you will still be able to register your interest.",
+            "subTitle1": "Third-party disclosure",
+            "p3": "We do not sell, trade, or otherwise transfer to outside parties your Personally Identifiable Information.",
+            "subTitle2": "Google",
+            "p4": "Google’s advertising requirements can be summed up by Google’s Advertising Principles. They are put in place to provide a positive experience for users.",
+            "p5": "https://support.google.com/adwordspolicy/answer/1316548?hl=en",
+            "p6": "We use Google AdSense Advertising on our website.",
+            "p7": "Google, as a third-party vendor, uses cookies to serve ads on our site. Google’s use of the DART cookie enables it to serve ads to our users based on previous visits to our site and other sites on the Internet. Users may opt-out of the use of the DART cookie by visiting the Google Ad and Content Network privacy policy.",
+            "subTitle3": "We have implemented the following:",
+            "b1": "Remarketing with Google AdSense",
+            "b2": "Google Display Network Impression Reporting",
+            "p8": "We, along with third-party vendors such as Google use first-party cookies (such as the Google Analytics cookies) and third-party cookies (such as the DoubleClick cookie) or other third-party identifiers together to compile data regarding user interactions with ad impressions and other ad service functions as they relate to our website.",
+            "subTitle4": "CAN SPAM Act",
+            "p9": "The CAN-SPAM Act is a law that sets the rules for commercial email, establishes requirements for commercial messages, gives recipients the right to have emails stopped from being sent to them, and spells out tough penalties for violations.",
+            "p10": "If at any time you would like to unsubscribe from receiving future emails, you can email us at info@my-dubai-property.com and we will promptly remove you from ALL correspondence.",
+            "p11": "This policy does not apply to information collected:,            ",
+            "b3": "through any other means, including any other website operated by any third party; or",
+            "b4": "by any third party, including through any application or content (including advertising) that may link to the Website."
+        },
+        "cookie": {
+            "breadcrumb": "Home",
+            "q1": "What are cookies?",
+            "p1": "Cookies are small files stored on a user's computer that hold data relating to a specific website. They are placed on the user's computer by that website and accessed each time a user browses it. The cookies used by MY DUBAI PROPERTY are harmless.",
+            "q2": "When and why does DAMAC place cookies?",
+            "p2": "DAMAC places cookies on any browser that visits its sites. They are primarily used to collect data in order to help improve our website, by seeing which parts of the site are being used, how users are navigating to each page and what items they prefer to click on. This policy is set out so you can know which cookies DAMAC uses and why; as well as giving you the option to opt-out of us using them on your computer if you wish.            ",
+            "q3": "What cookies does DAMAC use?",
+            "p3": "Necessary cookies – these help make a website usable by enabling basic functions, such as page navigation and access to secure areas of the site. The website cannot function properly without them.",
+            "p4": "Performance cookies – like most websites, DAMAC uses analytics software, such as Google Analytics. This software gathers anonymous data relating to how its site is being used and then provides aggregated visitor statistics, number of page views etc. DAMAC supplements this data with its own analytics, which allows more in-depth analysis of how people use its site. This information is vital as it helps to make the site as easy to use and as effective as possible. DAMAC regularly adds new features and changes existing ones to improve the site, and optimize the user experience for all parties. To ensure the changes are useful, variants of these changes across the site, reviewing data from the analytics system to see what works best.",
+            "p5": "DoubleClick cookies – DAMAC may also use cookies for ad serving through Google's DoubleClick ad server, which places a cookie on your computer when you are browsing the web and you visit a site using DoubleClick advertising (including some Google AdSense advertisements). This cookie is used to serve ads specific to you and your interests (‘interest based targeting’). The ads served will be targeted based on your previous browsing history. This cookie uses ‘non-personally identifiable information’ – it does not track any personal information about you whatsoever. You can opt-out of this ad serving on all sites using this form of advertising by visiting http://www.doubleclick.com/privacy/dart_adserving.aspx.",
+            "p6": "Third party cookies – in addition to the cookies listed above, third parties may also set cookies when you visit the site. In some cases, that is because DAMAC has hired a third party to provide services on its behalf, such as the enquiry form. Because your browser connects to those third parties’, they are able to set or read their own cookies on your device and may collect information about your online activities (but not any personally identifiable data). To control cookies from these third parties, please visit their respective sites.",
+            "p7": "Controlling cookies – DAMAC will make every effort to recognize and respect your choices; however there is a small chance that not all cookies and similar methods of data capture will be covered by these settings. If this is a concern to you then we recommend that you change the settings in your browser. The ‘help’ function within your browser should tell you how.",
+            "b1": "(Chrome)",
+            "b2": "(Firefox)",
+            "b3": "(Opera)",
+            "b4": "(Internet Explore)",
+            "b5": "(Safari)",
+            "b6": "(Edge)",
+            "newsletter": {
+                "textTop": "For more information on the benefits of buying off-plan property or if you are a developer and would like to feature your latest off-plan projects on this site, give us a call now: +971 (4) 000-0000",
+                "textBottom": "Sign up for our exclusive updates and information about the newest projects in Dubai",
+                "email": "Provide email",
+                "button": "Subscribe"
+            }
         }
     },
 
     "ar": {
         "navber": {
-            "home": "قائمة طعام",
-            "English": "الإنجليزية",
-            "Arabic": "العربية",
-            "Chinese": "الصينية",
-            "French": "الفرنسية",
-            "Russian": "الروسية"
-        },
+            "home": "الصفحة الرئيسية",
+            "english": "الإنجليزية",
+            "arabic": "العربية",
+            "chinese": "الصينية",
+            "french": "الفرنسية",
+            "russian": "الروسية",
+            "arrangeMeeting": "ترتيب اجتماع",
+            "offPlan": "قائمة",
+            "ready": "جاهز",
+            "allProjects": "جميع المشاريع"
+        },        
         "menu": {
-            "WHY US": "لماذا نحن",
-            "ABOUT US": "معلومات عنا",
-            "CONTACT US": "اتصل بنا",
-            "DEVELOPERS": "المطورون",
-            "PROJECTS": "المشاريع",
-            "OFFERS": "عروض",
-            "3D TOUR": "جولة ثلاثية الأبعاد"
+            "whyUs": "لماذا نحن",
+            "aboutUs": "من نحن",
+            "contactUs": "اتصل بنا",
+            "developers": "المطورين",
+            "emaar": "شركة إعمار العقارية",
+            "damac": "شركة داماك العقارية",
+            "dubai": "شركة دبي العقارية",
+            "all": "جميع المطورين",
+            "projects": "المشاريع",
+            "offPlan": "قائمة",
+            "ready": "جاهز",
+            "allProject": "جميع المشاريع",
+            "offers": "العروض",
+            "tour": "جولة ثلاثية الأبعاد"
+        },
+        "hero": {
+            "title": "احصل على نظرة عامة على أبرز المعالم المعمارية الرمزية في دبي",
+            "ready": "جاهز"
+        },
+        "filterHomepage": {
+            "textBoxPropertyArea": "جميع مناطق العقارات",
+            "textBoxDubaiDeveloper": "جميع مطوري دبي",
+            "textBoxPropertyType": "جميع أنواع العقارات",
+            "textBoxCompletion": "جميع حالات التسليم",
+            "textBoxDevelopmentType": "جميع أنواع التطوير",
+            "buttonSearch": "بحث"
+        },
+        "slider": {
+            "textCopy": "ابحث عن فرصة استثمارك القادمة مع أحدث المشاريع الجاهزة ومشاريع البيع على الخريطة في دبي",
+            "titleReady": "أحدث العقارات الجاهزة",
+            "titleOffPlan": "أحدث المشاريع الجديدة",
+            "buttonExplore": "استكشاف المزيد"
+        },
+        "propertySelection": {
+            "title": "أي استثمار عقاري مناسب لك؟",
+            "subTitle": "اكتشف أفضل المشاريع الجاهزة ومشاريع البيع على الخريطة في دبي واحصل على منزل أحلامك اليوم",
+            "insideTitle": "المطور الرائد للعقارات الفاخرة في دبي",
+            "insideSubTitle": "شركة داماك العقارية قامت بتشكيل سوق العقارات الفاخرة في الشرق الأوسط منذ عام 2002، حيث قدمت مشاريع سكنية وتجارية وترفيهية رمزية للبيع في دبي وعبر المنطقة وخارجها.",
+            "insideButton": "تواصل مع خبراء العقارات لدينا",
+            "ready": "جاهز",
+            "offPlan": "البيع على الخريطة"
+        },
+        "paymentMethod": {
+            "text": "نص عينة لمكون في فيجما. استنساخ طبقة الرئيسية للمكون. تكرار بيضاوي للمساحة والتمرير والتحريك واختيار النص. خط النص العريض وعرض النص وخط النص مشطوب.",
+            "cash": "نقدًا",
+            "crypto": "عملة مشفرة",
+            "mortgage": "رهن عقاري"
+        },
+        "newsletter": {
+            "title": "اشترك للحصول على تحديثات حصرية ومعلومات حول أحدث المشاريع في دبي",
+            "email": "قدم بريدك الإلكتروني",
+            "button": "اشترك",
+            "submitTextTitle": "شكرًا لاشتراكك معنا",
+            "submitTextSubTitle": "نود أن نعرض لك إشعارات حول أحدث الأخبار والتحديثات"
+        },
+        "footer": {
+            "whyUs": "لماذا نحن",
+            "aboutUs": "من نحن",
+            "contactUs": "اتصل بنا",
+            "developers": "المطورون",
+            "emaar": "شركة إعمار العقارية",
+            "damac": "شركة دبي للعقارات",
+            "nakheel": "شركة نخيل",
+            "meraas": "شركة مراس",
+            "propertiesForSale": "العقارات للبيع",
+            "villa": "فيلات للبيع",
+            "appartment": "شقق للبيع",
+            "hotel": "فنادق للبيع",
+            "readyVilla": "فيلات جاهزة للبيع",
+            "featuredProjects": "مشاريع مميزة",
+            "featuredProject1": "وي ريزيدنس وسط دبي",
+            "featuredProject2": "شقق الأتلانتيس الملكية الرياضية",
+            "featuredProject3": "ستة حواسيب ذا بالم",
+            "featuredProject4": "مجموعة دورشستر دبي",
+            "featuredProject5": "فيلات ديستريكت ون دبي"
+        },
+        "bottomBar": {
+            "enquire": "استفسار",
+            "contactUs": "اتصل بنا"
+        },
+        "meetings": {
+            "title": "ترتيب اجتماع",
+            "subTitle": "اتبع الخطوات لترتيب اجتماع مع فريق المبيعات للحصول على أفضل حلاً",
+            "next": "الخطوة التالية",
+            "phone": {
+                "text": "مكالمة هاتفية تعريفية",
+                "timeCount": "30",
+                "timeFormat": "دقيقة"
+            },
+            "video": {
+                "text": "اجتماع فيديو",
+                "timeCount": "60",
+                "timeFormat": "دقيقة"
+            },
+            "selectDate": "حدد التاريخ",
+            "selectTime": "حدد الوقت",
+            "enterDetails": "أدخل التفاصيل",
+            "placeholderName": "اسمك",
+            "placeholderEmail": "بريدك الإلكتروني",
+            "placeholderPhoneNumber": "رقم هاتفك",
+            "placeholderGuestEmails": "بريد الضيف (افصل بينهم بفواصل)",
+            "buttonAddGuests": "إضافة ضيوف",
+            "button": "إرسال",
+            "submitText": "تم الإرسال بنجاح"
+        },
+        "enquiryForm": {
+            "register": "سجل اهتمامك",
+            "placeholderName": "أدخل اسمك",
+            "placeholderEmail": "أدخل بريدك الإلكتروني",
+            "placeholderPhone": "رقم الهاتف",
+            "placeholderLanguage": "اللغة المفضلة",
+            "placeholderDescription": "وصف",
+            "buttonSubmit": "أرسل اهتمامك"
+        },
+        "propertyDetails": {
+            "titleInvestment": "رئيسي استثمار",
+            "titleIHighlights": "أبرز المميزات",
+            "titlePaymentPlan": "خطة الدفع",
+            "titleGallery": "معرض الصور",
+            "title": "فيديو",
+            "titleAmenities": "المرافق",
+            "titleNearbyAttractions": "المعالم القريبة",
+            "titleDownloads": "التنزيلات",
+            "enquiryForm": {
+                "register": "سجل اهتمامك",
+                "placeholderName": "أدخل اسمك",
+                "placeholderEmail": "أدخل بريدك الإلكتروني",
+                "placeholderPhone": "رقم الهاتف",
+                "placeholderLanguage": "اللغة المفضلة",
+                "placeholderDescription": "وصف",
+                "buttonSubmit": "أرسل اهتمامك"
+            },
+            "bradecumSimiliarProperties": "العقارات المماثلة"
+        },
+        "allProjects": {
+            "titleAllProperties": "جميع العقارات",
+            "titleReady": "العقارات الجاهزة",
+            "titleOffPlan": "العقارات على الخريطة",
+            "breadcrumb": "الرئيسية",
+            "dropdownDevelopmentType": "نوع التطوير",
+            "dropdownDeveloperType": "نوع المطور",
+            "dropdownPropertyArea": "مساحة العقار",
+            "dropdownSortBy": "الترتيب حسب"
+        },
+        "developers": {
+            "title": "المطورون",
+            "search": "بحث"
+        },
+        "developerDetails": {
+            "search": "بحث",
+            "breadcrumb": "الرئيسية",
+            "dropdownDubaiArea": "منطقة دبي",
+            "dropdownPropertyType": "نوع العقار",
+            "dropdownBeds": "عدد الغرف",
+            "dropdownCompletion": "الانتهاء",
+            "columnImage": "الصورة",
+            "columnTitle": "العنوان",
+            "columnArea": "المساحة",
+            "columnBeds": "عدد الغرف",
+            "columnPropertyType": "نوع العقار",
+            "columnCompletion": "الانتهاء",
+            "buttonSeeMore": "عرض المزيد"
+        },
+        "aboutUs": {
+            "breadcrumb": "الرئيسية",
+            "title1": "قصتنا",
+            "p1": "Property Seekers Properties Dubai هو بوابة واحدة لفرص الاستثمار الخاصة بك. نحن وسطاء محترفين يعملون حصرياً على مشاريع الاستثمار مع معلومات مجتمعية ماهرة للمستخدمين النهائيين وإحصائيات سوق مثالية بخصوص عائد الاستثمار للمستثمرين.",
+            "p2": "نحن شركاء رسميين مع أبرز المطورين في دبي. بعض أكبر وأجدر المطورين لمشاريع البيع على الخريطة هم إعمار ومراس. كمستثمر، تعتمد بنسبة 100٪ على تسليم وحدتك من المطورين الموثوقين، وبعد عام 2012 زادت مبيعات مشاريع البيع على الخريطة إلى 70٪ في دبي للاستثمارات. هذا يشير إلى أهمية اختيار وكيل أو وسيط مثالي للعثور على الخيار الاستثماري المناسب لك في العديد من المنتجات المتاحة في السوق في كل مرة.",
+            "p3": "نقوم بعمل العملاء مجاناً بنسبة 100٪. حيث تكون رسومنا من المطورين نظرًا لأننا نقدم لك نصيحة عادلة بناءً على احتياجاتك وتفضيلاتك.",
+            "title2": "لماذا نحن؟",
+            "b1": "شريك رسمي لجميع المطورين في دبي.",
+            "b2": "الوصول إلى جميع المشاريع في دبي بالكامل.",
+            "b3": "الوصول المبكر وإطلاق المنتج مسبقًا من جميع المطورين.",
+            "b4": "عائد الاستثمار للمجتمع وكل مشروع.",
+            "b5": "تقارير حول المشاريع المباعة وتقارير التسليم.",
+            "b6": "بدون عمولة - بدون رسوم وسيط - بدون علاوة.",
+            "newsletter": {
+                "textTop": "للمزيد من المعلومات حول فوائد شراء العقارات على الخريطة أو إذا كنت مطورًا وترغب في عرض أحدث مشاريع البيع على الخريطة على هذا الموقع، اتصل بنا الآن: +971 (4) 000-0000",
+                "textBottom": "اشترك للحصول على تحديثات حصرية ومعلومات حول أحدث المشاريع في دبي",
+                "email": "قدم بريدك الإلكتروني",
+                "button": "اشترك"
+            }
+        },
+        "contactUs": {
+            "breadcrumb": "الرئيسية",
+            "title": "العنوان",
+            "enquire": {
+                "register": "سجل اهتمامك",
+                "required": "* جميع الحقول مطلوبة",
+                "placeholderFirstName": "* الاسم الأول",
+                "placeholderLastName": "* الاسم الأخير",
+                "placeholderEmail": "* البريد الإلكتروني",
+                "placeholderPhoneNumber": "* رقم الهاتف",
+                "placeholderMessage": "رسالة",
+                "checkbox1": "أود أن أتلقى أخبار وعروض",
+                "checkbox2": "لقد قرأت ووافقت على سياسة الخصوصية",
+                "button": "اتصل بنا الآن"
+            },
+            "newsletter": {
+                "textTop": "للمزيد من المعلومات حول فوائد شراء العقارات على الخريطة أو إذا كنت مطورًا وترغب في عرض أحدث مشاريع البيع على الخريطة على هذا الموقع، اتصل بنا الآن: +971 (4) 000-0000",
+                "textBottom": "اشترك للحصول على تحديثات حصرية ومعلومات حول أحدث المشاريع في دبي",
+                "email": "قدم بريدك الإلكتروني",
+                "button": "اشترك"
+            }
+        },
+        "termsAndConditions": {
+            "breadcrumb": "الرئيسية",
+            "title1": "شروط الموقع",
+            "p1": "من خلال النقر على offplan-dubai.com أو أي من توسعاته، أو زيارة الموقع الذي يستضيف على offplan-dubai.com، أو اتخاذ أي إجراءات استنادًا إلى المعلومات المتاحة على الموقع، فإنك تقبل جميع السياسات والإخلاءات والشروط والأحكام المتعلقة بهذا الموقع، والمواقع الفرعية، وتبرئ بالكامل أصحاب هذا الموقع، والشركة، والشركات التابعة، والبائعين، والشركاء، وجميع الموظفين من جميع المسؤوليات بأي شكل من الأشكال.",
+            "p2": "يجمع موقع offplan-dubai.com ويمثل معلومات تتعلق بمشاريع العقارات الحالية والمستقبلية في محيط دبي أو مناطق أخرى محددة من وقت لآخر. إنه لا يمثل أيًا من الشركات أو المشاريع أو التطورات أو العقارات (أو 'الشركات') المذكورة في أي مكان على الموقع، أو أي من شركاته في أي شكل من الأشكال.",
+            "p3": "أي معلومات يتم عرضها على هذا الموقع offplan-dubai.com هي إشارية فقط ولأغراض معلوماتية ومرجعية فقط. يمكن تغييرها في أي وقت دون إخطار مسبق ومن المسؤولية المستخدم التحقق من الأقسام المطلوبة من الموقع ومواقعه التابعة للتغييرات. يتم تغييرها وفقًا لتقدير العلامة التجارية الفعلية، والشركة، والمُنشئ، والمُطور للعقار وفقًا لاحتياجاتهم. لا يتحمل أصحاب الموقع مسؤولية أي قرارات يتم اتخاذها استنادًا إلى المعلومات المنشورة على الموقع بأي شكل من الأشكال.",
+            "p4": "تم استخدام الشعارات والصور (الفنية والصور) بالكامل لأغراض الإشارة إلى العلامة التجارية الأصلية، والشركة، والمُنشئ، والمُطور فقط لتوفير وجهة نظر لمستخدم الموقع، ولا ترتبط الموقع أو أصحابه أو الشركات التابعة له بأي من العلامات التجارية المذكورة في الموقع بأي شكل من الأشكال. إذا كان لديك أي اعتراضات على المحتوى المنشور على هذا الموقع، نرجو منك كتابة رسالة إلى sales@mydubai-property.com بعنوان: 'طلب توضيح المحتوى' مع اسمك وعنوانك ورقم الهاتف / الجوال وسنقوم بالرد في أقرب وقت ممكن.",
+            "title2": "المشتريات عبر الإنترنت وشروط أخرى",
+            "p5": "تخضع جميع المشتريات من خلال موقعنا أو المعاملات الأخرى المتعلقة ببيع الخدمات التي تم تكوينها من خلال الموقع أو نتيجة الزيارات التي قام بها المستخدم بموجب هذه الشروط العامة واتفاق العقار.",
+            "p6": "قد تنطبق شروط وأحكام إضافية أيضًا على أجزاء معينة أو خدمات أو ميزات محددة من الموقع. يتم إدراج جميع هذه الشروط والأحكام الإضافية بهذا الإشارة ضمن هذه الشروط العامة.",
+            "p7": "تخضع جميع المدفوعات التي تتم من خلال هذا الموقع لهذه الشروط العامة واتفاق العقار. وبالتالي، ليس للشركة أي التزام بقبول أي مدفوعات غير المتوافقة مع هذه الشروط العامة أو اتفاق العقار أو التي تمت بعد إنهاء أي منهما، وبناءً على ذلك، فإنك تقر وتقبل بأن أي استلام للمدفوعات من خلال هذا الموقع أو غيره سيتم فهمه أو استيعابه على أنه قبول لمثل هذه المدفوعات أو تنازل عن حق رفضها في وقت لاحق.",
+            "p8": "وصف السلع والخدمات: يمكن استخدام الموقع لدفع رسوم الخدمات، والخدمات العامة، وأي رسوم أخرى يتعين عليك دفعها لإدارة المجتمع، والامتثال لقواعد المجتمع أو ما يلزمه القانون واحترامًا لاتفاق العقار.",
+            "p9": "العملة المستخدمة في جميع المعاملات هي الدرهم الإماراتي ما لم يُذكر خلاف ذلك.",
+            "p10": "من مسؤوليتك التأكد من أن الدفع تم بشكل صحيح وفي الوقت المناسب من قبل الشركة. وبناءً على ذلك، نقبل أي مسؤولية على الإطلاق في هذا الصدد، وليس علينا أي التزام بإعلامك بأي دفع غير صحيح أو مرفوض و / أو منخفض. يجب أيضًا عليك التأكد من توفر الرصيد الكافي، وفي حالة رفض دفعة ببطاقة الائتمان، من مسؤوليتك دفع أي رسوم إضافية و / أو رسوم تفويضية تفرضها إما مؤسسة مالية معينة أو الشركة، وستظل مسؤولاً عن دفع أي مبالغ مستحقة. بدون إخلال بما تقدم، يجب عليك إعلامنا على الفور في حالة أي معاملة فاشلة أو إذا واجهت أو واجهت أي مشاكل تقنية مرتبطة بالموقع أو استخدامه. إذا تبين أن أي معاملة غير صحيحة أو غير مصرح بها أو احتيالية، يمكن عكس الدفع وسيظل عليك دفع المبالغ المستحقة. سيتم معالجة معاملات الدفع في اليوم الذي تتم فيه المعاملة، ما لم تتم المعاملة في عطلة نهاية الأسبوع أو يوم غير عمل، حيث ستتم معالجة الدفع في اليوم العمل التالي. عند استلام الأموال في حساب البنك الخاص بنا، سنصدر بالتالي إيصالًا مناسبًا يتعرف على نفسه. ستتم معالجة جميع المعاملات دون تأخير، ومع ذلك، تُنكر شركة الشركة صراحة أي مسؤولية عن التأخيرات في المعالجة، التي قد تحدث في أي ظرف من الظروف. لن يتم قبول الدفع (لن يُعتبر مدفوعًا) حتى تتم معالجة الأموال بنجاح.",
+            "p11": "تخضع استردادات أي مدفوعات (إذا كانت هناك) تمت من خلال الموقع لشروط وأحكام اتفاق العقار. سيتم تعديل أي مدفوعات مكررة أو زائدة تم استلامها مقابل فواتير مستقبلية / متعاقبة. من مسؤوليتك الحفاظ على وثيقة تثبت الدفع عبر الموقع. أي طلبات خدمة أو صيانة تمت من خلال هذا الموقع تخضع لاتفاق العقار.",
+            "newsletter": {
+                "textTop": "لمزيد من المعلومات حول فوائد شراء العقارات على الخريطة أو إذا كنت مطورًا وتود عرض مشاريعك الجديدة على الخريطة على هذا الموقع، اتصل بنا الآن: +971 (4) 000-0000",
+                "textBottom": "اشترك للحصول على تحديثات حصرية ومعلومات حول أحدث المشاريع في دبي",
+                "email": "قدم بريدك الإلكتروني",
+                "button": "اشترك"
+            }
+        },
+        "privacypoicy": {
+            "breadcrumb": "الرئيسية",
+            "title1": "المقدمة",
+            "p1": "تم تجميع هذه سياسة الخصوصية لخدمة أفضل لأولئك الذين يشعرون بالقلق بشأن كيفية استخدام معلوماتهم الشخصية المعرفة بشكل فردي ('معلومات يمكن تحديدها شخصياً') عبر الإنترنت. معلومات يمكن تحديدها شخصياً، كما هو موجود في قانون الخصوصية وأمان المعلومات في الإمارات، هي معلومات يمكن استخدامها بمفردها أو مع معلومات أخرى لتحديد هوية شخص معين أو للاتصال به أو تحديد موقعه، أو لتحديد هوية فرد في سياق معين. يرجى قراءة سياسة الخصوصية لدينا بعناية للحصول على فهم واضح حول كيفية جمعنا واستخدامنا وحمايتنا أو التعامل بغير ذلك مع معلوماتك الشخصية المعرفة بشكل فردي وفقًا لموقعنا على الويب.",
+            "q1": "ما هي المعلومات الشخصية التي نجمعها من الأشخاص الذين يزورون مدونتنا أو موقعنا على الويب أو تطبيقنا؟",
+            "a1": "عند التسجيل في موقعنا، قد نُطلب منك إدخال اسمك وعنوان بريدك الإلكتروني ورقم هاتفك أو معلومات أخرى لمساعدتك في تجربتك.",
+            "q2": "متى نجمع المعلومات؟",
+            "a2": "نجمع المعلومات منك عندما تقوم بالتسجيل في موقعنا، أو تشترك في النشرة الإخبارية، أو تملأ استمارة، أو تستخدم الدردشة المباشرة، أو تقدم معلومات على موقعنا.",
+            "q3": "كيف نحمي معلوماتك؟",
+            "a3p1": "يتم فحص موقعنا على الويب بشكل منتظم للبحث عن ثغرات أمان وثغرات معروفة بهدف جعل زيارتك إلى موقعنا آمنة قدر الإمكان.",
+            "a3p2": "نستخدم فحص البرامج الضارة بانتظام.",
+            "a3p3": "نحن لا نطلب أبدًا معلومات شخصية أو خاصة مثل أرقام بطاقات الائتمان.",
+            "title2": "هل نستخدم ملفات 'الكوكيز'؟",
+            "p2": "نحن لا نستخدم ملفات الكوكيز لأغراض التتبع. يمكنك اختيار أن تتلقى تنبيهًا على جهاز الكمبيوتر الخاص بك في كل مرة يتم فيها إرسال ملف تعريف ارتباط، أو يمكنك اختيار تعطيل جميع ملفات الكوكيز. يمكنك القيام بذلك من خلال إعدادات متصفحك. نظرًا لأن كل متصفح مختلف قليلاً، يُرجى الرجوع إلى قائمة المساعدة في متصفحك لمعرفة الطريقة الصحيحة لتعديل إعدادات ملفات الكوكيز. إذا قمت بتعطيل ملفات الكوكيز، فقد يتم تعطيل بعض الميزات وقد لا تعمل بشكل صحيح. ومع ذلك، ستتمكن ما زلت من تسجيل اهتمامك.",
+            "subTitle1": "الكشف عن معلومات الأطراف الثالثة",
+            "p3": "نحن لا نبيع أو نتداول معلوماتك الشخصية المعرفة بشكل فردي للأطراف الخارجية.",
+            "subTitle2": "جوجل",
+            "p4": "يمكن تلخيص متطلبات الإعلانات من جوجل عبر مبادئ الإعلان من جوجل. تم وضعها لتوفير تجربة إيجابية للمستخدمين.",
+            "p5": "https://support.google.com/adwordspolicy/answer/1316548?hl=ar",
+            "p6": "نحن نستخدم إعلانات Google AdSense على موقعنا على الويب.",
+            "p7": "تستخدم جوجل كبائع طرف ثالث ملفات الكوكيز لعرض الإعلانات على موقعنا على الويب. يتيح لها استخدام ملف تعريف ارتباط DART عرض الإعلانات لمستخدمينا استنادًا إلى زياراتهم السابقة إلى موقعنا ومواقع أخرى على الإنترنت. يمكن للمستخدمين أن يختاروا عدم استخدام ملف تعريف ارتباط DART عن طريق زيارة سياسة الخصوصية لشبكة الإعلان والمحتوى التابعة لجوجل.",
+            "subTitle3": "لقد نفذنا ما يلي:",
+            "b1": "إعادة الاستهداف باستخدام Google AdSense",
+            "b2": "تقارير شبكة العرض لجوجل",
+            "p8": "نحن، جنبًا إلى جنب مع بائعي طرف ثالث مثل Google، نستخدم ملفات تعريف ارتباط من الأطراف الأولى (مثل ملفات تعريف ارتباط Google Analytics) وملفات تعريف ارتباط من الأطراف الثالثة (مثل ملف تعريف ارتباط DoubleClick) أو هويات من الأطراف الثالثة أخرى معًا لتجميع البيانات المتعلقة بتفاعل المستخدمين مع انطباعات الإعلان ووظائف الخدمة الإعلانية الأخرى فيما يتعلق بموقعنا على الويب.",
+            "subTitle4": "قانون CAN SPAM",
+            "p9": "قانون CAN-SPAM هو قانون يحدد القواعد لرسائل البريد الإلكتروني التجارية، وينص على متطلبات الرسائل التجارية، ويمنح المستلمين الحق في منع إرسال البريد الإلكتروني إليهم، ويحدد عقوبات صارمة للانتهاكات.",
+            "p10": "إذا كنت ترغب في أي وقت في إلغاء اشتراكك في تلقي رسائل البريد الإلكتروني المستقبلية، يمكنك إرسال بريد إلكتروني إلينا على info@my-dubai-property.com وسنقوم بإزالتك فورًا من جميع التراسلات.",
+            "p11": "لا تنطبق هذه السياسة على المعلومات المجمعة:",
+            "b3": "عبر أي وسيلة أخرى، بما في ذلك أي موقع ويب آخر يديره أي طرف ثالث؛ أو",
+            "b4": "بواسطة أي طرف ثالث، بما في ذلك من خلال أي تطبيق أو محتوى (بما في ذلك الإعلانات) قد يرتبط بالموقع على الويب."
+        },
+        "cookie": {
+            "breadcrumb": "الرئيسية",
+            "q1": "ما هي ملفات الكوكيز؟",
+            "p1": "ملفات الكوكيز هي ملفات صغيرة تُخزن على جهاز المستخدم وتحتوي على بيانات تتعلق بموقع ويب معين. يتم وضعها على جهاز المستخدم من قبل هذا الموقع ويتم الوصول إليها في كل مرة يتصفح فيها المستخدم الموقع. ملفات الكوكيز التي تستخدمها MY DUBAI PROPERTY غير ضارة.",
+            "q2": "متى ولماذا تضع DAMAC ملفات الكوكيز؟",
+            "p2": "يضع DAMAC ملفات الكوكيز على أي متصفح يزور مواقعه. تُستخدم بشكل أساسي لجمع البيانات بهدف تحسين موقعنا على الويب، من خلال رصد الأجزاء التي تُستخدم في الموقع، وكيفية تصفح المستخدمين لكل صفحة، والعناصر التي يفضلون النقر عليها. يُعرض هذا السياسة حتى تتعرف على ملفات الكوكيز التي تستخدمها DAMAC ولماذا؛ بالإضافة إلى إعطائك الخيار للانسحاب من استخدامها على جهاز الكمبيوتر الخاص بك إذا كنت ترغب في ذلك.",
+            "q3": "ما هي ملفات الكوكيز التي تستخدمها DAMAC؟",
+            "p3": "ملفات الكوكيز الضرورية – تساعد هذه الملفات في جعل موقع الويب قابلًا للتصفح من خلال تمكين وظائف أساسية مثل تصفح الصفحات والوصول إلى المناطق الآمنة على الموقع. الموقع على الويب لا يمكن أن يعمل بشكل صحيح بدونها.",
+            "p4": "ملفات الكوكيز الأداء – مثل معظم مواقع الويب، يستخدم DAMAC برامج تحليلية مثل Google Analytics. تقوم هذه البرامج بجمع بيانات مجهولة المصدر تتعلق بكيفية استخدام الموقع وتقديم إحصائيات زوار مجمعة، وعدد مشاهدات الصفحات، وما إلى ذلك. يكمل DAMAC هذه البيانات بتحليلها الخاص، مما يسمح بتحليل أعمق لكيفية استخدام الناس للموقع. تعتبر هذه المعلومات حيوية حيث تساعد في جعل الموقع سهل الاستخدام وفعالًا قدر الإمكان. يضيف DAMAC بانتظام ميزات جديدة ويجري تغييرات على القائمة لتحسين الموقع وتحسين تجربة المستخدم لجميع الأطراف. لضمان أن التغييرات مفيدة، يتم مراجعة بيانات منظومة التحليل لرؤية ما الذي يعمل بشكل أفضل.",
+            "p5": "ملفات الكوكيز DoubleClick – قد تستخدم DAMAC أيضًا ملفات الكوكيز لخدمة الإعلان عبر خادم الإعلان DoubleClick من Google، الذي يضع ملف تعريف ارتباط على جهاز الكمبيوتر الخاص بك عندما تتصفح الويب وتزور موقعًا يستخدم إعلانات DoubleClick (بما في ذلك بعض الإعلانات من Google AdSense). تُستخدم هذه الملفات لعرض إعلانات محددة لك ولمصالحك ('استهداف قائم على الاهتمام'). سيتم استهداف الإعلانات التي تُعرض استنادًا إلى تاريخ تصفحك السابق. تستخدم هذه الملفات 'معلومات غير قابلة للتعريف شخصياً' – لا تتتبع أي معلومات شخصية عنك على الإطلاق. يمكنك اختيار عدم الاشتراك في هذه الخدمة على جميع المواقع التي تستخدم هذا النوع من الإعلانات عبر زيارة http://www.doubleclick.com/privacy/dart_adserving.aspx.",
+            "p6": "ملفات الكوكيز الطرف الثالث – بالإضافة إلى ملفات الكوكيز المذكورة أعلاه، قد يقوم الأطراف الثالثة أيضًا بوضع ملفات الكوكيز عند زيارتك للموقع. في بعض الحالات، يكون ذلك لأن DAMAC قامت بتوظيف طرف ثالث لتقديم خدمات نيابة عنها، مثل استمارة الاستفسار. نظرًا لأن متصفحك يتصل بأطراف ثالثة، يمكنهم تعيين ملفات تعريف ارتباطهم الخاصة على جهازك وقد يتم جمع معلومات حول أنشطتك على الإنترنت (ولكن لا تتعلق بأي بيانات شخصية). للتحكم في ملفات الكوكيز من هذه الأطراف الثالثة، يُرجى زيارة مواقعهم الخاصة.",
+            "p7": "التحكم في ملفات الكوكيز – سيقوم DAMAC ببذل كل جهد ممكن للاعتراف بخياراتك واحترامها. ومع ذلك، هناك فرصة صغيرة لأن لا تشمل هذه الإعدادات جميع ملفات الكوكيز وطرق الالتقاط المماثلة للبيانات. إذا كان هذا يشكل قلقًا لك، فإننا نوصي بتغيير الإعدادات في متصفحك. يجب أن يُخبرك وظيفة 'المساعدة' داخل متصفحك بكيفية القيام بذلك.",
+            "b1": "(Chrome)",
+            "b2": "(Firefox)",
+            "b3": "(Opera)",
+            "b4": "(Internet Explorer)",
+            "b5": "(Safari)",
+            "b6": "(Edge)"
         }
     }
-
 }

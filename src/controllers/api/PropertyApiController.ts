@@ -36,8 +36,11 @@ export class PropertyApiController extends Controller {
             const developers: IDeveloperType[] = await this.DeveloperTypeProvider.getAll(lang);
             const propertyTypes: IPropertyType[] = await this.PropertyTypeProvider.getAll(lang);
             const developmentTypes: IDevelopmentType[] = await this.DevelopmentTypeProvider.getAll(lang);
+            const noOfBeds = [1,2,3,4,5,6,7,8,9,10];
             const completions = [2016,2017,2018,2019,2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030];
-            const payload = {propertyAreas, developers, propertyTypes, completions, developmentTypes, lang: res.bag.lang, langList: res.bag.langList };
+
+
+            const payload = {propertyAreas, developers, propertyTypes, completions, developmentTypes, noOfBeds, lang: res.bag.lang, langList: res.bag.langList };
             this.response.message = 'success';
             this.response.data = payload;
             return res.status(200).send(this.response);
