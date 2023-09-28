@@ -1,15 +1,15 @@
 {
-    "appTitle": "Off Ready Plan",
-    "host": "http://localhost",
+    "appTitle": "My Dubai Properties",
+    "host": "http://my-dubaiproperties.com:3000",
     "port": 3000,
     "smtp": {
-        "from": "No Reply<no-reply@btracsl.com>",
-        "host": "btracsl.mithiskyconnect.com",
+        "from": "Support<support@btracsl.com>",
+        "host": "smtp.office365.com",
         "port": 587,
         "secure": false,
         "auth": {
-            "user": "no-reply@btracsl.com",
-            "pass": "NOrePly#%2022"
+            "user": "support@btracsl.com",
+            "pass": "BTRACSL#2023"
         }
     },
     "awsS3": {
