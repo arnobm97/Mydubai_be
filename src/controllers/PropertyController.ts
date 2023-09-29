@@ -138,12 +138,13 @@ export class PropertyController extends Controller {
                 const property = await this.PropertyProvider.getById(propertyId);
                 const lang = property.lang;
                 res.bag.property = property;
-                res.bag.propertyType = await this.PropertyTypeProvider.getAll(lang);
-                res.bag.propertyArea = await this.PropertyAreaProvider.getAll(lang);
-                res.bag.developmentType = await this.DevelopmentTypeProvider.getAll(lang);
-                res.bag.developerType = await this.DeveloperTypeProvider.getAll(lang);
+                res.bag.propertyType = await this.PropertyTypeProvider.getAll();
+                res.bag.propertyArea = await this.PropertyAreaProvider.getAll();
+                res.bag.developmentType = await this.DevelopmentTypeProvider.getAll();
+                res.bag.developerType = await this.DeveloperTypeProvider.getAll();
 
                 //return res.send(property);
+                //return res.send(developmentType);
 
                 return res.view('property/update');
             }catch(error){

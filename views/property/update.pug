@@ -31,16 +31,24 @@ block content
                 select.form-control(name="lang" required )
                   option(value="", disabled="", selected="") Choose Language
                   each lang in langList
-                    option(value=lang.value) #{lang.title}
+                    -if(property.lang==lang.value)
+                      option(value=lang.value selected) #{lang.title}
+                    -else
+                      option(value=lang.value) #{lang.title}
+              
               div.col-12.col-md-4.mb-2
                 label.form-label(for='propertyName') Property Name
                 input#propertyName.form-control(type='text' value=property.propertyName name="propertyName" required )
+              
               div.col-12.col-md-4.mb-2
                 label.form-label(for='propertyType') Property Type
                 select.form-control(name="propertyType" required )
                   option(value="", disabled="", selected="") Choose Property Type
                   each pType in propertyType
-                    option(value=pType.id) #{pType.name}
+                    -if(property.propertyType.id==pType._id)
+                      option(value=pType.id selected) #{pType.name}
+                    -else
+                      option(value=pType.id) #{pType.name}
             div.row
               div.col-12.col-md-4.mb-2
                 label.form-label(for='propertyDescription') Property Description
@@ -50,20 +58,30 @@ block content
                 select.form-control(name="propertyArea" required)
                   option(value="", disabled="", selected="") Choose Property Area
                   each pArea in propertyArea
-                    option(value=pArea._id) #{pArea.areaName}
+                    -if(property.propertyArea.id==pArea._id)
+                      option(value=pArea._id selected) #{pArea.areaName}
+                    -else
+                      option(value=pArea._id) #{pArea.areaName}
               div.col-12.col-md-4.mb-2
                 label.form-label(for='developmentType') Development Type
                 select.form-control(name="developmentType" required)
                   option(value="", disabled="", selected="") Choose Development Type
                   each development in developmentType
-                    option(value=development._id) #{development.name}
+                    -if(property.developmentType.id==development._id)
+                      option(value=development._id selected ) #{development.name}
+                    -else
+                      option(value=development._id) #{development.name}
             div.row
               div.col-12.col-md-4.mb-2
                 label.form-label(for='developerType') Developer Type
                 select.form-control(name="developerType" required)
                   option(value="", disabled="", selected="") Choose Developer Type
                   each developer in developerType
-                    option(value=developer._id) #{developer.name}
+                    -if(developer._id == property.developerType.id)
+                      option(value=developer._id selected) #{developer.name}
+                    -else
+                      option(value=developer._id ) #{developer.name}
+
               div.col-12.col-md-4.mb-2
                 label.form-label(for='areaSize') Area Size
                 input#areaSize.form-control(type='text' value=property.areaSize name="areaSize" required )
