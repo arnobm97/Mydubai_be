@@ -91,7 +91,7 @@ export class UserController extends Controller {
     }
 
     public async updateUser(req: HttpRequest, res: HttpResponse, next: NextFunc) {
-        res.bag.pageTitle = "Weight Link | Create User";
+        res.bag.pageTitle = this.config.appTitle+" | Create User";
         const id = req.params.id;
         res.bag.userToUpdate = await this.UserProvider.getById(id);
 
