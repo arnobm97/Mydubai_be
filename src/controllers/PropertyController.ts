@@ -27,7 +27,7 @@ export class PropertyController extends Controller {
         this.onGet("/properties/delete/:propertyId?", this.deleteProperty, [Role.Admin]);
     }
 
-    //index
+    // index
     public async index(req: HttpRequest, res: HttpResponse, next: NextFunc) {
         res.bag.pageTitle = this.config.appTitle+" | Properties";
         const queryLanguage: any = req.query.lang;
@@ -39,7 +39,7 @@ export class PropertyController extends Controller {
     }
 
 
-    //create
+    // create
     public async createProperty(req: HttpRequest, res: HttpResponse, next: NextFunc) {
         res.bag.pageTitle = this.config.appTitle+" | Property Create";
         const queryLanguage: any = req.query.language;
@@ -129,12 +129,12 @@ export class PropertyController extends Controller {
 
     }
 
-    //update
+    // update
     public async updateProperty(req: HttpRequest, res: HttpResponse, next: NextFunc) {
         res.bag.pageTitle = this.config.appTitle+" | Property Update";
         const propertyId: string = req.params.propertyId;
         if(req.method === "GET"){
-            try{ 
+            try{
                 const property: IProperty = await this.PropertyProvider.getById(propertyId);
                 const lang: string = property.lang;
                 res.bag.property = property;
@@ -164,9 +164,9 @@ export class PropertyController extends Controller {
                 const brochure = req.body.brochure;
                 const images = req.body.images;
                 const videos = req.body.videos;
-                //const isFeatured = true;
-                //const createBy = { id: req.user.id, fullName: req.user.name };
-        
+                // const isFeatured = true;
+                // const createBy = { id: req.user.id, fullName: req.user.name };
+
                 // find in db then generate object
                 const tempPropertyType: IPropertyType =  await this.PropertyTypeProvider.get(req.body.propertyType);
                 const propertyType: EmbededPropertyType = {id: null, name: null};
@@ -204,7 +204,7 @@ export class PropertyController extends Controller {
                     req.flash('flashMessage', 'Invalid developer type. Please try again.');
                     return res.redirect('/properties');
                 }
-                
+
                 let oldProperty: IProperty = await this.PropertyProvider.getById(propertyId);
                 oldProperty.propertyName = propertyName;
                 oldProperty.lang = lang;
@@ -235,7 +235,7 @@ export class PropertyController extends Controller {
     }
 
 
-    //delete
+    // delete
     public async deleteProperty(req: HttpRequest, res: HttpResponse, next: NextFunc) {
         try{
             const propertyId = req.params.propertyId;
@@ -244,7 +244,7 @@ export class PropertyController extends Controller {
             req.flash('flashMessage', 'Property deleted successfully.');
             return res.redirect('/properties');
         }catch(error){
-            //console.log(error);
+            // console.log(error);
             req.flash('flashMessage', 'Opps! Something went wrong. Please try later.');
             return res.redirect('/properties');
         }
