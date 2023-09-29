@@ -199,9 +199,9 @@ export class PropertyApiController extends Controller {
             this.response.data = payload;
             return res.status(200).send(this.response);
         }catch(err){
-            const developer: any = null;
-            const developerProperty: any = null;
-            const payload = {developer, developerProperty, lang: res.bag.lang, langList: res.bag.langList };
+            const propertyArea: any = null;
+            const propertiesByArea: any = null;
+            const payload = {propertyArea, propertiesByArea, lang: res.bag.lang, langList: res.bag.langList };
             this.response.message = err;
             this.response.status = 500;
             this.response.data = payload;
@@ -232,9 +232,9 @@ export class PropertyApiController extends Controller {
             this.response.data = payload;
             return res.status(200).send(this.response);
         }catch(err){
-            const developer: any = null;
-            const developerProperty: any = null;
-            const payload = {developer, developerProperty, lang: res.bag.lang, langList: res.bag.langList };
+            const propertyType: any = null;
+            const propertiesByPropertyType: any = null;
+            const payload = {propertyType, propertiesByPropertyType, lang: res.bag.lang, langList: res.bag.langList };
             this.response.message = err;
             this.response.status = 500;
             this.response.data = payload;
