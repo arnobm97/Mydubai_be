@@ -63,5 +63,6 @@ block content
                   span=fmt.date.pretty(property.createdAt)+' '+fmt.date.Time12(property.createdAt)
                 td.cell.text-center
                   a.btn.app-btn-info.btn-sm(href="#") Update
+                  a.btn.app-btn-danger.btn-sm.ms-2(href='/properties/delete/'+property._id  onclick="return confirm('Are you sure you want to delete this property?');") Delete
                   a.btn.app-btn-primary.btn-sm.ms-2(href="#") View
                   a.btn.app-btn-primary.btn-sm.ms-2(href='/properties/create/'+property.propertyNo) Add Language

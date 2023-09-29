@@ -87,5 +87,6 @@ export interface IPropertyProvider {
     propertyListByDeveloper(page:number, size:number, developerId: string, propertyAreaId: string, propertyTypeId: string, completion: string, beds: string): Promise<IPropertyPage>;
     propertySearch(page:number, size:number, lang: string, developmentTypeId: string, propertyTypeId: string, developerId: string, propertyAreaId: string, completion: string): Promise<IPropertyPage>;
     create(property: IProperty): Promise<IProperty>;
+    delete(propertyId: string): Promise<any>;
 
 }

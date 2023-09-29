@@ -106,6 +106,11 @@ export class PropertyProvider implements IPropertyProvider {
     }
 
 
+    public async delete(propertyId: string): Promise<any> {
+        return await PropertyModel.findByIdAndDelete(propertyId);
+    }
+
+
 
 
 

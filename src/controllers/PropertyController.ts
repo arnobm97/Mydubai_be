@@ -22,6 +22,7 @@ export class PropertyController extends Controller {
         this.onGet("/properties", this.index, [Role.Admin, Role.Moderator]);
         this.onGet("/properties/create/:propertyNo?", this.createProperty, [Role.Admin, Role.Moderator]);
         this.onPost("/properties/create/:propertyNo?", this.createProperty, [Role.Admin, Role.Moderator]);
+        this.onGet("/properties/delete/:propertyId?", this.deleteProperty, [Role.Admin, Role.Moderator]);
     }
 
 
@@ -124,6 +125,22 @@ export class PropertyController extends Controller {
         });
 
 
+    }
+
+
+
+    public async deleteProperty(req: HttpRequest, res: HttpResponse, next: NextFunc) {
+        try{
+            const propertyId = req.params.propertyId;
+            await this.PropertyProvider.delete(propertyId);
+            res.bag.successMessage = "Done";
+            req.flash('flashMessage', 'Property deleted successfully.');
+            return res.redirect('/properties');
+        }catch(error){
+            console.log(error);
+            req.flash('flashMessage', 'Opps! Something went wrong. Please try later.');
+            return res.redirect('/properties');
+        }
     }
 
 
