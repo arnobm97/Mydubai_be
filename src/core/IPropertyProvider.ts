@@ -86,6 +86,7 @@ export interface IPropertyProvider {
     letestByDevelopmentType(developmentTypeId: string, limit: number): Promise<IProperty[]>;
     lastPropertyNo(): Promise<number>;
     propertyListByDeveloper(page:number, size:number, developerId: string, propertyAreaId: string, propertyTypeId: string, completion: string, beds: string): Promise<IPropertyPage>;
+    propertyListByArea(page:number, size:number, areaId: string, developerId: string, propertyTypeId: string, completion: string, beds: string): Promise<IPropertyPage>;
     propertySearch(page:number, size:number, lang: string, developmentTypeId: string, propertyTypeId: string, developerId: string, propertyAreaId: string, completion: string): Promise<IPropertyPage>;
     create(property: IProperty): Promise<IProperty>;
     delete(propertyId: string): Promise<any>;

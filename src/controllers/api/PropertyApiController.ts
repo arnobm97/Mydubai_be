@@ -23,6 +23,7 @@ export class PropertyApiController extends Controller {
         this.onGet("/api/v1/:lang/data/filter-list", this.filterList);
         this.onGet("/api/v1/:lang/developers", this.developerList);
         this.onGet("/api/v1/:lang/developers/:developerId", this.developerDetails);
+        this.onGet("/api/v1/:lang/property-area/:areaId", this.propertyAreaDetails);
         this.onGet("/api/v1/:lang/properties", this.propertyList);
         this.onGet("/api/v1/:lang/properties/:propertyNo", this.propertyDetails);
     }
@@ -170,6 +171,40 @@ export class PropertyApiController extends Controller {
             this.response.status = 500;
             this.response.data = payload;
             return res.status(this.response.status).send(this.response);
+        }
+    }
+
+
+    public async propertyAreaDetails(req: HttpRequest, res: HttpResponse, next: NextFunc) {
+        try{
+            const lang: string =  req.params.lang;
+            const areaId: string =  req.params.areaId;
+            // filter - act as optional
+            const developerId: any =  req.query.developerId;
+            const propertyTypeId: any =  req.query.propertyTypeId;
+            const completion: any =  req.query.completion;
+            const beds: any =  req.query.beds;
+
+            const p: any = req.query.page;
+            const s: any = req.query.size;
+            let page: number = parseInt(p, 10);
+            if (!page || page < 0) page = 1;
+            let size: number = parseInt(s, 10);
+            if (!size || size < 1) size = 6;
+            const propertyArea: IPropertyArea = await this.PropertyAreaProvider.get(areaId);
+            const propertiesByArea: IPropertyPage = await this.PropertyProvider.propertyListByArea(page, size, areaId, developerId, propertyTypeId, completion, beds);
+            const payload = {propertyArea, propertiesByArea, lang: res.bag.lang, langList: res.bag.langList };
+            this.response.message = 'success';
+            this.response.data = payload;
+            return res.status(200).send(this.response);
+        }catch(err){
+            const developer: any = null;
+            const developerProperty: any = null;
+            const payload = {developer, developerProperty, lang: res.bag.lang, langList: res.bag.langList };
+            this.response.message = err;
+            this.response.status = 500;
+            this.response.data = payload;
+            return res.status(200).send(this.response);
         }
     }
 
