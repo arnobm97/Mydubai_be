@@ -45,10 +45,12 @@ export class PropertyAreaProvider implements IPropertyAreaProvider {
 
 
 
-    public async create(areaName: string, lang: string, createdBy: EmbededUser): Promise<IPropertyArea> {
+    public async create(areaName: string, lang: string, areaDescription: string, areaThumbnail: string, createdBy: EmbededUser): Promise<IPropertyArea> {
         return await PropertyAreaModel.create({
             areaName,
             lang,
+            areaDescription,
+            areaThumbnail,
             createdBy
         });
     }

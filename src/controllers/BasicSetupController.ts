@@ -106,6 +106,8 @@ export class BasicSetupController extends Controller {
         }else if(req.method === "POST"){
             const areaName = req.body.areaName;
             const lang = req.body.lang;
+            const areaDescription = req.body.areaDescription;
+            const areaThumbnail = req.body.areaThumbnail;
             if (!areaName) {
                 res.bag.errorMessage = "Property area name is required";
                 return res.view('basic-setup/property-area/create')
@@ -113,9 +115,15 @@ export class BasicSetupController extends Controller {
             else if (!lang) {
                 res.bag.errorMessage = "Property area language is required";
                 return res.view('basic-setup/property-area/create')
+            }else if (!areaDescription) {
+                res.bag.errorMessage = "Property area description is required";
+                return res.view('basic-setup/property-area/create')
+            }else if (!areaThumbnail) {
+                res.bag.errorMessage = "Property area Thumbnail is required";
+                return res.view('basic-setup/property-area/create')
             }else{
                 const user : EmbededUser = {id: req.user.id, fullName: req.user.name };
-                await this.PropertyAreaProvider.create(areaName, lang, user);
+                await this.PropertyAreaProvider.create(areaName,lang,areaDescription,areaThumbnail,user);
                 req.flash('flashMessage', 'Property area created successfully.');
                 res.redirect('/basic-setup/property-area');
             }

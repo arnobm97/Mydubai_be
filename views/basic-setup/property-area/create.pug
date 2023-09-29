@@ -34,6 +34,12 @@ block content
               div.col-12.col-md-6.mb-2
                 label.form-label(for='areaName') Area Name
                 input#areaName.form-control(type='text' name="areaName" required )
+              div.col-12.col-md-6.mb-2
+                label.form-label(for='areaDescription') Area Description
+                textarea#areaDescription.form-control(type='text' name="areaDescription" required )
+              div.col-12.col-md-6.mb-2
+                label.form-label(for='areaThumbnail') Area Thumbnail URL
+                input#areaThumbnail.form-control(type='text' name="areaThumbnail" required )
             //- submit button
             hr
             button.btn.app-btn-primary(type='submit') Create Property Area
