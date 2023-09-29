@@ -330,7 +330,7 @@ block script
       
 
       //moreNearby
-      let nearByIndex = 1;
+      let nearByIndex = #{(property.location.nearby).length};
       addMoreNearBy = function(){
         const nearBy_content = '<div class="row nearby-list"><div class="col-12 col-md-4 mb-2"><input class="form-control" type="text" name="location[nearby]['+nearByIndex+'][title]" required=""></div><div class="col-12 col-md-3 mb-2"><input class="form-control" type="text" name="location[nearby]['+nearByIndex+'][icon]" required=""></div><div class="col-6 col-md-2 mb-2"><input class="form-control" type="number" name="location[nearby]['+nearByIndex+'][position][0]" step="any" placeholder="Example: 25.2048" required=""></div><div class="col-6 col-md-2 mb-2"><input class="form-control" type="number" name="location[nearby]['+nearByIndex+'][position][1]" step="any" placeholder="Example: 55.2708" required=""></div><div class="col-12 col-md-1 mb-2 text-center"><button class="btn text-danger" type="button" onclick='+"$(this).closest('div.nearby-list').remove()"+'><i class="fa fa-trash"></i></button></div></div>';
         $('div.nearby-row').append(nearBy_content);
@@ -338,7 +338,7 @@ block script
       }
 
       //morePaymentPlan
-      let paymentPlanIndex = 1;
+      let paymentPlanIndex = #{(property.paymentPlan).length};
       addMorePaymentPlan = function(){
         const paymentPlan_content = '<div class="row paymentPlan-list"> <div class="col-12 col-md-3 mb-2"><input class="form-control" type="text" name="paymentPlan['+paymentPlanIndex+'][milestone]" /> </div> <div class="col-12 col-md-2 mb-2"><input class="form-control" type="number" name="paymentPlan['+paymentPlanIndex+'][installment]" /> </div> <div class="col-12 col-md-2 mb-2"><input class="form-control" type="text" name="paymentPlan['+paymentPlanIndex+'][percentage]" /> </div> <div class="col-12 col-md-2 mb-2"><input class="form-control" type="date" name="paymentPlan['+paymentPlanIndex+'][date]" /> </div> <div class="col-12 col-md-2 mb-2"><input class="form-control" type="text" name="paymentPlan['+paymentPlanIndex+'][notes]" /> </div> <div class="col-12 col-md-1 mb-2 text-center"><button class="btn text-danger" type="button" onclick='+"$(this).closest('div.paymentPlan-list').remove()"+'> <i class="fa fa-trash"></i> </button> </div> </div>';
         $('div.paymentPlan-row').append(paymentPlan_content);
@@ -347,7 +347,7 @@ block script
 
 
       //moreImages
-      let imageIndex = 1;
+      let imageIndex = #{(property.images).length};
       addMoreImage = function(){
         $('div.images-row').append('<div class="row images-list"><div class="col-12 col-md-4 mb-2"><input class="form-control" type="text" name="images['+imageIndex+'][type]" required=""></div><div class="col-12 col-md-4 mb-2"><input class="form-control" type="text"  name="images['+imageIndex+'][metaDescription]" required=""></div><div class="col-12 col-md-3 mb-2"><input class="form-control" type="text" name="images['+imageIndex+'][path]" placeholder="JPG/JPEG/PNG image path only." required="" ></div><div class="col-12 col-md-1 mb-2 text-center"><button class="btn text-danger" type="button" onclick='+"$(this).closest('div.images-list').remove()"+'><i class="fa fa-trash"></i></button></div></div>');
         imageIndex++;
@@ -355,7 +355,7 @@ block script
 
 
       //moreVideos
-      let videoIndex = 1;
+      let videoIndex = #{(property.videos).length};
       addMoreVideo = function(){
         $('div.video-row').append('<div class="row video-list"><div class="col-12 col-md-6 mb-2"><input class="form-control" type="text" name="videos['+videoIndex+'][type]" required=""></div> <div class="col-12 col-md-5 mb-2"><input class="form-control" type="text" name="videos['+videoIndex+'][path]" placeholder="Video path only." required="" ></div><div class="col-12 col-md-1 mb-2 text-center"><button class="btn text-danger" type="button" onclick='+"$(this).closest('div.video-list').remove()"+'><i class="fa fa-trash"></i></button></div></div>');
         videoIndex++;
