@@ -81,6 +81,7 @@ export interface IPropertyPage {
 export interface IPropertyProvider {
     count(): Promise<number>;
     get(propertyNo: number, lang: string): Promise<IProperty>;
+    getById(propertyId: string): Promise<IProperty>;
     getAll(lang?: string): Promise<IProperty[]>;
     letestByDevelopmentType(developmentTypeId: string, limit: number): Promise<IProperty[]>;
     lastPropertyNo(): Promise<number>;

@@ -1,0 +1,350 @@
+extends ../layout
+block content
+
+
+  .row.app-card.mb-2.align-items-center.justify-content-between.bg-white.p-2.m-0
+    .col-auto
+      h1.app-page-title.mb-0 Properties / Update
+    .col-auto
+      .page-utilities
+        .row.g-2.justify-content-start.justify-content-md-end.align-items-center
+          .col-auto
+            a.btn.app-btn-info(href='')
+              i.fa.fa-refresh
+              | &nbsp;Reset Page
+          .col-auto
+            a.btn.app-btn-danger(href='/properties')
+              i.fa.fa-chevron-left
+              | &nbsp;Return
+  
+  div.row
+    div.col-12.col-md-12
+      div.app-card.app-card-settings.shadow-sm.p-4
+        -if(errorMessage)
+          div.alert.alert-danger(role='alert')=errorMessage
+        div.app-card-body
+          form(action="" method="POST")
+            
+            div.row
+              div.col-12.col-md-4.mb-2
+                label.form-label(for='lang') Language
+                select.form-control(name="lang" required )
+                  option(value="", disabled="", selected="") Choose Language
+                  each lang in langList
+                    option(value=lang.value) #{lang.title}
+              div.col-12.col-md-4.mb-2
+                label.form-label(for='propertyName') Property Name
+                input#propertyName.form-control(type='text' value=property.propertyName name="propertyName" required )
+              div.col-12.col-md-4.mb-2
+                label.form-label(for='propertyType') Property Type
+                select.form-control(name="propertyType" required )
+                  option(value="", disabled="", selected="") Choose Property Type
+                  each pType in propertyType
+                    option(value=pType.id) #{pType.name}
+            div.row
+              div.col-12.col-md-4.mb-2
+                label.form-label(for='propertyDescription') Property Description
+                textarea#propertyDescription.form-control(name="propertyDescription" rows='2' required )=property.propertyDescription
+              div.col-12.col-md-4.mb-2
+                label.form-label(for='propertyArea') Property Area
+                select.form-control(name="propertyArea" required)
+                  option(value="", disabled="", selected="") Choose Property Area
+                  each pArea in propertyArea
+                    option(value=pArea._id) #{pArea.areaName}
+              div.col-12.col-md-4.mb-2
+                label.form-label(for='developmentType') Development Type
+                select.form-control(name="developmentType" required)
+                  option(value="", disabled="", selected="") Choose Development Type
+                  each development in developmentType
+                    option(value=development._id) #{development.name}
+            div.row
+              div.col-12.col-md-4.mb-2
+                label.form-label(for='developerType') Developer Type
+                select.form-control(name="developerType" required)
+                  option(value="", disabled="", selected="") Choose Developer Type
+                  each developer in developerType
+                    option(value=developer._id) #{developer.name}
+              div.col-12.col-md-4.mb-2
+                label.form-label(for='areaSize') Area Size
+                input#areaSize.form-control(type='text' value=property.areaSize name="areaSize" required )
+              
+              div.col-12.col-md-4.mb-2
+                label.form-label(for='completion') Completion
+                input#completion.form-control(type='text' value=property.completion name="completion" required )
+
+            div.row
+              div.col-12.col-md-12.mb-2
+                label.form-label(for='highlights') Highlights
+                input#highlights.form-control(type='text' value=property.highlights name="highlights" placeholder="Use # after each separate entities." required )
+            div.row
+              div.col-12.col-md-4.mb-2
+                label.form-label(for='amenitiesDescription') Amenities : Description
+                textarea#amenitiesDescription.form-control(name="amenities[description]" rows='2' required )=property.amenities.description
+              div.col-12.col-md-8.mb-2
+                label.form-label(for='amenitiesFeatures') Amenities : Features
+                input#amenitiesFeatures.form-control(type='text' value=property.amenities.features name="amenities[features]" placeholder="Use # after each separate entities." required )
+            
+            div.row
+              div.col-12.col-md-4.mb-2
+                label.form-label(for='startingPrice') Starting Price
+                input#startingPrice.form-control(type='number' value=property.startingPrice step="any" name="startingPrice" required )
+              
+              div.col-12.col-md-4.mb-2
+                label.form-label(for='locDescription') location : Description
+                input#locDescription.form-control(type='text' value=property.location.locDescription name="location[locDescription]" required )
+              
+              div.col-6.col-md-2.mb-2
+                label.form-label(for='locationLatitude') Latitude 
+                input#position.form-control(type='number' value=property.location.position[0] name="location[position][0]" step="any" placeholder="Example: 25.2048" required )
+              div.col-6.col-md-2.mb-2
+                label.form-label(for='locationLongitude') Longitude 
+                input#position.form-control(type='number'  value=property.location.position[1] name="location[position][1]" step="any" placeholder="Example: 55.2708" required )
+            
+            //- NearBy : title, icon, position
+            div.row.nearby-row(style="border: 1px solid #cfcfcf")
+              div.row.m-0(style="background:#cfcfcf")
+                div.col-6.col-md-6.text-end
+                  label.form-label(for='nearBy') Nearby
+                div.col-6.col-md-6.text-end
+                  button.btn.app-btn-primary.btn-sm(type="button" onclick="addMoreNearBy()")
+                    i.fa.fa-plus
+                    | &nbsp; More
+              
+              -let index = 0;
+              each nearby in property.location.nearby
+                -if(index === 0)
+                  div.row.nearby-list
+                    div.col-12.col-md-4.mb-2
+                      label.form-label(for='nearByTitle') Title
+                      input#nearByTitle.form-control(type='text' value=nearby.title name="location[nearby]["+index+"][title]" required )
+                    div.col-12.col-md-3.mb-2
+                      label.form-label(for='locDescription') Icon
+                      input#locDescription.form-control(type='text' value=nearby.icon name="location[nearby]["+index+"][icon]" required )
+                    div.col-6.col-md-2.mb-2
+                      label.form-label(for='positionLatitude')  Latitude
+                      input#position.form-control(type='number' value=nearby.position[0] name="location[nearby]["+index+"][position][0]" step="any" placeholder="Example: 25.2048" required )
+                    div.col-6.col-md-2.mb-2
+                      label.form-label(for='positionLongitude') Longitude
+                      input#position.form-control(type='number' value=nearby.position[1] name="location[nearby]["+index+"][position][1]" step="any" placeholder="Example: 55.2708" required )
+                    div.col-12.col-md-1.mb-2.text-center
+                      label.form-label(for='action') Action
+                      br
+                      button.btn.text-danger(type="button" onclick="return false" disabled )
+                        i.fa.fa-trash
+                -else
+                  div.row.nearby-list
+                    div.col-12.col-md-4.mb-2
+                      input#nearByTitle.form-control(type='text' value=nearby.title name="location[nearby]["+index+"][title]" required )
+                    div.col-12.col-md-3.mb-2
+                      input#locDescription.form-control(type='text' value=nearby.icon name="location[nearby]["+index+"][icon]" required )
+                    div.col-6.col-md-2.mb-2
+                      input#position.form-control(type='number' value=nearby.position[0] name="location[nearby]["+index+"][position][0]" step="any" placeholder="Example: 25.2048" required )
+                    div.col-6.col-md-2.mb-2
+                      input#position.form-control(type='number' value=nearby.position[1] name="location[nearby]["+index+"][position][1]" step="any" placeholder="Example: 55.2708" required )
+                    div.col-12.col-md-1.mb-2.text-center
+                      button.btn.text-danger(type="button" onclick="$(this).closest('div.nearby-list').remove()" )
+                        i.fa.fa-trash
+                -index++;
+
+            
+            //- paymentPlan : milestone, Installment, Percentage, Date, Notes
+            div.row.paymentPlan-row(style="border: 1px solid #cfcfcf")
+              div.row.m-0(style="background:#cfcfcf")
+                div.col-6.col-md-6.text-end
+                  label.form-label(for='paymentPlan') Payment Plan
+                div.col-6.col-md-6.text-end
+                  button.btn.app-btn-primary.btn-sm(type="button" onclick="addMorePaymentPlan()")
+                    i.fa.fa-plus
+                    | &nbsp; More
+
+              -index = 0;
+              each paymentPlan in property.paymentPlan
+                -if(index === 0)
+                  div.row.paymentPlan-list
+                    div.col-12.col-md-3.mb-2
+                      label.form-label(for='paymentPlanMilestone') Milestone
+                      input.form-control(type='text' value=paymentPlan.milestone name="paymentPlan["+index+"][milestone]")
+                    div.col-12.col-md-2.mb-2
+                      label.form-label(for='paymentPlanInstallment') Installment
+                      input.form-control(type='number' value=paymentPlan.installment name="paymentPlan["+index+"][installment]")
+                    div.col-12.col-md-2.mb-2
+                      label.form-label(for='paymentPlanPercentage') Percentage
+                      input.form-control(type='text' value=paymentPlan.percentage name="paymentPlan["+index+"][percentage]")
+                    div.col-12.col-md-2.mb-2
+                      label.form-label(for='paymentPlanDate') Date
+                      input.form-control(type='date' value=fmt.date.ymd(paymentPlan.date) name="paymentPlan["+index+"][date]")
+                    div.col-12.col-md-2.mb-2
+                      label.form-label(for='paymentPlanNotes') Notes
+                      input.form-control(type='text' value=paymentPlan.notes name="paymentPlan["+index+"][notes]" )
+                    div.col-12.col-md-1.mb-2.text-center
+                      label.form-label(for='action') Action
+                      br
+                      button.btn.text-danger(type="button" onclick="return false" disabled )
+                        i.fa.fa-trash
+                -else
+                  div.row.paymentPlan-list
+                    div.col-12.col-md-3.mb-2
+                      input.form-control(type='text' value=paymentPlan.milestone name="paymentPlan["+index+"][milestone]")
+                    div.col-12.col-md-2.mb-2
+                      input.form-control(type='number' value=paymentPlan.installment name="paymentPlan["+index+"][installment]")
+                    div.col-12.col-md-2.mb-2
+                      input.form-control(type='text' value=paymentPlan.percentage name="paymentPlan["+index+"][percentage]")
+                    div.col-12.col-md-2.mb-2
+                      input.form-control(type='date' value=fmt.date.ymd(paymentPlan.date) name="paymentPlan["+index+"][date]")
+                    div.col-12.col-md-2.mb-2
+                      input.form-control(type='text' value=paymentPlan.notes name="paymentPlan["+index+"][notes]" )
+                    div.col-12.col-md-1.mb-2.text-center
+                      button.btn.text-danger(type="button" onclick="$(this).closest('div.paymentPlan-list').remove()")
+                        i.fa.fa-trash
+                -index++;
+
+            div.row
+              div.col-12.col-md-4.mb-2
+                label.form-label(for='unitTypeTitle') Unit Type : Title
+                input#unitTypeTitle.form-control(type='text' value=property.unitType.title name="unitType[title]")
+              div.col-12.col-md-4.mb-2
+                label.form-label(for='unitTypeCount') Unit Type : Count
+                input#unitTypeCount.form-control(type='text' value=property.unitType.count name="unitType[count]")
+              div.col-12.col-md-4.mb-2
+                label.form-label(for='unitTypeSize') Unit Type : size
+                input#unitTypeSize.form-control(type='text' value=property.unitType.size name="unitType[size]")
+
+            
+            div.row
+              div.col-12.col-md-12.mb-2
+                label.form-label(for='brochure') Brochure
+                input#brochure.form-control(type='text' value=property.brochure name="brochure" placeholder="PDF brochure path only." required)
+
+
+            //- images : type, metaDescription, path
+            div.row.images-row(style="border: 1px solid #cfcfcf")
+              div.row.m-0(style="background:#cfcfcf")
+                div.col-6.col-md-6.text-end
+                  label.form-label(for='images') Images
+                div.col-6.col-md-6.text-end
+                  button.btn.app-btn-primary.btn-sm(type="button" onclick="addMoreImage()")
+                    i.fa.fa-plus
+                    | &nbsp; More
+
+              -index = 0;
+              each image in property.images
+                -if(index === 0)
+                  div.row.images-list
+                    div.col-12.col-md-4.mb-2
+                      label.form-label(for='imageType') Type
+                      input.form-control(type='text' value=image.type name="images["+index+"][type]" required )
+                    div.col-12.col-md-4.mb-2
+                      label.form-label(for='imageMetaDescription') MetaDescription
+                      input.form-control(type='text' value=image.metaDescription name="images["+index+"][metaDescription]" required )
+                    div.col-12.col-md-3.mb-2
+                      label.form-label(for='imagePath') Path
+                      input.form-control(type='text' value=image.path name="images["+index+"][path]" placeholder="JPG/JPEG/PNG image path only." required )
+                    div.col-12.col-md-1.mb-2.text-center
+                      label.form-label(for='action') Action
+                      br
+                      button.btn.text-danger(type="button" onclick="return false" disabled )
+                        i.fa.fa-trash
+                -else
+                   div.row.images-list
+                    div.col-12.col-md-4.mb-2
+                      input.form-control(type='text' value=image.type name="images["+index+"][type]" required )
+                    div.col-12.col-md-4.mb-2
+                      input.form-control(type='text' value=image.metaDescription name="images["+index+"][metaDescription]" required )
+                    div.col-12.col-md-3.mb-2
+                      input.form-control(type='text' value=image.path name="images["+index+"][path]" placeholder="JPG/JPEG/PNG image path only." required )
+                    div.col-12.col-md-1.mb-2.text-center
+                      button.btn.text-danger(type="button" onclick="$(this).closest('div.images-list').remove()" )
+                        i.fa.fa-trash
+                -index++;
+            
+            
+            //- video : type, path
+            div.row.video-row(style="border: 1px solid #cfcfcf")
+              div.row.m-0(style="background:#cfcfcf")
+                div.col-6.col-md-6.text-end
+                  label.form-label(for='videos') Videos
+                div.col-6.col-md-6.text-end
+                  button.btn.app-btn-primary.btn-sm(type="button" onclick="addMoreVideo()")
+                    i.fa.fa-plus
+                    | &nbsp; More
+
+              -index = 0;
+              each video in property.videos
+                -if(index === 0)
+                  div.row.video-list
+                    div.col-12.col-md-6.mb-2
+                      label.form-label(for='videoType') Type
+                      input.form-control(type='text' value=video.type name="videos["+index+"][type]" required )
+                    div.col-12.col-md-5.mb-2
+                      label.form-label(for='videoPath') Path
+                      input.form-control(type='text' value=video.path name="videos["+index+"][path]" placeholder="Video path / Youtube link only." required )
+                    div.col-12.col-md-1.mb-2.text-center
+                      label.form-label(for='action') Action
+                      br
+                      button.btn.text-danger(type="button" onclick="return false" disabled )
+                        i.fa.fa-trash
+                -else
+                  div.row.video-list
+                    div.col-12.col-md-6.mb-2
+                      input.form-control(type='text' value=video.type name="videos["+index+"][type]" required )
+                    div.col-12.col-md-5.mb-2
+                      input.form-control(type='text' value=video.path name="videos["+index+"][path]" placeholder="Video path / Youtube link only." required )
+                    div.col-12.col-md-1.mb-2.text-center
+                      button.btn.text-danger(type="button" onclick="$(this).closest('div.video-list').remove()" )
+                        i.fa.fa-trash
+                -index++
+
+
+                
+            //- submit button
+            hr
+            button.btn.app-btn-primary(type='submit') Update Property
+
+block script
+  script.
+    
+    let addMoreNearBy;
+    let addMorePaymentPlan;
+    let addMoreImage;
+    let addMoreVideo;
+
+    $(document).ready(function(){
+      
+
+      //moreNearby
+      let nearByIndex = 1;
+      addMoreNearBy = function(){
+        const nearBy_content = '<div class="row nearby-list"><div class="col-12 col-md-4 mb-2"><input class="form-control" type="text" name="location[nearby]['+nearByIndex+'][title]" required=""></div><div class="col-12 col-md-3 mb-2"><input class="form-control" type="text" name="location[nearby]['+nearByIndex+'][icon]" required=""></div><div class="col-6 col-md-2 mb-2"><input class="form-control" type="number" name="location[nearby]['+nearByIndex+'][position][0]" step="any" placeholder="Example: 25.2048" required=""></div><div class="col-6 col-md-2 mb-2"><input class="form-control" type="number" name="location[nearby]['+nearByIndex+'][position][1]" step="any" placeholder="Example: 55.2708" required=""></div><div class="col-12 col-md-1 mb-2 text-center"><button class="btn text-danger" type="button" onclick='+"$(this).closest('div.nearby-list').remove()"+'><i class="fa fa-trash"></i></button></div></div>';
+        $('div.nearby-row').append(nearBy_content);
+        nearByIndex++;
+      }
+
+      //morePaymentPlan
+      let paymentPlanIndex = 1;
+      addMorePaymentPlan = function(){
+        const paymentPlan_content = '<div class="row paymentPlan-list"> <div class="col-12 col-md-3 mb-2"><input class="form-control" type="text" name="paymentPlan['+paymentPlanIndex+'][milestone]" /> </div> <div class="col-12 col-md-2 mb-2"><input class="form-control" type="number" name="paymentPlan['+paymentPlanIndex+'][installment]" /> </div> <div class="col-12 col-md-2 mb-2"><input class="form-control" type="text" name="paymentPlan['+paymentPlanIndex+'][percentage]" /> </div> <div class="col-12 col-md-2 mb-2"><input class="form-control" type="date" name="paymentPlan['+paymentPlanIndex+'][date]" /> </div> <div class="col-12 col-md-2 mb-2"><input class="form-control" type="text" name="paymentPlan['+paymentPlanIndex+'][notes]" /> </div> <div class="col-12 col-md-1 mb-2 text-center"><button class="btn text-danger" type="button" onclick='+"$(this).closest('div.paymentPlan-list').remove()"+'> <i class="fa fa-trash"></i> </button> </div> </div>';
+        $('div.paymentPlan-row').append(paymentPlan_content);
+        paymentPlanIndex++;
+      }
+
+
+      //moreImages
+      let imageIndex = 1;
+      addMoreImage = function(){
+        $('div.images-row').append('<div class="row images-list"><div class="col-12 col-md-4 mb-2"><input class="form-control" type="text" name="images['+imageIndex+'][type]" required=""></div><div class="col-12 col-md-4 mb-2"><input class="form-control" type="text"  name="images['+imageIndex+'][metaDescription]" required=""></div><div class="col-12 col-md-3 mb-2"><input class="form-control" type="text" name="images['+imageIndex+'][path]" placeholder="JPG/JPEG/PNG image path only." required="" ></div><div class="col-12 col-md-1 mb-2 text-center"><button class="btn text-danger" type="button" onclick='+"$(this).closest('div.images-list').remove()"+'><i class="fa fa-trash"></i></button></div></div>');
+        imageIndex++;
+      }
+
+
+      //moreVideos
+      let videoIndex = 1;
+      addMoreVideo = function(){
+        $('div.video-row').append('<div class="row video-list"><div class="col-12 col-md-6 mb-2"><input class="form-control" type="text" name="videos['+videoIndex+'][type]" required=""></div> <div class="col-12 col-md-5 mb-2"><input class="form-control" type="text" name="videos['+videoIndex+'][path]" placeholder="Video path only." required="" ></div><div class="col-12 col-md-1 mb-2 text-center"><button class="btn text-danger" type="button" onclick='+"$(this).closest('div.video-list').remove()"+'><i class="fa fa-trash"></i></button></div></div>');
+        videoIndex++;
+      }
+
+
+    });
+
+    
+

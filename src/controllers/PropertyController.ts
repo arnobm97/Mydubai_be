@@ -22,7 +22,9 @@ export class PropertyController extends Controller {
         this.onGet("/properties", this.index, [Role.Admin, Role.Moderator]);
         this.onGet("/properties/create/:propertyNo?", this.createProperty, [Role.Admin, Role.Moderator]);
         this.onPost("/properties/create/:propertyNo?", this.createProperty, [Role.Admin, Role.Moderator]);
-        this.onGet("/properties/delete/:propertyId?", this.deleteProperty, [Role.Admin, Role.Moderator]);
+        this.onGet("/properties/update/:propertyId?", this.updateProperty, [Role.Admin, Role.Moderator]);
+        this.onPost("/properties/update/:propertyId?", this.updateProperty, [Role.Admin, Role.Moderator]);
+        this.onGet("/properties/delete/:propertyId?", this.deleteProperty, [Role.Admin]);
     }
 
 
@@ -125,6 +127,33 @@ export class PropertyController extends Controller {
         });
 
 
+    }
+
+    //update
+    public async updateProperty(req: HttpRequest, res: HttpResponse, next: NextFunc) {
+        res.bag.pageTitle = this.config.appTitle+" | Property Update";
+        if(req.method === "GET"){
+            try{ 
+                const propertyId: string = req.params.propertyId;
+                const property = await this.PropertyProvider.getById(propertyId);
+                const lang = property.lang;
+                res.bag.property = property;
+                res.bag.propertyType = await this.PropertyTypeProvider.getAll(lang);
+                res.bag.propertyArea = await this.PropertyAreaProvider.getAll(lang);
+                res.bag.developmentType = await this.DevelopmentTypeProvider.getAll(lang);
+                res.bag.developerType = await this.DeveloperTypeProvider.getAll(lang);
+
+                //return res.send(property);
+
+                return res.view('property/update');
+            }catch(error){
+                console.log(error);
+                req.flash('flashMessage', 'Opps! Something went wrong. Please try later.');
+                return res.redirect('/properties');
+            }
+        }else{
+
+        }
     }
 
 

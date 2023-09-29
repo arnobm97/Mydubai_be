@@ -23,6 +23,12 @@ export class PropertyProvider implements IPropertyProvider {
         return await PropertyModel.findOne({"propertyNo": propertyNo, "lang": lang }).catch(err => null);
     }
 
+
+    public async getById(propertyId: string): Promise<IProperty> {
+        return await PropertyModel.findById(propertyId).catch(err => null);
+    }
+
+
     public async getAll(lang?: string): Promise<IProperty[]> {
         if(lang){
             return await PropertyModel.find({ "lang": lang }).catch(err => null);
