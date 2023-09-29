@@ -74,8 +74,8 @@ export class PropertyProvider implements IPropertyProvider {
     }
 
 
-    public async propertyListByArea(page:number = 1, size:number = 10, areaId: string, developerId: string, propertyTypeId: string, completion: string, beds: string): Promise<IPropertyPage> {
-        let filter: any = {"propertyArea.id": areaId };
+    public async propertyListByArea(page:number, size:number, propertyAreaId: string, developerId: string, propertyTypeId: string, completion: string, beds: string): Promise<IPropertyPage> {
+        let filter: any = {"propertyArea.id": propertyAreaId };
         if(developerId) {
             filter = {...filter, "developerType.id": developerId};
         }
@@ -93,6 +93,33 @@ export class PropertyProvider implements IPropertyProvider {
         const count: number = await PropertyModel.find(filter).countDocuments();
         let query;
 
+        if(page === 0){
+            pageSize = count;
+            query = await PropertyModel.find(filter).catch(err => null);
+        }else{
+            pageSize = size;
+            query = await PropertyModel.find(filter).skip(size * (page - 1)).limit(size).catch(err => null);
+        }
+        return { size: pageSize, page, count, data: query };
+    }
+    
+    public async propertyListByPropertyType(page:number, size:number, propertyTypeId: string, developerId: string, propertyAreaId: string, completion: string, beds: string): Promise<IPropertyPage> {
+        let filter: any = {"propertyType.id": propertyTypeId };
+        if(developerId) {
+            filter = {...filter, "developerType.id": developerId};
+        }
+        if(propertyAreaId) {
+            filter = {...filter, "propertyArea.id": propertyAreaId};
+        }
+        if(completion) {
+            filter = {...filter, "completion": completion};
+        }
+        if(beds) {
+            filter = {...filter,  "unitType.count": beds };
+        }
+        let pageSize : number;
+        const count: number = await PropertyModel.find(filter).countDocuments();
+        let query;
         if(page === 0){
             pageSize = count;
             query = await PropertyModel.find(filter).catch(err => null);
