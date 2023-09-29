@@ -55,7 +55,7 @@ export class CmsSetupController extends Controller {
             const description3 = req.body.description3;
             const targetLink = req.body.targetLink;
             const image = req.body.image;
-            
+
             if (!title) {
                 res.bag.errorMessage = "Slider's title is required";
                 return res.view('cms-setup/sliders/create')
@@ -81,7 +81,7 @@ export class CmsSetupController extends Controller {
 
     public async updateSlider(req: HttpRequest, res: HttpResponse, next: NextFunc) {
         res.bag.pageTitle = this.config.appTitle+" | Update Slider";
-        let slider: ISlider = await this.SliderProvider.get(req.params.id);
+        const slider: ISlider = await this.SliderProvider.get(req.params.id);
         if(req.method === "GET"){
             res.bag.sliderItem = slider;
             res.view('cms-setup/sliders/update');

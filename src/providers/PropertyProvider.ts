@@ -102,7 +102,7 @@ export class PropertyProvider implements IPropertyProvider {
         }
         return { size: pageSize, page, count, data: query };
     }
-    
+
     public async propertyListByPropertyType(page:number, size:number, propertyTypeId: string, developerId: string, propertyAreaId: string, completion: string, beds: string): Promise<IPropertyPage> {
         let filter: any = {"propertyType.id": propertyTypeId };
         if(developerId) {
@@ -131,9 +131,9 @@ export class PropertyProvider implements IPropertyProvider {
     }
 
 
-    
+
     public async propertySearch(page:number, size:number, lang: string, developmentTypeId: string, propertyTypeId: string, developerId: string, propertyAreaId: string, completion: string): Promise<IPropertyPage> {
-        let filter: any = {lang: lang };
+        let filter: any = {lang };
         if(developmentTypeId) {
             filter = {...filter, "developmentType.id": developmentTypeId};
         }
