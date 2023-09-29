@@ -66,8 +66,10 @@ export class CustomerInterestApiController extends Controller {
         const timeZone: string = req.body.timeZone;
         const organizer: IOrganizer = req.body.organizer;
         const guestEmails: [] = req.body.guestEmails;
+
+        //return res.send(req.body);
         
-        if(!phoneCall || !videoCall || !zoom || !googleMeet || !meetingDate || !meetingTime || !timeZone || !organizer || !guestEmails){
+        if(!meetingDate || !meetingTime || !timeZone || !organizer || !guestEmails){
             this.response.status = 403;
             this.response.error = true,
             this.response.message = "phoneCall, videoCall, zoom, googleMeet, meetingDate, meetingTime, timeZone, organizer and guestEmails is required.";
@@ -79,7 +81,8 @@ export class CustomerInterestApiController extends Controller {
             this.response.error = false,
             this.response.message = "Arrange meeting request submitted successfully.";
             return res.status(this.response.status).send(this.response);
-        }catch(err){
+        }catch(error){
+            console.log(error);
             this.response.status = 500;
             this.response.error = true,
             this.response.message = "Internal server error, please try later.";

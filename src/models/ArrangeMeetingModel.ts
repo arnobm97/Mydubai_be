@@ -2,15 +2,15 @@ import mongoose, { Schema } from "mongoose";
 import { IArrangeMeeting } from "../core/IArrangeMeetingProvider";
 
 const ArrangeMeetingModelSchema: Schema = new Schema({
-  phoneCall :{ type: Boolean, required: true },
-  videoCall :{ type: Boolean, required: true },
-  zoom :{ type: Boolean, required: true },
-  googleMeet :{ type: Boolean, required: true },
+  phoneCall :{ type: Boolean, default: false },
+  videoCall :{ type: Boolean, default: false },
+  zoom :{ type: Boolean, default: false },
+  googleMeet :{ type: Boolean, default: false },
   meetingDate :{ type: String, required: true },
   meetingTime :{ type: String, required: true },
   timeZone :{ type: String, required: true },
   organizer: {
-      name: { type: Number, required: true },
+      name: { type: String, required: true },
       phoneNumber: { type: String, required: true },
       email: { type: String, required: true },
   },
