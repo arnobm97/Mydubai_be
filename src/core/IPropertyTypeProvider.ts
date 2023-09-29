@@ -10,6 +10,8 @@ export interface EmbededPropertyType {
 export interface IPropertyType extends Document{
     name: string;
     lang: string;
+    description: string,
+    thumbnail: string,
     createdBy: EmbededUser;
 }
 
@@ -24,5 +26,5 @@ export interface IPropertyTypeProvider {
     get(id: string): Promise<IPropertyType>;
     getAll(lang?: string): Promise<IPropertyType[]>;
     list(page:number, size:number, lang?: string): Promise<IPropertyTypePage>;
-    create(name: string, lang: string, createdBy: EmbededUser): Promise<IPropertyType>;
+    create(name: string, lang: string, description: string, thumbnail: string, createdBy: EmbededUser): Promise<IPropertyType>;
 }

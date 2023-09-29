@@ -35,7 +35,13 @@ block content
               div.col-12.col-md-6.mb-2
                 label.form-label(for='name') Property Type Name
                 input#name.form-control(type='text' name="name" required )
+              div.col-12.col-md-6.mb-2
+                label.form-label(for='description') Property Type Description
+                textarea#description.form-control(name="description" required )
+              div.col-12.col-md-6.mb-2
+                label.form-label(for='thumbnail') Property Type Thumbnail URL
+                input#thumbnail.form-control(type='text' name="thumbnail" required )
             //- submit button
             hr
-            button.btn.app-btn-primary(type='submit') Create Developer Type
+            button.btn.app-btn-primary(type='submit') Create Property Type
   

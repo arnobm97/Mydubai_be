@@ -63,15 +63,23 @@ export class BasicSetupController extends Controller {
         }else if(req.method === "POST"){
             const name = req.body.name;
             const lang = req.body.lang;
+            const description = req.body.description;
+            const thumbnail = req.body.thumbnail;
             if (!name) {
                 res.bag.errorMessage = "Property type name is required";
                 return res.view('basic-setup/property-type/create')
             }else if (!lang) {
                 res.bag.errorMessage = "Property type language is required";
                 return res.view('basic-setup/property-type/create')
+            }else if (!description) {
+                res.bag.errorMessage = "Property type description is required";
+                return res.view('basic-setup/property-type/create')
+            }else if (!thumbnail) {
+                res.bag.errorMessage = "Property type thumbnail is required";
+                return res.view('basic-setup/property-type/create')
             }else{
                 const user : EmbededUser = {id: req.user.id, fullName: req.user.name };
-                await this.PropertyTypeProvider.create(name, lang, user);
+                await this.PropertyTypeProvider.create(name, lang, description, thumbnail, user);
                 req.flash('flashMessage', 'Property type created successfully.');
                 res.redirect('/basic-setup/property-type');
             }

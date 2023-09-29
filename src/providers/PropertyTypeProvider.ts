@@ -38,10 +38,12 @@ export class PropertyTypeProvider implements IPropertyTypeProvider {
     }
 
 
-    public async create(name: string, lang: string, createdBy: EmbededUser): Promise<IPropertyType> {
+    public async create(name: string, lang: string, description: string, thumbnail: string, createdBy: EmbededUser): Promise<IPropertyType> {
         return await PropertyTypeModel.create({
             name,
             lang,
+            description,
+            thumbnail,
             createdBy
         });
     }
