@@ -24,7 +24,7 @@ const PropertySchema: Schema = new Schema({
     },
     areaSize:{ type: String, required: true },
     highlights:{ type: Object, required: true },
-
+    tag:{ type: String, required: true, default: null },
     amenities: {
       description: { type: String, required: true },
       features: { type: Object, required: true },

@@ -65,6 +65,7 @@ export class PropertyController extends Controller {
         const areaSize = req.body.areaSize;
         const completion = req.body.completion;
         const highlights = req.body.highlights;  // highlights #
+        const tag = req.body.tag;  // highlights #
         const amenities = req.body.amenities; // features #
         const startingPrice = req.body.startingPrice;
         const location = req.body.location;
@@ -113,10 +114,8 @@ export class PropertyController extends Controller {
             req.flash('flashMessage', 'Invalid developer type. Please try again.');
             return res.redirect('/properties');
         }
-        const newProperty: any = {propertyNo,lang,propertyName,propertyDescription,propertyType,propertyArea,developmentType,developerType,areaSize,highlights,amenities,completion,startingPrice,location,paymentPlan,unitType,brochure,images,videos,isFeatured,createBy};
-
+        const newProperty: any = {propertyNo,lang,propertyName,propertyDescription,propertyType,propertyArea,developmentType,developerType,areaSize,highlights,tag,amenities,completion,startingPrice,location,paymentPlan,unitType,brochure,images,videos,isFeatured,createBy};
         // return res.send(newProperty);
-
         await this.PropertyProvider.create(newProperty).then(async property => {
             res.bag.successMessage = "Done";
             req.flash('flashMessage', 'Property created successfully.');
@@ -156,6 +155,7 @@ export class PropertyController extends Controller {
                 const areaSize = req.body.areaSize;
                 const completion = req.body.completion;
                 const highlights = req.body.highlights;  // highlights #
+                const tag = req.body.tag;  // highlights #
                 const amenities = req.body.amenities; // features #
                 const startingPrice = req.body.startingPrice;
                 const location = req.body.location;
@@ -218,6 +218,7 @@ export class PropertyController extends Controller {
                 oldProperty.location = location;
                 oldProperty.unitType = unitType;
                 oldProperty.highlights = highlights;
+                oldProperty.tag = tag;
                 oldProperty.completion = completion;
                 oldProperty.startingPrice = startingPrice;
                 oldProperty.paymentPlan = paymentPlan;

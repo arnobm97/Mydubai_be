@@ -57,6 +57,7 @@ export interface IProperty extends Document{
     developerType: EmbededDeveloperType;
     areaSize: string;
     highlights: string[];
+    tag: string;
     amenities: IPropertyAmenities;  // html string
     completion: string;
     startingPrice: number;
