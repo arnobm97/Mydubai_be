@@ -26,46 +26,47 @@ block content
         each mgs in flashMessage
           li=mgs
 
-  //- row
-  div.row.g-4.mb-4.mt-100
-    each folder in folderPage.data
-      div.col-3.col-md-2.col-xl-2.col-xxl-1
-        a(href="/file-drive/explore/"+folder._id)
-          i.fa.fa-folder.fa-5x(style="color: #eebf41")
-          p.text-black=folder.folderName.substring(0,10)+' ..'
+  -if(folderPage && folderPage.data)
+    //- row
+    div.row.g-4.mb-4.mt-100
+      each folder in folderPage.data
+        div.col-3.col-md-2.col-xl-2.col-xxl-1
+          a(href="/file-drive/explore/"+folder._id)
+            i.fa.fa-folder.fa-5x(style="color: #eebf41")
+            p.text-black=folder.folderName.substring(0,10)+' ..'
 
 
-  //- pagination
-  nav.app-pagination
-    ul.pagination.justify-content-center
-      - var n = 1;
-      - var pages = Math.ceil(folderPage.count/folderPage.size)
-      if folderPage.page > 1
-        li.page-item
-          a.page-link(href="/file-drive?page=" + (folderPage.page-1), tabindex='-1', aria-disabled='false') Previous
-      else
-        li.page-item.disabled
-          a.page-link(href="/file-drive?page=" + pages, tabindex='-1', aria-disabled='true') Previous
-
-      -var flag = 0;
-      while n <= pages
-        if n == folderPage.page
-          li.page-item.active #[a.page-link(href="/file-drive?page=" + n) #{n}]
-        else if n < 5 || n == folderPage.page - 1 || n == folderPage.page + 1 || n > pages - 1
-          li.page-item #[a.page-link(href="/file-drive?page=" + n) #{n}]
-        //- else
-        //-   if flag == 0
-        //-     li.page-item.disabled #[a.page-link(href="") - ]
-        //-   -flag=1;
+    //- pagination
+    nav.app-pagination
+      ul.pagination.justify-content-center
+        - var n = 1;
+        - var pages = Math.ceil(folderPage.count/folderPage.size)
+        if folderPage.page > 1
+          li.page-item
+            a.page-link(href="/file-drive?page=" + (folderPage.page-1), tabindex='-1', aria-disabled='false') Previous
         else
-          li.page-item #[a.page-link(href="/file-drive?page=" + n) #{n}]
-        - n++
-      if folderPage.page < pages
-        li.page-item
-          a.page-link(href=href="/file-drive?page=" + (folderPage.page+1)) Next
-      else
-        li.page-item.disabled
-          a.page-link(href="/file-drive?page=1") Next
+          li.page-item.disabled
+            a.page-link(href="/file-drive?page=" + pages, tabindex='-1', aria-disabled='true') Previous
+
+        -var flag = 0;
+        while n <= pages
+          if n == folderPage.page
+            li.page-item.active #[a.page-link(href="/file-drive?page=" + n) #{n}]
+          else if n < 5 || n == folderPage.page - 1 || n == folderPage.page + 1 || n > pages - 1
+            li.page-item #[a.page-link(href="/file-drive?page=" + n) #{n}]
+          //- else
+          //-   if flag == 0
+          //-     li.page-item.disabled #[a.page-link(href="") - ]
+          //-   -flag=1;
+          else
+            li.page-item #[a.page-link(href="/file-drive?page=" + n) #{n}]
+          - n++
+        if folderPage.page < pages
+          li.page-item
+            a.page-link(href=href="/file-drive?page=" + (folderPage.page+1)) Next
+        else
+          li.page-item.disabled
+            a.page-link(href="/file-drive?page=1") Next
 
 
 block script
