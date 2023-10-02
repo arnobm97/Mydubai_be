@@ -1,0 +1,70 @@
+extends ../layout
+block content
+
+  .row.app-card.mb-2.align-items-center.justify-content-between.bg-white.p-2.m-0
+    .col-auto
+      h1.app-page-title.mb-0 File Drive / #{folder.folderName}
+    .col-auto
+      .page-utilities
+        .row.g-2.justify-content-start.justify-content-md-end.align-items-center
+          
+          .col-auto
+            form.table-search-form.row.gx-1.align-items-center
+              .col-auto
+                input#search-orders.form-control.search-orders(type='text', name='searchorders', placeholder='Search')
+              .col-auto
+                button.btn.app-btn-secondary(type='submit') Search
+              .col-auto
+                select.form-select.w-auto
+                  option(selected='', value='option-1') All Files
+                  option(value='image') Image
+                  option(value='icon') Icon
+                  option(value='video') Video
+                  option(value='pdf') PDF
+          
+          .col-auto
+            a.btn.app-btn-primary(href='#' onclick="$('input.uploadFile').click()")
+              svg.bi.bi-upload.me-2(width='1em', height='1em', viewBox='0 0 16 16', fill='currentColor', xmlns='http://www.w3.org/2000/svg')
+                path(fill-rule='evenodd', d='M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z')
+                path(fill-rule='evenodd', d='M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z')
+              | Upload File
+                
+            form(action="/file-drive/upload/"+folder._id, method="post" enctype="multipart/form-data")
+              input.uploadFile(type='file' name='file' onchange="$(this).closest('form').submit()" hidden)
+
+
+  
+  div.row(style="margin: 0px 1px")
+    -if(flashMessage && flashMessage.length>0)
+      div.alert.alert-success(role='alert')
+        each mgs in flashMessage
+          li=mgs
+
+
+  div.app-card.app-card-orders-table.shadow-sm.mb-5
+    div.app-card-body
+      div.table-responsive
+        table.table.app-table-hover.mb-0.text-left
+          thead
+            tr
+              th.cell SL#
+              th.cell Location
+              th.cell.text-center(style="min-width: 150px") Action
+          tbody
+            -var sl=1
+            each file in files
+              tr
+                td.cell=sl++
+                td.cell=file.location
+                td.cell.text-center
+                  a.btn.app-btn-danger.btn-sm(href='/file-drive/delete/'+file.fileName+'/'+file._id+'/'+file.folderId) Delete
+                  a.btn.app-btn-primary.btn-sm.ms-2(href=file.location target="_blank") View
+
+
+
+
+block script
+  script.
+    
+    //- $(document).ready(function(){
+    //- });

@@ -6,6 +6,8 @@ import AWS from 'aws-sdk';
 import { uuid } from 'uuidv4';
 import fs from "fs";
 import { IFolderProvider, IFolder, IFolderPage } from "../core/IFolderProvider";
+import { IFileProvider, IFile } from "../core/IFileProvider";
+import  FileModel  from "../models/FileModel";
 
 
 
@@ -13,15 +15,16 @@ export class FileController extends Controller {
 
     private config = require("../../config.json");
     private FolderProvider: IFolderProvider;
+    private FileProvider: IFileProvider;
 
 
     public onRegister(): void {
         this.onGet("/file-drive", this.index, [Role.Admin, Role.Moderator]);
         this.onGet("/file-drive/new-folder", this.newFolder, [Role.Admin, Role.Moderator]);
+        this.onGet("/file-drive/explore/:folderId", this.exploreFolder, [Role.Admin, Role.Moderator]);
         this.onPost("/file-drive/new-folder", this.newFolder, [Role.Admin, Role.Moderator]);
-        this.onPost("/file-drive/upload", this.uploadFile, [Role.Admin, Role.Moderator]);
-        this.onGet("/file-drive/delete/:file", this.deleteFile, [Role.Admin, Role.Moderator]);
-
+        this.onPost("/file-drive/upload/:folderId", this.uploadFile, [Role.Admin, Role.Moderator]);
+        this.onGet("/file-drive/delete/:file/:fileId/:folderId", this.deleteFile, [Role.Admin, Role.Moderator]);
         AWS.config.update({
             accessKeyId: this.config.awsS3.accessKeyId,
             secretAccessKey: this.config.awsS3.secretAccessKey,
@@ -71,32 +74,17 @@ export class FileController extends Controller {
     }
 
 
-
-
-
-    public async files(req: HttpRequest, res: HttpResponse, next: NextFunc) {
-        res.bag.pageTitle = this.config.appTitle+" | Files";
-        const s3 = new AWS.S3();
-        const listParams: AWS.S3.ListObjectsV2Request = { Bucket: this.config.awsS3.bucket };
-        try {
-            const data = await s3.listObjectsV2(listParams).promise();
-            const fileList = data.Contents.map(obj => ({
-                name: obj.Key,
-                size: obj.Size,
-                LastModified: obj.LastModified
-            }));
-            res.bag.fileList = fileList;
-
-            // return res.send(fileList);
-
-            res.bag.flashMessage = req.flash('flashMessage');
-            res.view('file/index');
-        } catch (err) {
-            res.bag.flashMessage = err;
-            res.view('file/index');
+    public async exploreFolder(req: HttpRequest, res: HttpResponse, next: NextFunc) {
+        res.bag.pageTitle = this.config.appTitle+" | Explore Folder";
+        const folder = await this.FolderProvider.get(req.params.folderId);
+        if(folder){
+            res.bag.folder = folder;
+            res.bag.files = await this.FileProvider.getByFolderId(req.params.folderId);
+            res.view('folder/explore');
+        }else{
+            res.bag.flashMessage = "Unable to find folder";
+            res.view('folder/index');
         }
-
-        
     }
 
 
@@ -113,37 +101,78 @@ export class FileController extends Controller {
             const key = `${uuid()}-${file.originalFilename}`;
             const params = { Bucket: bucket, Key: key, Body: buffer, ContentType: file.headers['content-type'] };
             const s3 = new AWS.S3();
+
             s3.upload(params, function (error: any, data: any) {
                 if (error) {
                     req.flash('flashMessage', error.message );
                     res.redirect('/file-drive');
                 }
-                req.flash('flashMessage',"File uploaded into cloud successfully.");
-                res.redirect('/file-drive');
+
+                const folderId = req.params.folderId;
+                if(folderId && data){
+                    const user : EmbededUser = {id: req.user.id, fullName: req.user.name };                    
+                    let newFile: IFile =  new FileModel();
+                    newFile.folderId = folderId;
+                    newFile.location = data.Location;
+                    newFile.fileName = data.key;
+                    newFile.createBy = user;
+                    newFile.save();
+                    req.flash('flashMessage',"File uploaded into cloud successfully.");
+                    res.redirect('/file-drive/explore/'+folderId);
+                }else{
+                    req.flash('flashMessage',"File uploading failed.");
+                    res.redirect('/file-drive');
+                }
             });
         });
     }
 
 
-
     public async deleteFile(req: HttpRequest, res: HttpResponse, next: NextFunc) {
         const filePath = req.params.file;
+        const fileId = req.params.fileId;
+        const folderId = req.params.folderId;
         const bucket = this.config.awsS3.bucket;
         const params = {
             Bucket: bucket,
             Key: filePath,
         };
         const s3 = new AWS.S3();
-        s3.deleteObject(params, (err: any, data: any) => {
+        s3.deleteObject(params, async (err: any, data: any) => {
             if (err) {
                 req.flash('flashMessage',"`Error deleting file: ${err}`");
-                res.redirect('/file-drive');
+                res.redirect('/file-drive/explore'+folderId);
             } else {
+                await this.FileProvider.delete(fileId);
                 req.flash('flashMessage',"File deleted successfully");
-                res.redirect('/file-drive');
+                res.redirect('/file-drive/explore/'+folderId);
             }
         });
     }
+
+
+    // public async files(req: HttpRequest, res: HttpResponse, next: NextFunc) {
+    //     res.bag.pageTitle = this.config.appTitle+" | Files";
+    //     const s3 = new AWS.S3();
+    //     const listParams: AWS.S3.ListObjectsV2Request = { Bucket: this.config.awsS3.bucket };
+    //     try {
+    //         const data = await s3.listObjectsV2(listParams).promise();
+    //         const fileList = data.Contents.map(obj => ({
+    //             name: obj.Key,
+    //             size: obj.Size,
+    //             LastModified: obj.LastModified
+    //         }));
+    //         res.bag.fileList = fileList;
+
+    //         // return res.send(fileList);
+
+    //         res.bag.flashMessage = req.flash('flashMessage');
+    //         res.view('file/index');
+    //     } catch (err) {
+    //         res.bag.flashMessage = err;
+    //         res.view('file/index');
+    //     }
+    // }
 
 
 
