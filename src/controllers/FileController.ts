@@ -5,16 +5,20 @@ import multiparty from "multiparty"
 import AWS from 'aws-sdk';
 import { uuid } from 'uuidv4';
 import fs from "fs";
+import { IFolderProvider, IFolder, IFolderPage } from "../core/IFolderProvider";
 
 
 
 export class FileController extends Controller {
 
     private config = require("../../config.json");
+    private FolderProvider: IFolderProvider;
 
 
     public onRegister(): void {
         this.onGet("/file-drive", this.index, [Role.Admin, Role.Moderator]);
+        this.onGet("/file-drive/new-folder", this.newFolder, [Role.Admin, Role.Moderator]);
+        this.onPost("/file-drive/new-folder", this.newFolder, [Role.Admin, Role.Moderator]);
         this.onPost("/file-drive/upload", this.uploadFile, [Role.Admin, Role.Moderator]);
         this.onGet("/file-drive/delete/:file", this.deleteFile, [Role.Admin, Role.Moderator]);
 
@@ -27,6 +31,50 @@ export class FileController extends Controller {
 
 
     public async index(req: HttpRequest, res: HttpResponse, next: NextFunc) {
+        // const createBy = { id: req.user.id, fullName: req.user.name };
+        // await this.FolderProvider.create('Elegent Fire', 'Test Remarks', createBy);
+        res.bag.pageTitle = this.config.appTitle+" | Folders";
+        const p: any = req.query.page;
+        const s: any = req.query.size;
+        let page: number = parseInt(p, 10);
+        if (!page || page < 0) page = 1;
+        let size: number = parseInt(s, 10);
+        if (!size || size < 1) size = 18;
+        const folderPage: IFolderPage  = await this.FolderProvider.list( page, size );
+        //return res.send(folderPage);
+        res.bag.folderPage = folderPage;
+        res.bag.flashMessage = req.flash('flashMessage');
+        res.view('folder/index');
+    }
+
+
+    public async newFolder(req: HttpRequest, res: HttpResponse, next: NextFunc) {
+        res.bag.pageTitle = this.config.appTitle+" | New Folder";
+        if(req.method === "GET"){
+            res.view('folder/create');
+        }else if(req.method === "POST"){
+            const folderName = req.body.folderName;
+            const remarks = req.body.remarks;
+            if (!folderName) {
+                res.bag.errorMessage = "Property folder name is required";
+                return res.view('file-drive/new-folder')
+            }else{
+                const user : EmbededUser = {id: req.user.id, fullName: req.user.name };
+                await this.FolderProvider.create(folderName, remarks, user);
+                req.flash('flashMessage', 'New folder created successfully.');
+                res.redirect('/file-drive');
+            }
+        }else{
+            res.bag.errorMessage = "Invalid Request";
+            res.view('folder/create');
+        }
+    }
+
+
+
+
+
+    public async files(req: HttpRequest, res: HttpResponse, next: NextFunc) {
         res.bag.pageTitle = this.config.appTitle+" | Files";
         const s3 = new AWS.S3();
         const listParams: AWS.S3.ListObjectsV2Request = { Bucket: this.config.awsS3.bucket };

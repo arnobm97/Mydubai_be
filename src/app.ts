@@ -22,6 +22,7 @@ import { DeveloperTypeProvider } from "./providers/DeveloperTypeProvider";
 import { SliderProvider } from "./providers/SliderProvider";
 import { CustomerInterestProvider } from "./providers/CustomerInterestProvider";
 import { ArrangeMeetingProvider } from "./providers/ArrangeMeetingProvider";
+import { FolderProvider } from "./providers/FolderProvider";
 
 // Formatters
 import { dateFormatter } from "./ftms/date";
@@ -76,6 +77,7 @@ app.set("DeveloperTypeProvider", new DeveloperTypeProvider());
 app.set("SliderProvider", new SliderProvider());
 app.set("CustomerInterestProvider", new CustomerInterestProvider());
 app.set("ArrangeMeetingProvider", new ArrangeMeetingProvider());
+app.set("FolderProvider", new FolderProvider());
 
 
 
