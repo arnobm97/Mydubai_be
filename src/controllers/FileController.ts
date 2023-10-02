@@ -25,6 +25,12 @@ export class FileController extends Controller {
         this.onPost("/file-drive/new-folder", this.newFolder, [Role.Admin, Role.Moderator]);
         this.onPost("/file-drive/upload/:folderId", this.uploadFile, [Role.Admin, Role.Moderator]);
         this.onGet("/file-drive/delete/:file/:fileId/:folderId", this.deleteFile, [Role.Admin, Role.Moderator]);
+
+
+        this.onGet("/files/:folderId", this.files, [Role.Admin, Role.Moderator]);
+
+
+
         AWS.config.update({
             accessKeyId: this.config.awsS3.accessKeyId,
             secretAccessKey: this.config.awsS3.secretAccessKey,
@@ -151,28 +157,33 @@ export class FileController extends Controller {
     }
 
 
-    // public async files(req: HttpRequest, res: HttpResponse, next: NextFunc) {
-    //     res.bag.pageTitle = this.config.appTitle+" | Files";
-    //     const s3 = new AWS.S3();
-    //     const listParams: AWS.S3.ListObjectsV2Request = { Bucket: this.config.awsS3.bucket };
-    //     try {
-    //         const data = await s3.listObjectsV2(listParams).promise();
-    //         const fileList = data.Contents.map(obj => ({
-    //             name: obj.Key,
-    //             size: obj.Size,
-    //             LastModified: obj.LastModified
-    //         }));
-    //         res.bag.fileList = fileList;
+    public async files(req: HttpRequest, res: HttpResponse, next: NextFunc) {
+        res.bag.pageTitle = this.config.appTitle+" | Files";
+        const s3 = new AWS.S3();
+        const listParams: AWS.S3.ListObjectsV2Request = { Bucket: this.config.awsS3.bucket };
+        try {
+            const data = await s3.listObjectsV2(listParams).promise();
+            const fileList = data.Contents.map(obj => ({
+                name: obj.Key,
+                size: obj.Size,
+                LastModified: obj.LastModified
+            }));
+            res.bag.fileList = fileList;
 
-    //         // return res.send(fileList);
+            fileList.forEach(async element => {
+                const fileName = element.name;
+                const location = 'https://propertyseeker.s3.me-central-1.amazonaws.com/'+element.name
+                const user : EmbededUser = {id: req.user.id, fullName: req.user.name };
+                await this.FileProvider.create(req.params.folderId,location,fileName,user);
+            });
 
-    //         res.bag.flashMessage = req.flash('flashMessage');
-    //         res.view('file/index');
-    //     } catch (err) {
-    //         res.bag.flashMessage = err;
-    //         res.view('file/index');
-    //     }
-    // }
+            res.bag.flashMessage = req.flash('flashMessage');
+            res.view('file/index');
+        } catch (err) {
+            res.bag.flashMessage = err;
+            res.view('file/index');
+        }
+    }
 
 
 
