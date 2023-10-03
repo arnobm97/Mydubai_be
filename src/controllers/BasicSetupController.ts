@@ -4,6 +4,7 @@ import {IPropertyTypeProvider, IPropertyTypePage } from "../core/IPropertyTypePr
 import {IPropertyAreaProvider, IPropertyAreaPage } from "../core/IPropertyAreaProvider";
 import {IDevelopmentTypeProvider, IDevelopmentTypePage } from "../core/IDevelopmentTypeProvider";
 import {IDeveloperTypeProvider, IDeveloperTypePage } from "../core/IDeveloperTypeProvider";
+import { IPropertyProvider } from "../core/IPropertyProvider";
 import { Role, EmbededUser } from "../core/IUserProvider";
 
 
@@ -13,16 +14,19 @@ export class BasicSetupController extends Controller {
     private PropertyAreaProvider: IPropertyAreaProvider;
     private DevelopmentTypeProvider: IDevelopmentTypeProvider;
     private DeveloperTypeProvider: IDeveloperTypeProvider;
+    private PropertyProvider: IPropertyProvider;
     private config = require("../../config.json");
 
 
     public onRegister(): void {
         this.onGet("/basic-setup/index", this.index, [Role.Admin, Role.Moderator]);
+        
         this.onGet("/basic-setup/property-type", this.propertyType, [Role.Admin, Role.Moderator]);
         this.onGet("/basic-setup/property-type/create", this.createPropertyType, [Role.Admin, Role.Moderator]);
         this.onPost("/basic-setup/property-type/create", this.createPropertyType, [Role.Admin, Role.Moderator]);
         this.onGet("/basic-setup/property-type/update/:propertyTypeId", this.updatePropertyType, [Role.Admin, Role.Moderator]);
         this.onPost("/basic-setup/property-type/update/:propertyTypeId", this.updatePropertyType, [Role.Admin, Role.Moderator]);
+        this.onGet("/basic-setup/property-type/delete/:propertyTypeId", this.deletePropertyType, [Role.Admin, Role.Moderator]);
 
         this.onGet("/basic-setup/property-area", this.propertyArea, [Role.Admin, Role.Moderator]);
         this.onGet("/basic-setup/property-area/create", this.createPropertyArea, [Role.Admin, Role.Moderator]);
@@ -34,14 +38,12 @@ export class BasicSetupController extends Controller {
         this.onGet("/basic-setup/developer-type/create", this.createDeveloperType, [Role.Admin, Role.Moderator]);
         this.onPost("/basic-setup/developer-type/create", this.createDeveloperType, [Role.Admin, Role.Moderator]);
     }
-
-
+    //index menu
     public async index(req: HttpRequest, res: HttpResponse, next: NextFunc) {
         res.bag.pageTitle = this.config.appTitle+" | Basic Setup"
         res.view('basic-setup/index');
     }
-
-
+    //List
     public async propertyType(req: HttpRequest, res: HttpResponse, next: NextFunc) {
         res.bag.pageTitle = this.config.appTitle+" | Property Type"
         const queryLanguage: any = req.query.lang;
@@ -57,8 +59,7 @@ export class BasicSetupController extends Controller {
         res.bag.flashMessage = req.flash('flashMessage');
         res.view('basic-setup/property-type/index');
     }
-
-
+    //create
     public async createPropertyType(req: HttpRequest, res: HttpResponse, next: NextFunc) {
         res.bag.pageTitle = this.config.appTitle+" | Create Property Type";
         if(req.method === "GET"){
@@ -91,8 +92,7 @@ export class BasicSetupController extends Controller {
             res.view('/basic-setup/property-type');
         }
     }
-
-
+    //update
     public async updatePropertyType(req: HttpRequest, res: HttpResponse, next: NextFunc) {
         res.bag.pageTitle = this.config.appTitle+" | Update Property Type";
         const propertyTypeId = req.params.propertyTypeId;
@@ -118,13 +118,34 @@ export class BasicSetupController extends Controller {
                 return res.view('basic-setup/property-type/create')
             }else{
                 const user : EmbededUser = {id: req.user.id, fullName: req.user.name };
-                await this.PropertyTypeProvider.update(propertyTypeId, name, lang, description, thumbnail);
+                const isUpdate: any = await this.PropertyTypeProvider.update(propertyTypeId, name, lang, description, thumbnail);
+                if(isUpdate && isUpdate.nModified == 1){
+                    //Update property
+                    const condition = {'propertyType.id':  propertyTypeId};
+                    const updateData = {'propertyType.id': propertyTypeId,  'propertyType.name' : name };
+                    this.PropertyProvider.updatePropertyByRefData(condition, updateData);
+                }
                 req.flash('flashMessage', 'Property type updated successfully.');
                 res.redirect('/basic-setup/property-type');
             }
         }else{
             res.bag.errorMessage = "Invalid Request";
-            res.view('/basic-setup/property-type');
+            res.view('/basic-setup/basic-setup/property-type');
+        }
+    }
+
+    //delete
+    public async deletePropertyType(req: HttpRequest, res: HttpResponse, next: NextFunc) {
+        try{
+            const propertyTypeId = req.params.propertyTypeId;
+            await this.PropertyTypeProvider.delete(propertyTypeId);
+            res.bag.successMessage = "Done";
+            req.flash('flashMessage', 'Property type deleted successfully.');
+            return res.redirect('/basic-setup/property-type');
+        }catch(error){
+            // console.log(error);
+            req.flash('flashMessage', 'Opps! Something went wrong. Please try later.');
+            return res.redirect('/basic-setup/property-type');
         }
     }
 

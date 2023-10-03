@@ -169,6 +169,11 @@ export class PropertyProvider implements IPropertyProvider {
     }
 
 
+    public async updatePropertyByRefData(condition: object, updateData: object): Promise<any> {
+        return await PropertyModel.updateMany(condition, updateData);
+    }
+
+    
     public async delete(propertyId: string): Promise<any> {
         return await PropertyModel.findByIdAndDelete(propertyId);
     }

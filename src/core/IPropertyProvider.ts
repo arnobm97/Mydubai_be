@@ -91,6 +91,7 @@ export interface IPropertyProvider {
     propertyListByPropertyType(page:number, size:number, propertyTypeId: string, developerId: string, propertyAreaId: string, completion: string, beds: string): Promise<IPropertyPage>;
     propertySearch(page:number, size:number, lang: string, developmentTypeId: string, propertyTypeId: string, developerId: string, propertyAreaId: string, completion: string): Promise<IPropertyPage>;
     create(property: IProperty): Promise<IProperty>;
+    updatePropertyByRefData(condition: object, updateData: object): Promise<any>;
     delete(propertyId: string): Promise<any>;
 
 }
