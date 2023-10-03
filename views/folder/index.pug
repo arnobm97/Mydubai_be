@@ -19,21 +19,25 @@ block content
             a.btn.app-btn-primary(href='/file-drive/new-folder' )
               | New Folder
 
-  
   div.row(style="margin: 0px 1px")
     -if(flashMessage.length>0)
       div.alert.alert-success(role='alert')
         each mgs in flashMessage
           li=mgs
 
+
+
+
   -if(folderPage && folderPage.data)
     //- row
-    div.row.g-4.mb-4.mt-100
-      each folder in folderPage.data
-        div.col-3.col-md-2.col-xl-2.col-xxl-1
-          a(href="/file-drive/explore/"+folder._id)
-            i.fa.fa-folder.fa-5x(style="color: #eebf41")
-            p.text-black=folder.folderName.substring(0,10)+' ..'
+    div.app-card.app-card-orders-table.shadow-sm.mb-5
+      div.app-card-body
+        div.row
+          each folder in folderPage.data
+            div.col-3.col-md-2.col-xl-2.col-xxl-1.text-center.pt-3
+              a(href="/file-drive/explore/"+folder._id)
+                i.fa.fa-folder.fa-4x(style="color: #eebf41")
+                p.text-black=folder.folderName.length>10?folder.folderName.substring(0,10)+' ..': folder.folderName
 
 
     //- pagination
