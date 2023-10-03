@@ -2,7 +2,7 @@ extends ../../layout
 block content
   .row.app-card.mb-2.align-items-center.justify-content-between.bg-white.p-2.m-0
     .col-auto
-      h1.app-page-title.mb-0 Basic Setup / Property Type / Update
+      h1.app-page-title.mb-0 Basic Setup / Property Area / Update
     .col-auto
       .page-utilities
         .row.g-2.justify-content-start.justify-content-md-end.align-items-center
@@ -11,7 +11,7 @@ block content
               i.fa.fa-refresh
               | &nbsp;Reset Page
           .col-auto
-            a.btn.app-btn-danger(href='/basic-setup/property-type')
+            a.btn.app-btn-danger(href='/basic-setup/property-area')
               i.fa.fa-chevron-left
               | &nbsp;Return
   
@@ -28,19 +28,19 @@ block content
                 select.form-control(name="lang" required )
                   option(value="", disabled="", selected="") Choose Language
                   each lang in langList
-                    -if(propertyType && propertyType.lang==lang.value)
+                    -if(propertyArea && propertyArea.lang==lang.value)
                       option(value=lang.value selected) #{lang.title}
                     -else
                       option(value=lang.value) #{lang.title}
               div.col-12.col-md-6.mb-2
-                label.form-label(for='name') Property Type Name
-                input#name.form-control(type='text' name="name" value=propertyType?propertyType.name:'' required )
+                label.form-label(for='areaName') Property Area Name
+                input#areaName.form-control(type='text' name="areaName" value=propertyArea?propertyArea.areaName:'' required )
               div.col-12.col-md-6.mb-2
-                label.form-label(for='description') Property Type Description
-                textarea#description.form-control(name="description" required )=propertyType?propertyType.description:''
+                label.form-label(for='areaDescription') Property Area Description
+                textarea#areaDescription.form-control(name="areaDescription" required )=propertyArea?propertyArea.areaDescription:''
               div.col-12.col-md-6.mb-2
-                label.form-label(for='thumbnail') Property Type Thumbnail URL
-                input#thumbnail.form-control(type='text' value=propertyType?propertyType.thumbnail:'' name="thumbnail" required )
+                label.form-label(for='areaThumbnail') Property Area Thumbnail URL
+                input#areaThumbnail.form-control(type='text' value=propertyArea?propertyArea.areaThumbnail:'' name="areaThumbnail" required )
             //- submit button
             hr
-            button.btn.app-btn-primary(type='submit') Update Property Type
+            button.btn.app-btn-primary(type='submit') Update Property Area

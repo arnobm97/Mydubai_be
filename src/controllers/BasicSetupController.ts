@@ -20,20 +20,25 @@ export class BasicSetupController extends Controller {
 
     public onRegister(): void {
         this.onGet("/basic-setup/index", this.index, [Role.Admin, Role.Moderator]);
-        
+        //property type
         this.onGet("/basic-setup/property-type", this.propertyType, [Role.Admin, Role.Moderator]);
         this.onGet("/basic-setup/property-type/create", this.createPropertyType, [Role.Admin, Role.Moderator]);
         this.onPost("/basic-setup/property-type/create", this.createPropertyType, [Role.Admin, Role.Moderator]);
         this.onGet("/basic-setup/property-type/update/:propertyTypeId", this.updatePropertyType, [Role.Admin, Role.Moderator]);
         this.onPost("/basic-setup/property-type/update/:propertyTypeId", this.updatePropertyType, [Role.Admin, Role.Moderator]);
         this.onGet("/basic-setup/property-type/delete/:propertyTypeId", this.deletePropertyType, [Role.Admin, Role.Moderator]);
-
+        //property area
         this.onGet("/basic-setup/property-area", this.propertyArea, [Role.Admin, Role.Moderator]);
         this.onGet("/basic-setup/property-area/create", this.createPropertyArea, [Role.Admin, Role.Moderator]);
         this.onPost("/basic-setup/property-area/create", this.createPropertyArea, [Role.Admin, Role.Moderator]);
+        this.onGet("/basic-setup/property-area/update/:propertyAreaId", this.updatePropertyArea, [Role.Admin, Role.Moderator]);
+        this.onPost("/basic-setup/property-area/update/:propertyAreaId", this.updatePropertyArea, [Role.Admin, Role.Moderator]);
+        this.onGet("/basic-setup/property-area/delete/:propertyAreaId", this.updatePropertyArea, [Role.Admin, Role.Moderator]);
+        //development type
         this.onGet("/basic-setup/development-type", this.developmentType, [Role.Admin, Role.Moderator]);
         this.onGet("/basic-setup/development-type/create", this.createDevelopmentType, [Role.Admin, Role.Moderator]);
         this.onPost("/basic-setup/development-type/create", this.createDevelopmentType, [Role.Admin, Role.Moderator]);
+        //developer type
         this.onGet("/basic-setup/developer-type", this.developerType, [Role.Admin, Role.Moderator]);
         this.onGet("/basic-setup/developer-type/create", this.createDeveloperType, [Role.Admin, Role.Moderator]);
         this.onPost("/basic-setup/developer-type/create", this.createDeveloperType, [Role.Admin, Role.Moderator]);
@@ -92,6 +97,7 @@ export class BasicSetupController extends Controller {
             res.view('/basic-setup/property-type');
         }
     }
+    
     //update
     public async updatePropertyType(req: HttpRequest, res: HttpResponse, next: NextFunc) {
         res.bag.pageTitle = this.config.appTitle+" | Update Property Type";
@@ -117,7 +123,6 @@ export class BasicSetupController extends Controller {
                 res.bag.errorMessage = "Property type thumbnail is required";
                 return res.view('basic-setup/property-type/create')
             }else{
-                const user : EmbededUser = {id: req.user.id, fullName: req.user.name };
                 const isUpdate: any = await this.PropertyTypeProvider.update(propertyTypeId, name, lang, description, thumbnail);
                 if(isUpdate && isUpdate.nModified == 1){
                     //Update property
@@ -166,7 +171,6 @@ export class BasicSetupController extends Controller {
         res.view('basic-setup/property-area/index');
     }
 
-
     public async createPropertyArea(req: HttpRequest, res: HttpResponse, next: NextFunc) {
         res.bag.pageTitle = this.config.appTitle+" | Create Property Area";
         if(req.method === "GET"){
@@ -201,6 +205,66 @@ export class BasicSetupController extends Controller {
         }
 
     }
+
+    //update
+    public async updatePropertyArea(req: HttpRequest, res: HttpResponse, next: NextFunc) {
+        res.bag.pageTitle = this.config.appTitle+" | Update Property Area";
+        const propertyAreaId = req.params.propertyAreaId;
+        if(req.method === "GET"){
+            res.bag.propertyArea = await this.PropertyAreaProvider.get(propertyAreaId);
+            //return res.send(res.bag.propertyArea);
+
+            res.view('basic-setup/property-area/update');
+        }else if(req.method === "POST"){
+            const areaName = req.body.areaName;
+            const lang = req.body.lang;
+            const areaDescription = req.body.areaDescription;
+            const areaThumbnail = req.body.areaThumbnail;
+            if (!areaName) {
+                res.bag.errorMessage = "Property area name is required";
+                return res.view('basic-setup/property-area/create')
+            }else if (!lang) {
+                res.bag.errorMessage = "Property area language is required";
+                return res.view('basic-setup/property-area/create')
+            }else if (!areaDescription) {
+                res.bag.errorMessage = "Property area description is required";
+                return res.view('basic-setup/property-area/create')
+            }else if (!areaThumbnail) {
+                res.bag.errorMessage = "Property area thumbnail is required";
+                return res.view('basic-setup/property-area/create')
+            }else{
+                const isUpdate: any = await this.PropertyAreaProvider.update(propertyAreaId, areaName, lang, areaDescription, areaThumbnail);
+                if(isUpdate && isUpdate.nModified == 1){
+                    //Update property
+                    const condition = {'propertyArea.id':  propertyAreaId};
+                    const updateData = {'propertyArea.id': propertyAreaId,  'propertyArea.areaName' : areaName };
+                    this.PropertyProvider.updatePropertyByRefData(condition, updateData);
+                }
+                req.flash('flashMessage', 'Property area updated successfully.');
+                res.redirect('/basic-setup/property-area');
+            }
+        }else{
+            res.bag.errorMessage = "Invalid Request";
+            res.view('/basic-setup/basic-setup/property-area');
+        }
+    }
+
+    //delete
+    public async deletePropertyArea(req: HttpRequest, res: HttpResponse, next: NextFunc) {
+        try{
+            const propertyAreaId = req.params.propertyAreaId;
+            await this.PropertyAreaProvider.delete(propertyAreaId);
+            res.bag.successMessage = "Done";
+            req.flash('flashMessage', 'Property area deleted successfully.');
+            return res.redirect('/basic-setup/property-area');
+        }catch(error){
+            req.flash('flashMessage', 'Opps! Something went wrong. Please try later.');
+            return res.redirect('/basic-setup/property-area');
+        }
+    }
+
+
+
 
 
 

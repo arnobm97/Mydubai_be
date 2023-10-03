@@ -1,7 +1,6 @@
 import { EmbededUser } from "./IUserProvider"
 import { Document } from "mongoose";
 
-
 export interface EmbededPropertyArea {
     id: string,
     areaName: string,
@@ -22,11 +21,12 @@ export interface IPropertyAreaPage {
     data: IPropertyArea[]
 }
 
-
 export interface IPropertyAreaProvider {
     count(): Promise<number>;
     get(id: string): Promise<IPropertyArea>;
     getAll(lang?: string): Promise<IPropertyArea[]>;
     list(page:number, size:number, lang?: string): Promise<IPropertyAreaPage>;
     create(areaName: string, lang: string, areaDescription: string, areaThumbnail: string, createdBy: EmbededUser): Promise<IPropertyArea>;
+    update(propertyAreaId: string, areaName: string, lang: string, areaDescription: string, areaThumbnail: string): Promise<any>;
+    delete(propertyAreaId: string): Promise<any>;
 }
