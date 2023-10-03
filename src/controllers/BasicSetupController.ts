@@ -21,19 +21,19 @@ export class BasicSetupController extends Controller {
     public onRegister(): void {
         this.onGet("/basic-setup/index", this.index, [Role.Admin, Role.Moderator]);
         //property type
-        this.onGet("/basic-setup/property-type", this.propertyType, [Role.Admin, Role.Moderator]);
-        this.onGet("/basic-setup/property-type/create", this.createPropertyType, [Role.Admin, Role.Moderator]);
-        this.onPost("/basic-setup/property-type/create", this.createPropertyType, [Role.Admin, Role.Moderator]);
+        this.onGet("/basic-setup/property-type", this.propertyType, [Role.Admin, Role.Moderator, Role.User]);
+        this.onGet("/basic-setup/property-type/create", this.createPropertyType, [Role.Admin, Role.Moderator, Role.User]);
+        this.onPost("/basic-setup/property-type/create", this.createPropertyType, [Role.Admin, Role.Moderator,  Role.User]);
         this.onGet("/basic-setup/property-type/update/:propertyTypeId", this.updatePropertyType, [Role.Admin, Role.Moderator]);
         this.onPost("/basic-setup/property-type/update/:propertyTypeId", this.updatePropertyType, [Role.Admin, Role.Moderator]);
-        this.onGet("/basic-setup/property-type/delete/:propertyTypeId", this.deletePropertyType, [Role.Admin, Role.Moderator]);
+        this.onGet("/basic-setup/property-type/delete/:propertyTypeId", this.deletePropertyType, [Role.Admin]);
         //property area
-        this.onGet("/basic-setup/property-area", this.propertyArea, [Role.Admin, Role.Moderator]);
-        this.onGet("/basic-setup/property-area/create", this.createPropertyArea, [Role.Admin, Role.Moderator]);
-        this.onPost("/basic-setup/property-area/create", this.createPropertyArea, [Role.Admin, Role.Moderator]);
+        this.onGet("/basic-setup/property-area", this.propertyArea, [Role.Admin, Role.Moderator, Role.User]);
+        this.onGet("/basic-setup/property-area/create", this.createPropertyArea, [Role.Admin, Role.Moderator, Role.User]);
+        this.onPost("/basic-setup/property-area/create", this.createPropertyArea, [Role.Admin, Role.Moderator, Role.User]);
         this.onGet("/basic-setup/property-area/update/:propertyAreaId", this.updatePropertyArea, [Role.Admin, Role.Moderator]);
         this.onPost("/basic-setup/property-area/update/:propertyAreaId", this.updatePropertyArea, [Role.Admin, Role.Moderator]);
-        this.onGet("/basic-setup/property-area/delete/:propertyAreaId", this.updatePropertyArea, [Role.Admin, Role.Moderator]);
+        this.onGet("/basic-setup/property-area/delete/:propertyAreaId", this.updatePropertyArea, [Role.Admin]);
         //development type
         this.onGet("/basic-setup/development-type", this.developmentType, [Role.Admin, Role.Moderator]);
         this.onGet("/basic-setup/development-type/create", this.createDevelopmentType, [Role.Admin, Role.Moderator]);
