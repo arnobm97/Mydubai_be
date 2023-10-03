@@ -61,27 +61,27 @@ block content
       - var pages = Math.ceil(customerInterestPage.count/customerInterestPage.size)
       if customerInterestPage.page > 1
         li.page-item
-          a.page-link(href="/customer-interest/index" + (customerInterestPage.page-1), tabindex='-1', aria-disabled='false') Previous
+          a.page-link(href="/customer-interest/index?page=" + (customerInterestPage.page-1), tabindex='-1', aria-disabled='false') Previous
       else
         li.page-item.disabled
-          a.page-link(href="/customer-interest/index" + pages, tabindex='-1', aria-disabled='true') Previous
+          a.page-link(href="/customer-interest/index?page=" + pages, tabindex='-1', aria-disabled='true') Previous
 
       -var flag = 0;
       while n <= pages
         if n == customerInterestPage.page
-          li.page-item.active #[a.page-link(href="/customer-interest/index" + n) #{n}]
+          li.page-item.active #[a.page-link(href="/customer-interest/index?page=" + n) #{n}]
         else if n < 5 || n == customerInterestPage.page - 1 || n == customerInterestPage.page + 1 || n > pages - 1
-          li.page-item #[a.page-link(href="/customer-interest/index" + n) #{n}]
+          li.page-item #[a.page-link(href="/customer-interest/index?page=" + n) #{n}]
         //- else
         //-   if flag == 0
         //-     li.page-item.disabled #[a.page-link(href="") - ]
         //-   -flag=1;
         else
-          li.page-item #[a.page-link(href="/customer-interest/index" + n) #{n}]
+          li.page-item #[a.page-link(href="/customer-interest/index?page=" + n) #{n}]
         - n++
       if customerInterestPage.page < pages
         li.page-item
-          a.page-link(href=href="/customer-interest/index" + (customerInterestPage.page+1)) Next
+          a.page-link(href=href="/customer-interest/index?page=" + (customerInterestPage.page+1)) Next
       else
         li.page-item.disabled
-          a.page-link(href="/customer-interest/index1") Next
+          a.page-link(href="/customer-interest/index?page=") Next

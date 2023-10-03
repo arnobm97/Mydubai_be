@@ -56,8 +56,8 @@ export class PropertyAreaProvider implements IPropertyAreaProvider {
     }
 
 
-    public async update(propertyAreaId: string, areaName: string, lang: string, areaDescription: string, thumbnail: string): Promise<any> {
-        return await PropertyAreaModel.updateOne({ "_id": propertyAreaId }, {areaName,lang,areaDescription,thumbnail});
+    public async update(propertyAreaId: string, areaName: string, lang: string, areaDescription: string, areaThumbnail: string): Promise<any> {
+        return await PropertyAreaModel.updateOne({ "_id": propertyAreaId }, {areaName,lang,areaDescription,areaThumbnail});
     }
 
     public async delete(propertyAreaId: string): Promise<any> {
