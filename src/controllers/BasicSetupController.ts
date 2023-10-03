@@ -21,6 +21,9 @@ export class BasicSetupController extends Controller {
         this.onGet("/basic-setup/property-type", this.propertyType, [Role.Admin, Role.Moderator]);
         this.onGet("/basic-setup/property-type/create", this.createPropertyType, [Role.Admin, Role.Moderator]);
         this.onPost("/basic-setup/property-type/create", this.createPropertyType, [Role.Admin, Role.Moderator]);
+        this.onGet("/basic-setup/property-type/update/:propertyTypeId", this.updatePropertyType, [Role.Admin, Role.Moderator]);
+        this.onPost("/basic-setup/property-type/update/:propertyTypeId", this.updatePropertyType, [Role.Admin, Role.Moderator]);
+
         this.onGet("/basic-setup/property-area", this.propertyArea, [Role.Admin, Role.Moderator]);
         this.onGet("/basic-setup/property-area/create", this.createPropertyArea, [Role.Admin, Role.Moderator]);
         this.onPost("/basic-setup/property-area/create", this.createPropertyArea, [Role.Admin, Role.Moderator]);
@@ -81,6 +84,42 @@ export class BasicSetupController extends Controller {
                 const user : EmbededUser = {id: req.user.id, fullName: req.user.name };
                 await this.PropertyTypeProvider.create(name, lang, description, thumbnail, user);
                 req.flash('flashMessage', 'Property type created successfully.');
+                res.redirect('/basic-setup/property-type');
+            }
+        }else{
+            res.bag.errorMessage = "Invalid Request";
+            res.view('/basic-setup/property-type');
+        }
+    }
+
+
+    public async updatePropertyType(req: HttpRequest, res: HttpResponse, next: NextFunc) {
+        res.bag.pageTitle = this.config.appTitle+" | Update Property Type";
+        const propertyTypeId = req.params.propertyTypeId;
+        if(req.method === "GET"){
+            res.bag.propertyType = await this.PropertyTypeProvider.get(propertyTypeId);
+            res.view('basic-setup/property-type/update');
+        }else if(req.method === "POST"){
+            const name = req.body.name;
+            const lang = req.body.lang;
+            const description = req.body.description;
+            const thumbnail = req.body.thumbnail;
+            if (!name) {
+                res.bag.errorMessage = "Property type name is required";
+                return res.view('basic-setup/property-type/create')
+            }else if (!lang) {
+                res.bag.errorMessage = "Property type language is required";
+                return res.view('basic-setup/property-type/create')
+            }else if (!description) {
+                res.bag.errorMessage = "Property type description is required";
+                return res.view('basic-setup/property-type/create')
+            }else if (!thumbnail) {
+                res.bag.errorMessage = "Property type thumbnail is required";
+                return res.view('basic-setup/property-type/create')
+            }else{
+                const user : EmbededUser = {id: req.user.id, fullName: req.user.name };
+                await this.PropertyTypeProvider.update(propertyTypeId, name, lang, description, thumbnail);
+                req.flash('flashMessage', 'Property type updated successfully.');
                 res.redirect('/basic-setup/property-type');
             }
         }else{

@@ -55,7 +55,7 @@ block content
                 td.cell.text-center=list.createdBy.fullName
                 td.cell.text-center
                   a.btn.app-btn-info.btn-sm(href='/basic-setup/property-type/update/'+list._id) Update
-                  a.btn.app-btn-primary.btn-sm.ms-2(href='/basic-setup/property-type/details/'+list._id) View             
+                  a.btn.app-btn-danger.btn-sm.ms-2(onclick="return confirm('Are you sure you want to delete this item?');" href='/basic-setup/property-type/delete/'+list._id) Delete             
   //- pagination
   nav.app-pagination
     ul.pagination.justify-content-center

@@ -27,4 +27,6 @@ export interface IPropertyTypeProvider {
     getAll(lang?: string): Promise<IPropertyType[]>;
     list(page:number, size:number, lang?: string): Promise<IPropertyTypePage>;
     create(name: string, lang: string, description: string, thumbnail: string, createdBy: EmbededUser): Promise<IPropertyType>;
+    update(propertyTypeId: string, name: string, lang: string, description: string, thumbnail: string): Promise<any>;
+    delete(propertyTypeId: string): Promise<any>;
 }

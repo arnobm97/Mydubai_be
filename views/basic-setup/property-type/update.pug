@@ -1,0 +1,46 @@
+extends ../../layout
+block content
+  .row.app-card.mb-2.align-items-center.justify-content-between.bg-white.p-2.m-0
+    .col-auto
+      h1.app-page-title.mb-0 Basic Setup / Property Type / Update
+    .col-auto
+      .page-utilities
+        .row.g-2.justify-content-start.justify-content-md-end.align-items-center
+          .col-auto
+            a.btn.app-btn-info(href='')
+              i.fa.fa-refresh
+              | &nbsp;Reset Page
+          .col-auto
+            a.btn.app-btn-danger(href='/basic-setup/property-type')
+              i.fa.fa-chevron-left
+              | &nbsp;Return
+  
+  div.row
+    div.col-12.col-md-12
+      div.app-card.app-card-settings.shadow-sm.p-4
+        -if(errorMessage)
+          div.alert.alert-danger(role='alert')=errorMessage
+        div.app-card-body
+          form(action="" method="POST")
+            div.row
+              div.col-12.col-md-6.mb-2
+                label.form-label(for='lang') Language
+                select.form-control(name="lang" required )
+                  option(value="", disabled="", selected="") Choose Language
+                  each lang in langList
+                    -if(propertyType.lang==lang.value)
+                      option(value=lang.value selected) #{lang.title}
+                    -else
+                      option(value=lang.value) #{lang.title}
+              div.col-12.col-md-6.mb-2
+                label.form-label(for='name') Property Type Name
+                input#name.form-control(type='text' name="name" value=propertyType.name required )
+              div.col-12.col-md-6.mb-2
+                label.form-label(for='description') Property Type Description
+                textarea#description.form-control(name="description" required )=propertyType.description
+              div.col-12.col-md-6.mb-2
+                label.form-label(for='thumbnail') Property Type Thumbnail URL
+                input#thumbnail.form-control(type='text' value=propertyType.thumbnail name="thumbnail" required )
+            //- submit button
+            hr
+            button.btn.app-btn-primary(type='submit') Update Property Type

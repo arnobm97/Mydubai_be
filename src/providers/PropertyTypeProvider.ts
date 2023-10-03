@@ -37,7 +37,6 @@ export class PropertyTypeProvider implements IPropertyTypeProvider {
         return { size: pageSize, page, count, data: query };
     }
 
-
     public async create(name: string, lang: string, description: string, thumbnail: string, createdBy: EmbededUser): Promise<IPropertyType> {
         return await PropertyTypeModel.create({
             name,
@@ -46,6 +45,14 @@ export class PropertyTypeProvider implements IPropertyTypeProvider {
             thumbnail,
             createdBy
         });
+    }
+
+    public async update(propertyTypeId: string, name: string, lang: string, description: string, thumbnail: string): Promise<any> {
+        return await PropertyTypeModel.updateOne({ "_id": propertyTypeId }, {name,lang,description,thumbnail});
+    }
+
+    public async delete(propertyTypeId: string): Promise<any> {
+        return await PropertyTypeModel.findByIdAndDelete(propertyTypeId);
     }
 
 
