@@ -1,0 +1,40 @@
+extends ../../layout
+block content
+  .row.app-card.mb-2.align-items-center.justify-content-between.bg-white.p-2.m-0
+    .col-auto
+      h1.app-page-title.mb-0 Basic Setup / Development Type / Update
+    .col-auto
+      .page-utilities
+        .row.g-2.justify-content-start.justify-content-md-end.align-items-center
+          .col-auto
+            a.btn.app-btn-info(href='')
+              i.fa.fa-refresh
+              | &nbsp;Reset Page
+          .col-auto
+            a.btn.app-btn-danger(href='/basic-setup/development-type')
+              i.fa.fa-chevron-left
+              | &nbsp;Return
+  
+  div.row
+    div.col-12.col-md-12
+      div.app-card.app-card-settings.shadow-sm.p-4
+        -if(errorMessage)
+          div.alert.alert-danger(role='alert')=errorMessage
+        div.app-card-body
+          form(action="" method="POST")
+            div.row
+              div.col-12.col-md-6.mb-2
+                label.form-label(for='lang') Language
+                select.form-control(name="lang" required )
+                  option(value="", disabled="", selected="") Choose Language
+                  each lang in langList
+                    -if(developmentType && developmentType.lang==lang.value)
+                      option(value=lang.value selected) #{lang.title}
+                    -else
+                      option(value=lang.value) #{lang.title}
+              div.col-12.col-md-6.mb-2
+                label.form-label(for='name') Development Type Name
+                input#name.form-control(type='text' name="name" value=developmentType?developmentType.name:'' required )
+            //- submit button
+            hr
+            button.btn.app-btn-primary(type='submit') Update Development Type

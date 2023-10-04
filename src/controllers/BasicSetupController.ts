@@ -38,6 +38,9 @@ export class BasicSetupController extends Controller {
         this.onGet("/basic-setup/development-type", this.developmentType, [Role.Admin, Role.Moderator]);
         this.onGet("/basic-setup/development-type/create", this.createDevelopmentType, [Role.Admin, Role.Moderator]);
         this.onPost("/basic-setup/development-type/create", this.createDevelopmentType, [Role.Admin, Role.Moderator]);
+        this.onGet("/basic-setup/development-type/update/:developmentTypeId", this.updateDevelopmentType, [Role.Admin, Role.Moderator]);
+        this.onPost("/basic-setup/development-type/update/:developmentTypeId", this.updateDevelopmentType, [Role.Admin, Role.Moderator]);
+        this.onGet("/basic-setup/development-type/delete/:developmentTypeId", this.deleteDevelopmentType, [Role.Admin, Role.Moderator]);
         //developer type
         this.onGet("/basic-setup/developer-type", this.developerType, [Role.Admin, Role.Moderator]);
         this.onGet("/basic-setup/developer-type/create", this.createDeveloperType, [Role.Admin, Role.Moderator]);
@@ -309,6 +312,58 @@ export class BasicSetupController extends Controller {
             res.view('/basic-setup/development-type');
         }
     }
+
+
+    //updateDevelopmentType
+    public async updateDevelopmentType(req: HttpRequest, res: HttpResponse, next: NextFunc) {
+        res.bag.pageTitle = this.config.appTitle+" | Update  Development Type";
+        const developmentTypeId = req.params.developmentTypeId;
+        res.bag.developmentType = await this.DevelopmentTypeProvider.get(developmentTypeId);
+        if(req.method === "GET"){
+            res.view('basic-setup/development-type/update');
+        }else if(req.method === "POST"){
+            const name = req.body.name;
+            const lang = req.body.lang;
+            if (!name) {
+                res.bag.errorMessage = "Development type name is required";
+                return res.view('basic-setup/development-type/update')
+            }else{
+                const isUpdate: any = await this.DevelopmentTypeProvider.update(developmentTypeId, name, lang);
+                if(isUpdate && isUpdate.nModified == 1){
+                    //Update property
+                    const condition = {'developmentType.id':  developmentTypeId};
+                    const updateData = {'developmentType.id': developmentTypeId,  'developmentType.name' : name };
+                    this.PropertyProvider.updatePropertyByRefData(condition, updateData);
+                }
+                req.flash('flashMessage', 'Development type updated successfully.');
+                res.redirect('/basic-setup/development-type');
+            }
+        }else{
+            res.bag.errorMessage = "Invalid Request";
+            res.view('/basic-setup/basic-setup/development-type');
+        }
+    }
+
+    //delete
+    public async deleteDevelopmentType(req: HttpRequest, res: HttpResponse, next: NextFunc) {
+        try{
+            const developmentTypeId = req.params.developmentTypeId;
+            await this.DevelopmentTypeProvider.delete(developmentTypeId);
+            res.bag.successMessage = "Done";
+            req.flash('flashMessage', 'Development type deleted successfully.');
+            return res.redirect('/basic-setup/development-type');
+        }catch(error){
+            req.flash('flashMessage', 'Opps! Something went wrong. Please try later.');
+            return res.redirect('/basic-setup/development-type');
+        }
+    }
+
+
+
+
+
+
+
 
 
 

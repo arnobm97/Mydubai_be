@@ -26,4 +26,6 @@ export interface IDevelopmentTypeProvider {
     getAll(lang?: string): Promise<IDevelopmentType[]>;
     list(page:number, size:number, lang?: string): Promise<IDevelopmentTypePage>;
     create(name: string, lang: string, createdBy: EmbededUser): Promise<IDevelopmentType>;
+    update(developmentTypeId: string, name: string, lang: string): Promise<any>;
+    delete(developmentTypeId: string): Promise<any>;
 }

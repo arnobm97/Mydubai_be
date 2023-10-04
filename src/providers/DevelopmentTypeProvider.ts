@@ -46,6 +46,14 @@ export class DevelopmentTypeProvider implements IDevelopmentTypeProvider {
         });
     }
 
+    public async update(developmentTypeId: string, name: string, lang: string): Promise<any> {
+        return await DevelopmentTypeModel.updateOne({ "_id": developmentTypeId }, {name, lang});
+    }
+
+    public async delete(developmentTypeId: string): Promise<any> {
+        return await DevelopmentTypeModel.findByIdAndDelete(developmentTypeId);
+    }
+
 
 
 
