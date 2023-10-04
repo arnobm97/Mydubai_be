@@ -52,6 +52,14 @@ export class DeveloperTypeProvider implements IDeveloperTypeProvider {
         });
     }
 
+    public async update(developerTypeId: string, name: string, lang: string, description: string, logo: string): Promise<any> {
+        return await DeveloperTypeModel.updateOne({ "_id": developerTypeId }, {name, lang, description, logo});
+    }
+
+    public async delete(developerTypeId: string): Promise<any> {
+        return await DeveloperTypeModel.findByIdAndDelete(developerTypeId);
+    }
+
 
 
 

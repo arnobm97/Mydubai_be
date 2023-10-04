@@ -45,6 +45,9 @@ export class BasicSetupController extends Controller {
         this.onGet("/basic-setup/developer-type", this.developerType, [Role.Admin, Role.Moderator]);
         this.onGet("/basic-setup/developer-type/create", this.createDeveloperType, [Role.Admin, Role.Moderator]);
         this.onPost("/basic-setup/developer-type/create", this.createDeveloperType, [Role.Admin, Role.Moderator]);
+        this.onGet("/basic-setup/developer-type/update/:developerTypeId", this.updateDeveloperType, [Role.Admin, Role.Moderator]);
+        this.onPost("/basic-setup/developer-type/update/:developerTypeId", this.updateDeveloperType, [Role.Admin, Role.Moderator]);
+        this.onGet("/basic-setup/developer-type/delete/:developerTypeId", this.deleteDeveloperType, [Role.Admin, Role.Moderator]);
     }
     //index menu
     public async index(req: HttpRequest, res: HttpResponse, next: NextFunc) {
@@ -134,11 +137,11 @@ export class BasicSetupController extends Controller {
                     this.PropertyProvider.updatePropertyByRefData(condition, updateData);
                 }
                 req.flash('flashMessage', 'Property type updated successfully.');
-                res.redirect('/basic-setup/property-type');
+                return res.redirect('/basic-setup/property-type');
             }
         }else{
             res.bag.errorMessage = "Invalid Request";
-            res.view('/basic-setup/basic-setup/property-type');
+            return res.view('/basic-setup/basic-setup/property-type');
         }
     }
 
@@ -200,11 +203,11 @@ export class BasicSetupController extends Controller {
                 const user : EmbededUser = {id: req.user.id, fullName: req.user.name };
                 await this.PropertyAreaProvider.create(areaName,lang,areaDescription,areaThumbnail,user);
                 req.flash('flashMessage', 'Property area created successfully.');
-                res.redirect('/basic-setup/property-area');
+                return res.redirect('/basic-setup/property-area');
             }
         }else{
             res.bag.errorMessage = "Invalid Request";
-            res.view('/basic-setup/property-area');
+            return res.view('/basic-setup/property-area');
         }
 
     }
@@ -244,11 +247,11 @@ export class BasicSetupController extends Controller {
                     this.PropertyProvider.updatePropertyByRefData(condition, updateData);
                 }
                 req.flash('flashMessage', 'Property area updated successfully.');
-                res.redirect('/basic-setup/property-area');
+                return res.redirect('/basic-setup/property-area');
             }
         }else{
             res.bag.errorMessage = "Invalid Request";
-            res.view('/basic-setup/basic-setup/property-area');
+            return res.view('/basic-setup/basic-setup/property-area');
         }
     }
 
@@ -284,7 +287,7 @@ export class BasicSetupController extends Controller {
         res.bag.developmentTypePage = developmentTypePage;
         res.bag.currentLang = queryLanguage;
         res.bag.flashMessage = req.flash('flashMessage');
-        res.view('basic-setup/development-type/index');
+        return res.view('basic-setup/development-type/index');
     }
 
 
@@ -309,7 +312,7 @@ export class BasicSetupController extends Controller {
             }
         }else{
             res.bag.errorMessage = "Invalid Request";
-            res.view('/basic-setup/development-type');
+            return res.view('/basic-setup/development-type');
         }
     }
 
@@ -336,7 +339,7 @@ export class BasicSetupController extends Controller {
                     this.PropertyProvider.updatePropertyByRefData(condition, updateData);
                 }
                 req.flash('flashMessage', 'Development type updated successfully.');
-                res.redirect('/basic-setup/development-type');
+                return res.redirect('/basic-setup/development-type');
             }
         }else{
             res.bag.errorMessage = "Invalid Request";
@@ -360,13 +363,6 @@ export class BasicSetupController extends Controller {
 
 
 
-
-
-
-
-
-
-
     public async developerType(req: HttpRequest, res: HttpResponse, next: NextFunc) {
         res.bag.pageTitle = this.config.appTitle+" | Developer Type";
         const queryLanguage: any = req.query.lang;
@@ -380,7 +376,7 @@ export class BasicSetupController extends Controller {
         res.bag.developerTypePage = developerTypePage;
         res.bag.currentLang = queryLanguage;
         res.bag.flashMessage = req.flash('flashMessage');
-        res.view('basic-setup/developer-type/index');
+        return res.view('basic-setup/developer-type/index');
     }
 
 
@@ -390,7 +386,7 @@ export class BasicSetupController extends Controller {
         res.bag.pageTitle = this.config.appTitle+" | Create Developer Type";
 
         if(req.method === "GET"){
-            res.view('basic-setup/developer-type/create');
+            return res.view('basic-setup/developer-type/create');
         }else if(req.method === "POST"){
             const name = req.body.name;
             const description = req.body.description;
@@ -412,16 +408,69 @@ export class BasicSetupController extends Controller {
                 const user : EmbededUser = {id: req.user.id, fullName: req.user.name };
                 await this.DeveloperTypeProvider.create(name, description, logo, lang, user);
                 req.flash('flashMessage', 'Developer type created successfully.');
-                res.redirect('/basic-setup/developer-type');
+                return res.redirect('/basic-setup/developer-type');
             }
         }else{
             res.bag.errorMessage = "Invalid Request";
-            res.view('/basic-setup/developer-type');
+            return res.view('/basic-setup/developer-type');
         }
 
     }
 
+    //updateDeveloperType
+    public async updateDeveloperType(req: HttpRequest, res: HttpResponse, next: NextFunc) {
+        res.bag.pageTitle = this.config.appTitle+" | Update  developer Type";
+        const developerTypeId = req.params.developerTypeId;
+        res.bag.developerType = await this.DeveloperTypeProvider.get(developerTypeId);
+        if(req.method === "GET"){
+            return res.view('basic-setup/developer-type/update');
+        }else if(req.method === "POST"){
+            const name = req.body.name;
+            const lang = req.body.lang;
+            const description = req.body.description;
+            const logo = req.body.logo;
+            if (!name) {
+                res.bag.errorMessage = "Developer name is required";
+                return res.view('basic-setup/developer-type/update')
+            }else if(!lang) {
+                res.bag.errorMessage = "Developer language is required";
+                return res.view('basic-setup/developer-type/update')
+            }else if(!description) {
+                res.bag.errorMessage = "Developer description is required";
+                return res.view('basic-setup/developer-type/update')
+            }else if(!logo) {
+                res.bag.errorMessage = "Developer logo is required";
+                return res.view('basic-setup/developer-type/update')
+            }else{
+                const isUpdate: any = await this.DeveloperTypeProvider.update(developerTypeId, name, lang, description, logo);
+                if(isUpdate && isUpdate.nModified == 1){
+                    //Update property
+                    const condition = {'developerType.id':  developerTypeId};
+                    const updateData = {'developerType.id': developerTypeId,  'developerType.name' : name };
+                    this.PropertyProvider.updatePropertyByRefData(condition, updateData);
+                }
+                req.flash('flashMessage', 'Developer type updated successfully.');
+                return res.redirect('/basic-setup/developer-type');
+            }
+        }else{
+            res.bag.errorMessage = "Invalid Request";
+            return res.view('/basic-setup/basic-setup/developer-type');
+        }
+    }
 
+    //deleteDeveloperType
+    public async deleteDeveloperType(req: HttpRequest, res: HttpResponse, next: NextFunc) {
+        try{
+            const developerTypeId = req.params.developerTypeId;
+            await this.DeveloperTypeProvider.delete(developerTypeId);
+            res.bag.successMessage = "Done";
+            req.flash('flashMessage', 'Developer type deleted successfully.');
+            return res.redirect('/basic-setup/developer-type');
+        }catch(error){
+            req.flash('flashMessage', 'Opps! Something went wrong. Please try later.');
+            return res.redirect('/basic-setup/developer-type');
+        }
+    }
 
 
 

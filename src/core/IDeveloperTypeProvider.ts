@@ -28,4 +28,6 @@ export interface IDeveloperTypeProvider {
     getAll(lang?: string): Promise<IDeveloperType[]>;
     list(page:number, size:number, lang?: string): Promise<IDeveloperTypePage>;
     create(name: string, description: string, logo: string, lang: string, createdBy: EmbededUser): Promise<IDeveloperType>;
+    update(developerTypeId: string, name: string, lang: string, description: string, logo: string): Promise<any>;
+    delete(developerTypeId: string): Promise<any>;
 }

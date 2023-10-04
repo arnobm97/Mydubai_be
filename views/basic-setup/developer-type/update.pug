@@ -1,10 +1,8 @@
 extends ../../layout
 block content
-
-
   .row.app-card.mb-2.align-items-center.justify-content-between.bg-white.p-2.m-0
     .col-auto
-      h1.app-page-title.mb-0 Basic Setup / Developer Type / Create
+      h1.app-page-title.mb-0 Basic Setup / Developer Type / Update
     .col-auto
       .page-utilities
         .row.g-2.justify-content-start.justify-content-md-end.align-items-center
@@ -17,7 +15,6 @@ block content
               i.fa.fa-chevron-left
               | &nbsp;Return
   
-
   div.row
     div.col-12.col-md-12
       div.app-card.app-card-settings.shadow-sm.p-4
@@ -31,17 +28,21 @@ block content
                 select.form-control(name="lang" required )
                   option(value="", disabled="", selected="") Choose Language
                   each lang in langList
-                    option(value=lang.value) #{lang.title}
+                    -if(developerType && developerType.lang==lang.value)
+                      option(value=lang.value selected) #{lang.title}
+                    -else
+                      option(value=lang.value) #{lang.title}
               div.col-12.col-md-6.mb-2
                 label.form-label(for='name') Developer Name
-                input#name.form-control(type='text' name="name" required )
+                input#name.form-control(type='text' name="name" value=developerType?developerType.name:'' required )
+
               div.col-12.col-md-6.mb-2
                 label.form-label(for='description') Developer description
-                textarea#description.form-control(name="description" rows='6' required )
+                textarea#description.form-control(name="description" rows='6' required )=developerType?developerType.description:''
               div.col-12.col-md-6.mb-2
                 label.form-label(for='name') Developer logo path
-                input#logo.form-control(type='text' name="logo" required )
+                input#logo.form-control(type='text' value=developerType?developerType.logo:'' name="logo" required )
+
             //- submit button
             hr
-            button.btn.app-btn-primary(type='submit') Create Developer Type
-  
+            button.btn.app-btn-primary(type='submit') Update developer Type
