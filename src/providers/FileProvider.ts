@@ -7,11 +7,11 @@ import FileModel  from "../models/FileModel";
 export class FileProvider implements IFileProvider {
 
     public async get(id: string): Promise<IFile> {
-        return await FileModel.findOne({"_id": id }).catch(err => null);
+        return await FileModel.findOne({"_id": id }).catch(null);
     }
 
     public async getByFolderId(folderId: string): Promise<IFile[]> {
-        return await FileModel.find({"folderId": folderId }).catch(err => null);
+        return await FileModel.find({"folderId": folderId }).catch();
     }
 
     public async create(folderId: string, location: string, fileName: string, createBy: EmbededUser): Promise<IFile> {
@@ -22,7 +22,7 @@ export class FileProvider implements IFileProvider {
             createBy
         });
     }
-    
+
     public async delete(id: string): Promise<any> {
         return await FileModel.findByIdAndDelete(id);
     }

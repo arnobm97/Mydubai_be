@@ -6,7 +6,7 @@ import ArrangeMeetingModel from "../models/ArrangeMeetingModel";
 export class ArrangeMeetingProvider implements IArrangeMeetingProvider {
 
     public async get(id: string): Promise<IArrangeMeeting> {
-        return await ArrangeMeetingModel.findOne({"_id": id }).catch(err => null);
+        return await ArrangeMeetingModel.findOne({"_id": id }).catch(null);
     }
 
     public async list(page:number = 1, size:number = 10): Promise<IArrangeMeetingPage> {
@@ -15,10 +15,10 @@ export class ArrangeMeetingProvider implements IArrangeMeetingProvider {
         let query;
         if(page === 0){
             pageSize = count;
-            query = await ArrangeMeetingModel.find().catch(err => null);
+            query = await ArrangeMeetingModel.find().catch(null);
         }else{
             pageSize = size;
-            query = await ArrangeMeetingModel.find().skip(size * (page - 1)).limit(size).catch(err => null);
+            query = await ArrangeMeetingModel.find().skip(size * (page - 1)).limit(size).catch(null);
         }
         return { size: pageSize, page, count, data: query };
     }

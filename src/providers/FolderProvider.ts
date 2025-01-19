@@ -7,7 +7,7 @@ import FolderModel from "../models/FolderModel";
 export class FolderProvider implements IFolderProvider {
 
     public async get(id: string): Promise<IFolder> {
-        return await FolderModel.findOne({"_id": id }).catch(err => null);
+        return await FolderModel.findOne({"_id": id }).catch(null);
     }
 
     public async list(page:number = 1, size:number = 10): Promise<IFolderPage> {
@@ -16,10 +16,10 @@ export class FolderProvider implements IFolderProvider {
         let query;
         if(page === 0){
             pageSize = count;
-            query = await FolderModel.find().catch(err => null);
+            query = await FolderModel.find().catch();
         }else{
             pageSize = size;
-            query = await FolderModel.find().sort({createdAt: -1}).skip(size * (page - 1)).limit(size).catch(err => null);
+            query = await FolderModel.find().sort({createdAt: -1}).skip(size * (page - 1)).limit(size).catch();
         }
         return { size: pageSize, page, count, data: query };
     }
@@ -31,7 +31,7 @@ export class FolderProvider implements IFolderProvider {
             createBy
         });
     }
-    
+
     public async delete(id: string): Promise<any> {
         return await FolderModel.findByIdAndDelete(id);
     }

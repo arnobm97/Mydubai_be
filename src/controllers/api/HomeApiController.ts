@@ -7,7 +7,6 @@ import {IPropertyProvider, IProperty } from "../../core/IPropertyProvider";
 
 export class HomeApiController extends Controller {
 
-    private config = require("../../../config.json");
     private response = { status: 200, error: false, message: "", data: {} };
     private SliderProvider: ISliderProvider;
     private DevelopmentTypeProvider: IDevelopmentTypeProvider;
@@ -25,13 +24,13 @@ export class HomeApiController extends Controller {
             const devType: IDevelopmentType[] = await  this.DevelopmentTypeProvider.getAll(lang);
             let letestOffplan: IProperty[];
             let letestReady: IProperty[];
-            for(let item of devType){
+            for(const item of devType){
                 if((item.name).toLowerCase() === 'off plan' || (item.name).toLowerCase() === 'off-plan'){
                     letestOffplan = await this.PropertyProvider.letestByDevelopmentType(item._id, 5);
                 }else if((item.name).toLowerCase() === 'ready'){
                     letestReady = await this.PropertyProvider.letestByDevelopmentType(item._id, 5);
                 }else{
-                    //do noting
+                    // do noting
                 }
             }
             const payload = {sliders, letestOffplan, letestReady, lang: res.bag.lang, langList: res.bag.langList };
@@ -49,7 +48,7 @@ export class HomeApiController extends Controller {
             return res.status(200).send(this.response);
         }
     }
-  
+
 
 
 

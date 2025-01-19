@@ -11,7 +11,7 @@ import {IDeveloperTypeProvider, EmbededDeveloperType, IDeveloperType } from "../
 
 export class PropertyController extends Controller {
 
-    private config = require("../../config.json");
+    private config = require(`../../${(process.env.NODE_ENV || 'development') === 'production' ? "config.prod.json" : "config.dev.json"}`);
     private PropertyProvider: IPropertyProvider;
     private PropertyTypeProvider: IPropertyTypeProvider;
     private PropertyAreaProvider: IPropertyAreaProvider;
@@ -205,7 +205,7 @@ export class PropertyController extends Controller {
                     return res.redirect('/properties');
                 }
 
-                let oldProperty: IProperty = await this.PropertyProvider.getById(propertyId);
+                const oldProperty: IProperty = await this.PropertyProvider.getById(propertyId);
                 oldProperty.propertyName = propertyName;
                 oldProperty.lang = lang;
                 oldProperty.propertyDescription = propertyDescription;

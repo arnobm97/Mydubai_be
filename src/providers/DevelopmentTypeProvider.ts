@@ -8,14 +8,14 @@ import DevelopmentTypeModel from "../models/DevelopmentTypeModel";
 export class DevelopmentTypeProvider implements IDevelopmentTypeProvider {
 
     public async get(id: string): Promise<IDevelopmentType> {
-        return await DevelopmentTypeModel.findOne({ "_id": id }).catch(err => null);
+        return await DevelopmentTypeModel.findOne({ "_id": id }).catch(null);
     }
 
     public async getAll(lang?: string): Promise<IDevelopmentType[]> {
         if(lang){
-            return await DevelopmentTypeModel.find({ "lang": lang },{_id:1, name:1}).catch(err => null);
+            return await DevelopmentTypeModel.find({ "lang": lang },{_id:1, name:1}).catch(null);
         }else{
-            return await DevelopmentTypeModel.find().catch(err => null);
+            return await DevelopmentTypeModel.find().catch(null);
         }
     }
 
@@ -29,10 +29,10 @@ export class DevelopmentTypeProvider implements IDevelopmentTypeProvider {
         let query;
         if(page === 0){
             pageSize = count;
-            query = await DevelopmentTypeModel.find(filter).catch(err => null);
+            query = await DevelopmentTypeModel.find(filter).catch(null);
         }else{
             pageSize = size;
-            query = await DevelopmentTypeModel.find(filter).skip(size * (page - 1)).limit(size).catch(err => null);
+            query = await DevelopmentTypeModel.find(filter).skip(size * (page - 1)).limit(size).catch(null);
         }
         return { size: pageSize, page, count, data: query };
     }

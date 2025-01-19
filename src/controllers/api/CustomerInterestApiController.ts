@@ -6,7 +6,6 @@ import { IArrangeMeetingProvider, IArrangeMeeting, IArrangeMeetingPage, IOrganiz
 
 export class CustomerInterestApiController extends Controller {
 
-    private config = require("../../../config.json");
     private response = { status: 200, error: false, message: "", data: {} };
 
     private CustomerInterestProvider: ICustomerInterestProvider;
@@ -67,8 +66,8 @@ export class CustomerInterestApiController extends Controller {
         const organizer: IOrganizer = req.body.organizer;
         const guestEmails: [] = req.body.guestEmails;
 
-        //return res.send(req.body);
-        
+        // return res.send(req.body);
+
         if(!meetingDate || !meetingTime || !timeZone || !organizer || !guestEmails){
             this.response.status = 403;
             this.response.error = true,

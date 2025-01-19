@@ -8,7 +8,7 @@ import { Authenticator } from "../core/Authenticator";
 export class SetupController extends Controller {
   private UserProvider: IUserProvider;
   private Authenticator: Authenticator;
-  private config = require("../../config.json");
+  private config = require(`../../${(process.env.NODE_ENV || 'development') === 'production' ? "config.prod.json" : "config.dev.json"}`);
 
   public onRegister(): void {
     this.onGet("/setup", this.index);

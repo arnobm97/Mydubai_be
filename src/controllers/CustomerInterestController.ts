@@ -7,7 +7,7 @@ import { Role } from "../core/IUserProvider";
 export class CustomerInterestController extends Controller {
 
     private CustomerInterestProvider: ICustomerInterestProvider;
-    private config = require("../../config.json");
+    private config = require(`../../${(process.env.NODE_ENV || 'development') === 'production' ? "config.prod.json" : "config.dev.json"}`);
 
     public onRegister(): void {
         this.onGet("/customer-interest/index", this.index, [Role.Admin, Role.Moderator]);

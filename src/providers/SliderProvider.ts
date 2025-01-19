@@ -12,14 +12,14 @@ export class SliderProvider implements ISliderProvider {
     }
 
     public async get(id: string): Promise<ISlider> {
-        return await SliderModel.findOne({ "_id": id }).catch(err => null);
+        return await SliderModel.findOne({ "_id": id }).catch(null);
     }
 
     public async getAll(lang?: string): Promise<ISlider[]> {
         if(lang){
-            return await SliderModel.find({ "lang": lang },{createdBy:0, __v:0}).catch(err => null);
+            return await SliderModel.find({ "lang": lang },{createdBy:0, __v:0}).catch(null);
         }else{
-            return await SliderModel.find().catch(err => null);
+            return await SliderModel.find().catch(null);
         }
     }
 
@@ -33,10 +33,10 @@ export class SliderProvider implements ISliderProvider {
         let query;
         if(page === 0){
             pageSize = count;
-            query = await SliderModel.find(filter).catch(err => null);
+            query = await SliderModel.find(filter).catch(null);
         }else{
             pageSize = size;
-            query = await SliderModel.find(filter).skip(size * (page - 1)).limit(size).catch(err => null);
+            query = await SliderModel.find(filter).skip(size * (page - 1)).limit(size).catch(null);
         }
         return { size: pageSize, page, count, data: query };
     }
@@ -57,7 +57,7 @@ export class SliderProvider implements ISliderProvider {
 
 
     public async delete(id: string): Promise<any> {
-        return await SliderModel.findByIdAndDelete(id).catch(err => null);
+        return await SliderModel.findByIdAndDelete(id).catch(null);
     }
 
 

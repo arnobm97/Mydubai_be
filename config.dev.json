@@ -1,7 +1,7 @@
 {
-    "appTitle": "Off Ready Plan",
+    "appTitle": "My Dubai Properties",
     "host": "http://localhost",
-    "port": 3008,
+    "port": 3333,
     "smtp": {
         "from": "No Reply<no-reply@btracsl.com>",
         "host": "btracsl.mithiskyconnect.com",
@@ -18,7 +18,7 @@
         "secretAccessKey": "4vtTuBentjg/BPRN4H0gv149rSw4ex2ussPiqBz7",
         "region": "me-central-1"
     },
-    "mongoUrl": "mongodb://localhost:27017/off_ready_plan_db",
+    "mongoUrl": "mongodb://localhost:27017/my_dubai_properties_local_db",
     "cookieSecret": "P>twUC2.9mNurJN%fW(!esGwua:!e(Pu8bHfTXW grck3g9/J@*W3MuEB,FE#/=m",
     "sessionSecret": "P>twUC2.9mVurJN%fW(!esGwua:!e(Pu8bHfTXW grck3g9/J@*W3MuEB,FE#/=m",
     "authSecret": "TFqA$uc4hD5VV(NS*vF=f3$jaCsw6/3U/w%9yu)Py,#&w)kG2(pAgAP9@)3,uVqt",

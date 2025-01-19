@@ -13,7 +13,7 @@ export class DashboardController extends Controller {
     private PropertyProvider: IPropertyProvider;
     private DeveloperTypeProvider: IDeveloperTypeProvider;
     private PropertyAreaProvider: IPropertyAreaProvider;
-    private config = require("../../config.json");
+    private config = require(`../../${(process.env.NODE_ENV || 'development') === 'production' ? "config.prod.json" : "config.dev.json"}`);
 
     public onRegister(): void {
         this.onGet("/", this.index, [Role.Admin, Role.Moderator, Role.User]);

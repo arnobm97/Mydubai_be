@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Web & api services for Off Ready Plan",
   "main": "build/app.js",
+  "engines": {
+    "node": "16.20.2"
+  },
   "scripts": {
     "start": "npm run serve",
     "build": "npm run build-sass && npm run build-ts && npm run lint && npm run copy-static-assets",
@@ -41,6 +44,7 @@
     "body-parser": "^1.20.1",
     "connect-flash": "^0.1.1",
     "cookie-parser": "^1.4.5",
+    "dotenv": "^16.4.7",
     "express": "^4.18.2",
     "express-session": "^1.17.3",
     "fs": "0.0.1-security",
@@ -50,6 +54,7 @@
     "mongoose": "^5.10.0",
     "multiparty": "^4.2.3",
     "node-cron": "^2.0.3",
+    "node-sass": "^9.0.0",
     "nodemailer": "^6.9.1",
     "process": "^0.11.10",
     "pug": "^3.0.0",
@@ -73,7 +78,6 @@
     "concurrently": "^5.3.0",
     "fs-extra": "^9.0.1",
     "jest": "^26.2.1",
-    "node-sass": "^4.14.1",
     "nodemon": "^2.0.4",
     "npm-run-all": "^4.1.5",
     "rimraf": "^3.0.2",

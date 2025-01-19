@@ -8,14 +8,14 @@ import PropertyTypeModel from "../models/PropertyTypeModel";
 export class PropertyTypeProvider implements IPropertyTypeProvider {
 
     public async get(id: string): Promise<IPropertyType> {
-        return await PropertyTypeModel.findOne({ "_id": id }).catch(err => null);
+        return await PropertyTypeModel.findOne({ "_id": id }).catch(null);
     }
 
     public async getAll(lang?: string): Promise<IPropertyType[]> {
         if(lang){
-            return await PropertyTypeModel.find({ "lang": lang },{_id: 1, name: 1}).catch(err => null);
+            return await PropertyTypeModel.find({ "lang": lang },{_id: 1, name: 1}).catch(null);
         }else{
-            return await PropertyTypeModel.find().catch(err => null);
+            return await PropertyTypeModel.find().catch(null);
         }
     }
 
@@ -29,10 +29,10 @@ export class PropertyTypeProvider implements IPropertyTypeProvider {
         let query;
         if(page === 0){
             pageSize = count;
-            query = await PropertyTypeModel.find(filter).catch(err => null);
+            query = await PropertyTypeModel.find(filter).catch(null);
         }else{
             pageSize = size;
-            query = await PropertyTypeModel.find(filter).skip(size * (page - 1)).limit(size).catch(err => null);
+            query = await PropertyTypeModel.find(filter).skip(size * (page - 1)).limit(size).catch(null);
         }
         return { size: pageSize, page, count, data: query };
     }

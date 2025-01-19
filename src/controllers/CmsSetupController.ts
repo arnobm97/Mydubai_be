@@ -7,7 +7,7 @@ import { Role, EmbededUser } from "../core/IUserProvider";
 export class CmsSetupController extends Controller {
 
     private SliderProvider: ISliderProvider;
-    private config = require("../../config.json");
+    private config = require(`../../${(process.env.NODE_ENV || 'development') === 'production' ? "config.prod.json" : "config.dev.json"}`);
 
     public onRegister(): void {
         this.onGet("/cms-setup/index", this.index, [Role.Admin, Role.Moderator]);

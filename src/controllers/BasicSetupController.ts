@@ -15,33 +15,32 @@ export class BasicSetupController extends Controller {
     private DevelopmentTypeProvider: IDevelopmentTypeProvider;
     private DeveloperTypeProvider: IDeveloperTypeProvider;
     private PropertyProvider: IPropertyProvider;
-    private config = require("../../config.json");
-
+    private config = require(`../../${(process.env.NODE_ENV || 'development') === 'production' ? "config.prod.json" : "config.dev.json"}`);
 
     public onRegister(): void {
         this.onGet("/basic-setup/index", this.index, [Role.Admin, Role.Moderator]);
-        //property type
+        // property type
         this.onGet("/basic-setup/property-type", this.propertyType, [Role.Admin, Role.Moderator, Role.User]);
         this.onGet("/basic-setup/property-type/create", this.createPropertyType, [Role.Admin, Role.Moderator, Role.User]);
         this.onPost("/basic-setup/property-type/create", this.createPropertyType, [Role.Admin, Role.Moderator,  Role.User]);
         this.onGet("/basic-setup/property-type/update/:propertyTypeId", this.updatePropertyType, [Role.Admin, Role.Moderator]);
         this.onPost("/basic-setup/property-type/update/:propertyTypeId", this.updatePropertyType, [Role.Admin, Role.Moderator]);
         this.onGet("/basic-setup/property-type/delete/:propertyTypeId", this.deletePropertyType, [Role.Admin]);
-        //property area
+        // property area
         this.onGet("/basic-setup/property-area", this.propertyArea, [Role.Admin, Role.Moderator, Role.User]);
         this.onGet("/basic-setup/property-area/create", this.createPropertyArea, [Role.Admin, Role.Moderator, Role.User]);
         this.onPost("/basic-setup/property-area/create", this.createPropertyArea, [Role.Admin, Role.Moderator, Role.User]);
         this.onGet("/basic-setup/property-area/update/:propertyAreaId", this.updatePropertyArea, [Role.Admin, Role.Moderator]);
         this.onPost("/basic-setup/property-area/update/:propertyAreaId", this.updatePropertyArea, [Role.Admin, Role.Moderator]);
         this.onGet("/basic-setup/property-area/delete/:propertyAreaId", this.deletePropertyArea, [Role.Admin]);
-        //development type
+        // development type
         this.onGet("/basic-setup/development-type", this.developmentType, [Role.Admin, Role.Moderator]);
         this.onGet("/basic-setup/development-type/create", this.createDevelopmentType, [Role.Admin, Role.Moderator]);
         this.onPost("/basic-setup/development-type/create", this.createDevelopmentType, [Role.Admin, Role.Moderator]);
         this.onGet("/basic-setup/development-type/update/:developmentTypeId", this.updateDevelopmentType, [Role.Admin, Role.Moderator]);
         this.onPost("/basic-setup/development-type/update/:developmentTypeId", this.updateDevelopmentType, [Role.Admin, Role.Moderator]);
         this.onGet("/basic-setup/development-type/delete/:developmentTypeId", this.deleteDevelopmentType, [Role.Admin, Role.Moderator]);
-        //developer type
+        // developer type
         this.onGet("/basic-setup/developer-type", this.developerType, [Role.Admin, Role.Moderator]);
         this.onGet("/basic-setup/developer-type/create", this.createDeveloperType, [Role.Admin, Role.Moderator]);
         this.onPost("/basic-setup/developer-type/create", this.createDeveloperType, [Role.Admin, Role.Moderator]);
@@ -49,12 +48,12 @@ export class BasicSetupController extends Controller {
         this.onPost("/basic-setup/developer-type/update/:developerTypeId", this.updateDeveloperType, [Role.Admin, Role.Moderator]);
         this.onGet("/basic-setup/developer-type/delete/:developerTypeId", this.deleteDeveloperType, [Role.Admin, Role.Moderator]);
     }
-    //index menu
+    // index menu
     public async index(req: HttpRequest, res: HttpResponse, next: NextFunc) {
         res.bag.pageTitle = this.config.appTitle+" | Basic Setup"
         res.view('basic-setup/index');
     }
-    //List
+    // List
     public async propertyType(req: HttpRequest, res: HttpResponse, next: NextFunc) {
         res.bag.pageTitle = this.config.appTitle+" | Property Type"
         const queryLanguage: any = req.query.lang;
@@ -70,7 +69,7 @@ export class BasicSetupController extends Controller {
         res.bag.flashMessage = req.flash('flashMessage');
         res.view('basic-setup/property-type/index');
     }
-    //create
+    // create
     public async createPropertyType(req: HttpRequest, res: HttpResponse, next: NextFunc) {
         res.bag.pageTitle = this.config.appTitle+" | Create Property Type";
         if(req.method === "GET"){
@@ -103,8 +102,8 @@ export class BasicSetupController extends Controller {
             res.view('/basic-setup/property-type');
         }
     }
-    
-    //update
+
+    // update
     public async updatePropertyType(req: HttpRequest, res: HttpResponse, next: NextFunc) {
         res.bag.pageTitle = this.config.appTitle+" | Update Property Type";
         const propertyTypeId = req.params.propertyTypeId;
@@ -130,8 +129,8 @@ export class BasicSetupController extends Controller {
                 return res.view('basic-setup/property-type/create')
             }else{
                 const isUpdate: any = await this.PropertyTypeProvider.update(propertyTypeId, name, lang, description, thumbnail);
-                if(isUpdate && isUpdate.nModified == 1){
-                    //Update property
+                if(isUpdate && isUpdate.nModified === 1){
+                    // Update property
                     const condition = {'propertyType.id':  propertyTypeId};
                     const updateData = {'propertyType.id': propertyTypeId,  'propertyType.name' : name };
                     this.PropertyProvider.updatePropertyByRefData(condition, updateData);
@@ -145,7 +144,7 @@ export class BasicSetupController extends Controller {
         }
     }
 
-    //delete
+    // delete
     public async deletePropertyType(req: HttpRequest, res: HttpResponse, next: NextFunc) {
         try{
             const propertyTypeId = req.params.propertyTypeId;
@@ -212,13 +211,13 @@ export class BasicSetupController extends Controller {
 
     }
 
-    //update
+    // update
     public async updatePropertyArea(req: HttpRequest, res: HttpResponse, next: NextFunc) {
         res.bag.pageTitle = this.config.appTitle+" | Update Property Area";
         const propertyAreaId = req.params.propertyAreaId;
         if(req.method === "GET"){
             res.bag.propertyArea = await this.PropertyAreaProvider.get(propertyAreaId);
-            //return res.send(res.bag.propertyArea);
+            // return res.send(res.bag.propertyArea);
 
             res.view('basic-setup/property-area/update');
         }else if(req.method === "POST"){
@@ -240,8 +239,8 @@ export class BasicSetupController extends Controller {
                 return res.view('basic-setup/property-area/create')
             }else{
                 const isUpdate: any = await this.PropertyAreaProvider.update(propertyAreaId, areaName, lang, areaDescription, areaThumbnail);
-                if(isUpdate && isUpdate.nModified == 1){
-                    //Update property
+                if(isUpdate && isUpdate.nModified === 1){
+                    // Update property
                     const condition = {'propertyArea.id':  propertyAreaId};
                     const updateData = {'propertyArea.id': propertyAreaId,  'propertyArea.areaName' : areaName };
                     this.PropertyProvider.updatePropertyByRefData(condition, updateData);
@@ -255,7 +254,7 @@ export class BasicSetupController extends Controller {
         }
     }
 
-    //delete
+    // delete
     public async deletePropertyArea(req: HttpRequest, res: HttpResponse, next: NextFunc) {
         try{
             const propertyAreaId = req.params.propertyAreaId;
@@ -317,7 +316,7 @@ export class BasicSetupController extends Controller {
     }
 
 
-    //updateDevelopmentType
+    // updateDevelopmentType
     public async updateDevelopmentType(req: HttpRequest, res: HttpResponse, next: NextFunc) {
         res.bag.pageTitle = this.config.appTitle+" | Update  Development Type";
         const developmentTypeId = req.params.developmentTypeId;
@@ -332,8 +331,8 @@ export class BasicSetupController extends Controller {
                 return res.view('basic-setup/development-type/update')
             }else{
                 const isUpdate: any = await this.DevelopmentTypeProvider.update(developmentTypeId, name, lang);
-                if(isUpdate && isUpdate.nModified == 1){
-                    //Update property
+                if(isUpdate && isUpdate.nModified === 1){
+                    // Update property
                     const condition = {'developmentType.id':  developmentTypeId};
                     const updateData = {'developmentType.id': developmentTypeId,  'developmentType.name' : name };
                     this.PropertyProvider.updatePropertyByRefData(condition, updateData);
@@ -347,7 +346,7 @@ export class BasicSetupController extends Controller {
         }
     }
 
-    //delete
+    // delete
     public async deleteDevelopmentType(req: HttpRequest, res: HttpResponse, next: NextFunc) {
         try{
             const developmentTypeId = req.params.developmentTypeId;
@@ -417,7 +416,7 @@ export class BasicSetupController extends Controller {
 
     }
 
-    //updateDeveloperType
+    // updateDeveloperType
     public async updateDeveloperType(req: HttpRequest, res: HttpResponse, next: NextFunc) {
         res.bag.pageTitle = this.config.appTitle+" | Update  developer Type";
         const developerTypeId = req.params.developerTypeId;
@@ -443,8 +442,8 @@ export class BasicSetupController extends Controller {
                 return res.view('basic-setup/developer-type/update')
             }else{
                 const isUpdate: any = await this.DeveloperTypeProvider.update(developerTypeId, name, lang, description, logo);
-                if(isUpdate && isUpdate.nModified == 1){
-                    //Update property
+                if(isUpdate && isUpdate.nModified === 1){
+                    // Update property
                     const condition = {'developerType.id':  developerTypeId};
                     const updateData = {'developerType.id': developerTypeId,  'developerType.name' : name };
                     this.PropertyProvider.updatePropertyByRefData(condition, updateData);
@@ -458,7 +457,7 @@ export class BasicSetupController extends Controller {
         }
     }
 
-    //deleteDeveloperType
+    // deleteDeveloperType
     public async deleteDeveloperType(req: HttpRequest, res: HttpResponse, next: NextFunc) {
         try{
             const developerTypeId = req.params.developerTypeId;

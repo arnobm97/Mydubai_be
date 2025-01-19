@@ -8,7 +8,7 @@ export class CustomerInterestProvider implements ICustomerInterestProvider {
 
 
     public async get(id: string): Promise<ICustomerInterest> {
-        return await CustomerInterestModel.findOne({"_id": id }).catch(err => null);
+        return await CustomerInterestModel.findOne({"_id": id }).catch(null);
     }
 
 
@@ -18,10 +18,10 @@ export class CustomerInterestProvider implements ICustomerInterestProvider {
         let query;
         if(page === 0){
             pageSize = count;
-            query = await CustomerInterestModel.find().catch(err => null);
+            query = await CustomerInterestModel.find().catch(null);
         }else{
             pageSize = size;
-            query = await CustomerInterestModel.find().skip(size * (page - 1)).limit(size).catch(err => null);
+            query = await CustomerInterestModel.find().skip(size * (page - 1)).limit(size).catch(null);
         }
         return { size: pageSize, page, count, data: query };
     }

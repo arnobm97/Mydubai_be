@@ -13,7 +13,7 @@ import  FileModel  from "../models/FileModel";
 
 export class FileController extends Controller {
 
-    private config = require("../../config.json");
+    private config = require(`../../${(process.env.NODE_ENV || 'development') === 'production' ? "config.prod.json" : "config.dev.json"}`);
     private FolderProvider: IFolderProvider;
     private FileProvider: IFileProvider;
 
@@ -50,7 +50,7 @@ export class FileController extends Controller {
         let size: number = parseInt(s, 10);
         if (!size || size < 1) size = 18;
         const folderPage: IFolderPage  = await this.FolderProvider.list( page, size );
-        //return res.send(folderPage);
+        // return res.send(folderPage);
         res.bag.folderPage = folderPage;
         res.bag.flashMessage = req.flash('flashMessage');
         res.view('folder/index');
@@ -116,8 +116,8 @@ export class FileController extends Controller {
 
                 const folderId = req.params.folderId;
                 if(folderId && data){
-                    const user : EmbededUser = {id: req.user.id, fullName: req.user.name };                    
-                    let newFile: IFile =  new FileModel();
+                    const user : EmbededUser = {id: req.user.id, fullName: req.user.name };
+                    const newFile: IFile =  new FileModel();
                     newFile.folderId = folderId;
                     newFile.location = data.Location;
                     newFile.fileName = data.key;

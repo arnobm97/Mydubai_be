@@ -12,14 +12,14 @@ export class PropertyAreaProvider implements IPropertyAreaProvider {
     }
 
     public async get(id: string): Promise<IPropertyArea> {
-        return await PropertyAreaModel.findOne({ "_id": id }).catch(err => null);
+        return await PropertyAreaModel.findOne({ "_id": id }).catch(null);
     }
 
     public async getAll(lang?: string): Promise<IPropertyArea[]> {
         if(lang){
-            return await PropertyAreaModel.find({ "lang": lang },{_id:1, areaName:1}).catch(err => null);
+            return await PropertyAreaModel.find({ "lang": lang },{_id:1, areaName:1}).catch(null);
         }else{
-            return await PropertyAreaModel.find().catch(err => null);
+            return await PropertyAreaModel.find().catch(null);
         }
     }
 
@@ -35,10 +35,10 @@ export class PropertyAreaProvider implements IPropertyAreaProvider {
         let query;
         if(page === 0){
             pageSize = count;
-            query = await PropertyAreaModel.find(filter).catch(err => null);
+            query = await PropertyAreaModel.find(filter).catch(null);
         }else{
             pageSize = size;
-            query = await PropertyAreaModel.find(filter).skip(size * (page - 1)).limit(size).catch(err => null);
+            query = await PropertyAreaModel.find(filter).skip(size * (page - 1)).limit(size).catch(null);
         }
         return { size: pageSize, page, count, data: query };
     }

@@ -5,11 +5,12 @@ import fs from "fs";
 import { exit } from "process";
 
 // Core
-import { mongoInit } from "./init";
+import { mongoInit, wrapWithBox } from "./init";
 import { Application } from "./core/Application";
 import { Config } from "./core/Config";
 import { Role } from "./core/IUserProvider";
 import cron from "node-cron";
+import dotenv from 'dotenv';
 
 // Providers
 import { SMTPMailer } from "./providers/SMTPMailer";
@@ -44,10 +45,10 @@ import { HomeApiController } from "./controllers/api/HomeApiController";
 import { PropertyApiController } from "./controllers/api/PropertyApiController";
 import { CustomerInterestApiController } from "./controllers/api/CustomerInterestApiController";
 
+dotenv.config();
 
-
-// config
-const CONFIG_FILE = "config.json";
+const environment = process.env.NODE_ENV || 'development';
+const CONFIG_FILE: string = environment === 'production' ? "config.prod.json" : "config.dev.json";
 
 if (!fs.existsSync(CONFIG_FILE)) {
     console.warn(`Can't find '${CONFIG_FILE}' please make sure config file is present in the current directory`);
@@ -58,15 +59,11 @@ const APP_CONFIG: Config = new Config(JSON.parse(fs.readFileSync(CONFIG_FILE).to
 
 // Initialize mongo db
 mongoInit(APP_CONFIG.mongoUrl);
-
 const app = new Application(APP_CONFIG);
 
 app.viewDir("views");
 app.viewEngine("pug");
 app.setStatic(path.join(__dirname, "public"), { maxAge: 0 }); // 31557600000 turned off caching for now
-
-
-
 
 // provider
 app.set("UserProvider", new UserProvider());
@@ -131,5 +128,5 @@ app.registerController(CustomerInterestApiController);
 
 // start the express server
 app.listen(APP_CONFIG.port, () => {
-    console.log(`server started at http://localhost:${APP_CONFIG.port}`);
+    wrapWithBox(`Application is running in ${environment} mode on port: ${APP_CONFIG.port}`);
 });

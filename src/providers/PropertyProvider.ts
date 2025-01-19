@@ -10,7 +10,7 @@ export class PropertyProvider implements IPropertyProvider {
     }
 
     public async lastPropertyNo(): Promise<number> {
-        const lastEntry =  await PropertyModel.find().sort({propertyNo:-1}).limit(1).catch(err => null);
+        const lastEntry =  await PropertyModel.find().sort({propertyNo:-1}).limit(1).catch(null);
         if(lastEntry.length === 1){
             return lastEntry[0].propertyNo;
         }else{
@@ -20,26 +20,26 @@ export class PropertyProvider implements IPropertyProvider {
 
 
     public async get(propertyNo: number, lang: string): Promise<IProperty> {
-        return await PropertyModel.findOne({"propertyNo": propertyNo, "lang": lang }).catch(err => null);
+        return await PropertyModel.findOne({"propertyNo": propertyNo, "lang": lang }).catch(null);
     }
 
 
     public async getById(propertyId: string): Promise<IProperty> {
-        return await PropertyModel.findById(propertyId).catch(err => null);
+        return await PropertyModel.findById(propertyId).catch(null);
     }
 
 
     public async getAll(lang?: string): Promise<IProperty[]> {
         if(lang){
-            return await PropertyModel.find({ "lang": lang }).catch(err => null);
+            return await PropertyModel.find({ "lang": lang }).catch(null);
         }else{
-            return await PropertyModel.find().sort( { propertyNo: 1 } ).catch(err => null);
+            return await PropertyModel.find().sort( { propertyNo: 1 } ).catch(null);
         }
     }
 
 
     public async letestByDevelopmentType(developmentTypeId: string, limit: number): Promise<IProperty[]> {
-        return await PropertyModel.find({"developmentType.id": developmentTypeId}).limit(limit).catch(err => null);
+        return await PropertyModel.find({"developmentType.id": developmentTypeId}).limit(limit).catch(null);
     }
 
 
@@ -65,10 +65,10 @@ export class PropertyProvider implements IPropertyProvider {
 
         if(page === 0){
             pageSize = count;
-            query = await PropertyModel.find(filter).catch(err => null);
+            query = await PropertyModel.find(filter).catch(null);
         }else{
             pageSize = size;
-            query = await PropertyModel.find(filter).skip(size * (page - 1)).limit(size).catch(err => null);
+            query = await PropertyModel.find(filter).skip(size * (page - 1)).limit(size).catch(null);
         }
         return { size: pageSize, page, count, data: query };
     }
@@ -95,10 +95,10 @@ export class PropertyProvider implements IPropertyProvider {
 
         if(page === 0){
             pageSize = count;
-            query = await PropertyModel.find(filter).catch(err => null);
+            query = await PropertyModel.find(filter).catch(null);
         }else{
             pageSize = size;
-            query = await PropertyModel.find(filter).skip(size * (page - 1)).limit(size).catch(err => null);
+            query = await PropertyModel.find(filter).skip(size * (page - 1)).limit(size).catch(null);
         }
         return { size: pageSize, page, count, data: query };
     }
@@ -122,10 +122,10 @@ export class PropertyProvider implements IPropertyProvider {
         let query;
         if(page === 0){
             pageSize = count;
-            query = await PropertyModel.find(filter).catch(err => null);
+            query = await PropertyModel.find(filter).catch(null);
         }else{
             pageSize = size;
-            query = await PropertyModel.find(filter).skip(size * (page - 1)).limit(size).catch(err => null);
+            query = await PropertyModel.find(filter).skip(size * (page - 1)).limit(size).catch(null);
         }
         return { size: pageSize, page, count, data: query };
     }
@@ -154,10 +154,10 @@ export class PropertyProvider implements IPropertyProvider {
         let query;
         if(page === 0){
             pageSize = count;
-            query = await PropertyModel.find(filter).catch(err => null);
+            query = await PropertyModel.find(filter).catch(null);
         }else{
             pageSize = size;
-            query = await PropertyModel.find(filter).skip(size * (page - 1)).limit(size).catch(err => null);
+            query = await PropertyModel.find(filter).skip(size * (page - 1)).limit(size).catch(null);
         }
         return { size: pageSize, page, count, data: query };
     }
@@ -173,7 +173,7 @@ export class PropertyProvider implements IPropertyProvider {
         return await PropertyModel.updateMany(condition, updateData);
     }
 
-    
+
     public async delete(propertyId: string): Promise<any> {
         return await PropertyModel.findByIdAndDelete(propertyId);
     }

@@ -5,7 +5,7 @@ import { Authenticator } from "../core/Authenticator";
 export class LoginController extends Controller {
 
     private Authenticator: Authenticator;
-    private config = require("../../config.json");
+    private config = require(`../../${(process.env.NODE_ENV || 'development') === 'production' ? "config.prod.json" : "config.dev.json"}`);
 
     public onRegister(): void {
         this.onGet("/login", this.loginView);

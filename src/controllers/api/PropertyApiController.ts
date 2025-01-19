@@ -9,7 +9,6 @@ import {IDeveloperTypeProvider, IDeveloperType, IDeveloperTypePage } from "../..
 
 export class PropertyApiController extends Controller {
 
-    private config = require("../../../config.json");
     private response = { status: 200, error: false, message: "", data: {} };
     private PropertyProvider: IPropertyProvider;
     private PropertyAreaProvider: IPropertyAreaProvider;
