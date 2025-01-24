@@ -44,6 +44,40 @@ npm run start
 ```
 ##### Application will be running on: http://localhost:3333
 
+---
+## Admin Setup Steps
+
+### 1. **Access the MongoDB Database**  
+   Locate the MongoDB database connection string in the `mongoUrl` field of the `config` file. Use this to connect to your MongoDB instance. Once connected, create a new collection named `users`.
+
+### 2. **Insert Admin User Data**  
+   Insert the following object into the `users` collection to create a new admin user:  
+   ```json
+   {
+       "fullName": "Admin User",
+       "email": "igenserveradmin@example.com",
+       "password": "fc3b5136168b8a36d9c0076d5a4cefb8d2074a027a0302503493acf14f7af104",
+       "avatar": "https://example.com/default-avatar.png",
+       "role": "Admin",
+       "isActive": true
+   }
+   ```
+   > **Note:** The `password` field contains a pre-hashed password for security purposes.
+
+### 3. **Access the Admin Login Page**  
+   Navigate to the Admin login page using the following URL:  
+   ```
+   {baseURL}:{port}/login
+   ```  
+   Replace `{baseURL}` and `{port}` with your server's base URL and port number (e.g., `http://localhost:3333/login`).
+
+### 4. **Log In as Admin**  
+   Use the following credentials to log in:  
+   - **Email:** `igenserveradmin@example.com`  
+   - **Password:** `iGenServer2025@Admin`
+
+---
+
 <br /><br /><br />
 
 
