@@ -1,8 +1,6 @@
-
-import { v4 as uuidv4 } from "uuid";
 import { HttpRequest, HttpResponse, NextFunc } from "./Types";
-import { Config } from "./Config";
 import { Middleware } from "./Middleware";
+import { v4 } from 'uuid';
 
 export class Session extends Middleware {
 
@@ -19,6 +17,6 @@ export class Session extends Middleware {
     }
 
     private createSession(): string {
-        return JSON.stringify({ sessionId: uuidv4() , time: new Date() });
+        return JSON.stringify({ sessionId: v4() , time: new Date() });
     }
 }
