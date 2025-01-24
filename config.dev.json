@@ -14,11 +14,11 @@
     },
     "awsS3": {
         "bucket": "propertyseeker",
-        "accessKeyId": "AKIAQYX2GW46WQR65QYX",
-        "secretAccessKey": "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",
+        "accessKeyId": "AKIA3FLD6INMUXBK7265",
+        "secretAccessKey": "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",
         "region": "me-central-1"
     },
-    "mongoUrl": "mongodb://localhost:27017/my_dubai_properties_local_db",
+    "mongoUrl": "mongodb+srv://arafathossainarafat6:bEa7VgrPKuqZv46l@cluster0.zcht8.mongodb.net/my_dubai_properties",
     "cookieSecret": "P>twUC2.9mNurJN%fW(!esGwua:!e(Pu8bHfTXW grck3g9/J@*W3MuEB,FE#/=m",
     "sessionSecret": "P>twUC2.9mVurJN%fW(!esGwua:!e(Pu8bHfTXW grck3g9/J@*W3MuEB,FE#/=m",
     "authSecret": "TFqA$uc4hD5VV(NS*vF=f3$jaCsw6/3U/w%9yu)Py,#&w)kG2(pAgAP9@)3,uVqt",
