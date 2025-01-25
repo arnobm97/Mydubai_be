@@ -8,6 +8,7 @@ import fs from "fs";
 import { IFolderProvider, IFolder, IFolderPage } from "../core/IFolderProvider";
 import { IFileProvider, IFile } from "../core/IFileProvider";
 import  FileModel  from "../models/FileModel";
+import mongoose from 'mongoose';
 
 export class FileController extends Controller {
 
@@ -71,11 +72,18 @@ export class FileController extends Controller {
     }
 
     public async exploreFolder(req: HttpRequest, res: HttpResponse, next: NextFunc) {
-        res.bag.pageTitle = this.config.appTitle+" | Explore Folder";
-        const folder = await this.FolderProvider.get(req.params.folderId);
+        const folderId = req.params.folderId;
+
+        // Validate folderId
+        if (!mongoose.Types.ObjectId.isValid(folderId)) {
+            res.status(400).send("Invalid folder ID");
+            return;
+        }
 
         try {
-            const files = await this.FileProvider.getByFolderId(req.params.folderId);
+            const folder = await this.FolderProvider.get(folderId);
+            const files = await this.FileProvider.getByFolderId(folderId);
+
             if (folder) {
                 res.bag.folder = folder;
                 res.bag.files = files;
@@ -84,8 +92,9 @@ export class FileController extends Controller {
                 res.bag.flashMessage = "Unable to find folder";
                 res.view('folder/index');
             }
-        } catch(e) {
-            console.log('err: ', e);
+        } catch (e) {
+            console.error('Error: ', e);
+            res.status(500).send("Internal Server Error");
         }
     }
 

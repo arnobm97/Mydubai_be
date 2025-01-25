@@ -54,12 +54,15 @@ npm run start
    Insert the following object into the `users` collection to create a new admin user:  
    ```json
    {
-       "fullName": "Admin User",
-       "email": "igenserveradmin@example.com",
-       "password": "fc3b5136168b8a36d9c0076d5a4cefb8d2074a027a0302503493acf14f7af104",
-       "avatar": "https://example.com/default-avatar.png",
-       "role": "Admin",
-       "isActive": true
+      "fullName": "Admin User",
+      "email": "igenserveradmin@example.com",
+      "password": "fc3b5136168b8a36d9c0076d5a4cefb8d2074a027a0302503493acf14f7af104",
+      "avatar": "https://static.vecteezy.com/system/resources/previews/005/911/635/non_2x/automation-icon-setting-symbol-for-your-web-site-logo-app-ui-design-free-vector.jpg",
+      "role": "Admin",
+      "isActive": true,
+      "createdAt": {
+         "$date": "2025-01-01T06:00:00.000Z"
+      }
    }
    ```
    > **Note:** The `password` field contains a pre-hashed password for security purposes.

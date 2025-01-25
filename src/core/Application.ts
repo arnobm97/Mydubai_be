@@ -167,6 +167,12 @@ export class Application {
      */
     public use(middleware: Middleware): void {
         this.Express.use((req: HttpRequest, resp : HttpResponse, next: NextFunc) => {
+            // Handle favicon request
+            if (req.url.endsWith('/favicon.ico')) {
+                resp.status(204).end(); // Send a 204 (No Content) response
+                return;
+            }
+
             middleware.process(req, resp, next);
         });
     }
