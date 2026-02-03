@@ -18,7 +18,7 @@
         "secretAccessKey": "8zLH11WscNgKJ60XRhkdlxR5k5Eo42QSHVQanvp/",
         "region": "me-central-1"
     },
-    "mongoUrl": "mongodb+srv://arafathossainarafat6:bEa7VgrPKuqZv46l@cluster0.zcht8.mongodb.net/my_dubai_properties",
+    "mongoUrl": "mongodb+srv://b2cserver_db_user:H9cJBE9qxMzOvsf2@igenserver.9ruwz7l.mongodb.net/?appName=Igenserver",
     "cookieSecret": "P>twUC2.9mNurJN%fW(!esGwua:!e(Pu8bHfTXW grck3g9/J@*W3MuEB,FE#/=m",
     "sessionSecret": "P>twUC2.9mVurJN%fW(!esGwua:!e(Pu8bHfTXW grck3g9/J@*W3MuEB,FE#/=m",
     "authSecret": "TFqA$uc4hD5VV(NS*vF=f3$jaCsw6/3U/w%9yu)Py,#&w)kG2(pAgAP9@)3,uVqt",

@@ -37,11 +37,192 @@ export class PropertyProvider implements IPropertyProvider {
         }
     }
 
-
-    public async letestByDevelopmentType(developmentTypeId: string, limit: number): Promise<IProperty[]> {
-        return await PropertyModel.find({"developmentType.id": developmentTypeId}).limit(limit).catch(null);
+// In your PropertyProvider class
+public async letestByDevelopmentType(developmentTypeId: string, limit: number): Promise<IProperty[]> {
+    try {
+        const result = await PropertyModel.aggregate([
+            {
+                $match: {
+                    'developmentType.id': developmentTypeId
+                }
+            },
+            { $sort: { createdAt: -1 } },
+            { $limit: limit },
+            
+            // Lookup developer type using STRING ID comparison
+            {
+                $lookup: {
+                    from: 'developer-types', // Your collection name
+                    let: { devId: "$developerType.id" }, // This is a string like "emaar"
+                    pipeline: [
+                        {
+                            $match: {
+                                $expr: {
+                                    $eq: ["$_id", "$$devId"] // Compare _id (string) with devId (string)
+                                    // OR if your developer collection uses string _id like "emaar"
+                                    // this should work
+                                }
+                            }
+                        },
+                        {
+                            $project: {
+                                name: 1,
+                                logo: 1,
+                                description: 1,
+                                _id: 1
+                            }
+                        }
+                    ],
+                    as: 'developerTypeInfo'
+                }
+            },
+            
+            // Lookup property type using STRING ID comparison
+            {
+                $lookup: {
+                    from: 'property-types',
+                    let: { propTypeId: "$propertyType.id" }, // String like "apt"
+                    pipeline: [
+                        {
+                            $match: {
+                                $expr: {
+                                    $eq: ["$_id", "$$propTypeId"] // String comparison
+                                }
+                            }
+                        },
+                        {
+                            $project: {
+                                name: 1,
+                                thumbnail: 1,
+                                description: 1,
+                                _id: 1
+                            }
+                        }
+                    ],
+                    as: 'propertyTypeInfo'
+                }
+            },
+            
+            // Lookup development type (optional, since you might already have it)
+            {
+                $lookup: {
+                    from: 'development-types',
+                    let: { devTypeId: "$developmentType.id" }, // String like "ready"
+                    pipeline: [
+                        {
+                            $match: {
+                                $expr: {
+                                    $eq: ["$_id", "$$devTypeId"]
+                                }
+                            }
+                        },
+                        {
+                            $project: {
+                                name: 1,
+                                _id: 1
+                            }
+                        }
+                    ],
+                    as: 'developmentTypeInfo'
+                }
+            },
+            
+            // Lookup property area using STRING ID comparison
+            {
+                $lookup: {
+                    from: 'property-areas', // Adjust if different collection name
+                    let: { areaId: "$propertyArea.id" }, // String like "dubai-marina"
+                    pipeline: [
+                        {
+                            $match: {
+                                $expr: {
+                                    $eq: ["$_id", "$$areaId"] // String comparison
+                                }
+                            }
+                        },
+                        {
+                            $project: {
+                                areaName: 1,
+                                name: 1,
+                                _id: 1
+                            }
+                        }
+                    ],
+                    as: 'propertyAreaInfo'
+                }
+            },
+            
+            // Merge the looked up data
+            {
+                $addFields: {
+                    developerType: {
+                        $cond: {
+                            if: { $gt: [{ $size: "$developerTypeInfo" }, 0] },
+                            then: {
+                                $mergeObjects: [
+                                    "$developerType",
+                                    { $arrayElemAt: ["$developerTypeInfo", 0] }
+                                ]
+                            },
+                            else: "$developerType"
+                        }
+                    },
+                    propertyType: {
+                        $cond: {
+                            if: { $gt: [{ $size: "$propertyTypeInfo" }, 0] },
+                            then: {
+                                $mergeObjects: [
+                                    "$propertyType",
+                                    { $arrayElemAt: ["$propertyTypeInfo", 0] }
+                                ]
+                            },
+                            else: "$propertyType"
+                        }
+                    },
+                    developmentType: {
+                        $cond: {
+                            if: { $gt: [{ $size: "$developmentTypeInfo" }, 0] },
+                            then: {
+                                $mergeObjects: [
+                                    "$developmentType",
+                                    { $arrayElemAt: ["$developmentTypeInfo", 0] }
+                                ]
+                            },
+                            else: "$developmentType"
+                        }
+                    },
+                    propertyArea: {
+                        $cond: {
+                            if: { $gt: [{ $size: "$propertyAreaInfo" }, 0] },
+                            then: {
+                                $mergeObjects: [
+                                    "$propertyArea",
+                                    { $arrayElemAt: ["$propertyAreaInfo", 0] }
+                                ]
+                            },
+                            else: "$propertyArea"
+                        }
+                    }
+                }
+            },
+            
+            // Clean up
+            {
+                $project: {
+                    developerTypeInfo: 0,
+                    propertyTypeInfo: 0,
+                    developmentTypeInfo: 0,
+                    propertyAreaInfo: 0
+                }
+            }
+        ]);
+        
+        return result;
+    } catch (error) {
+        console.error('Error in letestByDevelopmentType:', error);
+        throw error;
     }
-
+}
 
 
     public async propertyListByDeveloper(page:number = 1, size:number = 10, developerId: string, propertyAreaId: string, propertyTypeId: string, completion: string, beds: string): Promise<IPropertyPage> {
