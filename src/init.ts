@@ -15,7 +15,7 @@ export function mongoInit(url: string): void {
     
     console.log('Using DNS servers:', dns.getServers());
     
-    // Rest of your existing code...
+   
     mongoose.Promise = bluebird;
     mongoose.connect(url).then(
         () => {
