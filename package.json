@@ -4,8 +4,8 @@
   "description": "Web & api services for Off Ready Plan",
   "main": "build/app.js",
   "engines": {
-    "node": "24.x",
-    "npm": "10.x"
+    "node": "20.x",
+    "npm": "9.x"
   },
   "scripts": {
     "start": "npm run serve",
