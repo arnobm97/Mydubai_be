@@ -60,3 +60,6 @@ yarn.lock
 
 # Ignore the default config.json
 config.json
+
+config.dev.json
+config.prod.json

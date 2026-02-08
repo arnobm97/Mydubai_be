@@ -11,13 +11,8 @@
             "user": "no-reply@btracsl.com",
             "pass": "NOrePly#%2022"
         }
-    },
-    "awsS3": {
-        "bucket": "property-seeker",
-        "accessKeyId": "AKIA3FLD6INMUXBK7265",
-        "secretAccessKey": "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",
-        "region": "me-central-1"
-    },
+    }
+ ,
    "mongoUrl": "mongodb://arnobm97_db_user:aqbH80dxdMY4iD7c@ac-q3iz67v-shard-00-00.jupqkx4.mongodb.net:27017,ac-q3iz67v-shard-00-01.jupqkx4.mongodb.net:27017,ac-q3iz67v-shard-00-02.jupqkx4.mongodb.net:27017/mydubaiproperties?replicaSet=atlas-latkm8-shard-0&authSource=admin&retryWrites=true&w=majority&ssl=true",
     "cookieSecret": "P>twUC2.9mNurJN%fW(!esGwua:!e(Pu8bHfTXW grck3g9/J@*W3MuEB,FE#/=m",
     "sessionSecret": "P>twUC2.9mVurJN%fW(!esGwua:!e(Pu8bHfTXW grck3g9/J@*W3MuEB,FE#/=m",
