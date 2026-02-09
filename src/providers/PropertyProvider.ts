@@ -48,7 +48,7 @@ public async letestByDevelopmentType(developmentTypeId: string, limit: number): 
             },
             { $sort: { createdAt: -1 } },
             { $limit: limit },
-            
+
             // Lookup developer type using STRING ID comparison
             {
                 $lookup: {
@@ -76,7 +76,7 @@ public async letestByDevelopmentType(developmentTypeId: string, limit: number): 
                     as: 'developerTypeInfo'
                 }
             },
-            
+
             // Lookup property type using STRING ID comparison
             {
                 $lookup: {
@@ -102,7 +102,7 @@ public async letestByDevelopmentType(developmentTypeId: string, limit: number): 
                     as: 'propertyTypeInfo'
                 }
             },
-            
+
             // Lookup development type (optional, since you might already have it)
             {
                 $lookup: {
@@ -126,7 +126,7 @@ public async letestByDevelopmentType(developmentTypeId: string, limit: number): 
                     as: 'developmentTypeInfo'
                 }
             },
-            
+
             // Lookup property area using STRING ID comparison
             {
                 $lookup: {
@@ -151,7 +151,7 @@ public async letestByDevelopmentType(developmentTypeId: string, limit: number): 
                     as: 'propertyAreaInfo'
                 }
             },
-            
+
             // Merge the looked up data
             {
                 $addFields: {
@@ -205,7 +205,7 @@ public async letestByDevelopmentType(developmentTypeId: string, limit: number): 
                     }
                 }
             },
-            
+
             // Clean up
             {
                 $project: {
@@ -216,7 +216,7 @@ public async letestByDevelopmentType(developmentTypeId: string, limit: number): 
                 }
             }
         ]);
-        
+
         return result;
     } catch (error) {
         console.error('Error in letestByDevelopmentType:', error);

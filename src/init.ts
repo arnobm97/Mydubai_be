@@ -12,10 +12,10 @@ export function wrapWithBox(message: string, lineGap: boolean = true) {
 
 export function mongoInit(url: string): void {
       dns.setServers(['8.8.8.8', '8.8.4.4']);
-    
+
     console.log('Using DNS servers:', dns.getServers());
-    
-   
+
+
     mongoose.Promise = bluebird;
     mongoose.connect(url).then(
         () => {

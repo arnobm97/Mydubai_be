@@ -36,16 +36,15 @@ export class PropertyController extends Controller {
         res.view('property/index');
     }
 
-    // Helper method to convert ObjectId to string
-    private toEmbeddedType<T extends { _id: any, name: string }>(
-        item: T | null, 
-        idFieldName: string = '_id'
-    ): { id: string | null, name: string | null } {
+    // Helper method to convert ObjectId to string - FIXED
+    private toEmbeddedType<T extends { _id: any; name: string }>(
+        item: T | null
+    ): { id: string | null; name: string | null } {
         if (!item) {
             return { id: null, name: null };
         }
         return {
-            id: item[idFieldName]?.toString() || null,
+            id: item._id?.toString() || null,
             name: item.name
         };
     }
@@ -73,7 +72,7 @@ export class PropertyController extends Controller {
             res.bag.developerType = await this.DeveloperTypeProvider.getAll(queryLanguage);
             return res.view('property/create');
         }
-        
+
         let propertyNo: number;
         if(req.params.propertyNo){
             propertyNo = parseInt(req.params.propertyNo,10);
@@ -103,7 +102,7 @@ export class PropertyController extends Controller {
         // Get and convert embedded types
         const tempPropertyType: IPropertyType = await this.PropertyTypeProvider.get(req.body.propertyType);
         const propertyType: EmbededPropertyType = this.toEmbeddedType(tempPropertyType);
-        
+
         if(!propertyType.id){
             req.flash('flashMessage', 'Invalid property type. Please try again.');
             return res.redirect('/properties');
@@ -111,7 +110,7 @@ export class PropertyController extends Controller {
 
         const tempPropertyArea: IPropertyArea = await this.PropertyAreaProvider.get(req.body.propertyArea);
         const propertyArea: EmbededPropertyArea = this.toEmbeddedPropertyArea(tempPropertyArea);
-        
+
         if(!propertyArea.id){
             req.flash('flashMessage', 'Invalid property area. Please try again.');
             return res.redirect('/properties');
@@ -119,7 +118,7 @@ export class PropertyController extends Controller {
 
         const tempDevelopmentType: IDevelopmentType = await this.DevelopmentTypeProvider.get(req.body.developmentType);
         const developmentType: EmbededDevelopmentType = this.toEmbeddedType(tempDevelopmentType);
-        
+
         if(!developmentType.id){
             req.flash('flashMessage', 'Invalid development type. Please try again.');
             return res.redirect('/properties');
@@ -127,7 +126,7 @@ export class PropertyController extends Controller {
 
         const tempDeveloperType: IDeveloperType = await this.DeveloperTypeProvider.get(req.body.developerType);
         const developerType: EmbededDeveloperType = this.toEmbeddedType(tempDeveloperType);
-        
+
         if(!developerType.id){
             req.flash('flashMessage', 'Invalid developer type. Please try again.');
             return res.redirect('/properties');
@@ -172,7 +171,7 @@ export class PropertyController extends Controller {
     public async updateProperty(req: HttpRequest, res: HttpResponse, next: NextFunc) {
         res.bag.pageTitle = this.config.appTitle+" | Property Update";
         const propertyId: string = req.params.propertyId;
-        
+
         if(req.method === "GET"){
             try{
                 const property: IProperty = await this.PropertyProvider.getById(propertyId);
@@ -208,7 +207,7 @@ export class PropertyController extends Controller {
                 // Get and convert embedded types
                 const tempPropertyType: IPropertyType = await this.PropertyTypeProvider.get(req.body.propertyType);
                 const propertyType: EmbededPropertyType = this.toEmbeddedType(tempPropertyType);
-                
+
                 if(!propertyType.id){
                     req.flash('flashMessage', 'Invalid property type. Please try again.');
                     return res.redirect('/properties');
@@ -216,7 +215,7 @@ export class PropertyController extends Controller {
 
                 const tempPropertyArea: IPropertyArea = await this.PropertyAreaProvider.get(req.body.propertyArea);
                 const propertyArea: EmbededPropertyArea = this.toEmbeddedPropertyArea(tempPropertyArea);
-                
+
                 if(!propertyArea.id){
                     req.flash('flashMessage', 'Invalid property area. Please try again.');
                     return res.redirect('/properties');
@@ -224,7 +223,7 @@ export class PropertyController extends Controller {
 
                 const tempDevelopmentType: IDevelopmentType = await this.DevelopmentTypeProvider.get(req.body.developmentType);
                 const developmentType: EmbededDevelopmentType = this.toEmbeddedType(tempDevelopmentType);
-                
+
                 if(!developmentType.id){
                     req.flash('flashMessage', 'Invalid development type. Please try again.');
                     return res.redirect('/properties');
@@ -232,7 +231,7 @@ export class PropertyController extends Controller {
 
                 const tempDeveloperType: IDeveloperType = await this.DeveloperTypeProvider.get(req.body.developerType);
                 const developerType: EmbededDeveloperType = this.toEmbeddedType(tempDeveloperType);
-                
+
                 if(!developerType.id){
                     req.flash('flashMessage', 'Invalid developer type. Please try again.');
                     return res.redirect('/properties');
@@ -258,7 +257,7 @@ export class PropertyController extends Controller {
                 oldProperty.brochure = brochure;
                 oldProperty.images = images;
                 oldProperty.videos = videos;
-                
+
                 await oldProperty.save();
                 req.flash('flashMessage', 'Property updated successfully.');
                 return res.redirect('/properties');
