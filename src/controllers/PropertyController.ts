@@ -7,8 +7,6 @@ import {IPropertyAreaProvider, EmbededPropertyArea, IPropertyArea } from "../cor
 import {IDevelopmentTypeProvider, EmbededDevelopmentType, IDevelopmentType } from "../core/IDevelopmentTypeProvider";
 import {IDeveloperTypeProvider, EmbededDeveloperType, IDeveloperType } from "../core/IDeveloperTypeProvider";
 
-
-
 export class PropertyController extends Controller {
 
     private config = require(`../../${(process.env.NODE_ENV || 'development') === 'production' ? "config.prod.json" : "config.dev.json"}`);
@@ -38,6 +36,30 @@ export class PropertyController extends Controller {
         res.view('property/index');
     }
 
+    // Helper method to convert ObjectId to string
+    private toEmbeddedType<T extends { _id: any, name: string }>(
+        item: T | null, 
+        idFieldName: string = '_id'
+    ): { id: string | null, name: string | null } {
+        if (!item) {
+            return { id: null, name: null };
+        }
+        return {
+            id: item[idFieldName]?.toString() || null,
+            name: item.name
+        };
+    }
+
+    // Helper method for PropertyArea (has areaName instead of name)
+    private toEmbeddedPropertyArea(item: IPropertyArea | null): EmbededPropertyArea {
+        if (!item) {
+            return { id: null, areaName: null };
+        }
+        return {
+            id: item._id?.toString() || null,
+            areaName: item.areaName
+        };
+    }
 
     // create
     public async createProperty(req: HttpRequest, res: HttpResponse, next: NextFunc) {
@@ -51,6 +73,7 @@ export class PropertyController extends Controller {
             res.bag.developerType = await this.DeveloperTypeProvider.getAll(queryLanguage);
             return res.view('property/create');
         }
+        
         let propertyNo: number;
         if(req.params.propertyNo){
             propertyNo = parseInt(req.params.propertyNo,10);
@@ -64,9 +87,9 @@ export class PropertyController extends Controller {
         const propertyDescription = req.body.propertyDescription;
         const areaSize = req.body.areaSize;
         const completion = req.body.completion;
-        const highlights = req.body.highlights;  // highlights #
-        const tag = req.body.tag;  // highlights #
-        const amenities = req.body.amenities; // features #
+        const highlights = req.body.highlights;
+        const tag = req.body.tag;
+        const amenities = req.body.amenities;
         const startingPrice = req.body.startingPrice;
         const location = req.body.location;
         const paymentPlan = req.body.paymentPlan;
@@ -77,65 +100,82 @@ export class PropertyController extends Controller {
         const isFeatured = true;
         const createBy = { id: req.user.id, fullName: req.user.name };
 
-        // find in db then generate object
-        const tempPropertyType: IPropertyType =  await this.PropertyTypeProvider.get(req.body.propertyType);
-        const propertyType: EmbededPropertyType = {id: null, name: null};
-        if(tempPropertyType){
-            propertyType.id = tempPropertyType._id;
-            propertyType.name = tempPropertyType.name;
-        }else{
+        // Get and convert embedded types
+        const tempPropertyType: IPropertyType = await this.PropertyTypeProvider.get(req.body.propertyType);
+        const propertyType: EmbededPropertyType = this.toEmbeddedType(tempPropertyType);
+        
+        if(!propertyType.id){
             req.flash('flashMessage', 'Invalid property type. Please try again.');
             return res.redirect('/properties');
         }
+
         const tempPropertyArea: IPropertyArea = await this.PropertyAreaProvider.get(req.body.propertyArea);
-        const propertyArea: EmbededPropertyArea = {id: null, areaName: null};
-        if(tempPropertyArea){
-            propertyArea.id = tempPropertyArea._id;
-            propertyArea.areaName = tempPropertyArea.areaName;
-        }else{
+        const propertyArea: EmbededPropertyArea = this.toEmbeddedPropertyArea(tempPropertyArea);
+        
+        if(!propertyArea.id){
             req.flash('flashMessage', 'Invalid property area. Please try again.');
             return res.redirect('/properties');
         }
+
         const tempDevelopmentType: IDevelopmentType = await this.DevelopmentTypeProvider.get(req.body.developmentType);
-        const developmentType: EmbededDevelopmentType = {id: null, name: null};
-        if(tempDevelopmentType){
-            developmentType.id = tempDevelopmentType._id;
-            developmentType.name = tempDevelopmentType.name;
-        }else{
+        const developmentType: EmbededDevelopmentType = this.toEmbeddedType(tempDevelopmentType);
+        
+        if(!developmentType.id){
             req.flash('flashMessage', 'Invalid development type. Please try again.');
             return res.redirect('/properties');
         }
+
         const tempDeveloperType: IDeveloperType = await this.DeveloperTypeProvider.get(req.body.developerType);
-        const developerType: EmbededDeveloperType = {id: null, name: null};
-        if(tempDeveloperType){
-            developerType.id = tempDeveloperType._id;
-            developerType.name = tempDeveloperType.name;
-        }else{
+        const developerType: EmbededDeveloperType = this.toEmbeddedType(tempDeveloperType);
+        
+        if(!developerType.id){
             req.flash('flashMessage', 'Invalid developer type. Please try again.');
             return res.redirect('/properties');
         }
-        const newProperty: any = {propertyNo,lang,propertyName,propertyDescription,propertyType,propertyArea,developmentType,developerType,areaSize,highlights,tag,amenities,completion,startingPrice,location,paymentPlan,unitType,brochure,images,videos,isFeatured,createBy};
-        // return res.send(newProperty);
+
+        const newProperty: any = {
+            propertyNo,
+            lang,
+            propertyName,
+            propertyDescription,
+            propertyType,
+            propertyArea,
+            developmentType,
+            developerType,
+            areaSize,
+            highlights,
+            tag,
+            amenities,
+            completion,
+            startingPrice,
+            location,
+            paymentPlan,
+            unitType,
+            brochure,
+            images,
+            videos,
+            isFeatured,
+            createBy
+        };
+
         await this.PropertyProvider.create(newProperty).then(async property => {
-            res.bag.successMessage = "Done";
             req.flash('flashMessage', 'Property created successfully.');
             return res.redirect('/properties');
         }).catch(async error => {
-            req.flash('flashMessage', 'Opps! Something went wrong. Please try later.');
+            console.error('Error creating property:', error);
+            req.flash('flashMessage', 'Oops! Something went wrong. Please try later.');
             return res.redirect('/properties');
         });
-
-
     }
 
     // update
     public async updateProperty(req: HttpRequest, res: HttpResponse, next: NextFunc) {
         res.bag.pageTitle = this.config.appTitle+" | Property Update";
         const propertyId: string = req.params.propertyId;
+        
         if(req.method === "GET"){
             try{
                 const property: IProperty = await this.PropertyProvider.getById(propertyId);
-                const lang: string = property.lang;
                 res.bag.property = property;
                 res.bag.propertyType = await this.PropertyTypeProvider.getAll();
                 res.bag.propertyArea = await this.PropertyAreaProvider.getAll();
@@ -143,8 +183,8 @@ export class PropertyController extends Controller {
                 res.bag.developerType = await this.DeveloperTypeProvider.getAll();
                 return res.view('property/update');
             }catch(error){
-                console.log(error);
-                req.flash('flashMessage', 'Opps! Something went wrong. Please try later.');
+                console.error('Error fetching property for update:', error);
+                req.flash('flashMessage', 'Oops! Something went wrong. Please try later.');
                 return res.redirect('/properties');
             }
         }else{
@@ -154,9 +194,9 @@ export class PropertyController extends Controller {
                 const propertyDescription = req.body.propertyDescription;
                 const areaSize = req.body.areaSize;
                 const completion = req.body.completion;
-                const highlights = req.body.highlights;  // highlights #
-                const tag = req.body.tag;  // highlights #
-                const amenities = req.body.amenities; // features #
+                const highlights = req.body.highlights;
+                const tag = req.body.tag;
+                const amenities = req.body.amenities;
                 const startingPrice = req.body.startingPrice;
                 const location = req.body.location;
                 const paymentPlan = req.body.paymentPlan;
@@ -164,43 +204,36 @@ export class PropertyController extends Controller {
                 const brochure = req.body.brochure;
                 const images = req.body.images;
                 const videos = req.body.videos;
-                // const isFeatured = true;
-                // const createBy = { id: req.user.id, fullName: req.user.name };
 
-                // find in db then generate object
-                const tempPropertyType: IPropertyType =  await this.PropertyTypeProvider.get(req.body.propertyType);
-                const propertyType: EmbededPropertyType = {id: null, name: null};
-                if(tempPropertyType){
-                    propertyType.id = tempPropertyType._id;
-                    propertyType.name = tempPropertyType.name;
-                }else{
+                // Get and convert embedded types
+                const tempPropertyType: IPropertyType = await this.PropertyTypeProvider.get(req.body.propertyType);
+                const propertyType: EmbededPropertyType = this.toEmbeddedType(tempPropertyType);
+                
+                if(!propertyType.id){
                     req.flash('flashMessage', 'Invalid property type. Please try again.');
                     return res.redirect('/properties');
                 }
+
                 const tempPropertyArea: IPropertyArea = await this.PropertyAreaProvider.get(req.body.propertyArea);
-                const propertyArea: EmbededPropertyArea = {id: null, areaName: null};
-                if(tempPropertyArea){
-                    propertyArea.id = tempPropertyArea._id;
-                    propertyArea.areaName = tempPropertyArea.areaName;
-                }else{
+                const propertyArea: EmbededPropertyArea = this.toEmbeddedPropertyArea(tempPropertyArea);
+                
+                if(!propertyArea.id){
                     req.flash('flashMessage', 'Invalid property area. Please try again.');
                     return res.redirect('/properties');
                 }
+
                 const tempDevelopmentType: IDevelopmentType = await this.DevelopmentTypeProvider.get(req.body.developmentType);
-                const developmentType: EmbededDevelopmentType = {id: null, name: null};
-                if(tempDevelopmentType){
-                    developmentType.id = tempDevelopmentType._id;
-                    developmentType.name = tempDevelopmentType.name;
-                }else{
+                const developmentType: EmbededDevelopmentType = this.toEmbeddedType(tempDevelopmentType);
+                
+                if(!developmentType.id){
                     req.flash('flashMessage', 'Invalid development type. Please try again.');
                     return res.redirect('/properties');
                 }
+
                 const tempDeveloperType: IDeveloperType = await this.DeveloperTypeProvider.get(req.body.developerType);
-                const developerType: EmbededDeveloperType = {id: null, name: null};
-                if(tempDeveloperType){
-                    developerType.id = tempDeveloperType._id;
-                    developerType.name = tempDeveloperType.name;
-                }else{
+                const developerType: EmbededDeveloperType = this.toEmbeddedType(tempDeveloperType);
+                
+                if(!developerType.id){
                     req.flash('flashMessage', 'Invalid developer type. Please try again.');
                     return res.redirect('/properties');
                 }
@@ -225,34 +258,29 @@ export class PropertyController extends Controller {
                 oldProperty.brochure = brochure;
                 oldProperty.images = images;
                 oldProperty.videos = videos;
-                oldProperty.save();
+                
+                await oldProperty.save();
                 req.flash('flashMessage', 'Property updated successfully.');
                 return res.redirect('/properties');
             }catch(error){
-                req.flash('flashMessage', 'Opps! Something went wrong. Please try later.');
+                console.error('Error updating property:', error);
+                req.flash('flashMessage', 'Oops! Something went wrong. Please try later.');
                 return res.redirect('/properties');
             }
         }
     }
-
 
     // delete
     public async deleteProperty(req: HttpRequest, res: HttpResponse, next: NextFunc) {
         try{
             const propertyId = req.params.propertyId;
             await this.PropertyProvider.delete(propertyId);
-            res.bag.successMessage = "Done";
             req.flash('flashMessage', 'Property deleted successfully.');
             return res.redirect('/properties');
         }catch(error){
-            // console.log(error);
-            req.flash('flashMessage', 'Opps! Something went wrong. Please try later.');
+            console.error('Error deleting property:', error);
+            req.flash('flashMessage', 'Oops! Something went wrong. Please try later.');
             return res.redirect('/properties');
         }
     }
-
-
-
-
-
 }

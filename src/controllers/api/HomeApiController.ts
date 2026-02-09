@@ -26,9 +26,9 @@ export class HomeApiController extends Controller {
             let letestReady: IProperty[];
             for(const item of devType){
                 if((item.name).toLowerCase() === 'off plan' || (item.name).toLowerCase() === 'off-plan'){
-                    letestOffplan = await this.PropertyProvider.letestByDevelopmentType(item._id, 5);
+                    letestOffplan = await this.PropertyProvider.letestByDevelopmentType(item._id.toString(), 5);
                 }else if((item.name).toLowerCase() === 'ready'){
-                    letestReady = await this.PropertyProvider.letestByDevelopmentType(item._id, 5);
+                    letestReady = await this.PropertyProvider.letestByDevelopmentType(item._id.toString(), 5);
                 }else{
                     // do noting
                 }
@@ -48,9 +48,4 @@ export class HomeApiController extends Controller {
             return res.status(200).send(this.response);
         }
     }
-
-
-
-
-
 }
